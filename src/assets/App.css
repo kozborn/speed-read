@@ -12,6 +12,7 @@
   height: 150px;
   padding: 20px;
   color: white;
+  border-bottom: 1px solid #eaeaea;
 }
 
 .App-intro {
@@ -23,8 +24,27 @@
   to { transform: rotate(360deg); }
 }
 
+footer {
+  border-top: 1px solid #eaeaea;
+  height: 100px;
+}
+
+.sliders {
+  margin: 10px auto;
+  max-width: 1000px;
+}
+
 .table {
-  margin-top: 150px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.correct {
+  background: palegreen;
+}
+
+.incorrect {
+  background: darksalmon;
 }
 
 .table .cell {
