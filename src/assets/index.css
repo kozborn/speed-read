@@ -3,3 +3,31 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.text-container {
+  max-width: 1000px;
+  margin: 50px auto;
+  text-align: left;
+  line-height: 20px
+}
+
+.wrapper {
+  position: relative;
+  line-height: 20px
+}
+
+.hide-bottom-letters {
+  height: 10px;
+  width: 100%;
+  position: absolute;
+  bottom: 0px;
+  background: white;
+}
+
+.hide-top-letters {
+  height: 10px;
+  width: 100%;
+  position: absolute;
+  top: 0px;
+  background: white;
+}

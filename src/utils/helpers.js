@@ -25,3 +25,17 @@ function shuffle(array) {
 
   return array;
 }
+
+export function stringDivider(str, width, prefix, postfix) {
+  if (str.length>width) {
+    var p=width
+    for (;p>0 && !/\s/.test(str[p]); p--) {
+    }
+    if (p>0) {
+        var left = str.substring(0, p);
+        var right = str.substring(p+1);
+        return prefix + left + postfix + stringDivider(right, width, prefix, postfix);
+    }
+  }
+  return prefix+str+postfix;
+}
