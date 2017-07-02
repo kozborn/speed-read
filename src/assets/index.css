@@ -31,3 +31,22 @@ body {
   top: 0px;
   background: white;
 }
+
+.text-with-fixations {
+  text-align: left;
+  line-height: 26px;
+  max-width: 1000px;
+  margin: 10px auto;
+}
+
+.clearfix {
+  clear: both;
+}
+
+.line .left {
+  float: left
+}
+
+.line .right {
+  float: left;
+}
