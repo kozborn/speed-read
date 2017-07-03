@@ -43,10 +43,15 @@ body {
   clear: both;
 }
 
-.line .left {
+.line .left,
+.line .left-space {
   float: left
 }
 
 .line .right {
   float: left;
+}
+
+.line .highlight {
+  background: lightgreen;
 }
