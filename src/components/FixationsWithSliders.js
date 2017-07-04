@@ -1,5 +1,5 @@
-import React from "react"
-import Fixations from "./Fixations"
+import React from "react";
+import Fixations from "./Fixations";
 
 class FixationsWithSliders extends React.Component {
 
@@ -9,7 +9,7 @@ class FixationsWithSliders extends React.Component {
         <div>Sliders</div>
         <Fixations />
       </div>
-    )
+    );
   }
 }
 
