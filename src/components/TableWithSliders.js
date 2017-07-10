@@ -1,8 +1,8 @@
-import React from "react"
-import Table from './Table'
-import Tooltip from 'rc-tooltip';
-import Slider from 'rc-slider';
-import 'rc-slider/assets/index.css';
+import React from "react";
+import Tooltip from "rc-tooltip";
+import Slider from "rc-slider";
+import "rc-slider/assets/index.css";
+import Table from "./Table";
 
 const createSliderWithTooltip = Slider.createSliderWithTooltip;
 
@@ -25,22 +25,22 @@ const handle = (props) => {
 
 class TableWithSliders extends React.Component {
 
-  constructor(props){
-    super(props)
+  constructor(props) {
+    super(props);
     this.state = {
       cols: 3,
-      rows: 3
-    }
-    this.onChangeRows = this.onChangeRows.bind(this)
-    this.onChangeCols = this.onChangeCols.bind(this)
+      rows: 3,
+    };
+    this.onChangeRows = this.onChangeRows.bind(this);
+    this.onChangeCols = this.onChangeCols.bind(this);
   }
 
   onChangeRows(e) {
-    this.setState({rows: e})
+    this.setState({rows: e});
   }
 
   onChangeCols(e) {
-    this.setState({cols: e})
+    this.setState({cols: e});
   }
 
   render() {
