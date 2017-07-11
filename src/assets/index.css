@@ -16,19 +16,19 @@ body {
   line-height: 20px
 }
 
-.hide-bottom-letters {
-  height: 10px;
-  width: 100%;
-  position: absolute;
-  bottom: 0px;
-  background: white;
-}
-
-.hide-top-letters {
+.show-bottom-letters {
   height: 10px;
   width: 100%;
   position: absolute;
   top: 0px;
+  background: white;
+}
+
+.show-top-letters {
+  height: 10px;
+  width: 100%;
+  position: absolute;
+  bottom: 0px;
   background: white;
 }
 
@@ -37,10 +37,6 @@ body {
   line-height: 26px;
   max-width: 1000px;
   margin: 10px auto;
-}
-
-.clearfix {
-  clear: both;
 }
 
 .line .left,
@@ -55,3 +51,4 @@ body {
 .line .highlight {
   background: lightgreen;
 }
+

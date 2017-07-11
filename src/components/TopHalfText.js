@@ -4,7 +4,7 @@ import text from "../assets/sample_texts.json"
 import {stringDivider} from "../utils/helpers"
 
 const PREFIX = '<div class="wrapper">';
-const POSTFIX = '<div class="hide-top-letters"></div></div>'
+const POSTFIX = '<div class="show-top-letters"></div></div>'
 
 class TopHalfText extends React.Component {
 
@@ -26,7 +26,7 @@ class TopHalfText extends React.Component {
 
   render() {
     return (
-      <div className="bottom-half-text">
+      <div className="top-half-text">
         <div
           className="text-container"
           ref={(e) => this.textContainer = e }

@@ -1,0 +1,13 @@
+.navigation-top li {
+  display: inline-block; }
+  .navigation-top li a {
+    color: gray;
+    text-decoration: none;
+    display: block;
+    padding: 10px; }
+    .navigation-top li a:hover, .navigation-top li a:active, .navigation-top li a:visited {
+      color: gray;
+      text-decoration: none; }
+
+.clearfix {
+  clear: both; }
