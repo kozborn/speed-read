@@ -1,5 +1,5 @@
 import React from "react";
-import {number} from "prop-types";
+import {number, func, string} from "prop-types";
 import sampleText from "../assets/sample_texts.json";
 import {stringDivider} from "../utils/helpers";
 
@@ -10,10 +10,14 @@ class Fixations extends React.Component {
 
   static propTypes = {
     speed: number, // ms
+    eventType: string,
+    handleExternalEvent: func,
   }
 
   static defaultProps = {
     speed: 1000, //ms
+    eventType: "",
+    handleExternalEvent: () => "",
   }
 
   constructor(props) {
@@ -21,10 +25,13 @@ class Fixations extends React.Component {
     this.state = {
       text: "",
       textSplitted: [],
+      running: false,
     };
 
     this.getText = this.getText.bind(this);
     this.startSwitching = this.startSwitching.bind(this);
+    this.stopSwitching = this.stopSwitching.bind(this);
+    this.pauseSwitching = this.pauseSwitching.bind(this);
   }
 
   componentDidMount() {
@@ -65,13 +72,13 @@ class Fixations extends React.Component {
 
   startSwitching() {
     const elements = this.getElements();
-    let index = 0;
+    this.setState({running: true});
     if (!this.interval) {
       this.interval = setInterval(() => {
-        elements[index].classList.add("highlight");
-        if (index > 0) elements[index - 1].classList.remove("highlight");
-        index += 1;
-        if (index === elements.length) {
+        elements[this.currentElIndex].classList.add("highlight");
+        if (this.currentElIndex > 0) elements[this.currentElIndex - 1].classList.remove("highlight");
+        this.currentElIndex += 1;
+        if (this.currentElIndex === elements.length) {
           clearInterval(this.interval);
           this.interval = null;
         }
@@ -79,7 +86,21 @@ class Fixations extends React.Component {
     }
   }
 
+  pauseSwitching() {
+    this.setState({running: false});
+    clearInterval(this.interval);
+    this.interval = null;
+  }
+
+  stopSwitching() {
+    const elements = this.getElements();
+    elements.forEach(element => element.classList.remove("highlight"));
+    this.pauseSwitching();
+    this.currentElIndex = 0;
+  }
+
   interval = null;
+  currentElIndex = 0;
 
   createMarkup(markup) {
     return {__html: markup};
@@ -89,7 +110,10 @@ class Fixations extends React.Component {
     return (
       <div className="text-with-fixations" ref={(e) => { this.textWithFixations = e; }} >
         <div className="toolbar">
-          <button onClick={this.startSwitching}>Start</button>
+          <button onClick={this.state.running ? this.pauseSwitching : this.startSwitching}>
+            {this.state.running ? "Pause" : "Start"}
+          </button>
+          {this.state.running ? <button onClick={this.stopSwitching} >Stop</button> : null}
         </div>
         {this.getText()}
       </div>

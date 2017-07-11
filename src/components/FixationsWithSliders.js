@@ -39,13 +39,12 @@ class FixationsWithSliders extends React.Component {
   render() {
     return (
       <div>
-        <div>
+        <div className="sliders">
           <h3>Speed</h3>
           <Slider
-            min={100}
+            min={200}
             max={1000}
             step={50}
-            invert={true}
             handle={handle}
             onChange={this.changeSpeed}
           />
