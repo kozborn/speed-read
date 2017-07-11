@@ -39,6 +39,14 @@ class Fixations extends React.Component {
     this.setState({text, textSplitted: text.split("||")});
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.speed !== this.props.speed) {
+      clearInterval(this.interval);
+      this.interval = null;
+      this.startSwitching();
+    }
+  }
+
   componentWillUnmount() {
     clearInterval(this.interval);
   }
