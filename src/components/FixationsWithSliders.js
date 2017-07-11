@@ -33,7 +33,7 @@ class FixationsWithSliders extends React.Component {
   }
 
   changeSpeed(e) {
-    this.setState({speed: e});
+    this.setState({speed: (1000 / e)});
   }
 
   render() {
@@ -42,9 +42,9 @@ class FixationsWithSliders extends React.Component {
         <div className="sliders">
           <h3>Speed</h3>
           <Slider
-            min={200}
-            max={1000}
-            step={50}
+            min={1}
+            max={5}
+            step={1}
             handle={handle}
             onChange={this.changeSpeed}
           />
