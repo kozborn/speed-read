@@ -4,7 +4,7 @@ import text from "../assets/sample_texts.json"
 import {stringDivider} from "../utils/helpers"
 
 const PREFIX = '<div class="wrapper">';
-const POSTFIX = '<div class="hide-bottom-letters"></div></div>'
+const POSTFIX = '<div class="show-bottom-letters"></div></div>'
 
 class BottomHalfText extends React.Component {
 

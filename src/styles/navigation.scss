@@ -1,0 +1,15 @@
+.navigation-top {
+  li {
+    display: inline-block;
+    a {
+      color: gray;
+      text-decoration: none;
+      display: block;
+      padding: 10px;
+      &:hover, &:active, &:visited {
+        color: gray;
+        text-decoration: none;
+      }
+    }
+  }
+}
