@@ -4,8 +4,6 @@ import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 import Table from "./Table";
 
-const createSliderWithTooltip = Slider.createSliderWithTooltip;
-
 const Handle = Slider.Handle;
 
 const handle = (props) => {
