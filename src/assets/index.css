@@ -55,3 +55,7 @@ body {
 .line .highlight {
   background: lightgreen;
 }
+
+.navigation-top li {
+  display: inline-block;
+}
