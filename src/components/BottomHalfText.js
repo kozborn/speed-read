@@ -1,23 +1,26 @@
-import React from "react"
-import text from "../assets/sample_texts.json"
-
-import {stringDivider} from "../utils/helpers"
-
-const PREFIX = '<div class="wrapper">';
-const POSTFIX = '<div class="show-bottom-letters"></div></div>'
+import React from "react";
+import {stringDivider} from "../utils/helpers";
+import Api from "../api/Api";
+const PREFIX = "<div class='wrapper'>";
+const POSTFIX = "<div class='show-bottom-letters'></div></div>";
 
 class BottomHalfText extends React.Component {
 
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
-      textWrapped: ""
-    }
+      textWrapped: "",
+    };
   }
 
-  componentDidMount() {
-    const textWrapped = stringDivider(text.text2, 100, PREFIX, POSTFIX)
-    this.setState({textWrapped})
+  componentWillMount() {
+    Api.getText()
+    .then((jsonResponse) => {
+      this.setState({sampleTexts: jsonResponse});
+      const {sampleTexts} = this.state;
+      const textWrapped = stringDivider(sampleTexts.reading, 100, PREFIX, POSTFIX);
+      this.setState({textWrapped});
+    });
   }
 
   createMarkup(markup) {
@@ -29,7 +32,7 @@ class BottomHalfText extends React.Component {
       <div className="bottom-half-text">
         <div
           className="text-container"
-          ref={(e) => this.textContainer = e }
+          ref={(e) => { this.textContainer = e; }}
           dangerouslySetInnerHTML={this.createMarkup(this.state.textWrapped)}
         />
       </div>

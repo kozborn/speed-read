@@ -1,0 +1,12 @@
+article {
+  $font_size: 16px;
+  text-align: left;
+  max-width: 800px;
+  margin: 25px auto 50px;
+  font-size: $font_size;
+  line-height: calc(#{$font_size} * 1.48);
+  color: #333;
+  title {
+    font-size: 25px;
+  }
+}

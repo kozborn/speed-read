@@ -1,23 +1,27 @@
-import React from "react"
-import text from "../assets/sample_texts.json"
+import React from "react";
+import Api from "../api/Api";
+import {stringDivider} from "../utils/helpers";
 
-import {stringDivider} from "../utils/helpers"
-
-const PREFIX = '<div class="wrapper">';
-const POSTFIX = '<div class="show-top-letters"></div></div>'
+const PREFIX = "<div class='wrapper'>";
+const POSTFIX = "<div class='show-top-letters'></div></div>";
 
 class TopHalfText extends React.Component {
 
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
-      textWrapped: ""
-    }
+      textWrapped: "",
+    };
   }
 
-  componentDidMount() {
-    const textWrapped = stringDivider(text.text2, 100, PREFIX, POSTFIX)
-    this.setState({textWrapped})
+  componentWillMount() {
+    Api.getText()
+    .then((jsonResponse) => {
+      this.setState({sampleTexts: jsonResponse});
+      const {sampleTexts} = this.state;
+      const textWrapped = stringDivider(sampleTexts.reading, 100, PREFIX, POSTFIX);
+      this.setState({textWrapped});
+    });
   }
 
   createMarkup(markup) {
@@ -29,7 +33,7 @@ class TopHalfText extends React.Component {
       <div className="top-half-text">
         <div
           className="text-container"
-          ref={(e) => this.textContainer = e }
+          ref={(e) => { this.textContainer = e; }}
           dangerouslySetInnerHTML={this.createMarkup(this.state.textWrapped)}
         />
       </div>

@@ -48,5 +48,15 @@ button:active {
   .user-text-form button.save {
     float: right; }
 
+article {
+  text-align: left;
+  max-width: 800px;
+  margin: 25px auto 50px;
+  font-size: 16px;
+  line-height: calc(16px * 1.48);
+  color: #333; }
+  article title {
+    font-size: 25px; }
+
 .clearfix {
   clear: both; }

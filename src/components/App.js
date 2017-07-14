@@ -5,6 +5,7 @@ import {
   Link,
 } from "react-router-dom";
 
+
 import logo from "../assets/logo.svg";
 import "../assets/App.css";
 import HomePage from "./HomePage";
@@ -15,6 +16,7 @@ import FixationsWithSliders from "./FixationsWithSliders";
 import UserText from "./forms/UserText";
 
 class App extends Component {
+
   render() {
     return (
       <Router>

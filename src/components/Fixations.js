@@ -1,6 +1,6 @@
 import React from "react";
 import {number, func, string} from "prop-types";
-import sampleText from "../assets/sample_texts.json";
+import Api from "../api/Api";
 import {stringDivider} from "../utils/helpers";
 
 const PREFIX = "<div class='wrapper'>";
@@ -34,9 +34,14 @@ class Fixations extends React.Component {
     this.pauseSwitching = this.pauseSwitching.bind(this);
   }
 
-  componentDidMount() {
-    const text = stringDivider(sampleText.text1, 40, PREFIX, POSTFIX);
-    this.setState({text, textSplitted: text.split("||")});
+  componentWillMount() {
+    Api.getText()
+    .then((jsonResponse) => {
+      this.setState({sampleTexts: jsonResponse});
+      const {sampleTexts} = this.state;
+      const text = stringDivider(sampleTexts.reading, 40, PREFIX, POSTFIX);
+      this.setState({text, textSplitted: text.split("||")});
+    });
   }
 
   componentWillReceiveProps(nextProps) {
