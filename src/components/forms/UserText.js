@@ -14,7 +14,7 @@ class UserText extends Component {
   }
 
   saveText() {
-    Api.saveText(this.textarea.value);
+    Api.saveText(null, this.textarea.value);
   }
 
   render() {

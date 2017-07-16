@@ -1,10 +1,20 @@
 import React from "react";
+import {string} from "prop-types";
 import {stringDivider} from "../utils/helpers";
 import Api from "../api/Api";
+
 const PREFIX = "<div class='wrapper'>";
 const POSTFIX = "<div class='show-bottom-letters'></div></div>";
 
 class BottomHalfText extends React.Component {
+
+  static propTypes = {
+    documentId: string,
+  }
+
+  static defaultProps = {
+    documentId: "sample_text",
+  }
 
   constructor(props) {
     super(props);
@@ -14,11 +24,11 @@ class BottomHalfText extends React.Component {
   }
 
   componentWillMount() {
-    Api.getText()
+    const {documentId} = this.props;
+
+    Api.getText(documentId)
     .then((jsonResponse) => {
-      this.setState({sampleTexts: jsonResponse});
-      const {sampleTexts} = this.state;
-      const textWrapped = stringDivider(sampleTexts.reading, 100, PREFIX, POSTFIX);
+      const textWrapped = stringDivider(jsonResponse.text, 100, PREFIX, POSTFIX);
       this.setState({textWrapped});
     });
   }
