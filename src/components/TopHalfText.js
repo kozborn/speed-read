@@ -3,8 +3,8 @@ import {string} from "prop-types";
 import Api from "../api/Api";
 import {stringDivider} from "../utils/helpers";
 
-const PREFIX = "<div class='wrapper'>";
-const POSTFIX = "<div class='show-top-letters'></div></div>";
+const PREFIX = '<div class="wrapper">';
+const POSTFIX = '<div class="show-top-letters"></div></div>';
 
 class TopHalfText extends React.Component {
 
