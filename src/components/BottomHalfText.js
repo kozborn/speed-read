@@ -28,7 +28,7 @@ class BottomHalfText extends React.Component {
 
     Api.getText(documentId)
     .then((jsonResponse) => {
-      const textWrapped = stringDivider(jsonResponse.text, 100, PREFIX, POSTFIX);
+      const textWrapped = stringDivider(jsonResponse.bottomHalfText ? jsonResponse.bottomHalfText : "", 100, PREFIX, POSTFIX);
       this.setState({textWrapped});
     });
   }
