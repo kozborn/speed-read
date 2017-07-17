@@ -1,18 +1,12 @@
-// let instance = null;
-// export default class Api {
-//   constructor() {
-//     if (!instance) {
-//       instance = this;
-//     }
-//     return instance;
-//   }
-// }
+import _ from "underscore";
 
 const ServerUrl = "http://127.0.0.1:5984/speed-read";
 
 export default {
 
-  getText(docId = "sample_text") {
+  getText(documentId) {
+    const docId = _.isEmpty(documentId) ? "sample_text" : documentId;
+
     return fetch(`${ServerUrl}/${docId}`)
     .then(response => response.json())
     .catch((ex) => {
@@ -20,7 +14,7 @@ export default {
     });
   },
 
-  saveText(docId, text) {
+  saveText(docId, text, key) {
     let url = "";
     let method = "";
     if (docId) {
@@ -31,25 +25,35 @@ export default {
       method = "POST";
     }
 
+    const body = {};
+    body[key] = text;
+
     const headers = new Headers();
     headers.append("Content-Type", "application/json");
-    const initOptions = {
+    const saveOptions = {
       method,
       headers,
       mode: "cors",
       cache: "default",
-      body: JSON.stringify({text}),
+      body: JSON.stringify(body),
     };
 
-    fetch(url, initOptions)
-    .then(response => response.json())
+    return fetch(url)
+    .then(response => response.status === 404 ? this.save(url, saveOptions) : response.json())
     .then((response) => {
-      console.log(response);
+      const newBody = JSON.parse(saveOptions.body);
+      newBody._rev = response._rev;
+      console.log(newBody, response);
+      saveOptions.body = JSON.stringify(newBody);
+      console.log(saveOptions);
+      return this.save(url, saveOptions);
     })
     .catch((ex) => {
       console.warn("Exception catched", ex);
     });
+  },
 
-    console.log(text);
+  save(url, saveOptions) {
+    return fetch(url, saveOptions);
   },
 };

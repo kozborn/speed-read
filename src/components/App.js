@@ -13,7 +13,7 @@ import BottomHalfText from "./BottomHalfText";
 import TopHalfText from "./TopHalfText";
 import TableWithSliders from "./TableWithSliders";
 import FixationsWithSliders from "./FixationsWithSliders";
-import UserText from "./forms/UserText";
+import NewFixationsText from "./NewFixationsText";
 import UrlParamsProvider from "../hoc/UrlProvider";
 
 class App extends Component {
@@ -45,7 +45,7 @@ class App extends Component {
           <Route path="/top-half-text" component={UrlParamsProvider(TopHalfText)} />
           <Route path="/bottom-half-text" component={UrlParamsProvider(BottomHalfText)} />
           <Route path="/schultz-table" component={UrlParamsProvider(TableWithSliders)} />
-          <Route path="/create-own-text" component={UrlParamsProvider(UserText)} />
+          <Route path="/create-own-text" component={UrlParamsProvider(NewFixationsText)} />
           <footer />
         </div>
       </Router>
