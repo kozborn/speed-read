@@ -7,12 +7,17 @@ export function getDoc(docId = "sample_text") {
     dispatch({type: "FETCHING_DOC", docId});
 
     const documentId = _.isEmpty(docId) ? "sample_text" : docId;
+    const userDocument = documentId !== "sample_text";
 
     return fetch(`${ServerUrl}/${documentId}`)
     .then(response => response.json())
     .then((response) => {
       console.log(response);
-      dispatch({type: "DOC_FETCHED", response});
+      if (userDocument) {
+        dispatch({type: "USER_DOC_FETCHED", response});
+      } else {
+        dispatch({type: "DOC_FETCHED", response});
+      }
     })
     .catch((ex) => {
       console.warn("parsing failed", ex);

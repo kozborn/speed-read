@@ -2,7 +2,7 @@ import React from "react";
 import Slider from "rc-slider";
 import Tooltip from "rc-tooltip";
 import {string} from "prop-types";
-import Fixations from "./Fixations";
+import Fixations from "../connectors/Fixations";
 
 const Handle = Slider.Handle;
 

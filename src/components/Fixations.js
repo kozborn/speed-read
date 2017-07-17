@@ -1,6 +1,5 @@
 import React from "react";
 import {number, func, string} from "prop-types";
-import Api from "../api/Api";
 import {stringDivider} from "../utils/helpers";
 
 const PREFIX = "<div class='wrapper'>";
@@ -10,9 +9,11 @@ class Fixations extends React.Component {
 
   static propTypes = {
     documentId: string,
+    fixationText: string.isRequired,
     speed: number, // ms
-    eventType: string,
-    handleExternalEvent: func,
+    getDoc: func.isRequired,
+    // eventType: string,
+    // handleExternalEvent: func,
   }
 
   static defaultProps = {
@@ -36,15 +37,18 @@ class Fixations extends React.Component {
   }
 
   componentWillMount() {
-    const {documentId} = this.props;
-    Api.getText(documentId)
-    .then((jsonResponse) => {
-      const textWrapped = stringDivider(jsonResponse.fixationsText, 50, PREFIX, POSTFIX).split("||");
-      this.setState({textWrapped});
-    });
+    this.props.getDoc(this.props.documentId);
+    // const {documentId} = this.props;
+    // Api.getText(documentId)
+    // .then((jsonResponse) => {
+    //   const textWrapped = stringDivider(jsonResponse.fixationsText, 50, PREFIX, POSTFIX).split("||");
+    //   this.setState({textWrapped});
+    // });
   }
 
   componentWillReceiveProps(nextProps) {
+    const textWrapped = stringDivider(nextProps.fixationText, 50, PREFIX, POSTFIX).split("||");
+    this.setState({textWrapped});
     if (nextProps.speed !== this.props.speed) {
       clearInterval(this.interval);
       this.interval = null;
