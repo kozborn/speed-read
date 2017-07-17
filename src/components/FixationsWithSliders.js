@@ -1,6 +1,7 @@
 import React from "react";
 import Slider from "rc-slider";
 import Tooltip from "rc-tooltip";
+import {string} from "prop-types";
 import Fixations from "./Fixations";
 
 const Handle = Slider.Handle;
@@ -21,6 +22,14 @@ const handle = (props) => {
 };
 
 class FixationsWithSliders extends React.Component {
+
+  static propTypes = {
+    documentId: string,
+  }
+
+  static defaultProps = {
+    documentId: "",
+  }
 
   constructor(props) {
     super(props);
@@ -48,7 +57,10 @@ class FixationsWithSliders extends React.Component {
             onChange={this.changeSpeed}
           />
         </div>
-        <Fixations speed={this.state.speed} />
+        <Fixations
+          documentId={this.props.documentId}
+          speed={this.state.speed}
+        />
       </div>
     );
   }

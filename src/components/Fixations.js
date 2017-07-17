@@ -1,6 +1,6 @@
 import React from "react";
 import {number, func, string} from "prop-types";
-import sampleText from "../assets/sample_texts.json";
+import Api from "../api/Api";
 import {stringDivider} from "../utils/helpers";
 
 const PREFIX = "<div class='wrapper'>";
@@ -9,12 +9,14 @@ const POSTFIX = " </div>||"; // "||" are used for splitting text
 class Fixations extends React.Component {
 
   static propTypes = {
+    documentId: string,
     speed: number, // ms
     eventType: string,
     handleExternalEvent: func,
   }
 
   static defaultProps = {
+    documentId: "sample_text",
     speed: 1000, //ms
     eventType: "",
     handleExternalEvent: () => "",
@@ -23,8 +25,7 @@ class Fixations extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      text: "",
-      textSplitted: [],
+      textWrapped: [],
       running: false,
     };
 
@@ -34,9 +35,13 @@ class Fixations extends React.Component {
     this.pauseSwitching = this.pauseSwitching.bind(this);
   }
 
-  componentDidMount() {
-    const text = stringDivider(sampleText.text1, 40, PREFIX, POSTFIX);
-    this.setState({text, textSplitted: text.split("||")});
+  componentWillMount() {
+    const {documentId} = this.props;
+    Api.getText(documentId)
+    .then((jsonResponse) => {
+      const textWrapped = stringDivider(jsonResponse.fixationsText, 50, PREFIX, POSTFIX).split("||");
+      this.setState({textWrapped});
+    });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -53,13 +58,13 @@ class Fixations extends React.Component {
 
   getText() {
     const lines = [];
-    const {textSplitted} = this.state;
+    const {textWrapped} = this.state;
 
-    for (let i = 0; i < textSplitted.length; i += 2) {
+    for (let i = 0; i < textWrapped.length; i += 2) {
       const line = (<div className="line" key={`line_${i}`}>
-        <div dangerouslySetInnerHTML={this.createMarkup(textSplitted[i])} className="left" />
+        <div dangerouslySetInnerHTML={this.createMarkup(textWrapped[i])} className="left" />
         <div className="left-space">&nbsp;</div>
-        <div dangerouslySetInnerHTML={this.createMarkup(textSplitted[i + 1])} className="right" />
+        <div dangerouslySetInnerHTML={this.createMarkup(textWrapped[i + 1])} className="right" />
         <div className="clearfix" />
       </div>);
       lines.push(line);
@@ -125,7 +130,7 @@ class Fixations extends React.Component {
         </div>
         {this.getText()}
       </div>
-    )
+    );
   }
 }
 
