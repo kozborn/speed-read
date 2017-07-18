@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
 import _ from "underscore";
-import Fixations from "../components/Fixations";
+import Fixations from "../components/FixationsWithCreateBtn";
 import {getDoc} from "../actions/actions";
 
 function mapStateToProps(state, ownProps) {

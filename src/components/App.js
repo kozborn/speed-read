@@ -6,7 +6,6 @@ import queryString from "query-string";
 import logo from "../assets/logo.svg";
 import "../assets/App.css";
 
-
 class App extends Component {
 
   render() {

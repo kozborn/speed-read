@@ -38,12 +38,6 @@ class Fixations extends React.Component {
 
   componentWillMount() {
     this.props.getDoc(this.props.documentId);
-    // const {documentId} = this.props;
-    // Api.getText(documentId)
-    // .then((jsonResponse) => {
-    //   const textWrapped = stringDivider(jsonResponse.fixationsText, 50, PREFIX, POSTFIX).split("||");
-    //   this.setState({textWrapped});
-    // });
   }
 
   componentWillReceiveProps(nextProps) {

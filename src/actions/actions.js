@@ -12,7 +12,6 @@ export function getDoc(docId = "sample_text") {
     return fetch(`${ServerUrl}/${documentId}`)
     .then(response => response.json())
     .then((response) => {
-      console.log(response);
       if (userDocument) {
         dispatch({type: "USER_DOC_FETCHED", response});
       } else {
@@ -24,3 +23,54 @@ export function getDoc(docId = "sample_text") {
     });
   };
 }
+
+function save(url, saveOptions) {
+  return fetch(url, saveOptions);
+}
+
+function create(url, saveOptions) {
+  return save(url, saveOptions);
+}
+
+function update(response, url, saveOptions) {
+  const newBody = JSON.parse(saveOptions.body);
+  newBody._rev = response._rev;
+  const newOptions = _.extend(saveOptions, {body: JSON.stringify(newBody)});
+  return save(url, newOptions);
+}
+
+export function saveText(docId, text, textKey) {
+  const method = _.isEmpty(docId) ? "POST" : "PUT";
+  const url = _.isEmpty(docId) ? ServerUrl : `${ServerUrl}/${docId}`;
+  const body = {};
+  body[textKey] = text;
+  const headers = new Headers();
+  headers.append("Content-Type", "application/json");
+  const saveOptions = {
+    method,
+    headers,
+    mode: "cors",
+    cache: "default",
+    body: JSON.stringify(body),
+  };
+
+  return (dispatch) => {
+    fetch(url)
+    .then((response) => {
+      let next = null;
+      if (response.status === 404) {
+        next = create(url, saveOptions);
+      } else {
+        next = update(response.json(), url, saveOptions);
+      }
+      return next;
+    })
+    .then((response) => {
+      dispatch({type: "DOCUMENT_SAVED", response});
+    })
+    .catch((ex) => {
+      console.warn("Exception catched", ex);
+    });
+  };
+}
+
