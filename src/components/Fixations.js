@@ -31,18 +31,18 @@ class Fixations extends React.Component {
     };
 
     this.getText = this.getText.bind(this);
+    this.prepareText = this.prepareText.bind(this);
     this.startSwitching = this.startSwitching.bind(this);
     this.stopSwitching = this.stopSwitching.bind(this);
     this.pauseSwitching = this.pauseSwitching.bind(this);
   }
 
-  componentWillMount() {
-    this.props.getDoc(this.props.documentId);
+  componentDidMount() {
+    this.prepareText(this.props.fixationText);
   }
 
   componentWillReceiveProps(nextProps) {
-    const textWrapped = stringDivider(nextProps.fixationText, 50, PREFIX, POSTFIX).split("||");
-    this.setState({textWrapped});
+    this.prepareText(nextProps.fixationText);
     if (nextProps.speed !== this.props.speed) {
       clearInterval(this.interval);
       this.interval = null;
@@ -79,6 +79,11 @@ class Fixations extends React.Component {
       elements.push(rightElements[i]);
     }
     return elements;
+  }
+
+  prepareText(text) {
+    const textWrapped = stringDivider(text, 50, PREFIX, POSTFIX).split("||");
+    this.setState({textWrapped});
   }
 
   startSwitching() {

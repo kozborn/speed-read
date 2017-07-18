@@ -2,18 +2,24 @@ import React, { Component } from "react";
 import {
   Link,
 } from "react-router-dom";
-import queryString from "query-string";
+import {string} from "prop-types";
 import logo from "../assets/logo.svg";
 import "../assets/App.css";
 
 class App extends Component {
 
+  static propTypes = {
+    docId: string,
+  }
+
+  static defaultProps = {
+    docId: null,
+  }
+
   render() {
     let queryParams = "";
-    const parsed = queryString.parse(window.location.search);
-    const documentId = parsed.documentId;
-    if (documentId) {
-      queryParams = `?documentId=${documentId}`;
+    if (this.props.docId) {
+      queryParams = `?documentId=${this.props.docId}`;
     }
 
     return (

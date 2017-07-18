@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {func, string} from "prop-types";
 
-class UserText extends Component {
+export default class TextForm extends Component {
 
   static propTypes = {
     text: string,
@@ -61,5 +61,3 @@ class UserText extends Component {
     );
   }
 }
-
-export default UserText;

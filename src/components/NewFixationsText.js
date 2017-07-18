@@ -1,7 +1,7 @@
 import React from "react";
 import {string} from "prop-types";
 import Api from "../api/Api";
-import UserText from "./forms/UserText";
+import TextForm from "./forms/TextForm";
 
 export default class NewFixationsText extends React.Component {
 
@@ -40,7 +40,7 @@ export default class NewFixationsText extends React.Component {
   render() {
     return (
       <div>
-        <UserText
+        <TextForm
           text={this.state.currentText}
           saveText={this.saveText}
         />

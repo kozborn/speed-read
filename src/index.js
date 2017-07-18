@@ -5,6 +5,8 @@ import { createStore, applyMiddleware } from "redux";
 import createBrowserHistory from "history/createBrowserHistory";
 import { Provider } from "react-redux";
 import thunkMiddleware from "redux-thunk";
+import queryString from "query-string";
+
 import reducer from "./reducer";
 import "./assets/index.css";
 import "./styles/index.css";
@@ -15,8 +17,8 @@ import TopHalfText from "./components/TopHalfText";
 import TableWithSliders from "./components/TableWithSliders";
 import FixationsWithSliders from "./components/FixationsWithSliders";
 import NewFixationsText from "./components/NewFixationsText";
-import UrlParamsProvider from "./hoc/UrlProvider";
 import registerServiceWorker from "./registerServiceWorker";
+import {setDocumentId} from "./actions/actions";
 
 const history = createBrowserHistory();
 
@@ -36,24 +38,29 @@ function logger({ getState }) {
 }
 
 const store = createStore(reducer, applyMiddleware(thunkMiddleware, logger));
+const parsed = queryString.parse(window.location.search);
+const documentId = parsed.documentId;
+if (documentId) {
+  store.dispatch(setDocumentId(documentId));
+}
+
+const docId = store.getState().getIn(["app", "docId"], null);
 
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
       <div>
-        <App>
-          <Route exact path="/" component={UrlParamsProvider(HomePage)} />
-          <Route path="/fixations" component={UrlParamsProvider(FixationsWithSliders)} />
-          <Route path="/top-half-text" component={UrlParamsProvider(TopHalfText)} />
-          <Route path="/bottom-half-text" component={UrlParamsProvider(BottomHalfText)} />
-          <Route path="/schultz-table" component={UrlParamsProvider(TableWithSliders)} />
-          <Route path="/create-own-text" component={UrlParamsProvider(NewFixationsText)} />
+        <App docId={docId}>
+          <Route exact path="/" component={HomePage} />
+          <Route path="/fixations" component={FixationsWithSliders} />
+          <Route path="/top-half-text" component={TopHalfText} />
+          <Route path="/bottom-half-text" component={BottomHalfText} />
+          <Route path="/schultz-table" component={TableWithSliders} />
+          <Route path="/create-own-text" component={NewFixationsText} />
         </App>
       </div>
     </Router>
   </Provider>,
   document.getElementById("root"),
 );
-
-// ReactDOM.render(<App />, document.getElementById("root"));
 registerServiceWorker();

@@ -33,13 +33,19 @@ function create(url, saveOptions) {
 }
 
 function update(response, url, saveOptions) {
-  const newBody = JSON.parse(saveOptions.body);
-  newBody._rev = response._rev;
-  const newOptions = _.extend(saveOptions, {body: JSON.stringify(newBody)});
-  return save(url, newOptions);
+  return response.then((res) => {
+    const newBody = JSON.parse(saveOptions.body);
+    newBody._rev = res._rev;
+    const newOptions = _.extend(saveOptions, {body: JSON.stringify(newBody)});
+    return save(url, newOptions);
+  });
 }
 
-export function saveText(docId, text, textKey) {
+export function setDocumentId(docId) {
+  return {type: "SET_USER_DOCID", docId};
+}
+
+export function saveText(docId, textKey, text) {
   const method = _.isEmpty(docId) ? "POST" : "PUT";
   const url = _.isEmpty(docId) ? ServerUrl : `${ServerUrl}/${docId}`;
   const body = {};
@@ -65,12 +71,19 @@ export function saveText(docId, text, textKey) {
       }
       return next;
     })
+    .then(response => response.json())
     .then((response) => {
-      dispatch({type: "DOCUMENT_SAVED", response});
+      if (response.ok) {
+        dispatch({type: "DOCUMENT_SAVED", response});
+        dispatch(setDocumentId(response.id));
+        // TODO Maybe try to do optymistic update?
+        dispatch(getDoc(response.id));
+      } else {
+        dispatch({type: "DOCUMENT_SAVE_FAILED", response});
+      }
     })
     .catch((ex) => {
       console.warn("Exception catched", ex);
     });
   };
 }
-

@@ -1,19 +1,21 @@
 import {connect} from "react-redux";
 import _ from "underscore";
 import Fixations from "../components/FixationsWithCreateBtn";
-import {getDoc} from "../actions/actions";
+import {getDoc, saveText} from "../actions/actions";
 
-function mapStateToProps(state, ownProps) {
-  const fixationText = _.isEmpty(ownProps.documentId)
+function mapStateToProps(state) {
+  const docId = state.getIn(["app", "docId"], null);
+  const fixationText = _.isEmpty(docId)
     ? state.getIn(["app", "defaultTexts", "fixations"], "")
     : state.getIn(["app", "userTexts", "fixations"], "");
 
-  return {fixationText};
+  return {docId, fixationText};
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch, ownProps) {
   return {
     getDoc: docId => dispatch(getDoc(docId)),
+    save: (textKey, text) => dispatch(saveText(ownProps.documentId, textKey, text)),
   };
 }
 
