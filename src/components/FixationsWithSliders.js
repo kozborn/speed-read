@@ -21,6 +21,22 @@ const handle = (props) => {
   );
 };
 
+const marks = {
+  0: "low",
+  1: "1",
+  2: "2",
+  3: "3",
+  4: "4",
+  5: "5",
+  6: "6",
+  7: "7",
+  8: "8",
+  9: "9",
+  10: "10",
+  11: "11",
+  12: "high",
+};
+
 class FixationsWithSliders extends React.Component {
 
   static propTypes = {
@@ -41,7 +57,7 @@ class FixationsWithSliders extends React.Component {
   }
 
   changeSpeed(e) {
-    this.setState({speed: (1000 / e)});
+    this.setState({speed: (1000 - (e * 75))});
   }
 
   render() {
@@ -50,11 +66,12 @@ class FixationsWithSliders extends React.Component {
         <div className="sliders">
           <h3>Speed</h3>
           <Slider
-            min={1}
-            max={5}
+            min={0}
+            max={12}
             step={1}
             handle={handle}
             onChange={this.changeSpeed}
+            marks={marks}
           />
         </div>
         <Fixations

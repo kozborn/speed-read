@@ -125,6 +125,7 @@ class Fixations extends React.Component {
   render() {
     return (
       <div className="text-with-fixations" ref={(e) => { this.textWithFixations = e; }} >
+        <h1>{this.props.speed}</h1>
         <div className="toolbar">
           <button onClick={this.state.running ? this.pauseSwitching : this.startSwitching}>
             {this.state.running ? "Pause" : "Start"}

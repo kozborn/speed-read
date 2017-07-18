@@ -10,8 +10,12 @@ export function getDoc(docId = "sample_text") {
     const userDocument = documentId !== "sample_text";
 
     return fetch(`${ServerUrl}/${documentId}`)
-    .then(response => response.json())
     .then((response) => {
+      console.log(response);
+      return response.json();
+    })
+    .then((response) => {
+      console.log("Response", response);
       if (userDocument) {
         dispatch({type: "USER_DOC_FETCHED", response});
       } else {
