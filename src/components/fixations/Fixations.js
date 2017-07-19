@@ -1,6 +1,7 @@
 import React from "react";
-import {number, func, string} from "prop-types";
+import {number, string, func} from "prop-types";
 import {stringDivider} from "../../utils/helpers";
+import FixationsToolbar from "./FixationsToolbar";
 
 const PREFIX = "<div class='wrapper'>";
 const POSTFIX = " </div>||"; // "||" are used for splitting text
@@ -8,19 +9,16 @@ const POSTFIX = " </div>||"; // "||" are used for splitting text
 class Fixations extends React.Component {
 
   static propTypes = {
-    documentId: string,
     fixationText: string.isRequired,
     speed: number, // ms
-    getDoc: func.isRequired,
-    // eventType: string,
-    // handleExternalEvent: func,
+    createBtnCb: func,
   }
 
   static defaultProps = {
     documentId: "sample_text",
     speed: 1000, //ms
     eventType: "",
-    handleExternalEvent: () => "",
+    createBtnCb: () => "",
   }
 
   constructor(props) {
@@ -125,13 +123,23 @@ class Fixations extends React.Component {
   render() {
     return (
       <div className="text-with-fixations" ref={(e) => { this.textWithFixations = e; }} >
-        <h1>{this.props.speed}</h1>
-        <div className="toolbar">
-          <button onClick={this.state.running ? this.pauseSwitching : this.startSwitching}>
-            {this.state.running ? "Pause" : "Start"}
-          </button>
-          {this.state.running ? <button onClick={this.stopSwitching} >Stop</button> : null}
-        </div>
+        <FixationsToolbar
+          startBtn={{
+            cb: this.state.running ? this.pauseSwitching : this.startSwitching,
+            label: this.state.running ? "Pause" : "Start",
+            disabled: false,
+          }}
+          stopBtn={{
+            cb: this.stopSwitching,
+            label: "Stop",
+            disabled: !this.state.running,
+          }}
+          createBtn={{
+            cb: this.props.createBtnCb,
+            label: "Dodaj swój text",
+            disabled: false,
+          }}
+        />
         {this.getText()}
       </div>
     );
