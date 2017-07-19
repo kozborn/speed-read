@@ -4,11 +4,11 @@ import {getDoc} from "../actions/actions";
 
 function mapStateToProps(state) {
   return {
-    reading: state.getIn(["app", "defaultTexts", "reading"], ""),
-    understanding: state.getIn(["app", "defaultTexts", "understanding"], ""),
-    anticipating: state.getIn(["app", "defaultTexts", "anticipating"], ""),
-    thinking: state.getIn(["app", "defaultTexts", "thinking"], ""),
-    memorizing: state.getIn(["app", "defaultTexts", "memorizing"], ""),
+    reading: state.getIn(["app", "defaultDoc", "reading"], ""),
+    understanding: state.getIn(["app", "defaultDoc", "understanding"], ""),
+    anticipating: state.getIn(["app", "defaultDoc", "anticipating"], ""),
+    thinking: state.getIn(["app", "defaultDoc", "thinking"], ""),
+    memorizing: state.getIn(["app", "defaultDoc", "memorizing"], ""),
   };
 }
 

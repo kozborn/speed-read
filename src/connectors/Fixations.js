@@ -6,8 +6,8 @@ import {getDoc, saveText} from "../actions/actions";
 function mapStateToProps(state) {
   const docId = state.getIn(["app", "docId"], null);
   const fixationText = _.isEmpty(docId)
-    ? state.getIn(["app", "defaultTexts", "fixations"], "")
-    : state.getIn(["app", "userTexts", "fixations"], "");
+    ? state.getIn(["app", "defaultDoc", "fixations"], "")
+    : state.getIn(["app", "userDoc", "fixations"], "");
 
   return {docId, fixationText};
 }
