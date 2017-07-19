@@ -1,7 +1,16 @@
 import React, { Component } from "react";
-import Api from "../api/Api";
+import {func, string} from "prop-types";
 
 class HomePage extends Component {
+
+  static propTypes = {
+    getDoc: func.isRequired,
+    memorizing: string.isRequired,
+    reading: string.isRequired,
+    understanding: string.isRequired,
+    anticipating: string.isRequired,
+    thinking: string.isRequired,
+  }
 
   constructor(props) {
     super(props);
@@ -11,35 +20,33 @@ class HomePage extends Component {
   }
 
   componentDidMount() {
-    Api.getText()
-    .then((jsonResponse) => {
-      this.setState({sampleTexts: jsonResponse});
-    });
+    this.props.getDoc();
   }
 
   render() {
-    const { sampleTexts } = this.state;
+    console.log(this.props);
+    const { reading, memorizing, thinking, understanding, anticipating } = this.props;
     return (
       <div>
         <article>
           <h2>Czytanie</h2>
-          <div>{sampleTexts.reading}</div>
+          <div>{reading}</div>
         </article>
         <article>
           <h2>Rozumienie</h2>
-          <div>{sampleTexts.understanding}</div>
+          <div>{understanding}</div>
         </article>
         <article>
           <h2>Antycypacja</h2>
-          <div>{sampleTexts.anticipating}</div>
+          <div>{anticipating}</div>
         </article>
         <article>
           <h2>Aktywizacja myślenia</h2>
-          <div>{sampleTexts.thinking}</div>
+          <div>{thinking}</div>
         </article>
         <article>
           <h2>Zapamiętywanie</h2>
-          <div>{sampleTexts.memorizing}</div>
+          <div>{memorizing}</div>
         </article>
       </div>
     );

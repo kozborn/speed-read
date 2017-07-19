@@ -1,7 +1,7 @@
 import React from "react";
-import {number, func, string} from "prop-types";
-import Api from "../api/Api";
-import {stringDivider} from "../utils/helpers";
+import {number, string, func} from "prop-types";
+import {stringDivider} from "../../utils/helpers";
+import FixationsToolbar from "./FixationsToolbar";
 
 const PREFIX = "<div class='wrapper'>";
 const POSTFIX = " </div>||"; // "||" are used for splitting text
@@ -9,17 +9,16 @@ const POSTFIX = " </div>||"; // "||" are used for splitting text
 class Fixations extends React.Component {
 
   static propTypes = {
-    documentId: string,
+    fixationText: string.isRequired,
     speed: number, // ms
-    eventType: string,
-    handleExternalEvent: func,
+    createBtnCb: func,
   }
 
   static defaultProps = {
     documentId: "sample_text",
     speed: 1000, //ms
     eventType: "",
-    handleExternalEvent: () => "",
+    createBtnCb: () => "",
   }
 
   constructor(props) {
@@ -30,21 +29,18 @@ class Fixations extends React.Component {
     };
 
     this.getText = this.getText.bind(this);
+    this.prepareText = this.prepareText.bind(this);
     this.startSwitching = this.startSwitching.bind(this);
     this.stopSwitching = this.stopSwitching.bind(this);
     this.pauseSwitching = this.pauseSwitching.bind(this);
   }
 
-  componentWillMount() {
-    const {documentId} = this.props;
-    Api.getText(documentId)
-    .then((jsonResponse) => {
-      const textWrapped = stringDivider(jsonResponse.fixationsText, 50, PREFIX, POSTFIX).split("||");
-      this.setState({textWrapped});
-    });
+  componentDidMount() {
+    this.prepareText(this.props.fixationText);
   }
 
   componentWillReceiveProps(nextProps) {
+    this.prepareText(nextProps.fixationText);
     if (nextProps.speed !== this.props.speed) {
       clearInterval(this.interval);
       this.interval = null;
@@ -81,6 +77,11 @@ class Fixations extends React.Component {
       elements.push(rightElements[i]);
     }
     return elements;
+  }
+
+  prepareText(text) {
+    const textWrapped = stringDivider(text, 50, PREFIX, POSTFIX).split("||");
+    this.setState({textWrapped});
   }
 
   startSwitching() {
@@ -122,12 +123,23 @@ class Fixations extends React.Component {
   render() {
     return (
       <div className="text-with-fixations" ref={(e) => { this.textWithFixations = e; }} >
-        <div className="toolbar">
-          <button onClick={this.state.running ? this.pauseSwitching : this.startSwitching}>
-            {this.state.running ? "Pause" : "Start"}
-          </button>
-          {this.state.running ? <button onClick={this.stopSwitching} >Stop</button> : null}
-        </div>
+        <FixationsToolbar
+          startBtn={{
+            cb: this.state.running ? this.pauseSwitching : this.startSwitching,
+            label: this.state.running ? "Pause" : "Start",
+            disabled: false,
+          }}
+          stopBtn={{
+            cb: this.stopSwitching,
+            label: "Stop",
+            disabled: !this.state.running,
+          }}
+          createBtn={{
+            cb: this.props.createBtnCb,
+            label: "Dodaj swój text",
+            disabled: false,
+          }}
+        />
         {this.getText()}
       </div>
     );

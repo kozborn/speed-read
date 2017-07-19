@@ -1,11 +1,10 @@
 import React from "react";
 import {string} from "prop-types";
-import {stringDivider} from "../utils/helpers";
 import Api from "../api/Api";
-import {stringDivider} from "../utils/helpers"
+import {stringDivider} from "../utils/helpers";
 
-const PREFIX = '<div class="wrapper">';
-const POSTFIX = '<div class="show-bottom-letters"></div></div>'
+const PREFIX = "<div class='wrapper'>";
+const POSTFIX = "<div class='show-bottom-letters'></div></div>";
 
 class BottomHalfText extends React.Component {
 
