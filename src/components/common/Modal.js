@@ -1,6 +1,5 @@
 import React from "react";
 import Modal from "react-modal";
-import _ from "underscore";
 import {bool, string, func} from "prop-types";
 
 export default class extends React.Component {

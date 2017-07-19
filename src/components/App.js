@@ -32,7 +32,6 @@ class App extends Component {
             <li><Link to={`/top-half-text${queryParams}`}>Top half text</Link></li>
             <li><Link to={`/schultz-table${queryParams}`}>Schultz table</Link></li>
             <li><Link to={`/fixations${queryParams}`}>Fixations</Link></li>
-            <li><Link to={`/create-own-text${queryParams}`}>Add Text</Link></li>
           </nav>
         </div>
         {this.props.children}

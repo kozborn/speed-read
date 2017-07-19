@@ -1,7 +1,6 @@
 import React from "react";
 import {string} from "prop-types";
-import Api from "../api/Api";
-import {stringDivider} from "../utils/helpers";
+
 
 const PREFIX = "<div class='wrapper'>";
 const POSTFIX = "<div class='show-bottom-letters'></div></div>";
@@ -26,11 +25,11 @@ class BottomHalfText extends React.Component {
   componentWillMount() {
     const {documentId} = this.props;
 
-    Api.getText(documentId)
-    .then((jsonResponse) => {
-      const textWrapped = stringDivider(jsonResponse.bottomHalfText ? jsonResponse.bottomHalfText : "", 100, PREFIX, POSTFIX);
-      this.setState({textWrapped});
-    });
+    // Api.getText(documentId)
+    // .then((jsonResponse) => {
+    //   const textWrapped = stringDivider(jsonResponse.bottomHalfText ? jsonResponse.bottomHalfText : "", 100, PREFIX, POSTFIX);
+    //   this.setState({textWrapped});
+    // });
   }
 
   createMarkup(markup) {
