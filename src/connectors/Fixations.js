@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
 import _ from "underscore";
-import Fixations from "../components/FixationsWithCreateBtn";
+import FixationsWithSliders from "../components/fixations/FixationsWithSliders";
 import {getDoc, saveText} from "../actions/actions";
 
 function mapStateToProps(state) {
@@ -15,8 +15,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch, ownProps) {
   return {
     getDoc: docId => dispatch(getDoc(docId)),
-    save: (textKey, text) => dispatch(saveText(ownProps.documentId, textKey, text)),
+    saveText: (textKey, text) => dispatch(saveText(ownProps.documentId, textKey, text)),
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Fixations);
+export default connect(mapStateToProps, mapDispatchToProps)(FixationsWithSliders);

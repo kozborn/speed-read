@@ -15,8 +15,7 @@ import HomePage from "./connectors/HomePage";
 import BottomHalfText from "./components/BottomHalfText";
 import TopHalfText from "./components/TopHalfText";
 import TableWithSliders from "./components/TableWithSliders";
-import FixationsWithSliders from "./components/FixationsWithSliders";
-import NewFixationsText from "./components/NewFixationsText";
+import Fixations from "./connectors/Fixations";
 import registerServiceWorker from "./registerServiceWorker";
 import {setDocumentId} from "./actions/actions";
 
@@ -52,11 +51,10 @@ ReactDOM.render(
       <div>
         <App docId={docId}>
           <Route exact path="/" component={HomePage} />
-          <Route path="/fixations" component={FixationsWithSliders} />
+          <Route path="/fixations" component={Fixations} />
           <Route path="/top-half-text" component={TopHalfText} />
           <Route path="/bottom-half-text" component={BottomHalfText} />
           <Route path="/schultz-table" component={TableWithSliders} />
-          <Route path="/create-own-text" component={NewFixationsText} />
         </App>
       </div>
     </Router>

@@ -1,25 +1,8 @@
 import React from "react";
 import Slider from "rc-slider";
-import Tooltip from "rc-tooltip";
-import {string} from "prop-types";
-import Fixations from "../connectors/Fixations";
-
-const Handle = Slider.Handle;
-
-const handle = (props) => {
-  const { value, dragging, index, ...restProps } = props;
-  return (
-    <Tooltip
-      prefixCls="rc-slider-tooltip"
-      overlay={value}
-      visible={dragging}
-      placement="top"
-      key={index}
-    >
-      <Handle value={value} {...restProps} />
-    </Tooltip>
-  );
-};
+import {string, func} from "prop-types";
+import FixationsWithCreateBtn from "./FixationsWithCreateBtn";
+import handle from "../common/SliderHandle";
 
 const marks = {
   0: "low",
@@ -40,11 +23,14 @@ const marks = {
 class FixationsWithSliders extends React.Component {
 
   static propTypes = {
-    documentId: string,
+    getDoc: func.isRequired,
+    docId: string,
+    saveText: func.isRequired,
+    fixationText: string.isRequired,
   }
 
   static defaultProps = {
-    documentId: "",
+    docId: null,
   }
 
   constructor(props) {
@@ -54,6 +40,15 @@ class FixationsWithSliders extends React.Component {
     };
 
     this.changeSpeed = this.changeSpeed.bind(this);
+    this.saveText = this.saveText.bind(this);
+  }
+
+  componentWillMount() {
+    this.props.getDoc(this.props.docId);
+  }
+
+  saveText(text) {
+    this.props.saveText("fixations", text);
   }
 
   changeSpeed(e) {
@@ -74,9 +69,10 @@ class FixationsWithSliders extends React.Component {
             marks={marks}
           />
         </div>
-        <Fixations
-          documentId={this.props.documentId}
+        <FixationsWithCreateBtn
+          fixationText={this.props.fixationText}
           speed={this.state.speed}
+          saveText={this.saveText}
         />
       </div>
     );

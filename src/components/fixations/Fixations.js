@@ -1,6 +1,6 @@
 import React from "react";
 import {number, func, string} from "prop-types";
-import {stringDivider} from "../utils/helpers";
+import {stringDivider} from "../../utils/helpers";
 
 const PREFIX = "<div class='wrapper'>";
 const POSTFIX = " </div>||"; // "||" are used for splitting text

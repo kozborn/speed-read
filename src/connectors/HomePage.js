@@ -1,10 +1,8 @@
 import {connect} from "react-redux";
-import {Map} from "immutable";
 import HomePage from "../components/HomePage";
 import {getDoc} from "../actions/actions";
 
 function mapStateToProps(state) {
-  console.log(state.get('app', new Map()).toJS());
   return {
     reading: state.getIn(["app", "defaultTexts", "reading"], ""),
     understanding: state.getIn(["app", "defaultTexts", "understanding"], ""),
