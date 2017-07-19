@@ -2,20 +2,18 @@ import _ from "underscore";
 
 const ServerUrl = "http://127.0.0.1:5984/speed-read";
 
-export function getDoc(docId = "sample_text") {
+export function getDoc(docId = "default_doc") {
   return (dispatch) => {
     dispatch({type: "FETCHING_DOC", docId});
 
-    const documentId = _.isEmpty(docId) ? "sample_text" : docId;
-    const userDocument = documentId !== "sample_text";
+    const documentId = _.isEmpty(docId) ? "default_doc" : docId;
+    const userDocument = documentId !== "default_doc";
 
     return fetch(`${ServerUrl}/${documentId}`)
     .then((response) => {
-      console.log(response);
       return response.json();
     })
     .then((response) => {
-      console.log("Response", response);
       if (userDocument) {
         dispatch({type: "USER_DOC_FETCHED", response});
       } else {
@@ -89,5 +87,13 @@ export function saveText(docId, textKey, text) {
     .catch((ex) => {
       console.warn("Exception catched", ex);
     });
+  };
+}
+
+export function savePreferences(docId, key, value) {
+  return (dispatch) => {
+    console.log(docId, key, value);
+    const preferences = {key: value};
+    dispatch({type: "SAVING_PREFERENCES", preferences});
   };
 }

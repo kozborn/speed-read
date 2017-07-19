@@ -11,16 +11,16 @@ const PREFERENCES = {
 function app(state = new Map({
   isFetching: false,
   docId: null,
-  defaultTexts: null,
+  defaultDoc: null,
   defaultPreferences: fromJS(PREFERENCES),
-  userTexts: null,
+  userDoc: null,
   userId: null,
 }), action) {
   switch (action.type) {
     case "USER_DOC_FETCHED":
-      return state.set("userTexts", fromJS(action.response));
+      return state.set("userDoc", fromJS(action.response));
     case "DOC_FETCHED":
-      return state.set("defaultTexts", fromJS(action.response));
+      return state.set("defaultDoc", fromJS(action.response));
     case "SET_USER_DOCID":
       return state.set("docId", action.docId);
     default:
