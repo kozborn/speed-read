@@ -14,7 +14,7 @@ import App from "./components/App";
 import HomePage from "./connectors/HomePage";
 import BottomHalfText from "./components/BottomHalfText";
 import TopHalfText from "./components/TopHalfText";
-import TableWithSliders from "./components/TableWithSliders";
+import TableWithSliders from "./connectors/Table";
 import Fixations from "./connectors/Fixations";
 import registerServiceWorker from "./registerServiceWorker";
 import {setDocumentId} from "./actions/actions";

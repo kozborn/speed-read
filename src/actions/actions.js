@@ -89,3 +89,11 @@ export function saveText(docId, textKey, text) {
     });
   };
 }
+
+export function savePreferences(docId, key, value) {
+  return (dispatch) => {
+    console.log(docId, key, value);
+    const preferences = {key: value};
+    dispatch({type: "SAVING_PREFERENCES", preferences});
+  };
+}

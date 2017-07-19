@@ -1,33 +1,23 @@
 import React from "react";
-import Tooltip from "rc-tooltip";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
+import {instanceOf, func} from "prop-types";
+import {Map} from "immutable";
 import Table from "./Table";
-
-const Handle = Slider.Handle;
-
-const handle = (props) => {
-  const { value, dragging, index, ...restProps } = props;
-  return (
-    <Tooltip
-      prefixCls="rc-slider-tooltip"
-      overlay={value}
-      visible={dragging}
-      placement="top"
-      key={index}
-    >
-      <Handle value={value} {...restProps} />
-    </Tooltip>
-  );
-};
+import handle from "./common/SliderHandle";
 
 class TableWithSliders extends React.Component {
+
+  static propTypes = {
+    preferences: instanceOf(Map).isRequired,
+    savePreferences: func.isRequired,
+  }
 
   constructor(props) {
     super(props);
     this.state = {
-      cols: 3,
-      rows: 3,
+      cols: this.props.preferences.get("cols", 3),
+      rows: this.props.preferences.get("rows", 3),
     };
     this.onChangeRows = this.onChangeRows.bind(this);
     this.onChangeCols = this.onChangeCols.bind(this);
@@ -35,10 +25,12 @@ class TableWithSliders extends React.Component {
 
   onChangeRows(e) {
     this.setState({rows: e});
+    this.props.savePreferences("shultzTable", {rows: e});
   }
 
   onChangeCols(e) {
     this.setState({cols: e});
+    this.props.savePreferences("shultzTable", {cols: e});
   }
 
   render() {
