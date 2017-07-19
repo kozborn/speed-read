@@ -1,7 +1,7 @@
 import React from "react";
-import {number, func, string} from "prop-types";
-import sampleText from "../assets/sample_texts.json";
-import {stringDivider} from "../utils/helpers";
+import {number, string, func} from "prop-types";
+import {stringDivider} from "../../utils/helpers";
+import FixationsToolbar from "./FixationsToolbar";
 
 const PREFIX = "<div class='wrapper'>";
 const POSTFIX = " </div>||"; // "||" are used for splitting text
@@ -9,37 +9,38 @@ const POSTFIX = " </div>||"; // "||" are used for splitting text
 class Fixations extends React.Component {
 
   static propTypes = {
+    fixationText: string.isRequired,
     speed: number, // ms
-    eventType: string,
-    handleExternalEvent: func,
+    createBtnCb: func,
   }
 
   static defaultProps = {
+    documentId: "sample_text",
     speed: 1000, //ms
     eventType: "",
-    handleExternalEvent: () => "",
+    createBtnCb: () => "",
   }
 
   constructor(props) {
     super(props);
     this.state = {
-      text: "",
-      textSplitted: [],
+      textWrapped: [],
       running: false,
     };
 
     this.getText = this.getText.bind(this);
+    this.prepareText = this.prepareText.bind(this);
     this.startSwitching = this.startSwitching.bind(this);
     this.stopSwitching = this.stopSwitching.bind(this);
     this.pauseSwitching = this.pauseSwitching.bind(this);
   }
 
   componentDidMount() {
-    const text = stringDivider(sampleText.text1, 40, PREFIX, POSTFIX);
-    this.setState({text, textSplitted: text.split("||")});
+    this.prepareText(this.props.fixationText);
   }
 
   componentWillReceiveProps(nextProps) {
+    this.prepareText(nextProps.fixationText);
     if (nextProps.speed !== this.props.speed) {
       clearInterval(this.interval);
       this.interval = null;
@@ -53,13 +54,13 @@ class Fixations extends React.Component {
 
   getText() {
     const lines = [];
-    const {textSplitted} = this.state;
+    const {textWrapped} = this.state;
 
-    for (let i = 0; i < textSplitted.length; i += 2) {
+    for (let i = 0; i < textWrapped.length; i += 2) {
       const line = (<div className="line" key={`line_${i}`}>
-        <div dangerouslySetInnerHTML={this.createMarkup(textSplitted[i])} className="left" />
+        <div dangerouslySetInnerHTML={this.createMarkup(textWrapped[i])} className="left" />
         <div className="left-space">&nbsp;</div>
-        <div dangerouslySetInnerHTML={this.createMarkup(textSplitted[i + 1])} className="right" />
+        <div dangerouslySetInnerHTML={this.createMarkup(textWrapped[i + 1])} className="right" />
         <div className="clearfix" />
       </div>);
       lines.push(line);
@@ -76,6 +77,11 @@ class Fixations extends React.Component {
       elements.push(rightElements[i]);
     }
     return elements;
+  }
+
+  prepareText(text) {
+    const textWrapped = stringDivider(text, 50, PREFIX, POSTFIX).split("||");
+    this.setState({textWrapped});
   }
 
   startSwitching() {
@@ -117,15 +123,26 @@ class Fixations extends React.Component {
   render() {
     return (
       <div className="text-with-fixations" ref={(e) => { this.textWithFixations = e; }} >
-        <div className="toolbar">
-          <button onClick={this.state.running ? this.pauseSwitching : this.startSwitching}>
-            {this.state.running ? "Pause" : "Start"}
-          </button>
-          {this.state.running ? <button onClick={this.stopSwitching} >Stop</button> : null}
-        </div>
+        <FixationsToolbar
+          startBtn={{
+            cb: this.state.running ? this.pauseSwitching : this.startSwitching,
+            label: this.state.running ? "Pause" : "Start",
+            disabled: false,
+          }}
+          stopBtn={{
+            cb: this.stopSwitching,
+            label: "Stop",
+            disabled: !this.state.running,
+          }}
+          createBtn={{
+            cb: this.props.createBtnCb,
+            label: "Dodaj swój text",
+            disabled: false,
+          }}
+        />
         {this.getText()}
       </div>
-    )
+    );
   }
 }
 
