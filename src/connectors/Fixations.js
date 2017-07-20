@@ -6,9 +6,14 @@ import {getDoc, saveText, savePreferences} from "../actions/actions";
 
 function mapStateToProps(state) {
   const docId = state.getIn(["app", "docId"], null);
-  const fixationText = _.isEmpty(docId)
+  let fixationText = _.isEmpty(docId)
     ? state.getIn(["app", "defaultDoc", "fixations"], "")
     : state.getIn(["app", "userDoc", "fixations"], "");
+
+  if (_.isEmpty(fixationText)) {
+    fixationText = state.getIn(["app", "defaultDoc", "fixations"], "");
+  }
+
   const preferences = _.isEmpty(docId)
     ? state.getIn(["app", "defaultDoc", "preferences"], new Map())
     : state.getIn(["app", "userDoc", "preferences"], new Map());

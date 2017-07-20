@@ -39,7 +39,7 @@ class FixationsWithSliders extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      speed: this.props.preferences.get("fixationsSpeed", 1),
+      speed: this.props.preferences.get("fixationsSpeed", 0),
     };
 
     this.changeSpeed = this.changeSpeed.bind(this);

@@ -17,7 +17,7 @@ import TopHalfText from "./components/TopHalfText";
 import TableWithSliders from "./connectors/Table";
 import Fixations from "./connectors/Fixations";
 import registerServiceWorker from "./registerServiceWorker";
-import {setDocumentId, clearLocalStorage} from "./actions/actions";
+import {getDoc, setDocumentId, clearLocalStorage} from "./actions/actions";
 
 const history = createBrowserHistory();
 
@@ -37,6 +37,7 @@ function logger({ getState }) {
 }
 
 const store = createStore(reducer, applyMiddleware(thunkMiddleware, logger));
+store.dispatch(getDoc());
 const parsed = queryString.parse(window.location.search);
 const documentId = parsed.documentId;
 if (documentId) {
