@@ -44,7 +44,7 @@ class Fixations extends React.Component {
     if (nextProps.speed !== this.props.speed) {
       clearInterval(this.interval);
       this.interval = null;
-      this.startSwitching();
+      if (this.state.running) this.startSwitching();
     }
   }
 
@@ -89,6 +89,7 @@ class Fixations extends React.Component {
     this.setState({running: true});
     if (!this.interval) {
       this.interval = setInterval(() => {
+        if (!elements[this.currentElIndex]) return;
         elements[this.currentElIndex].classList.add("highlight");
         if (this.currentElIndex > 0) elements[this.currentElIndex - 1].classList.remove("highlight");
         this.currentElIndex += 1;
@@ -96,7 +97,7 @@ class Fixations extends React.Component {
           clearInterval(this.interval);
           this.interval = null;
         }
-      }, this.props.speed);
+      }, (1000 - (this.props.speed * 75)));
     }
   }
 

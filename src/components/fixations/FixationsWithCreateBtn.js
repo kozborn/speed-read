@@ -31,7 +31,7 @@ export default class FixationsWithCreateButton extends React.Component {
 
   render() {
     return (<div>
-      <Fixations {...this.props} createBtnCb={this.openModal}/>
+      <Fixations {...this.props} createBtnCb={this.openModal} />
       <Modal
         isOpen={this.state.modalOpen}
         onClose={this.closeModal}

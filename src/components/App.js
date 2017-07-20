@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import {
   Link,
 } from "react-router-dom";
-import {string} from "prop-types";
+import {string, func} from "prop-types";
 import logo from "../assets/logo.svg";
 import "../assets/App.css";
 
@@ -10,16 +10,15 @@ class App extends Component {
 
   static propTypes = {
     docId: string,
-  }
-
-  static defaultProps = {
-    docId: null,
+    clearLocalStorage: func.isRequired,
   }
 
   render() {
     let queryParams = "";
-    if (this.props.docId) {
-      queryParams = `?documentId=${this.props.docId}`;
+
+    const docId = this.props.docId ? this.props.docId : localStorage.getItem("docId");
+    if (docId) {
+      queryParams = `?documentId=${docId}`;
     }
 
     return (
@@ -32,7 +31,13 @@ class App extends Component {
             <li><Link to={`/top-half-text${queryParams}`}>Top half text</Link></li>
             <li><Link to={`/schultz-table${queryParams}`}>Schultz table</Link></li>
             <li><Link to={`/fixations${queryParams}`}>Fixations</Link></li>
+            {
+              localStorage.getItem("docId") ?
+                <li className="pull-right"><button onClick={this.props.clearLocalStorage}>Wyczyść dane</button></li>
+              : null
+            }
           </nav>
+          <div className="clearfix" />
         </div>
         {this.props.children}
         <footer />

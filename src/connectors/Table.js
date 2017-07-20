@@ -5,7 +5,7 @@ import TableWithSliders from "../components/TableWithSliders";
 import {getDoc, savePreferences} from "../actions/actions";
 
 function mapStateToProps(state) {
-  const docId = state.getIn(["app", "docId"], null);
+  const docId = state.getIn(["app", "docId"], "");
   const preferences = _.isEmpty(docId)
     ? state.getIn(["app", "defaultDoc", "preferences"], new Map())
     : state.getIn(["app", "userDoc", "preferences"], new Map());

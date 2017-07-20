@@ -9,7 +9,7 @@ import handle from "./common/SliderHandle";
 class TableWithSliders extends React.Component {
 
   static propTypes = {
-    docId: string.isRequired,
+    docId: string,
     getDoc: func.isRequired,
     preferences: instanceOf(Map).isRequired,
     savePreferences: func.isRequired,

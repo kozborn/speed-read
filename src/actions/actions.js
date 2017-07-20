@@ -1,5 +1,5 @@
 import _ from "underscore";
-import {Map, fromJS} from "immutable";
+import {Map, fromJS, isMap} from "immutable";
 
 const ServerUrl = "http://127.0.0.1:5984/speed-read";
 
@@ -43,20 +43,21 @@ function getOptions(method, body) {
 }
 
 export function setDocumentId(docId) {
+  localStorage.setItem("docId", docId);
   return {type: "SET_USER_DOCID", docId};
+}
+
+export function clearLocalStorage() {
+  localStorage.removeItem("docId");
+  return {type: "SET_USER_DOCID", docId: null};
 }
 
 export function save(docId, data) {
   const method = _.isEmpty(docId) ? "POST" : "PUT";
   const url = _.isEmpty(docId) ? ServerUrl : `${ServerUrl}/${docId}`;
   return (dispatch, getState) => {
-    let userDoc = {};
-    if (docId) {
-      userDoc = getState().getIn(["app", "userDoc"], new Map());
-    }
-
-    let bodyToSave = userDoc;
-    bodyToSave = bodyToSave.mergeDeep(fromJS(data));
+    const userDoc = Map.isMap(getState().getIn(["app", "userDoc"])) ? getState().getIn(["app", "userDoc"]) : new Map();
+    const bodyToSave = userDoc.mergeDeep(fromJS(data));
     const options = getOptions(method, bodyToSave.toJS());
     fetch(url, options)
     .then((response) => {

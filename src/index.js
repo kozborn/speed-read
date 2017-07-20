@@ -17,7 +17,7 @@ import TopHalfText from "./components/TopHalfText";
 import TableWithSliders from "./connectors/Table";
 import Fixations from "./connectors/Fixations";
 import registerServiceWorker from "./registerServiceWorker";
-import {setDocumentId} from "./actions/actions";
+import {setDocumentId, clearLocalStorage} from "./actions/actions";
 
 const history = createBrowserHistory();
 
@@ -41,15 +41,17 @@ const parsed = queryString.parse(window.location.search);
 const documentId = parsed.documentId;
 if (documentId) {
   store.dispatch(setDocumentId(documentId));
+} else if (localStorage.getItem("docId")) {
+  store.dispatch(setDocumentId(localStorage.getItem("docId")));
 }
 
-const docId = store.getState().getIn(["app", "docId"], null);
+const docId = store.getState().getIn(["app", "docId"], "");
 
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
       <div>
-        <App docId={docId}>
+        <App docId={docId} clearLocalStorage={clearLocalStorage}>
           <Route exact path="/" component={HomePage} />
           <Route path="/fixations" component={Fixations} />
           <Route path="/top-half-text" component={TopHalfText} />
