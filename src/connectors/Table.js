@@ -13,11 +13,11 @@ function mapStateToProps(state) {
   return {docId, preferences};
 }
 
-function mapDispatchToProps(dispatch, ownProps) {
+function mapDispatchToProps(dispatch) {
   return {
     getDoc: docId => dispatch(getDoc(docId)),
-    savePreferences: (tableName, preferences) =>
-      dispatch(savePreferences(ownProps.documentId, tableName, preferences)),
+    savePreferences: (docId, tableName, preferences) =>
+      dispatch(savePreferences(docId, tableName, preferences)),
   };
 }
 

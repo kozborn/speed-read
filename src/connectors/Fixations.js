@@ -12,10 +12,10 @@ function mapStateToProps(state) {
   return {docId, fixationText};
 }
 
-function mapDispatchToProps(dispatch, ownProps) {
+function mapDispatchToProps(dispatch) {
   return {
     getDoc: docId => dispatch(getDoc(docId)),
-    saveText: (textKey, text) => dispatch(saveText(ownProps.documentId, textKey, text)),
+    saveText: (docId, textKey, text) => dispatch(saveText(docId, textKey, text)),
   };
 }
 

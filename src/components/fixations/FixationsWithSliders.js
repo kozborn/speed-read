@@ -48,7 +48,7 @@ class FixationsWithSliders extends React.Component {
   }
 
   saveText(text) {
-    this.props.saveText("fixations", text);
+    this.props.saveText(this.props.docId, "fixations", text);
   }
 
   changeSpeed(e) {
