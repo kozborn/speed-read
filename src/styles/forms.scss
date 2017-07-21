@@ -40,10 +40,17 @@ button:active {
 	top:1px;
 }
 
+div[contenteditable=true]{
+	min-height: 300px;
+	border: $default-border;
+	padding: 10px;
+}
+
 .user-text-form {
-  width: 1000px;
-  margin: 10px auto;
+	width: 100%;
+	margin: 0px auto;
   button.save {
-    float: right;
+		float: right;
+		margin-top: 10px;
   }
 }

@@ -26,6 +26,7 @@ export default class FixationsWithCreateButton extends React.Component {
   }
 
   closeModal() {
+    console.log('closeModal');
     this.setState({modalOpen: false});
   }
 
@@ -34,7 +35,7 @@ export default class FixationsWithCreateButton extends React.Component {
       <Fixations {...this.props} createBtnCb={this.openModal} />
       <Modal
         isOpen={this.state.modalOpen}
-        onClose={this.closeModal}
+        closeModal={this.closeModal}
       >
         <TextForm
           text={this.props.fixationText}
