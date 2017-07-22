@@ -14,8 +14,6 @@ class Table extends React.Component {
     rows: 3,
   }
 
-  elapsedTime = 0
-
   constructor(props) {
     super(props);
     this.state = {
@@ -27,7 +25,7 @@ class Table extends React.Component {
       nextExpected: 1,
       correct: null,
       finished: false,
-    }
+    };
     this.onClick = this.onClick.bind(this);
     this.startTimer = this.startTimer.bind(this);
     this.stopTimer = this.stopTimer.bind(this);
@@ -37,20 +35,6 @@ class Table extends React.Component {
 
   componentDidMount() {
     this.resetComponent(this.props.rows, this.props.cols);
-  }
-
-  resetComponent(rows, cols) {
-    this.elapsedTime = null;
-    this.setState({
-      timerRunning: false,
-      finished: false,
-      startTime: null,
-      elapsedTime: null,
-      selected: [0],
-      nextExpected: 1,
-      currentTable: this.buildTable(rows, cols),
-    });
-    clearInterval(this.timeInterval);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -89,6 +73,21 @@ class Table extends React.Component {
     }
   }
 
+  resetComponent(rows, cols) {
+    this.elapsedTime = null;
+    this.setState({
+      timerRunning: false,
+      finished: false,
+      startTime: null,
+      elapsedTime: null,
+      selected: [0],
+      nextExpected: 1,
+      currentTable: this.buildTable(rows, cols),
+    });
+    clearInterval(this.timeInterval);
+  }
+
+  elapsedTime = 0
   timeInterval = null
 
   handleNextElement(el, correct) {
@@ -103,7 +102,7 @@ class Table extends React.Component {
   buildTable(rows, cols) {
     const rowsMiddle = Math.floor(rows / 2);
     const colsMiddle = Math.floor(cols / 2);
-    const table = generateTable((cols * rows) - 1) ;// -1 because center is red dot
+    const table = generateTable((cols * rows) - 1); // -1 because center is red dot
     const rowsElements = [];
     let index = 0;
     let cellContent = null;
@@ -167,7 +166,7 @@ class Table extends React.Component {
       {this.state.finished === false ?
         <h3>Next expected: {this.state.nextExpected} <span>{this.informationElement()}</span></h3>
       : null }
-      <div className="table">
+      <div className="schultz-table">
         {this.state.currentTable}
       </div>
     </div>);

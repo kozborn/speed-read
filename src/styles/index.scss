@@ -1,7 +1,13 @@
+@import "variables";
 @import "navigation";
 @import "forms";
 @import "articles";
 @import "fixations";
+@import "table";
+
+* {
+  font-size: $default-font-size
+}
 
 .clearfix {
   clear: both;
@@ -14,3 +20,24 @@
 .pull-right {
   float: right;
 }
+
+.modal__content {
+  padding-top: 10px;
+}
+
+.modal__close-btn {
+  border: none;
+  padding: 2px;
+  background: transparent;
+  position: relative;
+  z-index: 999999;
+  top: -15px;
+  right: -1px;
+  float: right;
+  &:active {
+    top: -14px;
+    padding: 0;
+    margin: 0;
+  }
+}
+

@@ -45,11 +45,21 @@ button:active {
   position: relative;
   top: 1px; }
 
+div[contenteditable=true] {
+  position: relative;
+  min-height: 300px;
+  max-height: calc(100vh - 150px);
+  overflow: auto;
+  border: 1px solid #dcdcdc;
+  padding: 10px; }
+
 .user-text-form {
-  width: 1000px;
-  margin: 10px auto; }
+  width: 100%;
+  margin: 0px auto;
+  height: 100%; }
   .user-text-form button.save {
-    float: right; }
+    float: right;
+    margin-top: 10px; }
 
 article {
   text-align: left;
@@ -72,6 +82,17 @@ article {
 .fixations-toolbar button {
   margin-right: 10px; }
 
+.schultz-table .cell {
+  display: inline-block;
+  line-height: 50px;
+  width: 50px;
+  height: 50px;
+  font-size: 18px;
+  border: 1px solid #eaeaea; }
+
+* {
+  font-size: 14px; }
+
 .clearfix {
   clear: both; }
 
@@ -80,3 +101,20 @@ article {
 
 .pull-right {
   float: right; }
+
+.modal__content {
+  padding-top: 10px; }
+
+.modal__close-btn {
+  border: none;
+  padding: 2px;
+  background: transparent;
+  position: relative;
+  z-index: 999999;
+  top: -15px;
+  right: -1px;
+  float: right; }
+  .modal__close-btn:active {
+    top: -14px;
+    padding: 0;
+    margin: 0; }

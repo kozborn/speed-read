@@ -36,7 +36,7 @@ export default class TextForm extends Component {
   }
 
   saveText() {
-    this.props.saveText(this.textarea.value);
+    this.props.saveText(this.textarea.innerHTML);
   }
 
   render() {
@@ -46,13 +46,15 @@ export default class TextForm extends Component {
       <div className="user-text-form">
 
         {savedDocument ? <h3>Your private url: {`${currentPath}?documentId=${savedDocument.id}`}</h3> : null}
-
-        <textarea
+        <div
           ref={this.textAreaRef}
-          className="form-control"
-          value={this.state.text}
+          contentEditable="true"
+          suppressContentEditableWarning="true"
+          className="form-control text-form"
           onChange={this.handleChange}
-        />
+        >
+          {this.state.text}
+        </div>
         <button className="save" onClick={this.saveText}>
           Zapisz
         </button>

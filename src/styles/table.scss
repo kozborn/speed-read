@@ -1,0 +1,11 @@
+.schultz-table {
+  .cell {
+    display: inline-block;
+    $height: 50px;
+    line-height: $height;
+    width: $height;
+    height: $height;
+    font-size: 18px;
+    border: 1px solid #eaeaea;
+  }
+}
