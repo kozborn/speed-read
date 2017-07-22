@@ -1,6 +1,7 @@
 import React from "react";
 import Slider from "rc-slider";
-import {string, func} from "prop-types";
+import {Map} from "immutable";
+import {string, func, instanceOf} from "prop-types";
 import FixationsWithCreateBtn from "./FixationsWithCreateBtn";
 import handle from "../common/SliderHandle";
 
@@ -25,7 +26,9 @@ class FixationsWithSliders extends React.Component {
   static propTypes = {
     getDoc: func.isRequired,
     docId: string,
+    preferences: instanceOf(Map).isRequired,
     saveText: func.isRequired,
+    savePreferences: func.isRequired,
     fixationText: string.isRequired,
   }
 
@@ -36,7 +39,7 @@ class FixationsWithSliders extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      speed: 1000,
+      speed: this.props.preferences.get("fixationsSpeed", 0),
     };
 
     this.changeSpeed = this.changeSpeed.bind(this);
@@ -47,12 +50,17 @@ class FixationsWithSliders extends React.Component {
     this.props.getDoc(this.props.docId);
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({speed: nextProps.preferences.get("fixationsSpeed")});
+  }
+
   saveText(text) {
-    this.props.saveText("fixations", text);
+    this.props.saveText(this.props.docId, "fixations", text);
   }
 
   changeSpeed(e) {
-    this.setState({speed: (1000 - (e * 75))});
+    this.setState({speed: e});
+    this.props.savePreferences(this.props.docId, "fixationsSpeed", e);
   }
 
   render() {
@@ -65,6 +73,7 @@ class FixationsWithSliders extends React.Component {
             max={12}
             step={1}
             handle={handle}
+            value={this.state.speed}
             onChange={this.changeSpeed}
             marks={marks}
           />

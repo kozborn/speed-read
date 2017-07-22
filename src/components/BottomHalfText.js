@@ -1,9 +1,8 @@
 import React from "react";
 import {string} from "prop-types";
 
-
-const PREFIX = "<div class='wrapper'>";
-const POSTFIX = "<div class='show-bottom-letters'></div></div>";
+// const PREFIX = "<div class='wrapper'>";
+// const POSTFIX = "<div class='show-bottom-letters'></div></div>";
 
 class BottomHalfText extends React.Component {
 
