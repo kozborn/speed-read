@@ -48,13 +48,6 @@ footer {
   background: darksalmon;
 }
 
-.table .cell {
-  display: inline-block;
-  line-height: 50px;
-  width: 50px;
-  border: 1px solid #eaeaea;
-}
-
 .red {
   color: red;
 }

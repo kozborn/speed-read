@@ -20,13 +20,13 @@ const styles = {
     bottom: null,
     border: "1px solid #ccc",
     background: "#fff",
-    overflow: "auto",
     WebkitOverflowScrolling: "touch",
     borderRadius: "4px",
     outline: "none",
     padding: "20px 10px 10px", // 20px on top because of close button
     margin: "10px auto",
     maxWidth: "800px",
+    overflow: "auto",
   },
 };
 

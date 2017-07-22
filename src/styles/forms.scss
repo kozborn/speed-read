@@ -41,7 +41,10 @@ button:active {
 }
 
 div[contenteditable=true]{
+	position: relative;
 	min-height: 300px;
+	max-height: calc(100vh - 150px);
+	overflow: auto;
 	border: $default-border;
 	padding: 10px;
 }
@@ -49,6 +52,7 @@ div[contenteditable=true]{
 .user-text-form {
 	width: 100%;
 	margin: 0px auto;
+	height: 100%;
   button.save {
 		float: right;
 		margin-top: 10px;

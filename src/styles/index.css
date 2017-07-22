@@ -46,13 +46,17 @@ button:active {
   top: 1px; }
 
 div[contenteditable=true] {
+  position: relative;
   min-height: 300px;
+  max-height: calc(100vh - 150px);
+  overflow: auto;
   border: 1px solid #dcdcdc;
   padding: 10px; }
 
 .user-text-form {
   width: 100%;
-  margin: 0px auto; }
+  margin: 0px auto;
+  height: 100%; }
   .user-text-form button.save {
     float: right;
     margin-top: 10px; }
@@ -77,6 +81,14 @@ article {
 
 .fixations-toolbar button {
   margin-right: 10px; }
+
+.schultz-table .cell {
+  display: inline-block;
+  line-height: 50px;
+  width: 50px;
+  height: 50px;
+  font-size: 18px;
+  border: 1px solid #eaeaea; }
 
 * {
   font-size: 14px; }
