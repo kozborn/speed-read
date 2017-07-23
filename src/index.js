@@ -8,7 +8,6 @@ import thunkMiddleware from "redux-thunk";
 import queryString from "query-string";
 
 import reducer from "./reducer";
-import "./assets/index.css";
 import "./styles/index.css";
 import App from "./components/App";
 import HomePage from "./connectors/HomePage";

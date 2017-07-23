@@ -4,7 +4,6 @@ import {
 } from "react-router-dom";
 import {string, func} from "prop-types";
 import logo from "../assets/logo.svg";
-import "../assets/App.css";
 
 class App extends Component {
 
