@@ -1,17 +1,16 @@
 import React from "react";
-import {string} from "prop-types";
+import {string, func} from "prop-types";
+import {stringDivider} from "../utils/helpers";
 
-// const PREFIX = "<div class='wrapper'>";
-// const POSTFIX = "<div class='show-bottom-letters'></div></div>";
+const PREFIX = "<div class='wrapper'>";
+const POSTFIX = "<div class='show-bottom-letters'></div></div>";
 
 class BottomHalfText extends React.Component {
 
   static propTypes = {
-    documentId: string,
-  }
-
-  static defaultProps = {
-    documentId: "sample_text",
+    docId: string.isRequired,
+    getDoc: func.isRequired,
+    text: string.isRequired,
   }
 
   constructor(props) {
@@ -22,13 +21,17 @@ class BottomHalfText extends React.Component {
   }
 
   componentWillMount() {
-    const {documentId} = this.props;
+    this.props.getDoc(this.props.docId);
+  }
 
-    // Api.getText(documentId)
-    // .then((jsonResponse) => {
-    //   const textWrapped = stringDivider(jsonResponse.bottomHalfText ? jsonResponse.bottomHalfText : "", 100, PREFIX, POSTFIX);
-    //   this.setState({textWrapped});
-    // });
+  componentDidMount() {
+    const textWrapped = stringDivider(this.props.text, 100, PREFIX, POSTFIX);
+    this.setState({textWrapped});
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const textWrapped = stringDivider(nextProps.text, 100, PREFIX, POSTFIX);
+    this.setState({textWrapped});
   }
 
   createMarkup(markup) {
