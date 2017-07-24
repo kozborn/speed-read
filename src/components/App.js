@@ -26,10 +26,11 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <nav className="navigation-top">
             <li><Link to="/">Home page</Link></li>
-            <li><Link to={`/bottom-half-text${queryParams}`}>Bottom half text</Link></li>
-            <li><Link to={`/top-half-text${queryParams}`}>Top half text</Link></li>
-            <li><Link to={`/schultz-table${queryParams}`}>Schultz table</Link></li>
-            <li><Link to={`/fixations${queryParams}`}>Fixations</Link></li>
+            <li><Link to={`/bottom-half-text${queryParams}`}>Dolna połowa tekstu</Link></li>
+            <li><Link to={`/top-half-text${queryParams}`}>Górna połowa tekstu</Link></li>
+            <li><Link to={`/schultz-table${queryParams}`}>Tabela Schultz'a</Link></li>
+            <li><Link to={`/fixations${queryParams}`}>Fiksacja</Link></li>
+            <li><Link to={`/user-texts${queryParams}`}>Twoje teksty</Link></li>
             {
               localStorage.getItem("docId") ?
                 <li className="pull-right"><button onClick={this.props.clearLocalStorage}>Wyczyść dane</button></li>

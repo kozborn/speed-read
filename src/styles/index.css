@@ -109,6 +109,11 @@ article {
   margin: 10px auto 0px;
   text-align: left; }
 
+.user-texts {
+  max-width: 1000px;
+  margin: 10px auto;
+  text-align: left; }
+
 * {
   font-size: 14px; }
 
