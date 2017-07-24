@@ -1,24 +1,24 @@
 import {connect} from "react-redux";
 import _ from "underscore";
 import {Map} from "immutable";
-import FixationsWithSliders from "../components/fixations/FixationsWithSliders";
+import TopHalfText from "../components/TopHalfText";
 import {getDoc, saveText, savePreferences} from "../actions/actions";
 
 function mapStateToProps(state) {
   const docId = state.getIn(["app", "docId"], null);
-  let fixationText = _.isEmpty(docId)
-    ? state.getIn(["app", "defaultDoc", "fixations"], "")
-    : state.getIn(["app", "userDoc", "fixations"], "");
+  let text = _.isEmpty(docId)
+    ? state.getIn(["app", "defaultDoc", "text"], "")
+    : state.getIn(["app", "userDoc", "text"], "");
 
-  if (_.isEmpty(fixationText)) {
-    fixationText = state.getIn(["app", "defaultDoc", "fixations"], "");
+  if (_.isEmpty(text)) {
+    text = state.getIn(["app", "defaultDoc", "text"], "");
   }
 
   const preferences = _.isEmpty(docId)
     ? state.getIn(["app", "defaultDoc", "preferences"], new Map())
     : state.getIn(["app", "userDoc", "preferences"], new Map());
 
-  return {docId, fixationText, preferences};
+  return {docId, text, preferences};
 }
 
 function mapDispatchToProps(dispatch) {
@@ -30,4 +30,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(FixationsWithSliders);
+export default connect(mapStateToProps, mapDispatchToProps)(TopHalfText);

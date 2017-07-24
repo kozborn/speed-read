@@ -5,7 +5,7 @@ import TableWithSliders from "../components/TableWithSliders";
 import {getDoc, savePreferences} from "../actions/actions";
 
 function mapStateToProps(state) {
-  const docId = state.getIn(["app", "docId"], null);
+  const docId = state.getIn(["app", "docId"], "");
   const preferences = _.isEmpty(docId)
     ? state.getIn(["app", "defaultDoc", "preferences"], new Map())
     : state.getIn(["app", "userDoc", "preferences"], new Map());
@@ -13,11 +13,11 @@ function mapStateToProps(state) {
   return {docId, preferences};
 }
 
-function mapDispatchToProps(dispatch, ownProps) {
+function mapDispatchToProps(dispatch) {
   return {
     getDoc: docId => dispatch(getDoc(docId)),
-    savePreferences: (tableName, preferences) =>
-      dispatch(savePreferences(ownProps.documentId, tableName, preferences)),
+    savePreferences: (docId, tableName, preferences) =>
+      dispatch(savePreferences(docId, tableName, preferences)),
   };
 }
 

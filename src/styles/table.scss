@@ -1,0 +1,36 @@
+.schultz-table {
+  position: relative;
+  .cell {
+    display: inline-block;
+    $height: 50px;
+    line-height: $height;
+    width: $height;
+    height: $height;
+    font-size: 18px;
+    border: 1px solid #eaeaea;
+  }
+
+  .middle-table-dot {
+    position: absolute;
+    left: calc(50% - 3px);
+    top: calc(50% - 9px);
+  }
+}
+
+.table-with-sliders {
+  .sliders {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 50px;
+    .slider {
+      flex-grow: 1;
+      margin-right: 20px;
+      margin-left: 20px;
+    }
+  }
+
+  .slider-title {
+    margin: 10px auto 0px;
+    text-align: left;
+  }
+}

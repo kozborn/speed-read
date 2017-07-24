@@ -1,7 +1,18 @@
+@import "variables";
 @import "navigation";
 @import "forms";
 @import "articles";
 @import "fixations";
+@import "table";
+
+* {
+  font-size: $default-font-size
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
 
 .clearfix {
   clear: both;
@@ -13,4 +24,132 @@
 
 .pull-right {
   float: right;
+}
+
+.modal__content {
+  padding-top: 10px;
+}
+
+.modal__close-btn {
+  border: none;
+  padding: 2px;
+  background: transparent;
+  position: relative;
+  z-index: 999999;
+  top: -15px;
+  right: -1px;
+  float: right;
+  &:active {
+    top: -14px;
+    padding: 0;
+    margin: 0;
+  }
+}
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 40px;
+  float: left;
+}
+
+.App-header {
+  background-color: #222;
+  height: 40px;
+  padding: 20px;
+  color: white;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+footer {
+  border-top: 1px solid #eaeaea;
+  height: 100px;
+}
+
+.sliders {
+  margin: 10px auto;
+  max-width: 1000px;
+}
+
+.table {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.correct {
+  background: palegreen;
+}
+
+.incorrect {
+  background: darksalmon;
+}
+
+.red {
+  color: red;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.text-container {
+  max-width: 1000px;
+  margin: 50px auto;
+  text-align: left;
+  line-height: 20px
+}
+
+.wrapper {
+  position: relative;
+  line-height: 20px
+}
+
+.show-bottom-letters {
+  height: 10px;
+  width: 100%;
+  position: absolute;
+  top: 0px;
+  background: white;
+}
+
+.show-top-letters {
+  height: 10px;
+  width: 100%;
+  position: absolute;
+  bottom: 0px;
+  background: white;
+}
+
+.text-with-fixations {
+  text-align: left;
+  line-height: 26px;
+  max-width: 1000px;
+  margin: 10px auto;
+}
+
+.line .left,
+.line .left-space {
+  float: left
+}
+
+.line .right {
+  float: left;
+}
+
+.line .highlight {
+  background: lightgreen;
 }
