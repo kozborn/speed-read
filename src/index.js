@@ -8,12 +8,11 @@ import thunkMiddleware from "redux-thunk";
 import queryString from "query-string";
 
 import reducer from "./reducer";
-import "./assets/index.css";
 import "./styles/index.css";
 import App from "./components/App";
 import HomePage from "./connectors/HomePage";
-import BottomHalfText from "./components/BottomHalfText";
-import TopHalfText from "./components/TopHalfText";
+import BottomHalfText from "./connectors/BottomHalfText";
+import TopHalfText from "./connectors/TopHalfText";
 import TableWithSliders from "./connectors/Table";
 import Fixations from "./connectors/Fixations";
 import registerServiceWorker from "./registerServiceWorker";

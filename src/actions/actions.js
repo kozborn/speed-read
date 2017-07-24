@@ -1,5 +1,5 @@
 import _ from "underscore";
-import {Map, fromJS, isMap} from "immutable";
+import {Map, fromJS} from "immutable";
 
 const ServerUrl = "http://127.0.0.1:5984/speed-read";
 

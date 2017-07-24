@@ -1,6 +1,6 @@
 import React from "react";
 import {number} from "prop-types";
-import {generateTable} from "../utils/helpers"
+import {generateTable} from "../utils/helpers";
 
 class Table extends React.Component {
 
@@ -60,7 +60,7 @@ class Table extends React.Component {
     const {cols, rows} = this.props;
     const selected = this.state.selected;
     if (parseInt(currentNumber, 10) === parseInt(this.state.nextExpected, 10)) {
-      if (parseInt(currentNumber, 10) === (cols * rows) - 1) {
+      if (parseInt(currentNumber, 10) === (cols * rows)) {
         this.stopTimer(e);
         this.setState({finished: true});
         alert("All done!!!");
@@ -102,7 +102,7 @@ class Table extends React.Component {
   buildTable(rows, cols) {
     const rowsMiddle = Math.floor(rows / 2);
     const colsMiddle = Math.floor(cols / 2);
-    const table = generateTable((cols * rows) - 1); // -1 because center is red dot
+    const table = generateTable((cols * rows)); // -1 because center is red dot
     const rowsElements = [];
     let index = 0;
     let cellContent = null;
@@ -114,8 +114,8 @@ class Table extends React.Component {
         const cellKey = `${rowKey}-cell-${c}`;
         const number = table[index];
 
-        if (r === rowsMiddle && c === colsMiddle) {
-          cellContent = <span className="red" onClick={this.stopTimer}>{String.fromCharCode(9679)}</span>
+        if (r === rowsMiddle && c === colsMiddle && cols % 2 === 1 && rows % 2 === 1) {
+          cellContent = <span className="red" onClick={this.stopTimer}>{String.fromCharCode(9679)}</span>;
         } else {
           cellContent = number;
           index++;
@@ -134,6 +134,10 @@ class Table extends React.Component {
 
       const el = <div className="row" key={rowKey}>{colsElements}</div>;
       rowsElements.push(el);
+    }
+    if (cols % 2 !== 1 || rows % 2 !== 1) {
+      const centerDot = <span key="red-dot" className="middle-table-dot red" onClick={this.stopTimer}>{String.fromCharCode(9679)}</span>;
+      rowsElements.push(centerDot);
     }
     return rowsElements;
   }
