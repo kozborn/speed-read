@@ -135,22 +135,7 @@ body {
   background: white;
 }
 
-.text-with-fixations {
-  text-align: left;
-  line-height: 26px;
-  max-width: 1000px;
-  margin: 10px auto;
-}
-
-.line .left,
-.line .left-space {
-  float: left
-}
-
-.line .right {
-  float: left;
-}
-
-.line .highlight {
-  background: lightgreen;
+.edit-btn {
+  font-size: 12px;
+  padding: 2px 10px;
 }

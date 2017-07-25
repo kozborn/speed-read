@@ -85,6 +85,8 @@ export function save(docId, data) {
 export function saveText(docId, textKey, text) {
   const body = {};
   body[textKey] = text;
+
+  console.log(body);
   return dispatch => dispatch(save(docId, body));
 }
 

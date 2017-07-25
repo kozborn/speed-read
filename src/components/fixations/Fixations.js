@@ -1,5 +1,6 @@
 import React from "react";
-import {number, string, func} from "prop-types";
+import {number, instanceOf, func} from "prop-types";
+import {Map} from "immutable";
 import {stringDivider} from "../../utils/helpers";
 import FixationsToolbar from "./FixationsToolbar";
 
@@ -9,7 +10,7 @@ const POSTFIX = " </div>||"; // "||" are used for splitting text
 class Fixations extends React.Component {
 
   static propTypes = {
-    fixationText: string.isRequired,
+    fixation: instanceOf(Map).isRequired,
     speed: number, // ms
     createBtnCb: func,
   }
@@ -36,11 +37,11 @@ class Fixations extends React.Component {
   }
 
   componentDidMount() {
-    this.prepareText(this.props.fixationText);
+    this.prepareText(this.props.fixation.get("text", ""));
   }
 
   componentWillReceiveProps(nextProps) {
-    this.prepareText(nextProps.fixationText);
+    this.prepareText(nextProps.fixation.get("text", ""));
     if (nextProps.speed !== this.props.speed) {
       clearInterval(this.interval);
       this.interval = null;
@@ -141,6 +142,7 @@ class Fixations extends React.Component {
             disabled: false,
           }}
         />
+        <h3>{this.props.fixation.get("title")}</h3>
         {this.getText()}
       </div>
     );

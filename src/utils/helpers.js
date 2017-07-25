@@ -53,8 +53,6 @@ export function getTextsFromDocument(document) {
     return acc;
   }, []);
 
-  console.log(tmpTexts);
-
   return fromJS(tmpTexts);
 }
 
@@ -65,5 +63,11 @@ export function guid() {
       .substring(1);
   return s4() + s4() + "-" + s4() + "-" + s4() + "-" +
     s4() + "-" + s4() + s4() + s4();
+}
+
+export function getNextId(document) {
+  const texts = getTextsFromDocument(document);
+  const id = texts.keySeq().last() + 1;
+  return `text-${id}`;
 }
 

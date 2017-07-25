@@ -29,7 +29,7 @@ class FixationsWithSliders extends React.Component {
     preferences: instanceOf(Map).isRequired,
     saveText: func.isRequired,
     savePreferences: func.isRequired,
-    fixationText: string.isRequired,
+    fixation: instanceOf(Map).isRequired,
   }
 
   static defaultProps = {
@@ -54,8 +54,8 @@ class FixationsWithSliders extends React.Component {
     this.setState({speed: nextProps.preferences.get("fixationsSpeed")});
   }
 
-  saveText(text) {
-    this.props.saveText(this.props.docId, "fixations", text);
+  saveText(data) {
+    this.props.saveText(this.props.docId, "fixations", data);
   }
 
   changeSpeed(e) {
@@ -79,7 +79,7 @@ class FixationsWithSliders extends React.Component {
           />
         </div>
         <FixationsWithCreateBtn
-          fixationText={this.props.fixationText}
+          fixation={this.props.fixation}
           speed={this.state.speed}
           saveText={this.saveText}
         />

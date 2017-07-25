@@ -6,25 +6,25 @@ import {getDoc, saveText, savePreferences} from "../actions/actions";
 
 function mapStateToProps(state) {
   const docId = state.getIn(["app", "docId"], null);
-  let fixationText = _.isEmpty(docId)
-    ? state.getIn(["app", "defaultDoc", "fixations"], "")
-    : state.getIn(["app", "userDoc", "fixations"], "");
+  let fixation = _.isEmpty(docId)
+    ? state.getIn(["app", "defaultDoc", "fixations"], new Map())
+    : state.getIn(["app", "userDoc", "fixations"], new Map());
 
-  if (_.isEmpty(fixationText)) {
-    fixationText = state.getIn(["app", "defaultDoc", "fixations"], "");
+  if (_.isEmpty(fixation)) {
+    fixation = state.getIn(["app", "defaultDoc", "fixations"], new Map());
   }
 
   const preferences = _.isEmpty(docId)
     ? state.getIn(["app", "defaultDoc", "preferences"], new Map())
     : state.getIn(["app", "userDoc", "preferences"], new Map());
 
-  return {docId, fixationText, preferences};
+  return {docId, fixation, preferences};
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     getDoc: docId => dispatch(getDoc(docId)),
-    saveText: (docId, textKey, text) => dispatch(saveText(docId, textKey, text)),
+    saveText: (docId, textKey, data) => dispatch(saveText(docId, textKey, data)),
     savePreferences: (docId, key, preferences) =>
       dispatch(savePreferences(docId, key, preferences)),
   };

@@ -1,5 +1,6 @@
 import React from "react";
-import {string, func} from "prop-types";
+import {instanceOf, func} from "prop-types";
+import {Map} from "immutable";
 import Fixations from "./Fixations";
 import Modal from "../common/Modal";
 import TextForm from "../forms/TextForm";
@@ -7,7 +8,7 @@ import TextForm from "../forms/TextForm";
 export default class FixationsWithCreateButton extends React.Component {
 
   static propTypes = {
-    fixationText: string.isRequired,
+    fixation: instanceOf(Map).isRequired,
     saveText: func.isRequired,
   }
 
@@ -26,7 +27,6 @@ export default class FixationsWithCreateButton extends React.Component {
   }
 
   closeModal() {
-    console.log('closeModal');
     this.setState({modalOpen: false});
   }
 
@@ -38,7 +38,8 @@ export default class FixationsWithCreateButton extends React.Component {
         closeModal={this.closeModal}
       >
         <TextForm
-          text={this.props.fixationText}
+          title={this.props.fixation.get("title")}
+          text={this.props.fixation.get("text")}
           saveText={this.props.saveText}
         />
       </Modal>
