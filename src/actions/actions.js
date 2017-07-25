@@ -85,8 +85,6 @@ export function save(docId, data) {
 export function saveText(docId, textKey, text) {
   const body = {};
   body[textKey] = text;
-
-  console.log(body);
   return dispatch => dispatch(save(docId, body));
 }
 
@@ -96,5 +94,13 @@ export function savePreferences(docId, key, value) {
     preferences[key] = value;
     dispatch({type: "SAVING_PREFERENCES", preferences});
     dispatch(save(docId, {preferences}));
+  };
+}
+
+export function switchText(docId, key, id) {
+  console.log(docId, key, id);
+  return (dispatch) => {
+    dispatch(savePreferences(docId, key, id));
+    dispatch({type: "SWITCH_TYPE", data: {key, id}});
   };
 }

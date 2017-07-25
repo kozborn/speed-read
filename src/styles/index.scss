@@ -74,6 +74,34 @@ html, body {
   to { transform: rotate(360deg); }
 }
 
+.container {
+  width: 1000px;
+  margin: 0px auto;
+  display: flex;
+  height: 100%;
+  flex-direction: row;
+
+  .sidebar {
+    width: 200px;
+    flex: 0 200px;
+  }
+
+  .content {
+    flex: 1;
+  }
+
+}
+
+.sidebar {
+  text-align: left;
+  .text {
+    cursor: pointer;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: $default-border;
+  }
+}
+
 footer {
   border-top: 1px solid #eaeaea;
   height: 100px;
@@ -81,7 +109,7 @@ footer {
 
 .sliders {
   margin: 10px auto;
-  max-width: 1000px;
+  max-width: 600px;
 }
 
 .table {

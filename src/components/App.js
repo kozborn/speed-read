@@ -2,14 +2,33 @@ import React, { Component } from "react";
 import {
   Link,
 } from "react-router-dom";
-import {string, func} from "prop-types";
+import camelize from "underscore.string/camelize";
+import {string, func, object} from "prop-types";
 import logo from "../assets/logo.svg";
+import TextListToChoose from "../connectors/TextListToChoose";
+import {withRouter} from "react-router";
 
 class App extends Component {
 
   static propTypes = {
     docId: string,
     clearLocalStorage: func.isRequired,
+    location: object.isRequired,
+  }
+
+  constructor(props) {
+    super(props);
+    this.getSidebar = this.getSidebar.bind(this);
+  }
+
+  getSidebar(docId) {
+    const key = camelize(this.props.location.pathname.replace("/", ""));
+    if (["fixations", "bottomHalfText", "topHalfText"].indexOf(key) !== -1) {
+      return (<div className="sidebar">
+        <TextListToChoose docId={docId} textKey={key} />
+      </div>);
+    }
+    return null;
   }
 
   render() {
@@ -39,10 +58,15 @@ class App extends Component {
           </nav>
           <div className="clearfix" />
         </div>
-        {this.props.children}
+        <div className="container">
+          <div className="content">
+            {this.props.children}
+          </div>
+          {this.getSidebar(docId)}
+        </div>
         <footer />
       </div>
     );
   }
 }
-export default App;
+export default withRouter(App);

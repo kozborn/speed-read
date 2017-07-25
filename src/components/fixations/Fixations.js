@@ -12,14 +12,12 @@ class Fixations extends React.Component {
   static propTypes = {
     fixation: instanceOf(Map).isRequired,
     speed: number, // ms
-    createBtnCb: func,
   }
 
   static defaultProps = {
     documentId: "sample_text",
     speed: 1000, //ms
     eventType: "",
-    createBtnCb: () => "",
   }
 
   constructor(props) {
@@ -135,11 +133,6 @@ class Fixations extends React.Component {
             cb: this.stopSwitching,
             label: "Stop",
             disabled: !this.state.running,
-          }}
-          createBtn={{
-            cb: this.props.createBtnCb,
-            label: "Dodaj swój text",
-            disabled: false,
           }}
         />
         <h3>{this.props.fixation.get("title")}</h3>

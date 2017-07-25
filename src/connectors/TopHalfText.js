@@ -1,17 +1,17 @@
 import {connect} from "react-redux";
 import _ from "underscore";
 import {Map} from "immutable";
-import TopHalfText from "../components/TopHalfText";
+import BottomHalfText from "../components/BottomHalfText";
 import {getDoc, saveText, savePreferences} from "../actions/actions";
+import {getTextsFromDocument} from "../utils/helpers";
 
 function mapStateToProps(state) {
   const docId = state.getIn(["app", "docId"], null);
-  let text = _.isEmpty(docId)
-    ? state.getIn(["app", "defaultDoc", "text"], "")
-    : state.getIn(["app", "userDoc", "text"], "");
-
-  if (_.isEmpty(text)) {
-    text = state.getIn(["app", "defaultDoc", "text"], "");
+  let text = state.getIn(["app", "defaultDoc", "topHalfText"], new Map());
+  const userTexts = getTextsFromDocument(state.getIn(["app", "userDoc"], new Map()));
+  const textKey = state.getIn(["app", "userDoc", "preferences", "topHalfText"], "");
+  if (!userTexts.isEmpty() && textKey !== "") {
+    text = state.getIn(["app", "userDoc", textKey], "");
   }
 
   const preferences = _.isEmpty(docId)
@@ -30,4 +30,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TopHalfText);
+export default connect(mapStateToProps, mapDispatchToProps)(BottomHalfText);

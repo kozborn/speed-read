@@ -3,15 +3,15 @@ import _ from "underscore";
 import {Map} from "immutable";
 import FixationsWithSliders from "../components/fixations/FixationsWithSliders";
 import {getDoc, saveText, savePreferences} from "../actions/actions";
+import {getTextsFromDocument} from "../utils/helpers";
 
 function mapStateToProps(state) {
   const docId = state.getIn(["app", "docId"], null);
-  let fixation = _.isEmpty(docId)
-    ? state.getIn(["app", "defaultDoc", "fixations"], new Map())
-    : state.getIn(["app", "userDoc", "fixations"], new Map());
-
-  if (_.isEmpty(fixation)) {
-    fixation = state.getIn(["app", "defaultDoc", "fixations"], new Map());
+  let fixation = state.getIn(["app", "defaultDoc", "fixations"], new Map());
+  const userTexts = getTextsFromDocument(state.getIn(["app", "userDoc"], new Map()));
+  const userFixationKey = state.getIn(["app", "userDoc", "preferences", "fixations"], "");
+  if (!userTexts.isEmpty() && userFixationKey !== "") {
+    fixation = state.getIn(["app", "userDoc", userFixationKey], "");
   }
 
   const preferences = _.isEmpty(docId)
