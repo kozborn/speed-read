@@ -116,8 +116,9 @@ article {
   background: lightgreen; }
 
 .schultz-table {
-  position: relative; }
-  .schultz-table table {
+  position: relative;
+  text-align: center; }
+  .schultz-table .table {
     position: relative; }
   .schultz-table .cell {
     display: inline-block;
