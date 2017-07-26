@@ -18,7 +18,7 @@ function mapStateToProps(state) {
     ? state.getIn(["app", "defaultDoc", "preferences"], new Map())
     : state.getIn(["app", "userDoc", "preferences"], new Map());
 
-  return {docId, text, preferences};
+  return {docId: docId || "default_doc", text, preferences};
 }
 
 function mapDispatchToProps(dispatch) {
