@@ -58,15 +58,23 @@ class App extends Component {
           </nav>
           <div className="clearfix" />
         </div>
-        <div className="container">
+        <div className="App-body">
           <div className="content">
             {this.props.children}
           </div>
           {this.getSidebar(docId)}
         </div>
-        <footer />
+        <div className="App-footer">
+          <footer />
+        </div>
       </div>
     );
   }
 }
+
+// <div id="container">
+//    <div id="header"></div>
+//    <div id="body"></div>
+//    <div id="footer"></div>
+// </div>
 export default withRouter(App);
