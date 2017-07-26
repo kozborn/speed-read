@@ -1,5 +1,6 @@
 import React from "react";
-import {string, func} from "prop-types";
+import {Map} from "immutable";
+import {string, func, instanceOf} from "prop-types";
 import {stringDivider} from "../utils/helpers";
 
 const PREFIX = "<div class='wrapper'>";
@@ -10,7 +11,7 @@ class BottomHalfText extends React.Component {
   static propTypes = {
     docId: string.isRequired,
     getDoc: func.isRequired,
-    text: string.isRequired,
+    text: instanceOf(Map).isRequired,
   }
 
   constructor(props) {
@@ -25,12 +26,12 @@ class BottomHalfText extends React.Component {
   }
 
   componentDidMount() {
-    const textWrapped = stringDivider(this.props.text, 100, PREFIX, POSTFIX);
+    const textWrapped = stringDivider(this.props.text.get("text", ""), 100, PREFIX, POSTFIX);
     this.setState({textWrapped});
   }
 
   componentWillReceiveProps(nextProps) {
-    const textWrapped = stringDivider(nextProps.text, 100, PREFIX, POSTFIX);
+    const textWrapped = stringDivider(nextProps.text.get("text", ""), 100, PREFIX, POSTFIX);
     this.setState({textWrapped});
   }
 

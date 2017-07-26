@@ -13,7 +13,7 @@ function app(state = new Map({
   docId: null,
   defaultDoc: null,
   defaultPreferences: fromJS(PREFERENCES),
-  userDoc: null,
+  userDoc: new Map(),
   userId: null,
 }), action) {
   switch (action.type) {

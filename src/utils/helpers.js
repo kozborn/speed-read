@@ -1,3 +1,5 @@
+import {Map, List, fromJS} from "immutable";
+
 export function generateTable (count) {
   const table = [];
   for (let i = 0; i < count; i++){
@@ -39,3 +41,33 @@ export function stringDivider(str, width, prefix, postfix) {
   }
   return prefix + str + postfix;
 }
+
+
+export function getTextsFromDocument(document) {
+  if (document.isEmpty()) return new List();
+
+  const tmpTexts = document.reduce((acc, currentKey) => {
+    if (Map.isMap(currentKey) && currentKey.keySeq().last() === "text") {
+      acc.push(currentKey);
+    }
+    return acc;
+  }, []);
+
+  return fromJS(tmpTexts);
+}
+
+export function guid() {
+  const s4 = () =>
+    Math.floor((1 + Math.random()) * 0x10000)
+      .toString(16)
+      .substring(1);
+  return s4() + s4() + "-" + s4() + "-" + s4() + "-" +
+    s4() + "-" + s4() + s4() + s4();
+}
+
+export function getNextId(document) {
+  const texts = getTextsFromDocument(document);
+  const id = texts.keySeq().last() + 1;
+  return `text-${id}`;
+}
+

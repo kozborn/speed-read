@@ -1,5 +1,9 @@
 .schultz-table {
   position: relative;
+  text-align: center;
+  .table {
+    position: relative;
+  }
   .cell {
     display: inline-block;
     $height: 50px;
