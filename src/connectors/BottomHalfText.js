@@ -7,7 +7,7 @@ import {getTextsFromDocument} from "../utils/helpers";
 
 function mapStateToProps(state) {
   const docId = state.getIn(["app", "docId"], null);
-  let text = state.getIn(["app", "defaultDoc", "fixations"], new Map());
+  let text = state.getIn(["app", "defaultDoc", "bottomHalfText"], new Map());
   const userTexts = getTextsFromDocument(state.getIn(["app", "userDoc"], new Map()));
   const textKey = state.getIn(["app", "userDoc", "preferences", "bottomHalfText"], "");
   if (!userTexts.isEmpty() && textKey !== "") {
@@ -18,7 +18,7 @@ function mapStateToProps(state) {
     ? state.getIn(["app", "defaultDoc", "preferences"], new Map())
     : state.getIn(["app", "userDoc", "preferences"], new Map());
 
-  return {docId, text, preferences};
+  return {docId: docId || "default_doc", text, preferences};
 }
 
 function mapDispatchToProps(dispatch) {

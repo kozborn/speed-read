@@ -6,7 +6,7 @@ import {getDoc, saveText} from "../actions/actions";
 function mapStateToProps(state) {
   const docId = state.getIn(["app", "docId"], null);
   const document = state.getIn(["app", "userDoc"], new Map());
-  return {docId, document};
+  return {docId: docId || "default_doc", document};
 }
 
 function mapDispatchToProps(dispatch) {
