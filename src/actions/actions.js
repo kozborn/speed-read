@@ -96,3 +96,11 @@ export function savePreferences(docId, key, value) {
     dispatch(save(docId, {preferences}));
   };
 }
+
+export function switchText(docId, key, id) {
+  console.log(docId, key, id);
+  return (dispatch) => {
+    dispatch(savePreferences(docId, key, id));
+    dispatch({type: "SWITCH_TYPE", data: {key, id}});
+  };
+}

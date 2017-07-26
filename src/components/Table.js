@@ -2,6 +2,13 @@ import React from "react";
 import {number} from "prop-types";
 import {generateTable} from "../utils/helpers";
 
+function numberCount(rows, cols) {
+  if (cols % 2 !== 0 && rows % 2 !== 0) {
+    return (cols * rows) - 1;
+  }
+  return cols * rows;
+}
+
 class Table extends React.Component {
 
   static propTypes = {
@@ -57,10 +64,10 @@ class Table extends React.Component {
     }
 
     const currentNumber = e.target.getAttribute("data-number");
-    const {cols, rows} = this.props;
     const selected = this.state.selected;
+    const {rows, cols} = this.props;
     if (parseInt(currentNumber, 10) === parseInt(this.state.nextExpected, 10)) {
-      if (parseInt(currentNumber, 10) === (cols * rows)) {
+      if (parseInt(currentNumber, 10) === (numberCount(rows, cols))) {
         this.stopTimer(e);
         this.setState({finished: true});
         alert("All done!!!");
@@ -102,7 +109,7 @@ class Table extends React.Component {
   buildTable(rows, cols) {
     const rowsMiddle = Math.floor(rows / 2);
     const colsMiddle = Math.floor(cols / 2);
-    const table = generateTable((cols * rows)); // -1 because center is red dot
+    const table = generateTable(numberCount(rows, cols));
     const rowsElements = [];
     let index = 0;
     let cellContent = null;
@@ -110,7 +117,7 @@ class Table extends React.Component {
       const colsElements = [];
       const rowKey = `row-${r}`;
 
-      for (let c = 0; c < cols; c++){
+      for (let c = 0; c < cols; c++) {
         const cellKey = `${rowKey}-cell-${c}`;
         const number = table[index];
 
@@ -165,15 +172,17 @@ class Table extends React.Component {
   }
 
   render() {
-    return (<div>
-      <div id="timer" />
-      {this.state.finished === false ?
-        <h3>Next expected: {this.state.nextExpected} <span>{this.informationElement()}</span></h3>
-      : null }
+    return (
       <div className="schultz-table">
-        {this.state.currentTable}
+        <div id="timer" />
+        {this.state.finished === false ?
+          <h3>Next expected: {this.state.nextExpected} <span>{this.informationElement()}</span></h3>
+        : null }
+        <div className="table">
+          {this.state.currentTable}
+        </div>
       </div>
-    </div>);
+    );
   }
 }
 
