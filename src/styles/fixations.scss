@@ -15,3 +15,23 @@
     margin-right: 10px;
   }
 }
+
+.text-with-fixations {
+  text-align: left;
+  line-height: 26px;
+  max-width: 1000px;
+  margin: 10px auto;
+}
+
+.line .left,
+.line .left-space {
+  float: left
+}
+
+.line .right {
+  float: left;
+}
+
+.line .highlight {
+  background: lightgreen;
+}

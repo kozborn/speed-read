@@ -1,63 +1,82 @@
 import React, {Component} from "react";
 import {func, string} from "prop-types";
+import ContentEditable from "react-contenteditable";
 
 export default class TextForm extends Component {
 
   static propTypes = {
+    id: string,
+    title: string,
     text: string,
     saveText: func.isRequired,
   }
 
   static defaultProps = {
+    id: null,
+    title: "Title",
     text: "Dodaj swój text",
   }
 
   constructor(props) {
     super(props);
     this.state = {
-      savedDocument: "",
+      title: this.props.title,
       text: this.props.text,
     };
-    this.textAreaRef = this.textAreaRef.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+    this.changeTitle = this.changeTitle.bind(this);
+    this.changeText = this.changeText.bind(this);
     this.saveText = this.saveText.bind(this);
+    this.textareaRef = this.textareaRef.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({text: nextProps.text});
+    this.setState({text: nextProps.text, title: nextProps.title});
   }
 
-  textAreaRef(e) {
-    this.textarea = e;
+  changeTitle(e) {
+    this.setState({title: e.target.value});
   }
 
-  handleChange() {
-    this.setState({text: this.textarea.value});
+  changeText(evt) {
+    this.setState({text: evt.target.value.replace(/<(?:.|\n)*?>/gm, "")});
   }
 
   saveText() {
-    this.props.saveText(this.textarea.innerHTML);
+    const {title, text} = this.state;
+    const data = {
+      id: this.props.id,
+      title,
+      text,
+    };
+    this.props.saveText(data);
+  }
+
+  textareaRef(e) {
+    this.textarea = e;
   }
 
   render() {
-    const {savedDocument} = this.state;
-    const currentPath = window.location.pathname;
     return (
-      <div className="user-text-form">
-
-        {savedDocument ? <h3>Your private url: {`${currentPath}?documentId=${savedDocument.id}`}</h3> : null}
-        <div
-          ref={this.textAreaRef}
-          contentEditable="true"
-          suppressContentEditableWarning="true"
-          className="form-control text-form"
-          onChange={this.handleChange}
-        >
-          {this.state.text}
+      <div className="text-form">
+        <div className="form-row">
+          <input
+            type="text"
+            className="form-control"
+            value={this.state.title}
+            onChange={this.changeTitle}
+          />
         </div>
-        <button className="save" onClick={this.saveText}>
-          Zapisz
-        </button>
+        <div className="form-row">
+          <ContentEditable
+            html={this.state.text}
+            onChange={this.changeText}
+          />
+        </div>
+        <div className="form-row">
+          <button className="save-btn" onClick={this.saveText}>
+            Zapisz
+          </button>
+        </div>
         <div className="clearfix" />
       </div>
     );
