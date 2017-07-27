@@ -9,11 +9,16 @@
 * {
   font-size: $default-font-size
 }
-
+#root,
+#root > div,
 html, body {
   margin: 0;
   padding: 0;
   height: 100%;
+}
+#root,
+#root > div {
+  position: relative;
 }
 
 .clearfix {
@@ -76,10 +81,8 @@ html, body {
 .App-body {
   width: 1000px;
   margin: 0px auto;
-  display: flex;
   height: 100%;
   padding-bottom: 100px; // height of the footer
-  flex-direction: row;
 
   .sidebar {
     width: 200px;
@@ -92,6 +95,10 @@ html, body {
 }
 
 .App-footer {
+  width: 100%;
+  position: absolute;
+  z-index: 2;
+  bottom: 0px;
   border-top: 1px solid #eaeaea;
   height: 100px;
 }

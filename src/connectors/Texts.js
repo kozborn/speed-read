@@ -1,12 +1,12 @@
 import {connect} from "react-redux";
 import {Map} from "immutable";
 import Texts from "../components/texts/Texts";
-import {getDoc, saveText} from "../actions/actions";
+import {getDoc, saveText, DEFAULT_DOC_ID} from "../actions/actions";
 
 function mapStateToProps(state) {
   const docId = state.getIn(["app", "docId"], null);
   const document = state.getIn(["app", "userDoc"], new Map());
-  return {docId: docId || "default_doc", document};
+  return {docId: docId || DEFAULT_DOC_ID, document};
 }
 
 function mapDispatchToProps(dispatch) {

@@ -2,7 +2,7 @@ import {connect} from "react-redux";
 import _ from "underscore";
 import {Map} from "immutable";
 import BottomHalfText from "../components/BottomHalfText";
-import {getDoc, saveText, savePreferences} from "../actions/actions";
+import {getDoc, saveText, savePreferences, DEFAULT_DOC_ID} from "../actions/actions";
 import {getTextsFromDocument} from "../utils/helpers";
 
 function mapStateToProps(state) {
@@ -17,8 +17,7 @@ function mapStateToProps(state) {
   const preferences = _.isEmpty(docId)
     ? state.getIn(["app", "defaultDoc", "preferences"], new Map())
     : state.getIn(["app", "userDoc", "preferences"], new Map());
-
-  return {docId: docId || "default_doc", text, preferences};
+  return {docId: docId || DEFAULT_DOC_ID, text, preferences};
 }
 
 function mapDispatchToProps(dispatch) {
