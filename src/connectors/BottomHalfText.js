@@ -18,7 +18,6 @@ function mapStateToProps(state) {
   const preferences = _.isEmpty(docId)
     ? state.getIn(["app", "defaultDoc", "preferences"], new Map())
     : state.getIn(["app", "userDoc", "preferences"], new Map());
-
   return {docId: docId || DEFAULT_DOC_ID, text, preferences};
 }
 
