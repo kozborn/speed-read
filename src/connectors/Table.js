@@ -2,15 +2,15 @@ import {connect} from "react-redux";
 import _ from "underscore";
 import {Map} from "immutable";
 import TableWithSliders from "../components/TableWithSliders";
-import {getDoc, savePreferences} from "../actions/actions";
+import {getDoc, savePreferences, DEFAULT_DOC_ID} from "../actions/actions";
 
 function mapStateToProps(state) {
-  const docId = state.getIn(["app", "docId"], "default_doc");
+  const docId = state.getIn(["app", "docId"], DEFAULT_DOC_ID);
   const preferences = _.isEmpty(docId)
     ? state.getIn(["app", "defaultDoc", "preferences"], new Map())
     : state.getIn(["app", "userDoc", "preferences"], new Map());
 
-  return {docId: docId || "default_doc", preferences};
+  return {docId: docId || DEFAULT_DOC_ID, preferences};
 }
 
 function mapDispatchToProps(dispatch) {

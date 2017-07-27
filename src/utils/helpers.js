@@ -9,7 +9,6 @@ export function generateTable (count) {
 }
 
 // Fisher–Yates shuffle https://bost.ocks.org/mike/shuffle/
-
 function shuffle(array) {
   let m = array.length, t, i;
 
@@ -42,7 +41,6 @@ export function stringDivider(str, width, prefix, postfix) {
   return prefix + str + postfix;
 }
 
-
 export function getTextsFromDocument(document) {
   if (document.isEmpty()) return new List();
 
@@ -52,7 +50,6 @@ export function getTextsFromDocument(document) {
     }
     return acc;
   }, []);
-
   return fromJS(tmpTexts);
 }
 
@@ -70,4 +67,3 @@ export function getNextId(document) {
   const id = texts.keySeq().last() + 1;
   return `text-${id}`;
 }
-
