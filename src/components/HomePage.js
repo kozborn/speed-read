@@ -24,7 +24,6 @@ class HomePage extends Component {
   }
 
   render() {
-    console.log(this.props);
     const { reading, memorizing, thinking, understanding, anticipating } = this.props;
     return (
       <div>

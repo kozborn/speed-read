@@ -22,7 +22,7 @@ function app(state = new Map({
     case "DOC_FETCHED":
       return state.set("defaultDoc", fromJS(action.response));
     case "SET_USER_DOCID":
-      return state.set("docId", action.docId);
+      return state.set("docId", action.userDocId);
     default:
       return state;
   }

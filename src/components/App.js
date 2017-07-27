@@ -4,9 +4,10 @@ import {
 } from "react-router-dom";
 import camelize from "underscore.string/camelize";
 import {string, func, object} from "prop-types";
-import logo from "../assets/logo.svg";
-import TextListToChoose from "../connectors/TextListToChoose";
 import {withRouter} from "react-router";
+import logo from "../assets/logo.svg";
+import Footer from "../connectors/Footer";
+import TextListToChoose from "../connectors/TextListToChoose";
 
 class App extends Component {
 
@@ -64,17 +65,10 @@ class App extends Component {
           </div>
           {this.getSidebar(docId)}
         </div>
-        <div className="App-footer">
-          <footer />
-        </div>
+        <Footer />
       </div>
     );
   }
 }
 
-// <div id="container">
-//    <div id="header"></div>
-//    <div id="body"></div>
-//    <div id="footer"></div>
-// </div>
 export default withRouter(App);
