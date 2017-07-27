@@ -2,7 +2,8 @@ import _ from "underscore";
 import {Map, fromJS} from "immutable";
 
 export const DEFAULT_DOC_ID = "default_doc";
-export const ServerUrl = "http://127.0.0.1:5984/speed-read";
+export const DbUrl = "http://127.0.0.1:5984/speed-read";
+export const ServerUrl = "http://localhost:3000";
 
 export function getDoc(docId) {
   return (dispatch) => {
@@ -11,7 +12,7 @@ export function getDoc(docId) {
     const documentId = _.isEmpty(docId) ? DEFAULT_DOC_ID : docId;
     const userDocument = documentId !== DEFAULT_DOC_ID;
 
-    return fetch(`${ServerUrl}/${documentId}`)
+    return fetch(`${DbUrl}/${documentId}`)
     .then(response => response.json())
     .then((response) => {
       if (userDocument) {
@@ -27,7 +28,7 @@ export function getDoc(docId) {
 }
 
 function fetchDoc(docId) {
-  return fetch(`${ServerUrl}/${docId}`)
+  return fetch(`${DbUrl}/${docId}`)
   .then(response => response.json());
 }
 
@@ -56,7 +57,7 @@ export function clearLocalStorage() {
 
 export function save(docId, data) {
   const method = _.isEmpty(docId) || docId === DEFAULT_DOC_ID ? "POST" : "PUT";
-  const url = _.isEmpty(docId) || docId === DEFAULT_DOC_ID ? ServerUrl : `${ServerUrl}/${docId}`;
+  const url = _.isEmpty(docId) || docId === DEFAULT_DOC_ID ? DbUrl : `${DbUrl}/${docId}`;
   return (dispatch, getState) => {
     const userDoc = Map.isMap(getState().getIn(["app", "userDoc"])) ? getState().getIn(["app", "userDoc"]) : new Map();
     if (userDoc.isEmpty()) {

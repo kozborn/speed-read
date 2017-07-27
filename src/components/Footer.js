@@ -14,7 +14,7 @@ export default class Footer extends React.Component {
   }
 
   getUrl() {
-    return `${ServerUrl}/${this.props.docId}`;
+    return `${ServerUrl}?documentId=${this.props.docId}`;
   }
 
   render() {
