@@ -64,6 +64,10 @@ export function guid() {
 
 export function getNextId(document) {
   const texts = getTextsFromDocument(document);
-  const id = texts.keySeq().last() + 1;
-  return `text-${id}`;
+  if (texts.isEmpty()) {
+    return "text-1";
+  }
+  const [key, id] = (texts.last().get("id")).split("-");
+
+  return `text-${parseInt(id) + 1}`;
 }

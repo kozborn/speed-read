@@ -26,6 +26,7 @@ export default class extends React.Component {
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.saveText = this.saveText.bind(this);
+    this.newText = this.newText.bind(this);
     this.setTextToEdit = this.setTextToEdit.bind(this);
   }
 
@@ -42,6 +43,11 @@ export default class extends React.Component {
     const key = data.id ? data.id : getNextId(this.props.document);
     this.props.saveText(this.props.docId, key, _.extend(data, {id: key}));
     this.closeModal();
+  }
+
+  newText() {
+    this.setState({textToEdit: new Map()});
+    this.openModal();
   }
 
   openModal() {
@@ -67,7 +73,7 @@ export default class extends React.Component {
           <div>Nie masz jeszcze swojego documentu</div>
         }
 
-        <button className="btn btn-sm btn-primary" onClick={this.openModal}>Dodaj nowy text</button>
+        <button className="btn btn-sm btn-primary" onClick={this.newText}>Dodaj nowy text</button>
 
         <Modal
           isOpen={this.state.modalOpen}
