@@ -68,7 +68,11 @@ class App extends Component {
             <li><Link to={`/user-texts${queryParams}`}>Twoje teksty</Link></li>
             {
               localStorage.getItem("docId") ?
-                <li className="pull-right"><button onClick={this.props.clearLocalStorage}>Wyczyść dane</button></li>
+                <li className="pull-right">
+                  <button className="btn btn-sm btn-warning" onClick={this.props.clearLocalStorage}>
+                    Wyczyść dane
+                  </button>
+                </li>
                 : null
             }
           </nav>

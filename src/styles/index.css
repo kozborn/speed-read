@@ -9,6 +9,32 @@
       color: gray;
       text-decoration: none; }
 
+.form-row {
+  position: relative;
+  width: 100%;
+  margin: 10px 0px; }
+
+input[type="text"] {
+  height: 1.5rem; }
+
+.form-control {
+  line-height: 1.2rem; }
+
+div[contenteditable=true] {
+  position: relative;
+  min-height: 300px;
+  max-height: calc(100vh - 150px);
+  overflow: auto;
+  padding: 10px !important; }
+
+.user-text-form {
+  width: 100%;
+  margin: 0px auto;
+  height: 100%; }
+  .user-text-form button.save {
+    float: right;
+    margin-top: 10px; }
+
 article {
   text-align: left;
   max-width: 800px;
