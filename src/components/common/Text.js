@@ -26,7 +26,7 @@ export default class extends React.Component {
     return (
       <div className="text">
         <div onClick={this.onClick}>
-          <h3>{title}</h3>
+          <h5>{title}</h5>
           <div className="snippet">{text.slice(0, 200)}</div>
         </div>
       </div>

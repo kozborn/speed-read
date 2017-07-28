@@ -22,9 +22,9 @@ export default class extends React.Component {
     const {text} = this.props;
     return (
       <div>
-        <h3>{text.get("title")}
-          <button className="edit-btn pull-right" onClick={this.setTextToEdit}>Edytuj</button>
-        </h3>
+        <h5>{text.get("title")}
+          <button className="btn btn-sm btn-default pull-right" onClick={this.setTextToEdit}>Edytuj</button>
+        </h5>
         <div>{text.get("text")}</div>
       </div>
     );

@@ -67,7 +67,7 @@ export default class extends React.Component {
           <div>Nie masz jeszcze swojego documentu</div>
         }
 
-        <button onClick={this.openModal}>Dodaj nowy text</button>
+        <button className="btn btn-sm btn-primary" onClick={this.openModal}>Dodaj nowy text</button>
 
         <Modal
           isOpen={this.state.modalOpen}

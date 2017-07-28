@@ -10,14 +10,12 @@
   font-size: $default-font-size
 }
 #root,
-#root > div,
 html, body {
   margin: 0;
   padding: 0;
   height: 100%;
 }
-#root,
-#root > div {
+#root {
   position: relative;
 }
 
@@ -68,8 +66,7 @@ html, body {
 .App-header {
   background-color: #222;
   text-align: center;
-  height: 40px;
-  padding: 20px;
+  padding: 10px;
   color: white;
   border-bottom: 1px solid #eaeaea;
 }
@@ -83,15 +80,6 @@ html, body {
   margin: 0px auto;
   height: 100%;
   padding-bottom: 100px; // height of the footer
-
-  .sidebar {
-    width: 200px;
-    flex: 0 200px;
-  }
-
-  .content {
-    flex: 1;
-  }
 }
 
 .App-footer {
@@ -109,6 +97,7 @@ html, body {
 }
 
 .sidebar {
+  margin-top: 50px;
   text-align: left;
   .text {
     cursor: pointer;
@@ -135,10 +124,6 @@ html, body {
 
 .incorrect {
   background: darksalmon;
-}
-
-.red {
-  color: red;
 }
 
 body {
@@ -173,9 +158,4 @@ body {
   position: absolute;
   bottom: 0px;
   background: white;
-}
-
-.edit-btn {
-  font-size: 12px;
-  padding: 2px 10px;
 }
