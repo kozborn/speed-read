@@ -35,6 +35,7 @@ class TableWithSliders extends React.Component {
     };
     this.onChangeRows = this.onChangeRows.bind(this);
     this.onChangeCols = this.onChangeCols.bind(this);
+    this.saveSettings = this.saveSettings.bind(this);
   }
 
   componentWillMount() {
@@ -48,14 +49,25 @@ class TableWithSliders extends React.Component {
     });
   }
 
+  componentWillUnmount() {
+    console.log("Unmount");
+  }
+
   onChangeRows(e) {
     this.setState({rows: e});
-    this.props.savePreferences(this.props.docId, "schultzTable", {rows: e});
   }
 
   onChangeCols(e) {
     this.setState({cols: e});
-    this.props.savePreferences(this.props.docId, "schultzTable", {cols: e});
+    // this.props.savePreferences(this.props.docId, "schultzTable", {cols: e});
+  }
+
+  saveSettings() {
+    console.log('saving');
+    this.props.savePreferences(this.props.docId, "schultzTable", {
+      rows: this.state.rows,
+      cols: this.state.cols,
+    });
   }
 
   render() {
@@ -73,6 +85,7 @@ class TableWithSliders extends React.Component {
               value={this.state.cols}
               marks={marks}
               onChange={this.onChangeCols}
+              onAfterChange={this.saveSettings}
             />
           </div>
           <div className="slider">
@@ -85,6 +98,7 @@ class TableWithSliders extends React.Component {
               marks={marks}
               value={this.state.rows}
               onChange={this.onChangeRows}
+              onAfterChange={this.saveSettings}
             />
           </div>
         </div>
