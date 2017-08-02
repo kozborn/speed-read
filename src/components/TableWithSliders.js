@@ -49,21 +49,15 @@ class TableWithSliders extends React.Component {
     });
   }
 
-  componentWillUnmount() {
-    console.log("Unmount");
-  }
-
   onChangeRows(e) {
     this.setState({rows: e});
   }
 
   onChangeCols(e) {
     this.setState({cols: e});
-    // this.props.savePreferences(this.props.docId, "schultzTable", {cols: e});
   }
 
   saveSettings() {
-    console.log('saving');
     this.props.savePreferences(this.props.docId, "schultzTable", {
       rows: this.state.rows,
       cols: this.state.cols,
