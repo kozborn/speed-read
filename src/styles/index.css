@@ -1,13 +1,24 @@
+.navigation-footer li,
 .navigation-top li {
   display: inline-block; }
+  .navigation-footer li a,
   .navigation-top li a {
     color: gray;
     text-decoration: none;
     display: block;
     padding: 10px; }
-    .navigation-top li a:hover, .navigation-top li a:active, .navigation-top li a:visited {
+    .navigation-footer li a:hover, .navigation-footer li a:active, .navigation-footer li a:visited,
+    .navigation-top li a:hover,
+    .navigation-top li a:active,
+    .navigation-top li a:visited {
       color: gray;
       text-decoration: none; }
+
+.navigation-footer {
+  text-align: center; }
+
+.user-private-link {
+  text-align: center; }
 
 .form-row {
   position: relative;

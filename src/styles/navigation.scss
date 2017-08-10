@@ -1,3 +1,4 @@
+.navigation-footer,
 .navigation-top {
   li {
     display: inline-block;
@@ -12,4 +13,12 @@
       }
     }
   }
+}
+
+.navigation-footer {
+  text-align: center;
+}
+
+.user-private-link {
+  text-align: center;
 }
