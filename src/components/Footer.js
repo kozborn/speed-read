@@ -43,6 +43,9 @@ export default class Footer extends React.Component {
               Twój prywatny link <a href={this.getUrl()}>{this.getUrl()}</a>
             </div>
           : null}
+          <div className="copyrights">
+            © Copyright by piotrkozubek@gmail.com {new Date().getFullYear()}
+          </div>
         </footer>
       </div>
     );

@@ -89,6 +89,17 @@ html, body {
   bottom: 0px;
   border-top: 1px solid #eaeaea;
   height: 100px;
+  footer {
+    position: relative;
+    height: 100%;
+    .copyrights {
+      font-size: 12px;
+      opacity: 0.4;
+      position: absolute;
+      bottom: 5px;
+      right: 5px;
+    }
+  }
 }
 
 @keyframes App-logo-spin {
