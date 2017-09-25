@@ -122,7 +122,7 @@ class Table extends React.Component {
         const number = table[index];
 
         if (r === rowsMiddle && c === colsMiddle && cols % 2 === 1 && rows % 2 === 1) {
-          cellContent = <span className="red" onClick={this.stopTimer}>{String.fromCharCode(9679)}</span>;
+          cellContent = <span className="red-dot" onClick={this.stopTimer}>{String.fromCharCode(9679)}</span>;
         } else {
           cellContent = number;
           index++;
@@ -139,11 +139,11 @@ class Table extends React.Component {
         colsElements.push(cell);
       }
 
-      const el = <div className="row" key={rowKey}>{colsElements}</div>;
+      const el = <div className="table-row" key={rowKey}>{colsElements}</div>;
       rowsElements.push(el);
     }
     if (cols % 2 !== 1 || rows % 2 !== 1) {
-      const centerDot = <span key="red-dot" className="middle-table-dot red" onClick={this.stopTimer}>{String.fromCharCode(9679)}</span>;
+      const centerDot = <span key="red-dot" className="middle-table-dot red-dot" onClick={this.stopTimer}>{String.fromCharCode(9679)}</span>;
       rowsElements.push(centerDot);
     }
     return rowsElements;

@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import {
-  Link,
-} from "react-router-dom";
+import { Link } from "react-router-dom";
+import cn from "classnames";
 import camelize from "underscore.string/camelize";
-import {string, func, object} from "prop-types";
-import {withRouter} from "react-router";
+import { string, func, object } from "prop-types";
+import { withRouter } from "react-router";
 import logo from "../assets/logo.svg";
 import Footer from "../connectors/Footer";
 import TextListToChoose from "../connectors/TextListToChoose";
@@ -19,17 +18,26 @@ class App extends Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      sidebar: false,
+    };
     this.getSidebar = this.getSidebar.bind(this);
+    this.hasSidebar = this.hasSidebar.bind(this);
   }
 
   getSidebar(docId) {
-    const key = camelize(this.props.location.pathname.replace("/", ""));
-    if (["fixations", "bottomHalfText", "topHalfText"].indexOf(key) !== -1) {
-      return (<div className="sidebar">
+    if (this.hasSidebar()) {
+      const key = camelize(this.props.location.pathname.replace("/", ""));
+      return (<div className="sidebar col-lg-4">
         <TextListToChoose docId={docId} textKey={key} />
       </div>);
     }
     return null;
+  }
+
+  hasSidebar() {
+    const key = camelize(this.props.location.pathname.replace("/", ""));
+    return (["fixations", "bottomHalfText", "topHalfText"].indexOf(key) !== -1);
   }
 
   render() {
@@ -39,6 +47,11 @@ class App extends Component {
     if (docId) {
       queryParams = `?documentId=${docId}`;
     }
+
+    const contentClasses = cn("content", {
+      "col-lg-12": !this.hasSidebar(),
+      "col-lg-8": !this.hasSidebar(),
+    });
 
     return (
       <div className="App">
@@ -53,17 +66,23 @@ class App extends Component {
             <li><Link to={`/user-texts${queryParams}`}>Twoje teksty</Link></li>
             {
               localStorage.getItem("docId") ?
-                <li className="pull-right"><button onClick={this.props.clearLocalStorage}>Wyczyść dane</button></li>
-              : null
+                <li className="pull-right">
+                  <button className="btn btn-sm btn-warning" onClick={this.props.clearLocalStorage}>
+                    Wyczyść dane
+                  </button>
+                </li>
+                : null
             }
           </nav>
           <div className="clearfix" />
         </div>
         <div className="App-body">
-          <div className="content">
-            {this.props.children}
+          <div className="row">
+            <div className={contentClasses}>
+              {this.props.children}
+            </div>
+            {this.getSidebar(docId)}
           </div>
-          {this.getSidebar(docId)}
         </div>
         <Footer />
       </div>

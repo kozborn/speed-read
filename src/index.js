@@ -8,6 +8,8 @@ import thunkMiddleware from "redux-thunk";
 import queryString from "query-string";
 
 import reducer from "./reducer";
+import "../node_modules/mdbootstrap/css/bootstrap.css";
+import "../node_modules/mdbootstrap/css/mdb.css";
 import "./styles/index.css";
 import App from "./components/App";
 import HomePage from "./connectors/HomePage";
@@ -51,16 +53,14 @@ const docId = store.getState().getIn(["app", "docId"], "");
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
-      <div>
-        <App docId={docId} clearLocalStorage={clearLocalStorage}>
-          <Route exact path="/" component={HomePage} />
-          <Route path="/fixations" component={Fixations} />
-          <Route path="/top-half-text" component={TopHalfText} />
-          <Route path="/bottom-half-text" component={BottomHalfText} />
-          <Route path="/schultz-table" component={TableWithSliders} />
-          <Route path="/user-texts" component={Texts} />
-        </App>
-      </div>
+      <App docId={docId} clearLocalStorage={clearLocalStorage}>
+        <Route exact path="/" component={HomePage} />
+        <Route path="/fixations" component={Fixations} />
+        <Route path="/top-half-text" component={TopHalfText} />
+        <Route path="/bottom-half-text" component={BottomHalfText} />
+        <Route path="/schultz-table" component={TableWithSliders} />
+        <Route path="/user-texts" component={Texts} />
+      </App>
     </Router>
   </Provider>,
   document.getElementById("root"),

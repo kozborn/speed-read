@@ -1,6 +1,9 @@
 .schultz-table {
   position: relative;
   text-align: center;
+  .red-dot {
+    color: red;
+  }
   .table {
     position: relative;
   }
@@ -16,12 +19,14 @@
 
   .middle-table-dot {
     position: absolute;
-    left: calc(50% - 3px);
-    top: calc(50% - 9px);
+    left: calc(50% - 4px);
+    top: calc(50% - 10px);
   }
 }
 
 .table-with-sliders {
+  padding-top: 25px;
+  text-align: center;
   .sliders {
     display: flex;
     flex-direction: row;

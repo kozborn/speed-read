@@ -68,12 +68,13 @@ export default class TextForm extends Component {
         </div>
         <div className="form-row">
           <ContentEditable
+            className="form-control"
             html={this.state.text}
             onChange={this.changeText}
           />
         </div>
         <div className="form-row">
-          <button className="save-btn" onClick={this.saveText}>
+          <button className="btn btn-sm btn-default" onClick={this.saveText}>
             Zapisz
           </button>
         </div>

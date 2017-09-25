@@ -20,8 +20,12 @@ export default class extends React.Component {
     return (
       <div className="fixations-toolbar">
         <div className="pull-left">
-          <button onClick={startBtn.cb} disabled={startBtn.disabled}>{startBtn.label}</button>
-          <button onClick={stopBtn.cb} disabled={stopBtn.disabled}>{stopBtn.label}</button>
+          <button className="btn btn-sm btn-default" onClick={startBtn.cb} disabled={startBtn.disabled}>
+            {startBtn.label}
+          </button>
+          <button className="btn btn-sm btn-warning" onClick={stopBtn.cb} disabled={stopBtn.disabled}>
+            {stopBtn.label}
+          </button>
         </div>
         <div className="clearfix" />
       </div>
