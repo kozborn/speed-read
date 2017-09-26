@@ -126,21 +126,12 @@ article {
   font-size: 14px; }
 
 #root,
-<<<<<<< HEAD
-#root > div,
-=======
->>>>>>> footer
 html, body {
   margin: 0;
   padding: 0;
   height: 100%; }
 
-<<<<<<< HEAD
-#root,
-#root > div {
-=======
 #root {
->>>>>>> footer
   position: relative; }
 
 .clearfix {
