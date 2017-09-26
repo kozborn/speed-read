@@ -1,5 +1,5 @@
 import React from "react";
-import {number, instanceOf, func} from "prop-types";
+import {number, instanceOf} from "prop-types";
 import {Map} from "immutable";
 import {stringDivider} from "../../utils/helpers";
 import FixationsToolbar from "./FixationsToolbar";
@@ -16,7 +16,7 @@ class Fixations extends React.Component {
 
   static defaultProps = {
     documentId: "sample_text",
-    speed: 1000, //ms
+    speed: 0, // ms
     eventType: "",
   }
 
@@ -135,7 +135,7 @@ class Fixations extends React.Component {
             disabled: !this.state.running,
           }}
         />
-        <h3>{this.props.fixation.get("title")}</h3>
+        <div className="text-title">{this.props.fixation.get("title")}</div>
         {this.getText()}
       </div>
     );

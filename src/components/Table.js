@@ -176,7 +176,7 @@ class Table extends React.Component {
       <div className="schultz-table">
         <div id="timer" />
         {this.state.finished === false ?
-          <h3>Next expected: {this.state.nextExpected} <span>{this.informationElement()}</span></h3>
+          <h3>Następna: {this.state.nextExpected} <span>{this.informationElement()}</span></h3>
         : null }
         <div className="table">
           {this.state.currentTable}
