@@ -1,8 +1,12 @@
 .fixations-with-slider {
   max-width: 1000px;
-  margin: 0px auto;
+  margin: 0px;
   .sliders {
+    margin-left: 0px;
     margin-bottom: 25px;
+    .rc-slider {
+      margin-left: 10px;
+    }
   }
 
   .add-fixations-text {
@@ -20,7 +24,7 @@
   text-align: left;
   line-height: 26px;
   max-width: 1000px;
-  margin: 10px auto;
+  margin: 10px 0px;
 }
 
 .line .left,

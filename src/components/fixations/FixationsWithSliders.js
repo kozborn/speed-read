@@ -74,7 +74,7 @@ class FixationsWithSliders extends React.Component {
     return (
       <div className="fixations-with-slider">
         <div className="sliders">
-          <h3>Prędkość przełączania</h3>
+          <div className="slider-title">Prędkość przełączania</div>
           <Slider
             min={0}
             max={12}
