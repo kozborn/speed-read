@@ -34,18 +34,18 @@ class Fixations extends React.Component {
       running: false,
     };
 
-    this.currentElIndex = this.props.fixationIndex;
-
     this.getText = this.getText.bind(this);
     this.prepareText = this.prepareText.bind(this);
     this.startSwitching = this.startSwitching.bind(this);
     this.stopSwitching = this.stopSwitching.bind(this);
     this.pauseSwitching = this.pauseSwitching.bind(this);
     this.setCurrentElIndex = this.setCurrentElIndex.bind(this);
+    this.updateCurrentElIndex = this.updateCurrentElIndex.bind(this);
   }
 
   componentDidMount() {
     this.prepareText(this.props.fixation.get("text", ""));
+    this.setCurrentElIndex(this.props.fixationIndex);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -55,17 +55,34 @@ class Fixations extends React.Component {
       this.interval = null;
       if (this.state.running) this.startSwitching();
     }
+
+    if (nextProps.fixationIndex !== this.props.fixationIndex) {
+      this.setCurrentElIndex(nextProps.fixationIndex);
+    }
+  }
+
+  componentDidUpdate() {
+    this.setCurrentElIndex(this.props.fixationIndex);
   }
 
   componentWillUnmount() {
     clearInterval(this.interval);
+    this.props.savePosition(this.currentElIndex);
   }
 
-  setCurrentElIndex(e) {
+  updateCurrentElIndex(e) {
+    const index = parseInt(e.target.closest(".wrapper-content").getAttribute("data-element-index"));
+    this.setCurrentElIndex(index);
+    this.props.savePosition(index);
+  }
+
+  setCurrentElIndex(index) {
+    this.currentElIndex = index;
     const elements = this.getElements();
     elements.forEach(element => element.classList.remove("highlight"));
-    this.currentElIndex = parseInt(e.target.closest(".wrapper-content").getAttribute("data-element-index"));
-    elements[this.currentElIndex].classList.add("highlight");
+    if (elements[this.currentElIndex]) {
+      elements[this.currentElIndex].classList.add("highlight");
+    }
   }
 
   getText() {
@@ -78,14 +95,14 @@ class Fixations extends React.Component {
           className="left wrapper-content"
           dangerouslySetInnerHTML={this.createMarkup(textWrapped[i])}
           data-element-index={i}
-          onClick={this.setCurrentElIndex}
+          onClick={this.updateCurrentElIndex}
         />
         <div className="left-space">&nbsp;</div>
         <div
           className="right wrapper-content"
           dangerouslySetInnerHTML={this.createMarkup(textWrapped[i + 1])}
           data-element-index={i + 1}
-          onClick={this.setCurrentElIndex}
+          onClick={this.updateCurrentElIndex}
         />
         <div className="clearfix" />
       </div>);

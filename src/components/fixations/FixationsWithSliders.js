@@ -56,7 +56,7 @@ class FixationsWithSliders extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({speed: nextProps.preferences.get("fixationsSpeed")});
+    this.setState({speed: nextProps.preferences.get("fixationsSpeed", 0)});
   }
 
   saveText(data) {
@@ -93,6 +93,7 @@ class FixationsWithSliders extends React.Component {
         </div>
         <Fixations
           fixation={this.props.fixation}
+          fixationIndex={this.props.preferences.get("fixationIndex", 0)}
           speed={this.state.speed}
           saveText={this.saveText}
           savePosition={this.savePosition}
