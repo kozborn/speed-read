@@ -85,6 +85,12 @@ article {
 
 .line .highlight {
   background: lightgreen; }
+  .line .highlight .wrapper:hover {
+    background: transparent; }
+
+.line .wrapper:hover {
+  background: lightblue;
+  cursor: pointer; }
 
 .schultz-table {
   position: relative;

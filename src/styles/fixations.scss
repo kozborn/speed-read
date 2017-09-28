@@ -36,6 +36,17 @@
   float: left;
 }
 
-.line .highlight {
-  background: lightgreen;
+.line {
+  .highlight {
+    background: lightgreen;
+    .wrapper:hover {
+      background: transparent;
+    }
+  }
+  .wrapper {
+    &:hover {
+      background: lightblue;
+      cursor: pointer;
+    }
+  }
 }

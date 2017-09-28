@@ -47,6 +47,7 @@ class FixationsWithSliders extends React.Component {
 
     this.changeSpeed = this.changeSpeed.bind(this);
     this.saveSettings = this.saveSettings.bind(this);
+    this.savePosition = this.savePosition.bind(this);
     this.saveText = this.saveText.bind(this);
   }
 
@@ -70,6 +71,10 @@ class FixationsWithSliders extends React.Component {
     this.props.savePreferences(this.props.docId, "fixationsSpeed", e);
   }
 
+  savePosition(index) {
+    this.props.savePreferences(this.props.docId, "fixationIndex", index);
+  }
+
   render() {
     return (
       <div className="fixations-with-slider">
@@ -90,6 +95,7 @@ class FixationsWithSliders extends React.Component {
           fixation={this.props.fixation}
           speed={this.state.speed}
           saveText={this.saveText}
+          savePosition={this.savePosition}
         />
       </div>
     );
