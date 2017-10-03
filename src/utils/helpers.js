@@ -71,7 +71,11 @@ export function getNextId(document) {
   return `text-${parseInt(id) + 1}`;
 }
 
+<<<<<<< HEAD
 const ALLOWED_TAGS = ["H3", "H2", "H1", "DIV", "P"];
+=======
+const ALLOWED_TAGS = ["H3", "H2", "DIV", "P"];
+>>>>>>> Saving fixations index (#21)
 
 function usurp(p) {
   // "Replace parent 'p' with its children.";
