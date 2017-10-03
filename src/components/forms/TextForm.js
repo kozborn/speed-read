@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import {func, string} from "prop-types";
 import ContentEditable from "react-contenteditable";
+import { sanitizeString } from "../../utils/helpers";
 
 export default class TextForm extends Component {
 
@@ -38,7 +39,7 @@ export default class TextForm extends Component {
   }
 
   changeText(evt) {
-    this.setState({text: evt.target.value.replace(/<(?:.|\n)*?>/gm, "")});
+    this.setState({text: sanitizeString(evt.target.value)});
   }
 
   saveText() {

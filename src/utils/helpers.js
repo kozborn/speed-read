@@ -71,3 +71,36 @@ export function getNextId(document) {
 
   return `text-${parseInt(id) + 1}`;
 }
+
+const ALLOWED_TAGS = ["H3", "H2", "DIV", "P"];
+
+function usurp(p) {
+  // "Replace parent 'p' with its children.";
+  let last = p;
+  for (let i = p.childNodes.length - 1; i >= 0; i--) {
+    const e = p.removeChild(p.childNodes[i]);
+    p.parentNode.insertBefore(e, last);
+    last = e;
+  }
+  p.parentNode.removeChild(p);
+}
+
+function sanitize(el) {
+    // "Remove all tags from element `el' that aren't in the ALLOWED_TAGS list."
+  const tags = Array.prototype.slice.apply(el.getElementsByTagName("*"), [0]);
+  for (let i = 0; i < tags.length; i++) {
+    while (tags[i].attributes.length > 0) {
+      tags[i].removeAttribute(tags[i].attributes[0].name);
+    }
+    if (ALLOWED_TAGS.indexOf(tags[i].nodeName) === -1) {
+      usurp(tags[i]);
+    }
+  }
+}
+
+export function sanitizeString(string) {
+  const div = document.createElement("div");
+  div.innerHTML = string;
+  sanitize(div);
+  return div.innerHTML;
+}
