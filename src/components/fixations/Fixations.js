@@ -1,5 +1,5 @@
 import React from "react";
-import {number, instanceOf} from "prop-types";
+import {number, instanceOf, func} from "prop-types";
 import {Map} from "immutable";
 import {stringDivider} from "../../utils/helpers";
 import FixationsToolbar from "./FixationsToolbar";
@@ -11,14 +11,21 @@ class Fixations extends React.Component {
 
   static propTypes = {
     fixation: instanceOf(Map).isRequired,
+    fixationIndex: number,
     speed: number, // ms
+    savePosition: func,
   }
 
   static defaultProps = {
     documentId: "sample_text",
     speed: 0, // ms
+    fixationIndex: 0,
     eventType: "",
+    savePosition: () => "",
   }
+
+  interval = null;
+  currentElIndex = 0;
 
   constructor(props) {
     super(props);
@@ -32,10 +39,13 @@ class Fixations extends React.Component {
     this.startSwitching = this.startSwitching.bind(this);
     this.stopSwitching = this.stopSwitching.bind(this);
     this.pauseSwitching = this.pauseSwitching.bind(this);
+    this.setCurrentElIndex = this.setCurrentElIndex.bind(this);
+    this.updateCurrentElIndex = this.updateCurrentElIndex.bind(this);
   }
 
   componentDidMount() {
     this.prepareText(this.props.fixation.get("text", ""));
+    this.setCurrentElIndex(this.props.fixationIndex);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -45,10 +55,34 @@ class Fixations extends React.Component {
       this.interval = null;
       if (this.state.running) this.startSwitching();
     }
+
+    if (nextProps.fixationIndex !== this.props.fixationIndex) {
+      this.setCurrentElIndex(nextProps.fixationIndex);
+    }
+  }
+
+  componentDidUpdate() {
+    this.setCurrentElIndex(this.props.fixationIndex);
   }
 
   componentWillUnmount() {
     clearInterval(this.interval);
+    this.props.savePosition(this.currentElIndex);
+  }
+
+  updateCurrentElIndex(e) {
+    const index = parseInt(e.target.closest(".wrapper-content").getAttribute("data-element-index"));
+    this.setCurrentElIndex(index);
+    this.props.savePosition(index);
+  }
+
+  setCurrentElIndex(index) {
+    this.currentElIndex = index;
+    const elements = this.getElements();
+    elements.forEach(element => element.classList.remove("highlight"));
+    if (elements[this.currentElIndex]) {
+      elements[this.currentElIndex].classList.add("highlight");
+    }
   }
 
   getText() {
@@ -57,9 +91,19 @@ class Fixations extends React.Component {
 
     for (let i = 0; i < textWrapped.length; i += 2) {
       const line = (<div className="line" key={`line_${i}`}>
-        <div dangerouslySetInnerHTML={this.createMarkup(textWrapped[i])} className="left" />
+        <div
+          className="left wrapper-content"
+          dangerouslySetInnerHTML={this.createMarkup(textWrapped[i])}
+          data-element-index={i}
+          onClick={this.updateCurrentElIndex}
+        />
         <div className="left-space">&nbsp;</div>
-        <div dangerouslySetInnerHTML={this.createMarkup(textWrapped[i + 1])} className="right" />
+        <div
+          className="right wrapper-content"
+          dangerouslySetInnerHTML={this.createMarkup(textWrapped[i + 1])}
+          data-element-index={i + 1}
+          onClick={this.updateCurrentElIndex}
+        />
         <div className="clearfix" />
       </div>);
       lines.push(line);
@@ -104,6 +148,7 @@ class Fixations extends React.Component {
     this.setState({running: false});
     clearInterval(this.interval);
     this.interval = null;
+    this.props.savePosition(this.currentElIndex);
   }
 
   stopSwitching() {
@@ -111,10 +156,8 @@ class Fixations extends React.Component {
     elements.forEach(element => element.classList.remove("highlight"));
     this.pauseSwitching();
     this.currentElIndex = 0;
+    this.props.savePosition(0);
   }
-
-  interval = null;
-  currentElIndex = 0;
 
   createMarkup(markup) {
     return {__html: markup};
