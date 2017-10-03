@@ -1,7 +1,7 @@
 import {connect} from "react-redux";
 import _ from "underscore";
 import {Map} from "immutable";
-import BottomHalfText from "../components/BottomHalfText";
+import TopHalfText from "../components/TopHalfText";
 import {getDoc, saveText, savePreferences, DEFAULT_DOC_ID} from "../actions/actions";
 import {getTextsFromDocument} from "../utils/helpers";
 
@@ -29,4 +29,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(BottomHalfText);
+export default connect(mapStateToProps, mapDispatchToProps)(TopHalfText);

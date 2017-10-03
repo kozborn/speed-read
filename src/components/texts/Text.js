@@ -18,6 +18,10 @@ export default class extends React.Component {
     this.props.setTextToEdit(this.props.text.get("id"));
   }
 
+  createMarkup(markup) {
+    return {__html: markup};
+  }
+
   render() {
     const {text} = this.props;
     return (
@@ -25,7 +29,7 @@ export default class extends React.Component {
         <h5>{text.get("title")}
           <button className="btn btn-sm btn-default pull-right" onClick={this.setTextToEdit}>Edytuj</button>
         </h5>
-        <div>{text.get("text")}</div>
+        <div dangerouslySetInnerHTML={this.createMarkup(text.get("text"))} />
       </div>
     );
   }

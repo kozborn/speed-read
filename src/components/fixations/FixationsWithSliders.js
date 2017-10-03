@@ -47,6 +47,7 @@ class FixationsWithSliders extends React.Component {
 
     this.changeSpeed = this.changeSpeed.bind(this);
     this.saveSettings = this.saveSettings.bind(this);
+    this.savePosition = this.savePosition.bind(this);
     this.saveText = this.saveText.bind(this);
   }
 
@@ -55,7 +56,7 @@ class FixationsWithSliders extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({speed: nextProps.preferences.get("fixationsSpeed")});
+    this.setState({speed: nextProps.preferences.get("fixationsSpeed", 0)});
   }
 
   saveText(data) {
@@ -70,11 +71,15 @@ class FixationsWithSliders extends React.Component {
     this.props.savePreferences(this.props.docId, "fixationsSpeed", e);
   }
 
+  savePosition(index) {
+    this.props.savePreferences(this.props.docId, "fixationIndex", index);
+  }
+
   render() {
     return (
       <div className="fixations-with-slider">
         <div className="sliders">
-          <h3>Prędkość przełączania</h3>
+          <div className="slider-title">Prędkość przełączania</div>
           <Slider
             min={0}
             max={12}
@@ -88,8 +93,10 @@ class FixationsWithSliders extends React.Component {
         </div>
         <Fixations
           fixation={this.props.fixation}
+          fixationIndex={this.props.preferences.get("fixationIndex", 0)}
           speed={this.state.speed}
           saveText={this.saveText}
+          savePosition={this.savePosition}
         />
       </div>
     );
