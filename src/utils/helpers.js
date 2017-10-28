@@ -107,7 +107,6 @@ export function sanitizeString(string) {
 export const sliceHTMLText = (text, desiredContentLength = 200) => {
   const el = document.createElement("div");
   el.innerHTML = text;
-
   return el.textContent.slice(0, desiredContentLength);
 };
 
