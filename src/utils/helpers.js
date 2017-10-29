@@ -28,6 +28,7 @@ function shuffle(array) {
 }
 
 export function stringDivider(str, width, prefix, postfix) {
+  console.log(str)
   if (str.length > width) {
     let p = width;
     for (;p > 0 && !/\s/.test(str[p]); p--) {}
