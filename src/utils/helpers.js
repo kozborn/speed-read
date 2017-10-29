@@ -28,6 +28,7 @@ function shuffle(array) {
 }
 
 export function stringDivider(str, width, prefix, postfix) {
+  console.log(str)
   if (str.length > width) {
     let p = width;
     for (;p > 0 && !/\s/.test(str[p]); p--) {}
@@ -71,11 +72,7 @@ export function getNextId(document) {
   return `text-${parseInt(id) + 1}`;
 }
 
-<<<<<<< HEAD
 const ALLOWED_TAGS = ["H3", "H2", "H1", "DIV", "P"];
-=======
-const ALLOWED_TAGS = ["H3", "H2", "DIV", "P"];
->>>>>>> Saving fixations index (#21)
 
 function usurp(p) {
   // "Replace parent 'p' with its children.";
@@ -121,11 +118,13 @@ export const flattenHTML = (html) => {
   const flattenEl = document.createElement("div");
   el.innerHTML = html;
   const elements = el.getElementsByTagName("*");
+
   if (elements.length === 0) {
     const wrapper = document.createElement("div");
     wrapper.appendChild(el);
     return flattenEl.appendChild(wrapper);
   }
+
   for (let i = 0; i < elements.length; i++) {
     if (elements[i].firstChild && elements[i].firstChild.nodeType === Node.TEXT_NODE) {
       const wrapper = document.createElement("div");
