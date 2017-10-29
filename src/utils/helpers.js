@@ -28,6 +28,7 @@ function shuffle(array) {
 }
 
 export function stringDivider(str, width, prefix, postfix) {
+  console.log(str)
   if (str.length > width) {
     let p = width;
     for (;p > 0 && !/\s/.test(str[p]); p--) {}
@@ -107,6 +108,7 @@ export function sanitizeString(string) {
 export const sliceHTMLText = (text, desiredContentLength = 200) => {
   const el = document.createElement("div");
   el.innerHTML = text;
+
   return el.textContent.slice(0, desiredContentLength);
 };
 
