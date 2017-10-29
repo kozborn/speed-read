@@ -1,7 +1,7 @@
 import React from "react";
 import {number, instanceOf, func} from "prop-types";
 import {Map} from "immutable";
-import {stringDivider} from "../../utils/helpers";
+import { stringDivider, flattenHTML } from "../../utils/helpers";
 import FixationsToolbar from "./FixationsToolbar";
 
 const PREFIX = "<div class='wrapper'>";

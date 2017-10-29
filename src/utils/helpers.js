@@ -28,13 +28,13 @@ function shuffle(array) {
 }
 
 export function stringDivider(str, width, prefix, postfix) {
+  console.log(str)
   if (str.length > width) {
     let p = width;
-    for (;p > 0 && !/\s/.test(str[p]); p--) {
-    }
+    for (;p > 0 && !/\s/.test(str[p]); p--) {}
     if (p > 0) {
       const left = str.substring(0, p);
-      const right = str.substring(p+1);
+      const right = str.substring(p + 1);
       return prefix + left + postfix + stringDivider(right, width, prefix, postfix);
     }
   }
@@ -72,7 +72,7 @@ export function getNextId(document) {
   return `text-${parseInt(id) + 1}`;
 }
 
-const ALLOWED_TAGS = ["H3", "H2", "DIV", "P"];
+const ALLOWED_TAGS = ["H3", "H2", "H1", "DIV", "P"];
 
 function usurp(p) {
   // "Replace parent 'p' with its children.";
@@ -108,5 +108,21 @@ export function sanitizeString(string) {
 export const sliceHTMLText = (text, desiredContentLength = 200) => {
   const el = document.createElement("div");
   el.innerHTML = text;
+
   return el.textContent.slice(0, desiredContentLength);
-}
+};
+
+export const flattenHTML = (html) => {
+  const el = document.createElement("div");
+  const flattenEl = document.createElement("div");
+  el.innerHTML = html;
+  const elements = el.getElementsByTagName("*");
+  for (let i = 0; i < elements.length; i++) {
+    if (elements[i].firstChild && elements[i].firstChild.nodeType === Node.TEXT_NODE) {
+      const wrapper = document.createElement("div");
+      wrapper.innerText = elements[i].textContent;
+      flattenEl.appendChild(wrapper);
+    }
+  }
+  return flattenEl;
+};
