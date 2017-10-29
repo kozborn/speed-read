@@ -123,8 +123,15 @@ class Fixations extends React.Component {
   }
 
   prepareText(text) {
-    const textWrapped = stringDivider(text, 50, PREFIX, POSTFIX).split("||");
-    this.setState({textWrapped});
+    const flattenText = flattenHTML(text);
+    let wrapped = [];
+    for (let i = 0; i < flattenText.childElementCount; i++) {
+      const t = flattenText.children[i].textContent;
+      const sliced = stringDivider(t, 50, PREFIX, POSTFIX).split("||");
+      wrapped = wrapped.concat(sliced);
+    }
+
+    this.setState({textWrapped: wrapped});
   }
 
   startSwitching() {
