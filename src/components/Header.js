@@ -43,7 +43,7 @@ class Header extends React.Component {
       {
         localStorage.getItem("docId") &&
           <div className={'menuItem'}>
-            <Button className="btn-sm btn-warning" onClick={this.props.clearLocalStorage}>
+            <Button type="warning" onClick={this.props.clearLocalStorage}>
               Wyczyść dane
             </Button>
           </div>
@@ -65,9 +65,9 @@ class Header extends React.Component {
           {
             localStorage.getItem("docId") ?
               <li>
-                <button className="btn btn-sm btn-warning" onClick={this.props.clearLocalStorage}>
-                  Wyczyść dane
-                </button>
+                <Button type="warning" onClick={this.props.clearLocalStorage}>
+                  Wyczyść danes
+                </Button>
               </li>
               : null
           }

@@ -408,6 +408,54 @@ nav {
       color: #eaeaea; }
       nav li a:hover {
         color: #b7b7b7; }
+  @media (max-width: 767px) {
+    nav {
+      display: none; } }
+
+.hamburger {
+  display: none;
+  float: right; }
+  @media (max-width: 767px) {
+    .hamburger {
+      display: inline-block;
+      margin-top: 5px;
+      margin-right: 10px; } }
+  .hamburger.hamburger-menu-btn {
+    cursor: pointer;
+    border: 1px solid #dddddd;
+    border-radius: 4px;
+    background-color: transparent;
+    padding: 9px 10px;
+    outline: none; }
+    .hamburger.hamburger-menu-btn:hover {
+      background-color: #dddddd; }
+
+.hamburgerMenu {
+  top: 70px;
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  border-top: 1px solid HAMBURGER_BORDER;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left; }
+  @media (min-width: 1024px) {
+    .hamburgerMenu {
+      display: none; } }
+
+.hamburgerIconBar {
+  display: block;
+  background-color: #888888;
+  width: 22px;
+  height: 2px;
+  margin-top: 4px;
+  border-radius: 1px; }
+
+.hamburgerIconBar:first-child {
+  margin-top: 0; }
 
 .logo {
   animation: App-logo-spin infinite 20s linear;

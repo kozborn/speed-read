@@ -1,11 +1,11 @@
 import React from 'react';
 import cn from 'classnames';
-import { string, func, oneOf } from 'prop-types';
+import { string, func, oneOf, node } from 'prop-types';
 
 const Button = props =>
-  <button onClick={props.onClick} className={cn("btn", props.className, props.type, props.icon)}>
-    {props.label !== "" && props.label}
-  </button>;
+  (<button onClick={props.onClick} className={cn("btn", props.className, props.type, props.icon)}>
+    {props.children}
+  </button>);
 
 const types = ['apply', 'clear', 'submit', 'delete'];
 
@@ -13,12 +13,11 @@ Button.propTypes = {
   type: oneOf(types),
   icon: oneOf(['', 'left', 'right']),
   onClick: func.isRequired,
-  label: string,
+  children: node.isRequired,
   className: string,
 };
 
 Button.defaultProps = {
-  label: "",
   className: "",
   icon: '',
   type: 'apply',

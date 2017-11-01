@@ -1,3 +1,5 @@
+@import './breakpoints';
+
 $navigationLinkColor: #eaeaea;
 
 .header {
@@ -23,6 +25,60 @@ nav {
       }
     }
   }
+  @include phone {
+    display: none
+  }
+}
+
+.hamburger {
+  display: none;
+  @include phone {
+    display: inline-block;
+    margin-top: 5px;
+    margin-right: 10px;
+  }
+  float: right;
+  &.hamburger-menu-btn {
+    cursor: pointer;
+    border: 1px solid #dddddd;
+    border-radius: 4px;
+    background-color: transparent;
+    padding: 9px 10px;
+    outline: none;
+    &:hover {
+      background-color: #dddddd;
+    }
+  }
+}
+
+.hamburgerMenu {
+  top: 70px;
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  border-top: 1px solid HAMBURGER_BORDER;
+  @include desktop {
+    display: none;
+  }
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.hamburgerIconBar {
+  display: block;
+  background-color: #888888;
+  width: 22px;
+  height: 2px;
+  margin-top: 4px;
+  border-radius: 1px;
+}
+
+.hamburgerIconBar:first-child {
+  margin-top: 0
 }
 
 .logo {
