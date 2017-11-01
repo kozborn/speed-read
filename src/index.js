@@ -8,8 +8,6 @@ import thunkMiddleware from "redux-thunk";
 import queryString from "query-string";
 
 import reducer from "./reducer";
-import "../node_modules/mdbootstrap/css/bootstrap.css";
-import "../node_modules/mdbootstrap/css/mdb.css";
 import "./styles/index.css";
 import App from "./components/App";
 import HomePage from "./connectors/HomePage";
