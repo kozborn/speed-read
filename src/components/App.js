@@ -53,13 +53,9 @@ class App extends Component {
           clearLocalStorage={this.props.clearLocalStorage}
         />
         <div className="App-body">
-<<<<<<< HEAD
           <div className="page-content">
             {this.props.children}
           </div>
-=======
-          {this.props.children}
->>>>>>> Use flex instead of bootstrap (#24)
           {this.getSidebar(docId)}
         </div>
         <Footer />
