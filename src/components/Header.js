@@ -63,13 +63,16 @@ class Header extends React.Component {
           <li><Link to={`/fixations${this.props.queryParams}`}>Fiksacja</Link></li>
           <li><Link to={`/user-texts${this.props.queryParams}`}>Twoje teksty</Link></li>
           {
-            localStorage.getItem("docId") ?
+            localStorage.getItem("docId") &&
               <li>
-                <Button type="warning" onClick={this.props.clearLocalStorage}>
-                  Wyczyść danes
+                <Button
+                  type="cancel"
+                  icon="left"
+                  onClick={this.props.clearLocalStorage}
+                >
+                  Wyczyść dane
                 </Button>
               </li>
-              : null
           }
         </nav>
         <Hamburger

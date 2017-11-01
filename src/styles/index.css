@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /*! normalize.css v7.0.0 | MIT License | github.com/necolas/normalize.css */
 /* Document
    ========================================================================== */
@@ -400,6 +401,46 @@ template {
   .btn:active {
     left: 1px;
     top: 1px; }
+  .btn.icon-left.apply:before {
+    margin-right: 5px;
+    display: inline-block;
+    content: "✔";
+    font-weight: 700; }
+  .btn.icon-left.forward:before {
+    margin-right: 5px;
+    display: inline-block;
+    content: ">";
+    font-weight: 700; }
+  .btn.icon-left.cancel:before {
+    margin-right: 5px;
+    display: inline-block;
+    content: "×";
+    font-weight: 700; }
+  .btn.icon-left.back:before {
+    margin-right: 5px;
+    display: inline-block;
+    content: "<";
+    font-weight: 700; }
+  .btn.icon-right.apply:after {
+    margin-left: 5px;
+    display: inline-block;
+    content: "✔";
+    font-weight: 700; }
+  .btn.icon-right.cancel:after {
+    margin-left: 5px;
+    display: inline-block;
+    content: "×";
+    font-weight: 700; }
+  .btn.icon-right.forward:after {
+    margin-left: 5px;
+    display: inline-block;
+    content: ">";
+    font-weight: 700; }
+  .btn.icon-right.back:after {
+    margin-left: 5px;
+    display: inline-block;
+    content: "<";
+    font-weight: 700; }
 
 .header {
   background-color: #222;
@@ -416,9 +457,9 @@ nav {
   display: flex; }
   nav li {
     margin-right: 10px; }
-    nav li a {
+    nav li button, nav li a {
       color: #eaeaea; }
-      nav li a:hover {
+      nav li button:hover, nav li a:hover {
         color: #b7b7b7; }
   @media (max-width: 767px) {
     nav {
@@ -454,6 +495,9 @@ nav {
   align-items: flex-start;
   text-align: left; }
   @media (min-width: 1024px) {
+    .hamburger-menu {
+      display: none; } }
+  @media (min-width: 768px) and (max-width: 1023px) {
     .hamburger-menu {
       display: none; } }
   .hamburger-menu .menuItem {

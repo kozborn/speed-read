@@ -3,11 +3,11 @@ import cn from 'classnames';
 import { string, func, oneOf, node } from 'prop-types';
 
 const Button = props =>
-  (<button onClick={props.onClick} className={cn("btn", props.className, props.type, props.icon)}>
+  (<button onClick={props.onClick} className={cn("btn", props.className, props.type, props.icon !== '' ? `icon-${props.icon}` : '')}>
     {props.children}
   </button>);
 
-const types = ['apply', 'clear', 'submit', 'delete'];
+const types = ['apply', 'cancel', 'forward', 'back', 'submit', 'delete'];
 
 Button.propTypes = {
   type: oneOf(types),
@@ -20,7 +20,7 @@ Button.propTypes = {
 Button.defaultProps = {
   className: "",
   icon: '',
-  type: 'apply',
+  type: '',
 };
 
 export default Button;

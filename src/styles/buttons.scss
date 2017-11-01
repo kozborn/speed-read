@@ -1,3 +1,21 @@
+@mixin iconLeftButton($icon) {
+  &:before {
+    margin-right: 5px;
+    display: inline-block;
+    content: $icon;
+    font-weight: 700;
+  }
+}
+
+@mixin iconRightButton($icon) {
+  &:after {
+    margin-left: 5px;
+    display: inline-block;
+    content: $icon;
+    font-weight: 700;
+  }
+}
+
 .btn {
   position: relative;
   background: none;
@@ -14,4 +32,33 @@
     top: 1px;
   }
 
+  &.icon-left {
+    &.apply {
+      @include iconLeftButton("\2714")
+    }
+    &.forward {
+      @include iconLeftButton("\3e")
+    }
+    &.cancel {
+      @include iconLeftButton("\D7")
+    }
+    &.back {
+      @include iconLeftButton("\3c")
+    }
+  }
+
+  &.icon-right {
+    &.apply {
+      @include iconRightButton("\2714")
+    }
+    &.cancel {
+      @include iconRightButton("\D7")
+    }
+    &.forward {
+      @include iconRightButton("\3e")
+    }
+    &.back {
+      @include iconRightButton("\3c")
+    }
+  }
 }

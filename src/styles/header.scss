@@ -18,7 +18,7 @@ nav {
   display: flex;
   li {
     margin-right: 10px;
-    a {
+    button, a {
       color: $navigationLinkColor;
       &:hover {
         color: darken($navigationLinkColor, 20%);
@@ -65,6 +65,11 @@ nav {
   @include desktop {
     display: none;
   }
+
+  @include tablet {
+    display: none;
+  }
+
   .menuItem {
     width: 100%;
     text-align: center;
