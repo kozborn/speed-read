@@ -53,7 +53,9 @@ class App extends Component {
           clearLocalStorage={this.props.clearLocalStorage}
         />
         <div className="App-body">
-          {this.props.children}
+          <div className="page-content">
+            {this.props.children}
+          </div>
           {this.getSidebar(docId)}
         </div>
         <Footer />

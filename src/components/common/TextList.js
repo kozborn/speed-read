@@ -1,11 +1,11 @@
 import React from "react";
 import {instanceOf, func, string} from "prop-types";
-import {List} from "immutable";
+import {Map} from "immutable";
 import Text from "./Text";
 
 export default class extends React.Component {
   static propTypes = {
-    texts: instanceOf(List).isRequired,
+    texts: instanceOf(Map).isRequired,
     switchText: func.isRequired,
     textKey: string.isRequired,
   }
@@ -23,15 +23,15 @@ export default class extends React.Component {
     const {texts} = this.props;
     return (
       <div className="text-list">
-        {texts.map(text => (
+        {texts.map((text, key) => (
           <Text
-            key={text.get("id")}
-            id={text.get("id")}
+            key={key}
+            id={key}
             title={text.get("title")}
             text={text.get("text")}
             onCheck={this.switchText}
           />),
-        )}
+        ).toList()}
       </div>
     );
   }
