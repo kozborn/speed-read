@@ -389,6 +389,18 @@ template {
 [hidden] {
   display: none; }
 
+.btn {
+  position: relative;
+  background: none;
+  outline: none;
+  border: none;
+  cursor: pointer; }
+  .btn.link {
+    border: none; }
+  .btn:active {
+    left: 1px;
+    top: 1px; }
+
 .header {
   background-color: #222;
   text-align: center;
@@ -430,30 +442,29 @@ nav {
     .hamburger.hamburger-menu-btn:hover {
       background-color: #dddddd; }
 
-.hamburgerMenu {
+.hamburger-menu {
   top: 70px;
   position: absolute;
   z-index: 2;
   left: 0;
   width: 100%;
   background: #fff;
-  border-top: 1px solid HAMBURGER_BORDER;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   text-align: left; }
   @media (min-width: 1024px) {
-    .hamburgerMenu {
+    .hamburger-menu {
       display: none; } }
-  .hamburgerMenu .menuItem {
+  .hamburger-menu .menuItem {
     width: 100%;
     text-align: center;
     padding-top: 5px;
     padding-bottom: 5px; }
-    .hamburgerMenu .menuItem a {
+    .hamburger-menu .menuItem a {
       color: #383838;
       font-size: 16px; }
-      .hamburgerMenu .menuItem a:hover {
+      .hamburger-menu .menuItem a:hover {
         color: #6b6b6b; }
 
 .hamburgerIconBar {

@@ -21,7 +21,7 @@ class Header extends React.Component {
   }
 
   renderHamburgerMenu() {
-    return (<div className={'hamburgerMenu'}>
+    return (<div className={'hamburger-menu'}>
       <div className={'menuItem'}>
         <Link to="/">Home page</Link>
       </div>

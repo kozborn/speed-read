@@ -51,21 +51,20 @@ nav {
   }
 }
 
-.hamburgerMenu {
+.hamburger-menu {
   top: 70px;
   position: absolute;
   z-index: 2;
   left: 0;
   width: 100%;
   background: #fff;
-  border-top: 1px solid HAMBURGER_BORDER;
-  @include desktop {
-    display: none;
-  }
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   text-align: left;
+  @include desktop {
+    display: none;
+  }
   .menuItem {
     width: 100%;
     text-align: center;
