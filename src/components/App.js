@@ -26,7 +26,7 @@ class App extends Component {
   getSidebar(docId) {
     if (this.hasSidebar()) {
       const key = camelize(this.props.location.pathname.replace("/", ""));
-      return (<div className="sidebar col-lg-4">
+      return (<div className="sidebar">
         <TextListToChoose docId={docId} textKey={key} />
       </div>);
     }
