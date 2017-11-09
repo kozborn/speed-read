@@ -737,6 +737,7 @@ a, a:hover, a:visited, a:active {
   @media (min-width: 768px) and (max-width: 1023px) {
     .sidebar {
       width: 175px; } }
+<<<<<<< HEAD
   .sidebar .text {
     cursor: pointer;
     margin-bottom: 20px;
@@ -768,6 +769,8 @@ a, a:hover, a:visited, a:active {
   @media (min-width: 768px) and (max-width: 1023px) {
     .sidebar {
       width: 150px; } }
+=======
+>>>>>>> Styles for sliders (#25)
   .sidebar .text {
     cursor: pointer;
     margin-bottom: 20px;
