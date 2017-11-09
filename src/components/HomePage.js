@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import {func, string} from "prop-types";
+import Button from './common/Button';
 
 class HomePage extends Component {
 

@@ -1,5 +1,6 @@
 import React from "react";
 import {string, func} from "prop-types";
+import { sliceHTMLText } from "../../utils/helpers";
 
 export default class extends React.Component {
 
@@ -12,7 +13,6 @@ export default class extends React.Component {
 
   constructor(props) {
     super(props);
-
     this.onClick = this.onClick.bind(this);
   }
 
@@ -22,12 +22,13 @@ export default class extends React.Component {
 
   render() {
     const {title, text} = this.props;
-
     return (
       <div className="text">
         <div onClick={this.onClick}>
           <h5>{title}</h5>
-          <div className="snippet">{text.slice(0, 200)}</div>
+          <div className="snippet">
+            {sliceHTMLText(text)}
+          </div>
         </div>
       </div>
     );

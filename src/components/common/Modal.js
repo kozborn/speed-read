@@ -1,6 +1,6 @@
 import React from "react";
 import _ from "underscore";
-import Modal from "react-modal";
+// import Modal from "react-modal";
 import {bool, object, string, func} from "prop-types";
 
 const styles = {
@@ -49,7 +49,7 @@ export default class extends React.Component {
   render() {
     const {isOpen, contentLabel, closeBtn, closeModal} = this.props;
     return (
-      <Modal
+      <div
         isOpen={isOpen}
         aria={{
           labelledby: "heading",
@@ -62,7 +62,7 @@ export default class extends React.Component {
         <div className="modal__content">
           {this.props.children}
         </div>
-      </Modal>
+      </div>
     );
   }
 }

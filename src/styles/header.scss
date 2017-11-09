@@ -1,0 +1,110 @@
+@import './breakpoints';
+
+$navigationLinkColor: #eaeaea;
+
+.header {
+  background-color: #222;
+  text-align: center;
+  padding: 10px;
+  color: white;
+  border-bottom: 1px solid #eaeaea;
+  display: flex;
+  justify-content: space-between
+}
+
+nav {
+  height: auto;
+  align-items: center;
+  display: flex;
+  li {
+    margin-right: 10px;
+    button, a {
+      color: $navigationLinkColor;
+      &:hover {
+        color: darken($navigationLinkColor, 20%);
+      }
+    }
+  }
+  @include phone {
+    display: none
+  }
+}
+
+.hamburger {
+  display: none;
+  @include phone {
+    display: inline-block;
+    margin-top: 5px;
+    margin-right: 10px;
+  }
+  float: right;
+  &.hamburger-menu-btn {
+    cursor: pointer;
+    border: 1px solid #dddddd;
+    border-radius: 4px;
+    background-color: transparent;
+    padding: 9px 10px;
+    outline: none;
+    &:hover {
+      background-color: #dddddd;
+    }
+  }
+}
+
+.hamburger-menu {
+  top: 70px;
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  @include desktop {
+    display: none;
+  }
+
+  @include tablet {
+    display: none;
+  }
+
+  .menuItem {
+    width: 100%;
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    a {
+      color: darken($navigationLinkColor, 70%);
+      font-size: 16px;
+      &:hover {
+        color: darken($navigationLinkColor, 50%);
+      }
+    }
+  }
+}
+
+.hamburgerIconBar {
+  display: block;
+  background-color: #888888;
+  width: 22px;
+  height: 2px;
+  margin-top: 4px;
+  border-radius: 1px;
+}
+
+.hamburgerIconBar:first-child {
+  margin-top: 0
+}
+
+.logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 40px;
+  float: left;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
