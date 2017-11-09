@@ -10,7 +10,7 @@
   "plugins": ["react"],
   "extends": ["react-app", "airbnb"],
   "rules": {
-    "quotes": [2, "double", {"allowTemplateLiterals": true}], // specify whether backticks, double or single quotes should be used (fixable)
+    "quotes": [0, "double", {"allowTemplateLiterals": true}], // specify whether backticks, double or single quotes should be used (fixable)
     "import/prefer-default-export": [1],
     "object-curly-spacing": "off",
     "import/no-unresolved": "off",
@@ -22,6 +22,7 @@
     "react/no-array-index-key": "off",
     "react/forbid-prop-types": "off",
     "quote-props": "off",
+    "no-plusplus": "off",
     "jsx-a11y/no-static-element-interactions": "off",
     "radix": "off" // this is very stupid rule IMHO
   }

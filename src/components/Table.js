@@ -41,6 +41,7 @@ class Table extends React.Component {
   }
 
   componentDidMount() {
+
     this.resetComponent(this.props.rows, this.props.cols);
   }
 

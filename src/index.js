@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { Router, Route } from "react-router-dom";
 import { createStore, applyMiddleware } from "redux";
 import createBrowserHistory from "history/createBrowserHistory";
 import { Provider } from "react-redux";
@@ -8,8 +8,6 @@ import thunkMiddleware from "redux-thunk";
 import queryString from "query-string";
 
 import reducer from "./reducer";
-import "../node_modules/mdbootstrap/css/bootstrap.css";
-import "../node_modules/mdbootstrap/css/mdb.css";
 import "./styles/index.css";
 import App from "./components/App";
 import HomePage from "./connectors/HomePage";
