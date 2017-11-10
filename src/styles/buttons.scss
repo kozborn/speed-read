@@ -61,4 +61,9 @@
       @include iconRightButton("\3c")
     }
   }
+
+  &.settings {
+    font-size: 20px;
+    font-weight: 700;
+  }
 }

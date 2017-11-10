@@ -51,6 +51,11 @@ class Header extends React.Component {
     </div>);
   }
 
+  // TODO create settings popup with manually creating first doc and later saving document
+  // there should be also checkbox for autosaving
+  // there should be also possibility to totally remove user data
+  // Make menu more DRY
+
   render() {
     return (
       <header className="header">
@@ -62,6 +67,14 @@ class Header extends React.Component {
           <li><Link to={`/schultz-table${this.props.queryParams}`}>Tabela Schultz'a</Link></li>
           <li><Link to={`/fixations${this.props.queryParams}`}>Fiksacja</Link></li>
           <li><Link to={`/user-texts${this.props.queryParams}`}>Twoje teksty</Link></li>
+          <li>
+            <Button
+              className="settings"
+              onClick={this.toggleSettings}
+            >
+              &#9881;
+            </Button>
+          </li>
           {
             localStorage.getItem("docId") &&
               <li>

@@ -441,6 +441,9 @@ template {
     display: inline-block;
     content: "<";
     font-weight: 700; }
+  .btn.settings {
+    font-size: 20px;
+    font-weight: 700; }
 
 .header {
   background-color: #222;
