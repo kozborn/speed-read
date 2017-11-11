@@ -38,8 +38,10 @@ function logger({ getState }) {
 
 const store = createStore(reducer, applyMiddleware(thunkMiddleware, logger));
 store.dispatch(getDoc());
+
 const parsed = queryString.parse(window.location.search);
 const documentId = parsed.documentId;
+
 if (documentId) {
   store.dispatch(setDocumentId(documentId));
 } else if (localStorage.getItem("docId")) {

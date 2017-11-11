@@ -6,6 +6,12 @@ import Header from './Header';
 import Footer from "../connectors/Footer";
 import TextListToChoose from "../connectors/TextListToChoose";
 
+const pageWithSidebar = (location) => {
+  const key = camelize(location.replace("/", ""));
+  return (["fixations", "bottomHalfText", "topHalfText"].indexOf(key) !== -1);
+};
+
+
 class App extends Component {
 
   static propTypes = {
@@ -20,22 +26,16 @@ class App extends Component {
       sidebar: false,
     };
     this.getSidebar = this.getSidebar.bind(this);
-    this.hasSidebar = this.hasSidebar.bind(this);
   }
 
   getSidebar(docId) {
-    if (this.hasSidebar()) {
+    if (pageWithSidebar(this.props.location.pathname)) {
       const key = camelize(this.props.location.pathname.replace("/", ""));
       return (<div className="sidebar">
         <TextListToChoose docId={docId} textKey={key} />
       </div>);
     }
     return null;
-  }
-
-  hasSidebar() {
-    const key = camelize(this.props.location.pathname.replace("/", ""));
-    return (["fixations", "bottomHalfText", "topHalfText"].indexOf(key) !== -1);
   }
 
   render() {

@@ -2,7 +2,7 @@ import _ from "underscore";
 import {Map, fromJS} from "immutable";
 
 export const DEFAULT_DOC_ID = "default_doc";
-export const DbUrl = "http://127.0.0.1:5984/speed-read";
+export const DbUrl = "http://piotrkozubek.pl:5984/speed-read";
 export const ServerUrl = "http://localhost:3000";
 
 export function getDoc(docId) {
