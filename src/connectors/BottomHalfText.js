@@ -5,19 +5,24 @@ import BottomHalfText from "../components/BottomHalfText";
 import {DEFAULT_DOC_ID, getDoc, saveText, savePreferences} from "../actions/actions";
 import {getTextsFromDocument} from "../utils/helpers";
 
-
 function mapStateToProps(state) {
+
   const docId = state.getIn(["app", "docId"], null);
   let text = state.getIn(["app", "defaultDoc", "bottomHalfText"], new Map());
-  const userTexts = getTextsFromDocument(state.getIn(["app", "userDoc"], new Map()));
-  const textKey = state.getIn(["app", "userDoc", "preferences", "bottomHalfText"], "");
+
+  const userDoc = state.getIn(["app", "userDoc"], new Map())
+
+  const userTexts = getTextsFromDocument(userDoc);
+  const textKey = userDoc.getIn(["preferences", "bottomHalfText"], "");
+
   if (!userTexts.isEmpty() && textKey !== "") {
-    text = state.getIn(["app", "userDoc", textKey], "");
+    text = userDoc.get(textKey, "");
   }
 
   const preferences = _.isEmpty(docId)
     ? state.getIn(["app", "defaultDoc", "preferences"], new Map())
-    : state.getIn(["app", "userDoc", "preferences"], new Map());
+    : userDoc.get("preferences", new Map());
+
   return {docId: docId || DEFAULT_DOC_ID, text, preferences};
 }
 
