@@ -23,7 +23,6 @@ const HomePage = (props) => {
 }
 
 HomePage.propTypes = {
-  getDoc: func.isRequired,
   memorizing: instanceOf(Immutable.Map).isRequired,
   reading: instanceOf(Immutable.Map).isRequired,
   understanding: instanceOf(Immutable.Map).isRequired,

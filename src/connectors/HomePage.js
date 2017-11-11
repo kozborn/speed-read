@@ -4,12 +4,13 @@ import HomePage from "../components/HomePage";
 import {getDoc} from "../actions/actions";
 
 function mapStateToProps(state) {
+  const defaultDoc = state.getIn(["app", "defaultDoc"], Immutable.Map())
   return {
-    reading: state.getIn(["app", "defaultDoc", "reading"], Immutable.Map()),
-    understanding: state.getIn(["app", "defaultDoc", "understanding"], Immutable.Map()),
-    anticipating: state.getIn(["app", "defaultDoc", "anticipating"], Immutable.Map()),
-    thinking: state.getIn(["app", "defaultDoc", "thinking"], Immutable.Map()),
-    memorizing: state.getIn(["app", "defaultDoc", "memorizing"], Immutable.Map()),
+    reading: defaultDoc.get("reading", Immutable.Map()),
+    understanding: defaultDoc.get("understanding", Immutable.Map()),
+    anticipating: defaultDoc.get("anticipating", Immutable.Map()),
+    thinking: defaultDoc.get("thinking", Immutable.Map()),
+    memorizing: defaultDoc.get("memorizing", Immutable.Map()),
   };
 }
 
