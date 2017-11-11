@@ -1,56 +1,34 @@
-import React, { Component } from "react";
-import {func, string} from "prop-types";
-import Button from './common/Button';
+import React from "react";
+import Immutable from "immutable";
+import {func, instanceOf} from "prop-types";
+import Button from "./common/Button";
 
-class HomePage extends Component {
+const HomeArticle = ({article}) => 
+  <article>
+    <h2>{article.get("title")}</h2>
+    <div>{article.get("text")}</div>
+  </article>
 
-  static propTypes = {
-    getDoc: func.isRequired,
-    memorizing: string.isRequired,
-    reading: string.isRequired,
-    understanding: string.isRequired,
-    anticipating: string.isRequired,
-    thinking: string.isRequired,
-  }
+const HomePage = (props) => {
+  const { reading, memorizing, thinking, understanding, anticipating } = props;
+  return (
+    <div>
+      <HomeArticle article={reading} />
+      <HomeArticle article={memorizing} />
+      <HomeArticle article={thinking} />
+      <HomeArticle article={understanding} />
+      <HomeArticle article={anticipating} />
+    </div>
+  );
+}
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      sampleTexts: {},
-    };
-  }
-
-  componentDidMount() {
-    this.props.getDoc();
-  }
-
-  render() {
-    const { reading, memorizing, thinking, understanding, anticipating } = this.props;
-    return (
-      <div>
-        <article>
-          <h2>Czytanie</h2>
-          <div>{reading}</div>
-        </article>
-        <article>
-          <h2>Rozumienie</h2>
-          <div>{understanding}</div>
-        </article>
-        <article>
-          <h2>Antycypacja</h2>
-          <div>{anticipating}</div>
-        </article>
-        <article>
-          <h2>Aktywizacja myślenia</h2>
-          <div>{thinking}</div>
-        </article>
-        <article>
-          <h2>Zapamiętywanie</h2>
-          <div>{memorizing}</div>
-        </article>
-      </div>
-    );
-  }
+HomePage.propTypes = {
+  getDoc: func.isRequired,
+  memorizing: instanceOf(Immutable.Map).isRequired,
+  reading: instanceOf(Immutable.Map).isRequired,
+  understanding: instanceOf(Immutable.Map).isRequired,
+  anticipating: instanceOf(Immutable.Map).isRequired,
+  thinking: instanceOf(Immutable.Map).isRequired,
 }
 
 export default HomePage;
