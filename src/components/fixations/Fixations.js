@@ -10,7 +10,7 @@ const POSTFIX = " </div>||"; // "||" are used for splitting text
 class Fixations extends React.Component {
 
   static propTypes = {
-    fixation: instanceOf(Map).isRequired,
+    text: instanceOf(Map).isRequired,
     fixationIndex: number,
     speed: number, // ms
     savePosition: func,
@@ -44,12 +44,12 @@ class Fixations extends React.Component {
   }
 
   componentDidMount() {
-    this.prepareText(this.props.fixation.get("text", ""));
+    this.prepareText(this.props.text.get("text", ""));
     this.setCurrentElIndex(this.props.fixationIndex);
   }
 
   componentWillReceiveProps(nextProps) {
-    this.prepareText(nextProps.fixation.get("text", ""));
+    this.prepareText(nextProps.text.get("text", ""));
     if (nextProps.speed !== this.props.speed) {
       clearInterval(this.interval);
       this.interval = null;
@@ -125,6 +125,7 @@ class Fixations extends React.Component {
   prepareText(text) {
     const flattenText = flattenHTML(text);
     let wrapped = [];
+    // TODO this needs to be more bulletproof
     for (let i = 0; i < flattenText.childElementCount; i++) {
       const t = flattenText.children[i].textContent;
       const sliced = stringDivider(t, 50, PREFIX, POSTFIX).split("||");
@@ -185,7 +186,7 @@ class Fixations extends React.Component {
             disabled: !this.state.running,
           }}
         />
-        <div className="text-title">{this.props.fixation.get("title")}</div>
+        <div className="text-title">{this.props.text.get("title")}</div>
         {this.getText()}
       </div>
     );
