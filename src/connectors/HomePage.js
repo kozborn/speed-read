@@ -5,6 +5,7 @@ import {getDoc} from "../actions/actions";
 
 function mapStateToProps(state) {
   const defaultDoc = state.getIn(["app", "defaultDoc"], Immutable.Map())
+  console.log(defaultDoc);
   return {
     reading: defaultDoc.get("reading", Immutable.Map()),
     understanding: defaultDoc.get("understanding", Immutable.Map()),
