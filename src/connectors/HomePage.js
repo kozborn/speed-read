@@ -1,14 +1,17 @@
 import {connect} from "react-redux";
+import Immutable from "immutable";
 import HomePage from "../components/HomePage";
 import {getDoc} from "../actions/actions";
 
 function mapStateToProps(state) {
+  const defaultDoc = state.getIn(["app", "defaultDoc"], Immutable.Map())
+  console.log(defaultDoc);
   return {
-    reading: state.getIn(["app", "defaultDoc", "reading"], ""),
-    understanding: state.getIn(["app", "defaultDoc", "understanding"], ""),
-    anticipating: state.getIn(["app", "defaultDoc", "anticipating"], ""),
-    thinking: state.getIn(["app", "defaultDoc", "thinking"], ""),
-    memorizing: state.getIn(["app", "defaultDoc", "memorizing"], ""),
+    reading: defaultDoc.get("reading", Immutable.Map()),
+    understanding: defaultDoc.get("understanding", Immutable.Map()),
+    anticipating: defaultDoc.get("anticipating", Immutable.Map()),
+    thinking: defaultDoc.get("thinking", Immutable.Map()),
+    memorizing: defaultDoc.get("memorizing", Immutable.Map()),
   };
 }
 
