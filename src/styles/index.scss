@@ -94,16 +94,16 @@ a, a:hover, a:visited, a:active {
   flex-grow: 1;
   padding: 10px;
   @include desktop {
-    max-width: $pageContentWidth;
+    max-width: 800px;
   }
 }
 
 .sidebar {
   margin-top: 50px;
   text-align: left;
-  width: $sidebarWidth;
+  width: 200px;
   @include tablet {
-    width: 175px;
+    width: 150px;
   }
   .text {
     cursor: pointer;
