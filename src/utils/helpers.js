@@ -117,13 +117,11 @@ export const flattenHTML = (html) => {
   const flattenEl = document.createElement("div");
   el.innerHTML = html;
   const elements = el.getElementsByTagName("*");
-
   if (elements.length === 0) {
     const wrapper = document.createElement("div");
     wrapper.appendChild(el);
     return flattenEl.appendChild(wrapper);
   }
-
   for (let i = 0; i < elements.length; i++) {
     if (elements[i].firstChild && elements[i].firstChild.nodeType === Node.TEXT_NODE) {
       const wrapper = document.createElement("div");
