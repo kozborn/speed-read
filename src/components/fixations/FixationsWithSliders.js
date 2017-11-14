@@ -29,9 +29,8 @@ class FixationsWithSliders extends React.Component {
     preferences: instanceOf(Map).isRequired,
     saveText: func.isRequired,
     savePreferences: func.isRequired,
-    fixation: oneOfType([
+    text: oneOfType([
       instanceOf(Map),
-      string,
     ]).isRequired,
   }
 
@@ -92,7 +91,7 @@ class FixationsWithSliders extends React.Component {
           />
         </div>
         <Fixations
-          fixation={this.props.fixation}
+          text={this.props.text}
           fixationIndex={this.props.preferences.get("fixationIndex", 0)}
           speed={this.state.speed}
           saveText={this.saveText}

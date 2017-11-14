@@ -7,6 +7,6 @@ let app;
 describe("App", () => {
   it("should render App without crashing", () => {
     app = shallow(<App />);
-    expect(1).toBe(1);
+    expect(app.exists()).toBe(true);
   });
 });

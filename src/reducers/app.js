@@ -11,7 +11,7 @@ const PREFERENCES = {
 function app(state = new Map({
   isFetching: false,
   docId: null,
-  defaultDoc: null,
+  defaultDoc: new Map(),
   defaultPreferences: fromJS(PREFERENCES),
   userDoc: new Map(),
   userId: null,
