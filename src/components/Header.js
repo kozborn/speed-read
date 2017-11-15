@@ -72,7 +72,6 @@ class Header extends React.Component {
 }
 
 Header.propTypes = {
-  clearLocalStorage: func.isRequired,
   queryParams: string.isRequired,
 };
 

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import camelize from "underscore.string/camelize";
 import { withRouter } from "react-router";
-import { string, func, object } from "prop-types";
+import { string, object, node } from "prop-types";
 import Header from './Header';
 import Footer from "../connectors/Footer";
 import TextListToChoose from "../connectors/TextListToChoose";
@@ -11,13 +11,12 @@ const pageWithSidebar = (location) => {
   return (["fixations", "bottomHalfText", "topHalfText"].indexOf(key) !== -1);
 };
 
-
 class App extends Component {
 
   static propTypes = {
-    docId: string,
-    clearLocalStorage: func.isRequired,
+    docId: string.isRequired,
     location: object.isRequired,
+    children: node.isRequired,
   }
 
   constructor(props) {
@@ -50,7 +49,6 @@ class App extends Component {
       <div className="App">
         <Header
           queryParams={queryParams}
-          clearLocalStorage={this.props.clearLocalStorage}
         />
         <div className="App-body">
           <div className="page-content">

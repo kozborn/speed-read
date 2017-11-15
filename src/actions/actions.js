@@ -35,17 +35,6 @@ export const getDefaultDoc = () => {
   };
 };
 
-export function setUserDocumentId(docId) {
-  const userDocId = docId;
-  localStorage.setItem("docId", userDocId);
-  return {type: "SET_USER_DOCID", userDocId};
-}
-
-export function clearLocalStorage() {
-  localStorage.removeItem("docId");
-  return {type: "SET_USER_DOCID", userDocId: null};
-}
-
 export function save(docId, data) {
 //   const method = _.isEmpty(docId) || docId === DEFAULT_DOC_ID ? "POST" : "PUT";
 //   const url = _.isEmpty(docId) || docId === DEFAULT_DOC_ID ? DbUrl : `${DbUrl}/${docId}`;

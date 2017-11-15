@@ -9,7 +9,7 @@ import queryString from "query-string";
 
 import reducer from "./reducer";
 import "./styles/index.css";
-import App from "./components/App";
+import App from "./connectors/App";
 import HomePage from "./connectors/HomePage";
 import BottomHalfText from "./connectors/BottomHalfText";
 import TopHalfText from "./connectors/TopHalfText";
@@ -18,7 +18,8 @@ import Fixations from "./connectors/Fixations";
 import Texts from "./connectors/Texts";
 import Settings from "./connectors/Settings";
 import registerServiceWorker from "./registerServiceWorker";
-import { getDefaultDoc, setDocumentId, clearLocalStorage} from "./actions/actions";
+import { getDefaultDoc } from "./actions/actions";
+import { getUserDoc } from './actions/user-actions';
 
 const history = createBrowserHistory();
 
@@ -40,21 +41,19 @@ function logger({ getState }) {
 const store = createStore(reducer, applyMiddleware(thunkMiddleware, logger));
 store.dispatch(getDefaultDoc());
 
-// const parsed = queryString.parse(window.location.search);
-// const documentId = parsed.documentId;
+const parsed = queryString.parse(window.location.search);
+const documentId = parsed.documentId;
 
-// if (documentId) {
-//   store.dispatch(setDocumentId(documentId));
-// } else if (localStorage.getItem("docId")) {
-//   store.dispatch(setDocumentId(localStorage.getItem("docId")));
-// }
-
-const docId = store.getState().getIn(["app", "docId"], "");
+if (documentId) {
+  store.dispatch(getUserDoc(documentId));
+} else if (localStorage.getItem("docId")) {
+  store.dispatch(getUserDoc(localStorage.getItem("docId")));
+}
 
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
-      <App docId={docId} clearLocalStorage={clearLocalStorage}>
+      <App>
         <Route exact path="/" component={HomePage} />
         <Route path="/fixations" component={Fixations} />
         <Route path="/top-half-text" component={TopHalfText} />
