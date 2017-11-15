@@ -1,36 +1,25 @@
 import Immutable from 'immutable';
 import _ from 'underscore';
-import { getTextsFromDocument } from "./helpers";
-// import { DEFAULT_DOC_ID } from "../actions/actions"
 
-// returns docId, currentText and preferences
 export const getText = (state, textKey) => {
-  const defaultText = state.getIn(['app', 'defaultDoc', textKey]);
+
+  const defaultText = state.getIn(['app', 'defaultDoc', textKey], Immutable.Map());
+  if (defaultText.isEmpty()) {
+    throw {error: `There is no default text for this key: "${textKey}"`};
+  }
   const userDoc = state.getIn(['user', 'doc']);
   if (userDoc.isEmpty()) return defaultText;
-  // const docId = state.getIn(["app", "docId"], null);
-  // let text = state.getIn(["app", "defaultDoc", textKey], new Map());
 
-  // const userDoc = state.getIn(["app", "userDoc"], new Map());
+  // get text id from user preferences
+  const userTextKey = state.getIn(['user', 'doc', 'preferences', textKey], "");
+  if (_(userTextKey).isEmpty()) return defaultText;
 
-  // const userTexts = getTextsFromDocument(userDoc);
-  // const key = userDoc.getIn(["preferences", textKey], "");
+  // check if key exist in user doc
+  const userText = state.getIn(['user', 'doc', 'texts'], Immutable.List())
+  .find((text) => { return text.get('id') === userTextKey; }, null, Immutable.Map());
 
-  // // First check if there is text with `key` in userTexts
-  // // if not then take text from defaultDoc
-
-  // if (key!== '') {
-  //   if (!userTexts.isEmpty()) {
-  //     // Saving user texts needs to be fixed first
-  //     // searchForTextWithKey(key);
-  //   } else {
-  //     text = state.getIn(["app", "defaultDoc", key], new Map());
-  //   }
-  // }
-
-  // const preferences = _.isEmpty(docId)
-  //   ? state.getIn(["app", "defaultDoc", "preferences"], new Map())
-  //   : userDoc.get("preferences", new Map());
-
-  // return { docId: docId || DEFAULT_DOC_ID, text, preferences };
-}
+  // if not then return default text for this key
+  if (userText.isEmpty()) return defaultText;
+  // finally return user text foer this key
+  return userText;
+};

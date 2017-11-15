@@ -2,12 +2,12 @@ import { fetchDoc } from '../utils/db_helpers';
 
 export function setUserDocumentId(docId) {
   const userDocId = docId;
-  localStorage.setItem("docId", userDocId);
+  // localStorage.setItem("docId", userDocId);
   return { type: "SET_USER_DOCID", userDocId };
 }
 
 export function clearLocalStorage() {
-  localStorage.removeItem("docId");
+  // localStorage.removeItem("docId");
   return { type: "SET_USER_DOCID", userDocId: null };
 }
 
@@ -22,6 +22,6 @@ export const getUserDoc = (docId) => {
         dispatch({type: "USER_DOC_FETCHED", response});
         dispatch(setUserDocumentId(docId));
       }
-    })
+    });
   };
 };
