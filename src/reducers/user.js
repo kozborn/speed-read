@@ -12,7 +12,7 @@ const user = (state = Immutable.fromJS({
       return state.set("isFetching", true);
     case "USER_DOC_FETCHED":
       return state.withMutations((s) => {
-        s.set("userDoc", Immutable.fromJS(action.response));
+        s.set("doc", Immutable.fromJS(action.response));
         s.set('isFetching', false);
       });
     case "USER_DOC_FETCHING_ERROR":

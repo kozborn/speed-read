@@ -56,7 +56,7 @@ class App extends Component {
         <div className="App-body">
           <div className="page-content">
 
-            {isFetching ? <Spinner /> : this.props.children}
+            {isFetching ? <Spinner /> : children}
           </div>
           {this.getSidebar(docId)}
         </div>

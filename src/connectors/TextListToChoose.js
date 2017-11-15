@@ -15,7 +15,9 @@ function mapStateToProps(state) {
 
   // texts = texts.concat(userTexts);
   // return {docId, texts};
-  return {};
+  return {
+    texts: Immutable.Map(),
+  };
 }
 
 function mapDispatchToProps(dispatch, ownProps) {

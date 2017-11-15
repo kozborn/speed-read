@@ -1,7 +1,8 @@
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 import App from '../components/App';
 
-const mapsStateToProps = (state) => {
+const mapStateToProps = (state) => {
   const isFetching = state.getIn(['user', 'isFetching']) || state.getIn(['app', 'isFetching'])
 
   return {
@@ -10,4 +11,4 @@ const mapsStateToProps = (state) => {
   };
 };
 
-export default connect(mapsStateToProps)(App);
+export default withRouter(connect(mapStateToProps)(App));

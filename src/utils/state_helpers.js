@@ -4,7 +4,10 @@ import { getTextsFromDocument } from "./helpers";
 // import { DEFAULT_DOC_ID } from "../actions/actions"
 
 // returns docId, currentText and preferences
-export const docIdCurrentTextPreferences = (state, textKey) => {
+export const getText = (state, textKey) => {
+  const defaultText = state.getIn(['app', 'defaultDoc', textKey]);
+  const userDoc = state.getIn(['user', 'doc']);
+  if (userDoc.isEmpty()) return defaultText;
   // const docId = state.getIn(["app", "docId"], null);
   // let text = state.getIn(["app", "defaultDoc", textKey], new Map());
 
