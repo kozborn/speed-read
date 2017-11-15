@@ -11,6 +11,10 @@ export function clearLocalStorage() {
   return { type: "SET_USER_DOCID", userDocId: null };
 }
 
+export const checkText = (key, textId) => {
+  return {type: 'SWITCH_TEXT_FOR_KEY', key, textId};
+};
+
 export const getUserDoc = (docId) => {
   return (dispatch) => {
     dispatch({type: "FETCHING_USER_DOC"});

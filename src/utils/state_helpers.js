@@ -12,16 +12,22 @@ export const getText = (state, textKey) => {
 
   // get text id from user preferences
   const userTextKey = state.getIn(['user', 'doc', 'preferences', textKey], "");
+
   if (_(userTextKey).isEmpty()) return defaultText;
 
   // check if key exist in user doc
   const userText = state.getIn(['user', 'doc', 'texts'], Immutable.List())
   .find((text) => { return text.get('id') === userTextKey; }, null, Immutable.Map());
 
-  // if not then return default text for this key
-  if (userText.isEmpty()) return defaultText;
-  // finally return user text foer this key
-  return userText;
+  // if is not empty then return
+  if (!userText.isEmpty()) return userText;
+  
+  // if userText is empty then try to find it in defaultDoc
+  const defaultTextForKey = state.getIn(['app', 'defaultDoc', userTextKey], Immutable.Map());
+  if (!defaultTextForKey.isEmpty()) return defaultTextForKey;
+
+  // if everything fails then return default text
+  return defaultText;
 };
 
 

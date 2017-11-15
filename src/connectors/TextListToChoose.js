@@ -1,7 +1,7 @@
 import {connect} from "react-redux";
 import Immutable from "immutable";
 import TextList from "../components/common/TextList";
-import { switchText } from "../actions/actions";
+import { checkText } from "../actions/user-actions";
 import { parseDefaultTexts } from '../utils/state_helpers';
 
 function mapStateToProps(state) {
@@ -12,10 +12,10 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchToProps(dispatch, ownProps) {
+function mapDispatchToProps(dispatch) {
   return {
-    switchText: (key, preferences) =>
-      dispatch(switchText(ownProps.docId, key, preferences)),
+    checkText: (key, textId) =>
+      dispatch(checkText(key, textId)),
   };
 }
 

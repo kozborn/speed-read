@@ -20,6 +20,10 @@ const user = (state = Immutable.fromJS({
         s.set("isFetching", false);
         s.set("error", "Ten document nie może zostać pobrany. Upewnij się że podałeś prawidłowy documentId");
       });
+    case "SWITCH_TEXT_FOR_KEY":
+      return state.withMutations((s) => {
+        s.setIn(['doc', 'preferences', action.key], action.textId);
+      });
     default:
       return state;
   }
