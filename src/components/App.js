@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import camelize from "underscore.string/camelize";
 import { withRouter } from "react-router";
-import { string, object, node } from "prop-types";
+import { bool, string, object, node } from "prop-types";
 import Header from './Header';
+import Spinner from './common/Spinner';
 import Footer from "../connectors/Footer";
 import TextListToChoose from "../connectors/TextListToChoose";
 
@@ -15,6 +16,7 @@ class App extends Component {
 
   static propTypes = {
     docId: string.isRequired,
+    isFetching: bool.isRequired,
     location: object.isRequired,
     children: node.isRequired,
   }
@@ -39,6 +41,7 @@ class App extends Component {
 
   render() {
     let queryParams = "";
+    const {isFetching, children} = this.props;
 
     const docId = this.props.docId ? this.props.docId : localStorage.getItem("docId");
     if (docId) {
@@ -52,7 +55,8 @@ class App extends Component {
         />
         <div className="App-body">
           <div className="page-content">
-            {this.props.children}
+
+            {isFetching ? <Spinner /> : this.props.children}
           </div>
           {this.getSidebar(docId)}
         </div>

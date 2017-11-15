@@ -16,8 +16,12 @@ export const getUserDoc = (docId) => {
     dispatch({type: "FETCHING_USER_DOC"});
     fetchDoc(docId)
     .then((response) => {
-      dispatch({type: "USER_DOC_FETCHED", response});
+      if (response.error) {
+        dispatch({ type: "USER_DOC_FETCHING_ERROR"});
+      } else {
+        dispatch({type: "USER_DOC_FETCHED", response});
+        dispatch(setUserDocumentId(docId));
+      }
     })
-    .then(() => dispatch(setUserDocumentId(docId)));
   };
 };
