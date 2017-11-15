@@ -15,6 +15,10 @@ export const checkText = (key, textId) => {
   return {type: 'SWITCH_TEXT_FOR_KEY', key, textId};
 };
 
+export const savePreferences = (key, preferences) => {
+  return {type: "SAVE_USER_PREFERENCES", key, preferences};
+};
+
 export const getUserDoc = (docId) => {
   return (dispatch) => {
     dispatch({type: "FETCHING_USER_DOC"});

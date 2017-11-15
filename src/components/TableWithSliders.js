@@ -21,8 +21,6 @@ const marks = {
 class TableWithSliders extends React.Component {
 
   static propTypes = {
-    docId: string.isRequired,
-    getDoc: func.isRequired,
     preferences: instanceOf(Map).isRequired,
     savePreferences: func.isRequired,
   }
@@ -36,10 +34,6 @@ class TableWithSliders extends React.Component {
     this.onChangeRows = this.onChangeRows.bind(this);
     this.onChangeCols = this.onChangeCols.bind(this);
     this.saveSettings = this.saveSettings.bind(this);
-  }
-
-  componentWillMount() {
-    this.props.getDoc(this.props.docId);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -58,7 +52,7 @@ class TableWithSliders extends React.Component {
   }
 
   saveSettings() {
-    this.props.savePreferences(this.props.docId, "schultzTable", {
+    this.props.savePreferences("schultzTable", {
       rows: this.state.rows,
       cols: this.state.cols,
     });
