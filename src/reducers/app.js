@@ -10,19 +10,17 @@ const PREFERENCES = {
 
 function app(state = new Map({
   isFetching: false,
-  docId: null,
   defaultDoc: new Map(),
   defaultPreferences: fromJS(PREFERENCES),
-  userDoc: new Map(),
-  userId: null,
 }), action) {
   switch (action.type) {
-    case "USER_DOC_FETCHED":
-      return state.set("userDoc", fromJS(action.response));
-    case "DOC_FETCHED":
-      return state.set("defaultDoc", fromJS(action.response));
-    case "SET_USER_DOCID":
-      return state.set("docId", action.userDocId);
+    case "FETCHING_DEFAULT_DOC":
+      return state.set("isFetching", true);
+    case "DEFAULT_DOC_FETCHED":
+      return state.withMutations((s) => {
+        s.set("defaultDoc", fromJS(action.response));
+        s.set("isFetching", false);
+      });
     default:
       return state;
   }

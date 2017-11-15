@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
 import BottomHalfText from "../components/BottomHalfText";
-import {DEFAULT_DOC_ID, getDoc, saveText, savePreferences} from "../actions/actions";
+import { saveText, savePreferences} from "../actions/actions";
 import { docIdCurrentTextPreferences } from '../utils/state_helpers';
 
 function mapStateToProps(state) {
@@ -9,7 +9,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    getDoc: docId => dispatch(getDoc(docId)),
+    // getDoc: docId => dispatch(fetchDoc(docId)),
     saveText: (docId, textKey, text) => dispatch(saveText(docId, textKey, text)),
     savePreferences: (docId, key, preferences) =>
       dispatch(savePreferences(docId, key, preferences)),

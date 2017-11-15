@@ -1,11 +1,9 @@
 import {connect} from "react-redux";
 import Immutable from "immutable";
 import HomePage from "../components/HomePage";
-import {getDoc} from "../actions/actions";
 
 function mapStateToProps(state) {
-  const defaultDoc = state.getIn(["app", "defaultDoc"], Immutable.Map())
-  console.log(defaultDoc);
+  const defaultDoc = state.getIn(["app", "defaultDoc"], Immutable.Map());
   return {
     reading: defaultDoc.get("reading", Immutable.Map()),
     understanding: defaultDoc.get("understanding", Immutable.Map()),
@@ -16,9 +14,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return {
-    getDoc: () => dispatch(getDoc()),
-  };
+  return {};
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

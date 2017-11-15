@@ -18,7 +18,7 @@ import Fixations from "./connectors/Fixations";
 import Texts from "./connectors/Texts";
 import Settings from "./connectors/Settings";
 import registerServiceWorker from "./registerServiceWorker";
-import {getDoc, setDocumentId, clearLocalStorage} from "./actions/actions";
+import { getDefaultDoc, setDocumentId, clearLocalStorage} from "./actions/actions";
 
 const history = createBrowserHistory();
 
@@ -38,16 +38,16 @@ function logger({ getState }) {
 }
 
 const store = createStore(reducer, applyMiddleware(thunkMiddleware, logger));
-store.dispatch(getDoc());
+store.dispatch(getDefaultDoc());
 
-const parsed = queryString.parse(window.location.search);
-const documentId = parsed.documentId;
+// const parsed = queryString.parse(window.location.search);
+// const documentId = parsed.documentId;
 
-if (documentId) {
-  store.dispatch(setDocumentId(documentId));
-} else if (localStorage.getItem("docId")) {
-  store.dispatch(setDocumentId(localStorage.getItem("docId")));
-}
+// if (documentId) {
+//   store.dispatch(setDocumentId(documentId));
+// } else if (localStorage.getItem("docId")) {
+//   store.dispatch(setDocumentId(localStorage.getItem("docId")));
+// }
 
 const docId = store.getState().getIn(["app", "docId"], "");
 
