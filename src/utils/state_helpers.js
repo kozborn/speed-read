@@ -23,3 +23,14 @@ export const getText = (state, textKey) => {
   // finally return user text foer this key
   return userText;
 };
+
+
+export const parseDefaultTexts = (defaultDoc) => {
+  return defaultDoc.filter(entry => Immutable.Map.isMap(entry))
+  .reduce((acc, entry, key) => {
+    if (entry.has('title') && entry.has('text')) {
+      return acc.push(entry.set('id', key));
+    }
+    return acc;
+  }, Immutable.List());
+};
