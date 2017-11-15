@@ -16,7 +16,8 @@ export default class extends React.Component {
   }
 
   switchText(id) {
-    this.props.switchText(this.props.textKey, id);
+    console.log(this.props.textKey, id)
+    // this.props.switchText(this.props.textKey, id);
   }
 
   render() {
