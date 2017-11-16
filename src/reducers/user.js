@@ -18,12 +18,16 @@ const user = (state = Immutable.fromJS({
     case "USER_DOC_FETCHING_ERROR":
       return state.withMutations((s) => {
         s.set("isFetching", false);
-        s.set("error", "Ten document nie może zostać pobrany. Upewnij się że podałeś prawidłowy documentId");
+        s.set("error", "Ten dokument nie może zostać pobrany. Upewnij się że podałeś prawidłowy documentId");
       });
     case "SWITCH_TEXT_FOR_KEY":
       return state.withMutations((s) => {
         s.setIn(['doc', 'preferences', action.key], action.textId);
       });
+    case "ADD_NEW_TEXT": {
+      const texts = state.getIn(['doc', 'texts'], Immutable.List());
+      return state.setIn(['doc', 'texts'], texts.concat(action.text));
+    }
     default:
       return state;
   }

@@ -19,6 +19,10 @@ export const savePreferences = (key, preferences) => {
   return {type: "SAVE_USER_PREFERENCES", key, preferences};
 };
 
+export const addText = (text) => {
+  return {type: "ADD_NEW_TEXT", text};
+};
+
 export const getUserDoc = (docId) => {
   return (dispatch) => {
     dispatch({type: "FETCHING_USER_DOC"});

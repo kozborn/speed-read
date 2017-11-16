@@ -15,7 +15,8 @@ import BottomHalfText from "./connectors/BottomHalfText";
 import TopHalfText from "./connectors/TopHalfText";
 import TableWithSliders from "./connectors/Table";
 import Fixations from "./connectors/Fixations";
-import Texts from "./connectors/Texts";
+import UserTexts from "./connectors/UserTexts";
+import NewText from "./connectors/NewText";
 import Settings from "./connectors/Settings";
 import registerServiceWorker from "./registerServiceWorker";
 import { getDefaultDoc } from "./actions/actions";
@@ -59,7 +60,8 @@ ReactDOM.render(
         <Route path="/top-half-text" component={TopHalfText} />
         <Route path="/bottom-half-text" component={BottomHalfText} />
         <Route path="/schultz-table" component={TableWithSliders} />
-        <Route path="/user-texts" component={Texts} />
+        <Route path="/new-text" component={NewText} />
+        <Route path="/user-texts" component={UserTexts} />
         <Route path="/settings" component={Settings} />
       </App>
     </Router>
