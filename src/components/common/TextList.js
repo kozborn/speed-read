@@ -8,6 +8,7 @@ export default class extends React.Component {
     texts: instanceOf(Immutable.List).isRequired,
     checkText: func.isRequired,
     textKey: string.isRequired,
+    save: func.isRequired,
   }
 
   constructor(props) {
@@ -17,6 +18,7 @@ export default class extends React.Component {
 
   checkText(id) {
     this.props.checkText(this.props.textKey, id);
+    this.props.save()
   }
 
   render() {

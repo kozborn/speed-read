@@ -1,4 +1,6 @@
-import { fetchDoc } from '../utils/db_helpers';
+import _ from 'underscore';
+import Immutable from 'immutable';
+import { fetchDoc, DbUrl, getOptions, saveDoc } from '../utils/db_helpers';
 
 export function setUserDocumentId(docId) {
   const userDocId = docId;
@@ -37,3 +39,38 @@ export const getUserDoc = (docId) => {
     });
   };
 };
+
+export const save = () => {
+  return (dispatch, getState) => {
+    const userState = getState().get('user', Immutable.Map())
+    const userId = userState.get('id', null)
+    const method = "PUT";
+    
+    const url = _.isEmpty(userId) ? DbUrl : `${DbUrl}/${userId}`;
+    const docToSave = userState.get('doc', Immutable.Map())
+    const options = getOptions(method);
+    saveDoc(docToSave, options)
+    .then(response => response.json())
+    .then((response) => {
+      dispatch({type: "USER_DOC_SAVED", response})
+      return response;
+    })
+    .then((response) => {
+      dispatch(setUserDocumentId(response.id))
+    }) 
+    .catch((err) => {
+      dispatch({type: "USER_DOC_SAVING_ERROR", err});
+    })
+  }
+}
+
+
+export const saveUserDoc = (docId, data) => {
+  // if there is a docId then update else create document
+  
+  return (dispatch, getState) => {
+    const userDoc = getState().getIn(['user', 'doc'], Immutable.Map());
+    const bodyToSave = userDoc.mergeDeep(Immutable.fromJS(data));
+    console.log(bodyToSave.toJS())
+  }
+}
