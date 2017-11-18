@@ -17,9 +17,7 @@ export const getOptions = (method) => {
 export const fetchDoc = docId =>
   fetch(`${DbUrl}/${docId}`)
     .then(response => response.json())
-    .catch((ex) => {
-      console.warn("parsing failed", ex);
-    });
+    .catch(ex => ex);
 
 export const saveDoc = (data, options = {}) => {
   const url = _(data.id).isEmpty() ? DbUrl : `${DbUrl}/${data.id}`;
@@ -34,7 +32,5 @@ export const saveDoc = (data, options = {}) => {
     else
       return response.json()
   })
-  .catch((ex) => {
-    console.warn("parsing failed", ex);
-  });
+  .catch(ex => ex);
 }

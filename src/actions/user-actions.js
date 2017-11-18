@@ -18,7 +18,10 @@ export const checkText = (key, textId) => {
 };
 
 export const savePreferences = (key, preferences) => {
-  return {type: "SAVE_USER_PREFERENCES", key, preferences};
+  return (dispatch) => {
+    dispatch({ type: "SAVE_USER_PREFERENCES", key, preferences })  
+    dispatch(save())
+  }
 };
 
 export const addText = (text) => {
@@ -54,21 +57,10 @@ export const save = () => {
       return response;
     })
     .then((response) => {
-      console.log(response)
       dispatch(setUserDocumentId(response.id))
     }) 
     .catch((err) => {
       dispatch({type: "USER_DOC_SAVING_ERROR", err});
     })
-  }
-}
-
-
-export const saveUserDoc = (docId, data) => {
-  // if there is a docId then update else create document
-  return (dispatch, getState) => {
-    const userDoc = getState().getIn(['user', 'doc'], Immutable.Map());
-    const bodyToSave = userDoc.mergeDeep(Immutable.fromJS(data));
-    console.log(bodyToSave.toJS())
   }
 }
