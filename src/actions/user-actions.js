@@ -4,12 +4,12 @@ import { fetchDoc, DbUrl, getOptions, saveDoc } from '../utils/db_helpers';
 
 export function setUserDocumentId(docId) {
   const userDocId = docId;
-  // localStorage.setItem("docId", userDocId);
+  localStorage.setItem("docId", userDocId);
   return { type: "SET_USER_DOCID", userDocId };
 }
 
 export function clearLocalStorage() {
-  // localStorage.removeItem("docId");
+  localStorage.removeItem("docId");
   return { type: "SET_USER_DOCID", userDocId: null };
 }
 
@@ -43,19 +43,18 @@ export const getUserDoc = (docId) => {
 export const save = () => {
   return (dispatch, getState) => {
     const userState = getState().get('user', Immutable.Map())
-    const userId = userState.get('id', null)
-    const method = "PUT";
-    
-    const url = _.isEmpty(userId) ? DbUrl : `${DbUrl}/${userId}`;
+    const docId = userState.get('id', null)
+    const method = _.isEmpty(docId) ? "POST" : "PUT";
     const docToSave = userState.get('doc', Immutable.Map())
     const options = getOptions(method);
-    saveDoc(docToSave, options)
-    .then(response => response.json())
+
+    saveDoc(docToSave.set('id', docId).toJS(), options)
     .then((response) => {
       dispatch({type: "USER_DOC_SAVED", response})
       return response;
     })
     .then((response) => {
+      console.log(response)
       dispatch(setUserDocumentId(response.id))
     }) 
     .catch((err) => {
@@ -67,7 +66,6 @@ export const save = () => {
 
 export const saveUserDoc = (docId, data) => {
   // if there is a docId then update else create document
-  
   return (dispatch, getState) => {
     const userDoc = getState().getIn(['user', 'doc'], Immutable.Map());
     const bodyToSave = userDoc.mergeDeep(Immutable.fromJS(data));

@@ -27,10 +27,14 @@ export const saveDoc = (data, options = {}) => {
   .then((response) => {
     if (response.status === 409) {
       return fetchDoc(data.id)
-      .then((e) => {
-        saveDoc(data, _.extend(data, {_rev: e._rev}));
-      });
-    }
-    return response;
+        .then((e) => {
+          return saveDoc(_.extend(data, { _rev: e._rev }), options);
+        });
+    } 
+    else
+      return response.json()
   })
+  .catch((ex) => {
+    console.warn("parsing failed", ex);
+  });
 }
