@@ -40,21 +40,11 @@ class Header extends React.Component {
       <div className={'menuItem'}>
         <Link to={`/user-texts${this.props.queryParams}`}>Twoje teksty</Link>
       </div>
-      {
-        localStorage.getItem("docId") &&
-          <div className={'menuItem'}>
-            <Button type="warning" onClick={this.props.clearLocalStorage}>
-              Wyczyść dane
-            </Button>
-          </div>
-      }
+      <div className={'menuItem'}>
+        <Link className="settings" to={`/settings${this.props.queryParams}`}>Settings &#9881;</Link>
+      </div>
     </div>);
   }
-
-  // TODO create settings popup with manually creating first doc and later saving document
-  // there should be also checkbox for autosaving
-  // there should be also possibility to totally remove user data
-  // Make menu more DRY
 
   render() {
     return (
@@ -68,25 +58,8 @@ class Header extends React.Component {
           <li><Link to={`/fixations${this.props.queryParams}`}>Fiksacja</Link></li>
           <li><Link to={`/user-texts${this.props.queryParams}`}>Twoje teksty</Link></li>
           <li>
-            <Button
-              className="settings"
-              onClick={this.toggleSettings}
-            >
-              &#9881;
-            </Button>
+            <Link className="settings" to={`/settings${this.props.queryParams}`}>&#9881;</Link>
           </li>
-          {
-            localStorage.getItem("docId") &&
-              <li>
-                <Button
-                  type="cancel"
-                  icon="left"
-                  onClick={this.props.clearLocalStorage}
-                >
-                  Wyczyść dane
-                </Button>
-              </li>
-          }
         </nav>
         <Hamburger
           className={'hamburger'}
@@ -99,7 +72,6 @@ class Header extends React.Component {
 }
 
 Header.propTypes = {
-  clearLocalStorage: func.isRequired,
   queryParams: string.isRequired,
 };
 

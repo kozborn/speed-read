@@ -1,0 +1,18 @@
+.spinner-container {
+  width: 100%;
+  text-align: center;
+  margin: 10px auto;
+
+  .spinner {
+    margin: 0px auto;
+    animation: spinner-animation infinite 5s linear;
+    height: 20px;
+    width: 20px;
+    background: red;
+  }
+}
+
+@keyframes spinner-animation {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}

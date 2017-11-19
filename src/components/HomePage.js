@@ -1,13 +1,16 @@
 import React from "react";
 import Immutable from "immutable";
-import {func, instanceOf} from "prop-types";
-import Button from "./common/Button";
+import { instanceOf } from "prop-types";
 
-const HomeArticle = ({article}) => 
-  <article>
+const HomeArticle = ({ article }) =>
+  (<article>
     <h2>{article.get("title")}</h2>
     <div>{article.get("text")}</div>
-  </article>
+  </article>);
+
+HomeArticle.propTypes = {
+  article: instanceOf(Immutable.Map).isRequired,
+};
 
 const HomePage = (props) => {
   const { reading, memorizing, thinking, understanding, anticipating } = props;
@@ -20,7 +23,7 @@ const HomePage = (props) => {
       <HomeArticle article={anticipating} />
     </div>
   );
-}
+};
 
 HomePage.propTypes = {
   memorizing: instanceOf(Immutable.Map).isRequired,
@@ -28,6 +31,6 @@ HomePage.propTypes = {
   understanding: instanceOf(Immutable.Map).isRequired,
   anticipating: instanceOf(Immutable.Map).isRequired,
   thinking: instanceOf(Immutable.Map).isRequired,
-}
+};
 
 export default HomePage;

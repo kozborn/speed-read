@@ -40,18 +40,6 @@ export function stringDivider(str, width, prefix, postfix) {
   return prefix + str + postfix;
 }
 
-export function getTextsFromDocument(document) {
-  if (document.isEmpty()) return new List();
-
-  const tmpTexts = document.reduce((acc, currentKey) => {
-    if (Map.isMap(currentKey) && currentKey.keySeq().last() === "text") {
-      acc.push(currentKey);
-    }
-    return acc;
-  }, []);
-  return fromJS(tmpTexts);
-}
-
 export function guid() {
   const s4 = () =>
     Math.floor((1 + Math.random()) * 0x10000)
@@ -59,16 +47,6 @@ export function guid() {
       .substring(1);
   return s4() + s4() + "-" + s4() + "-" + s4() + "-" +
     s4() + "-" + s4() + s4() + s4();
-}
-
-export function getNextId(document) {
-  const texts = getTextsFromDocument(document);
-  if (texts.isEmpty()) {
-    return "text-1";
-  }
-  const [key, id] = (texts.last().get("id")).split("-");
-
-  return `text-${parseInt(id) + 1}`;
 }
 
 const ALLOWED_TAGS = ["H3", "H2", "H1", "DIV", "P"];

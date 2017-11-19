@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {func, string} from "prop-types";
 import ContentEditable from "react-contenteditable";
-import { sanitizeString } from "../../utils/helpers";
+import { sanitizeString, guid } from "../../utils/helpers";
 
 export default class TextForm extends Component {
 
@@ -45,7 +45,7 @@ export default class TextForm extends Component {
   saveText() {
     const {title, text} = this.state;
     const data = {
-      id: this.props.id,
+      id: this.props.id || guid(),
       title,
       text,
     };
