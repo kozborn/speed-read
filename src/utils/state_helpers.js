@@ -1,33 +1,42 @@
-import { Map } from 'immutable'
+import Immutable from 'immutable';
 import _ from 'underscore';
-import { getTextsFromDocument } from "./helpers";
-import { DEFAULT_DOC_ID } from "../actions/actions"
 
-// returns docId, currentText and preferences
-export const docIdCurrentTextPreferences = (state, textKey) => {
-  const docId = state.getIn(["app", "docId"], null);
-  let text = state.getIn(["app", "defaultDoc", textKey], new Map());
+export const getText = (state, textKey) => {
 
-  const userDoc = state.getIn(["app", "userDoc"], new Map());
-
-  const userTexts = getTextsFromDocument(userDoc);
-  const key = userDoc.getIn(["preferences", textKey], "");
-
-  // First check if there is text with `key` in userTexts
-  // if not then take text from defaultDoc
-
-  if (key!== '') {
-    if (!userTexts.isEmpty()) {
-      // Saving user texts needs to be fixed first
-      // searchForTextWithKey(key);
-    } else {
-      text = state.getIn(["app", "defaultDoc", key], new Map());
-    }
+  const defaultText = state.getIn(['app', 'defaultDoc', textKey], Immutable.Map());
+  if (defaultText.isEmpty()) {
+    throw {error: `There is no default text for this key: "${textKey}"`};
   }
+  const userDoc = state.getIn(['user', 'doc']);
+  if (userDoc.isEmpty()) return defaultText;
 
-  const preferences = _.isEmpty(docId)
-    ? state.getIn(["app", "defaultDoc", "preferences"], new Map())
-    : userDoc.get("preferences", new Map());
+  // get text id from user preferences
+  const userTextKey = state.getIn(['user', 'doc', 'preferences', textKey], "");
 
-  return { docId: docId || DEFAULT_DOC_ID, text, preferences };
-}
+  if (_(userTextKey).isEmpty()) return defaultText;
+
+  // check if key exist in user doc
+  const userText = state.getIn(['user', 'doc', 'texts'], Immutable.List())
+  .find((text) => { return text.get('id') === userTextKey; }, null, Immutable.Map());
+
+  // if is not empty then return
+  if (!userText.isEmpty()) return userText;
+  
+  // if userText is empty then try to find it in defaultDoc
+  const defaultTextForKey = state.getIn(['app', 'defaultDoc', userTextKey], Immutable.Map());
+  if (!defaultTextForKey.isEmpty()) return defaultTextForKey;
+
+  // if everything fails then return default text
+  return defaultText;
+};
+
+
+export const parseDefaultTexts = (defaultDoc) => {
+  return defaultDoc.filter(entry => Immutable.Map.isMap(entry))
+  .reduce((acc, entry, key) => {
+    if (entry.has('title') && entry.has('text')) {
+      return acc.push(entry.set('id', key));
+    }
+    return acc;
+  }, Immutable.List());
+};

@@ -1,18 +1,18 @@
 import {connect} from "react-redux";
+import Immutable from 'immutable';
 import FixationsWithSliders from "../components/fixations/FixationsWithSliders";
-import {getDoc, saveText, savePreferences} from "../actions/actions";
-import { docIdCurrentTextPreferences } from '../utils/state_helpers';
+import { savePreferences } from "../actions/user-actions";
+import { getText } from '../utils/state_helpers';
 
 function mapStateToProps(state) {
-  return docIdCurrentTextPreferences(state, "fixations");
+  return {
+    text: getText(state, "fixations"),
+    preferences: state.getIn(['user', 'doc', 'preferences'], Immutable.Map()),
+  };
 }
-
 function mapDispatchToProps(dispatch) {
   return {
-    getDoc: docId => dispatch(getDoc(docId)),
-    saveText: (docId, textKey, data) => dispatch(saveText(docId, textKey, data)),
-    savePreferences: (docId, key, preferences) =>
-      dispatch(savePreferences(docId, key, preferences)),
+    savePreferences: (key, preferences) => dispatch(savePreferences(key, preferences)),
   };
 }
 
