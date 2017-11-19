@@ -9,15 +9,18 @@ import queryString from "query-string";
 
 import reducer from "./reducer";
 import "./styles/index.css";
-import App from "./components/App";
+import App from "./connectors/App";
 import HomePage from "./connectors/HomePage";
 import BottomHalfText from "./connectors/BottomHalfText";
 import TopHalfText from "./connectors/TopHalfText";
 import TableWithSliders from "./connectors/Table";
 import Fixations from "./connectors/Fixations";
-import Texts from "./connectors/Texts";
+import UserTexts from "./connectors/UserTexts";
+import NewText from "./connectors/NewText";
+import Settings from "./connectors/Settings";
 import registerServiceWorker from "./registerServiceWorker";
-import {getDoc, setDocumentId, clearLocalStorage} from "./actions/actions";
+import { getDefaultDoc } from "./actions/actions";
+import { getUserDoc } from './actions/user-actions';
 
 const history = createBrowserHistory();
 
@@ -37,29 +40,29 @@ function logger({ getState }) {
 }
 
 const store = createStore(reducer, applyMiddleware(thunkMiddleware, logger));
-store.dispatch(getDoc());
+store.dispatch(getDefaultDoc());
 
 const parsed = queryString.parse(window.location.search);
 const documentId = parsed.documentId;
 
 if (documentId) {
-  store.dispatch(setDocumentId(documentId));
+  store.dispatch(getUserDoc(documentId));
 } else if (localStorage.getItem("docId")) {
-  store.dispatch(setDocumentId(localStorage.getItem("docId")));
+  store.dispatch(getUserDoc(localStorage.getItem("docId")));
 }
-
-const docId = store.getState().getIn(["app", "docId"], "");
 
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
-      <App docId={docId} clearLocalStorage={clearLocalStorage}>
+      <App>
         <Route exact path="/" component={HomePage} />
         <Route path="/fixations" component={Fixations} />
         <Route path="/top-half-text" component={TopHalfText} />
         <Route path="/bottom-half-text" component={BottomHalfText} />
         <Route path="/schultz-table" component={TableWithSliders} />
-        <Route path="/user-texts" component={Texts} />
+        <Route path="/new-text" component={NewText} />
+        <Route path="/user-texts" component={UserTexts} />
+        <Route path="/settings" component={Settings} />
       </App>
     </Router>
   </Provider>,

@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import {string} from "prop-types";
-import {DEFAULT_DOC_ID, ServerUrl} from "../actions/actions";
+
+const FIX_ME = "/"
 
 export default class Footer extends React.Component {
 
@@ -15,7 +16,7 @@ export default class Footer extends React.Component {
   }
 
   getUrl() {
-    return `${ServerUrl}?documentId=${this.props.docId}`;
+    return `${FIX_ME}?documentId=${this.props.docId}`;
   }
 
   render() {
@@ -38,11 +39,11 @@ export default class Footer extends React.Component {
             <li><Link to={`/user-texts${queryParams}`}>Twoje teksty</Link></li>
           </nav>
           <div className="clearfix" />
-          {this.props.docId !== DEFAULT_DOC_ID ?
-            <div className="user-private-link">
-              Twój prywatny link <a href={this.getUrl()}>{this.getUrl()}</a>
-            </div>
-          : null}
+
+          <div className="user-private-link">
+            Twój prywatny link <a href="">FIX ME</a>
+          </div>
+
           <div className="copyrights">
             © Copyright by piotrkozubek@gmail.com {new Date().getFullYear()}
           </div>

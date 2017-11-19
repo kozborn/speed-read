@@ -1,35 +1,37 @@
 import React from "react";
 import {instanceOf, func, string} from "prop-types";
-import {Map} from "immutable";
+import Immutable from "immutable";
 import Text from "./Text";
 
 export default class extends React.Component {
   static propTypes = {
-    texts: instanceOf(Map).isRequired,
-    switchText: func.isRequired,
+    texts: instanceOf(Immutable.List).isRequired,
+    checkText: func.isRequired,
     textKey: string.isRequired,
+    save: func.isRequired,
   }
 
   constructor(props) {
     super(props);
-    this.switchText = this.switchText.bind(this);
+    this.checkText = this.checkText.bind(this);
   }
 
-  switchText(id) {
-    this.props.switchText(this.props.textKey, id);
+  checkText(id) {
+    this.props.checkText(this.props.textKey, id);
+    this.props.save()
   }
 
   render() {
     const {texts} = this.props;
     return (
       <div className="text-list">
-        {texts.map((text, key) => (
+        {texts.map(text => (
           <Text
-            key={key}
-            id={key}
+            key={text.get('id')}
+            id={text.get('id')}
             title={text.get("title")}
             text={text.get("text")}
-            onCheck={this.switchText}
+            onCheck={this.checkText}
           />),
         ).toList()}
       </div>

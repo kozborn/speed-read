@@ -4,7 +4,7 @@ import {Map} from "immutable";
 import _ from "underscore";
 import Modal from "../common/Modal";
 import TextForm from "../forms/TextForm";
-import {getTextsFromDocument, getNextId} from "../../utils/helpers";
+// import {getTextsFromDocument, getNextId} from "../../utils/helpers";
 import TextsList from "./TextsList";
 
 export default class extends React.Component {
@@ -13,7 +13,7 @@ export default class extends React.Component {
     getDoc: func.isRequired,
     docId: string.isRequired,
     saveText: func.isRequired,
-    document: instanceOf(Map).isRequired,
+    texts: instanceOf(Map).isRequired,
   }
 
   constructor(props) {
@@ -40,8 +40,8 @@ export default class extends React.Component {
   }
 
   saveText(data) {
-    const key = data.id ? data.id : getNextId(this.props.document);
-    this.props.saveText(this.props.docId, key, _.extend(data, {id: key}));
+    // const key = data.id ? data.id : getNextId(this.props.document);
+    // this.props.saveText(this.props.docId, key, _.extend(data, {id: key}));
     this.closeModal();
   }
 
@@ -65,7 +65,7 @@ export default class extends React.Component {
           <div>
             <div>Twoje teksty</div>
             <TextsList
-              texts={getTextsFromDocument(this.props.document)}
+              texts={this.props.texts}
               setTextToEdit={this.setTextToEdit}
             />
           </div>
