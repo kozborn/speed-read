@@ -697,32 +697,18 @@ a, a:hover, a:visited, a:active {
 .App {
   text-align: left;
   min-height: 100%;
-<<<<<<< HEAD
-<<<<<<< HEAD
   position: relative;
   min-width: 680px; }
-=======
-  position: relative; }
->>>>>>> Use flex instead of bootstrap (#24)
-=======
-  position: relative;
-  min-width: 680px; }
->>>>>>> Fixed displaying sidebar and text to choose
 
 .App-body {
   margin: 0px auto;
   height: 100%;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> Fixed displaying sidebar and text to choose
   padding-left: 20px;
   padding-right: 20px;
   padding-bottom: 100px;
   display: flex;
   justify-content: space-around; }
   @media (max-width: 767px) {
-<<<<<<< HEAD
     .App-body {
       flex-direction: column; } }
 
@@ -732,38 +718,6 @@ a, a:hover, a:visited, a:active {
   @media (min-width: 1024px) {
     .page-content {
       max-width: 800px; } }
-
-.sidebar {
-  margin-top: 50px;
-  text-align: left;
-  width: 200px; }
-  @media (min-width: 768px) and (max-width: 1023px) {
-    .sidebar {
-      width: 175px; } }
-<<<<<<< HEAD
-  .sidebar .text {
-    cursor: pointer;
-    margin-bottom: 20px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #dcdcdc; }
-=======
-  padding-bottom: 100px; }
-  @media (min-width: 1024px) {
-    .App-body {
-      max-width: 1000px; } }
-  @media (min-width: 768px) and (max-width: 1023px) {
-=======
->>>>>>> Fixed displaying sidebar and text to choose
-    .App-body {
-      flex-direction: column; } }
-
-.page-content {
-  flex-grow: 1;
-  padding: 10px; }
-  @media (min-width: 1024px) {
-    .page-content {
-      max-width: 800px; } }
->>>>>>> Use flex instead of bootstrap (#24)
 
 .sidebar {
   margin-top: 50px;
@@ -772,8 +726,6 @@ a, a:hover, a:visited, a:active {
   @media (min-width: 768px) and (max-width: 1023px) {
     .sidebar {
       width: 150px; } }
-=======
->>>>>>> Styles for sliders (#25)
   .sidebar .text {
     cursor: pointer;
     margin-bottom: 20px;
@@ -797,21 +749,6 @@ a, a:hover, a:visited, a:active {
       bottom: 5px;
       right: 5px; }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-.sidebar {
-  margin-top: 50px;
-  text-align: left; }
-  .sidebar .text {
-    cursor: pointer;
-    margin-bottom: 20px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #dcdcdc; }
-
->>>>>>> Use flex instead of bootstrap (#24)
-=======
->>>>>>> Fixed displaying sidebar and text to choose
 .sliders {
   margin: 10px auto;
   max-width: 600px; }
