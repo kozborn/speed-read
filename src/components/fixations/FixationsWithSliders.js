@@ -25,7 +25,6 @@ class FixationsWithSliders extends React.Component {
 
   static propTypes = {
     preferences: instanceOf(Map).isRequired,
-    saveText: func.isRequired,
     savePreferences: func.isRequired,
     text: oneOfType([
       instanceOf(Map),
@@ -45,15 +44,10 @@ class FixationsWithSliders extends React.Component {
     this.changeSpeed = this.changeSpeed.bind(this);
     this.saveSettings = this.saveSettings.bind(this);
     this.savePosition = this.savePosition.bind(this);
-    this.saveText = this.saveText.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
     this.setState({speed: nextProps.preferences.get("fixationsSpeed", 0)});
-  }
-
-  saveText(data) {
-    this.props.saveText(this.props.docId, "fixations", data);
   }
 
   changeSpeed(e) {
@@ -61,7 +55,6 @@ class FixationsWithSliders extends React.Component {
   }
 
   saveSettings(e) {
-    console.log(e);
     this.props.savePreferences("fixationsSpeed", e);
   }
 
@@ -89,7 +82,6 @@ class FixationsWithSliders extends React.Component {
           text={this.props.text}
           fixationIndex={this.props.preferences.get("fixationIndex", 0)}
           speed={this.state.speed}
-          saveText={this.saveText}
           savePosition={this.savePosition}
         />
       </div>
