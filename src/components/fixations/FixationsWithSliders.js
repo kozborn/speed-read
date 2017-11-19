@@ -24,8 +24,6 @@ const marks = {
 class FixationsWithSliders extends React.Component {
 
   static propTypes = {
-    getDoc: func.isRequired,
-    docId: string,
     preferences: instanceOf(Map).isRequired,
     saveText: func.isRequired,
     savePreferences: func.isRequired,
@@ -41,17 +39,13 @@ class FixationsWithSliders extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      speed: this.props.preferences.get("fixationsSpeed", 0),
+      speed: props.preferences.get("fixationsSpeed", 0),
     };
 
     this.changeSpeed = this.changeSpeed.bind(this);
     this.saveSettings = this.saveSettings.bind(this);
     this.savePosition = this.savePosition.bind(this);
     this.saveText = this.saveText.bind(this);
-  }
-
-  componentWillMount() {
-    this.props.getDoc(this.props.docId);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -67,11 +61,12 @@ class FixationsWithSliders extends React.Component {
   }
 
   saveSettings(e) {
-    this.props.savePreferences(this.props.docId, "fixationsSpeed", e);
+    console.log(e);
+    this.props.savePreferences("fixationsSpeed", e);
   }
 
   savePosition(index) {
-    this.props.savePreferences(this.props.docId, "fixationIndex", index);
+    this.props.savePreferences("fixationIndex", index);
   }
 
   render() {
