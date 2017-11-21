@@ -1,33 +1,26 @@
 import React from "react";
-import _ from "underscore";
-// import Modal from "react-modal";
+import ReactDOM from 'react-dom';
+import cn from 'classnames';
 import {bool, object, string, func} from "prop-types";
 
-const styles = {
-  overlay: {
-    position: "fixed",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: "rgba(255, 255, 255, 0.75)",
-  },
-  content: {
-    position: "relative",
-    top: null,
-    left: null,
-    right: null,
-    bottom: null,
-    border: "1px solid #ccc",
-    background: "#fff",
-    WebkitOverflowScrolling: "touch",
-    borderRadius: "4px",
-    outline: "none",
-    padding: "20px 10px 10px", // 20px on top because of close button
-    margin: "10px auto",
-    maxWidth: "800px",
-    overflow: "auto",
-  },
+const ModalContent = ({
+  closeBtn,
+  onClose,
+  children,
+  title,
+  overlay,
+  position,
+}) => {
+  return (
+    <div className="modal">
+      <div className={cn({"modal__overlay": overlay})}>
+        <div className={cn("modal__content", position)}>
+          <h3>{title}</h3>
+          {children}
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default class extends React.Component {
@@ -47,22 +40,16 @@ export default class extends React.Component {
   }
 
   render() {
-    const {isOpen, contentLabel, closeBtn, closeModal} = this.props;
+    const { isOpen, children, container, overlay, title, position } = this.props;
+
     return (
-      <div
-        isOpen={isOpen}
-        aria={{
-          labelledby: "heading",
-          describedby: "full_description",
-        }}
-        style={_.extend({}, styles, this.props.style)}
-        contentLabel={contentLabel}
-      >
-        {closeBtn ? <button className="modal__close-btn" onClick={closeModal} >&times;</button> : null}
-        <div className="modal__content">
-          {this.props.children}
-        </div>
-      </div>
+      isOpen ? ReactDOM.createPortal(<ModalContent
+          overlay={overlay}
+          title={title}
+          position={position}
+        >
+        {children}
+      </ModalContent>, container) : null
     );
   }
 }
