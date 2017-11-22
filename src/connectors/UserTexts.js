@@ -1,7 +1,6 @@
 import {connect} from "react-redux";
 import Immutable from "immutable";
 import Texts from "../components/user-texts/Texts";
-import { saveText } from "../actions/actions";
 
 function mapStateToProps(state) {
   const texts = state.getIn(["user", "doc", 'texts'], Immutable.List());
@@ -10,7 +9,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    saveText: (docId, textKey, text) => dispatch(saveText(docId, textKey, text)),
+    // saveText: (docId, textKey, text) => dispatch(saveText(docId, textKey, text)),
   };
 }
 
