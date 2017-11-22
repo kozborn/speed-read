@@ -3,6 +3,22 @@
   z-index: 100;
   top: 0px;
   left: 0px;
+  .modal--close {
+    position: absolute;
+    cursor: pointer;
+    right: 0px;
+    top: 5px;
+    border: none;
+    background: transparent;
+    outline: none;
+    &:active {
+      right: -1px;
+      top: 6px;
+    }
+    &:after {
+      content: "\2716"
+    }
+  }
 }
 
 .modal__overlay {
@@ -13,10 +29,25 @@
 }
 
 .modal__content {
-  max-width: calc(50vw);
+  position: relative;
   display: inline-block;
+  padding: 20px;
+  min-width: 300px;
+  max-width: calc(50vw);
   background: #fff;
+  box-shadow: 1px 1px 10px #666;
+  &.left {
+    margin-left: 10px;
+    margin-top: 10px;
+  }
+
+  &.right {
+    margin-top: 10px;
+    margin-left: 100%;
+    transform: translateX(calc(-100% - 10px));
+  }
   &.center {
-    margin: 0px auto;
+    margin-top: 10px;
+    margin-left: 50%;
   }
 }
