@@ -19,9 +19,9 @@ export const checkText = (key, textId) => {
 
 export const savePreferences = (key, preferences) => {
   return (dispatch) => {
-    dispatch({ type: "SAVE_USER_PREFERENCES", key, preferences })  
-    dispatch(save())
-  }
+    dispatch({ type: "SAVE_USER_PREFERENCES", key, preferences });
+    dispatch(save());
+  };
 };
 
 export const addText = (text) => {
@@ -34,7 +34,7 @@ export const getUserDoc = (docId) => {
     fetchDoc(docId)
     .then((response) => {
       if (response.error) {
-        dispatch({ type: "USER_DOC_FETCHING_ERROR"});
+        dispatch({ type: "FETCHING_ERROR", response});
       } else {
         dispatch({type: "USER_DOC_FETCHED", response});
         dispatch(setUserDocumentId(docId));
@@ -45,22 +45,22 @@ export const getUserDoc = (docId) => {
 
 export const save = () => {
   return (dispatch, getState) => {
-    const userState = getState().get('user', Immutable.Map())
-    const docId = userState.get('id', null)
+    const userState = getState().get('user', Immutable.Map());
+    const docId = userState.get('id', null);
     const method = _.isEmpty(docId) ? "POST" : "PUT";
-    const docToSave = userState.get('doc', Immutable.Map())
+    const docToSave = userState.get('doc', Immutable.Map());
     const options = getOptions(method);
 
     saveDoc(docToSave.set('id', docId).toJS(), options)
     .then((response) => {
-      dispatch({type: "USER_DOC_SAVED", response})
+      dispatch({type: "USER_DOC_SAVED", response});
       return response;
     })
     .then((response) => {
-      dispatch(setUserDocumentId(response.id))
-    }) 
+      dispatch(setUserDocumentId(response.id));
+    })
     .catch((err) => {
       dispatch({type: "USER_DOC_SAVING_ERROR", err});
-    })
-  }
-}
+    });
+  };
+};
