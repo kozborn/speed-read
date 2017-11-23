@@ -26,7 +26,8 @@ const user = (state = Immutable.fromJS({
       });
     case "ADD_NEW_TEXT": {
       const texts = state.getIn(['doc', 'texts'], Immutable.List());
-      return state.setIn(['doc', 'texts'], texts.concat(action.text));
+      const newText = Immutable.fromJS(action.text);
+      return state.setIn(['doc', 'texts'], texts.push(newText.set('timestamp', Date.now())));
     }
     case "SAVE_USER_PREFERENCES": {
       return state.setIn(['doc', 'preferences', action.key], Immutable.fromJS(action.preferences));

@@ -17,17 +17,6 @@ export const checkText = (key, textId) => {
   return {type: 'SWITCH_TEXT_FOR_KEY', key, textId};
 };
 
-export const savePreferences = (key, preferences) => {
-  return (dispatch) => {
-    dispatch({ type: "SAVE_USER_PREFERENCES", key, preferences });
-    dispatch(save());
-  };
-};
-
-export const addText = (text) => {
-  return {type: "ADD_NEW_TEXT", text};
-};
-
 export const getUserDoc = (docId) => {
   return (dispatch) => {
     dispatch({type: "FETCHING_USER_DOC"});
@@ -62,5 +51,19 @@ export const save = () => {
     .catch((err) => {
       dispatch({type: "USER_DOC_SAVING_ERROR", err});
     });
+  };
+};
+
+export const savePreferences = (key, preferences) => {
+  return (dispatch) => {
+    dispatch({ type: "SAVE_USER_PREFERENCES", key, preferences });
+    dispatch(save());
+  };
+};
+
+export const addText = (text) => {
+  return (dispatch) => {
+    dispatch({type: "ADD_NEW_TEXT", text});
+    dispatch(save());
   };
 };
