@@ -1,4 +1,5 @@
 import Immutable from "immutable";
+import notificationCreator from './notification';
 
 const PREFERENCES = {
   fixationsSpeed: 1000,
@@ -23,7 +24,7 @@ function app(state = Immutable.Map({
         s.set("isFetching", false);
       });
     case "FETCHING_ERROR":
-      return state.set('notification', Immutable.fromJS(action.response));
+      return state.set('notification', notificationCreator('response-error', Immutable.fromJS(action.response)));
     case "SHOW_NOTIFICATION":
       return state.set('notification', Immutable.fromJS(action.notfication));
     case "CLOSE_NOTIFICATION":

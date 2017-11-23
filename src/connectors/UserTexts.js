@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
 import Immutable from "immutable";
-import Texts from "../components/user-texts/Texts";
+import UserTexts from "../components/UserTexts";
 
 function mapStateToProps(state) {
   const texts = state.getIn(["user", "doc", 'texts'], Immutable.List());
@@ -13,4 +13,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Texts);
+export default connect(mapStateToProps, mapDispatchToProps)(UserTexts);
