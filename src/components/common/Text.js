@@ -23,10 +23,10 @@ export default class extends React.Component {
   render() {
     const {title, text} = this.props;
     return (
-      <div className="text">
+      <div className="snippet">
         <div onClick={this.onClick}>
           <h5>{title}</h5>
-          <div className="snippet">
+          <div className="snippet--text">
             {sliceHTMLText(text)}
           </div>
         </div>
