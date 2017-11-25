@@ -1,7 +1,7 @@
 import React from "react";
 import Slider from "rc-slider";
 import {Map} from "immutable";
-import {string, func, instanceOf, oneOfType} from "prop-types";
+import { func, instanceOf, oneOfType} from "prop-types";
 import Fixations from "./Fixations";
 import handle from "../common/SliderHandle";
 

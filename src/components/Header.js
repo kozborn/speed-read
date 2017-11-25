@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { func, string } from 'prop-types';
+import { string } from 'prop-types';
 import Hamburger from './common/Hamburger';
-import Button from './common/Button';
 import logo from "../assets/logo.svg";
 
 class Header extends React.Component {

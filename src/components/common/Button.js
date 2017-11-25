@@ -7,7 +7,7 @@ const Button = props =>
     {props.children}
   </button>);
 
-const types = ['', 'apply', 'cancel', 'forward', 'back', 'submit', 'delete'];
+const types = ['', 'apply', 'cancel', 'forward', 'back', 'submit', 'delete', 'edit'];
 
 Button.propTypes = {
   type: oneOf(types),

@@ -1,6 +1,6 @@
 import _ from 'underscore';
 import Immutable from 'immutable';
-import { fetchDoc, DbUrl, getOptions, saveDoc } from '../utils/db_helpers';
+import { fetchDoc, getOptions, saveDoc } from '../utils/db_helpers';
 
 export function setUserDocumentId(docId) {
   const userDocId = docId;
