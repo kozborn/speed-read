@@ -67,3 +67,15 @@ export const addText = (text) => {
     dispatch(save());
   };
 };
+
+export const clearStatus = () => {
+  return {type: "CLEAR_STATUS"};
+};
+
+export const removeText = (textId) => {
+  return (dispatch) => {
+    dispatch({type: 'REMOVE_TEXT', textId});
+    dispatch(save());
+    dispatch({ type: "SHOW_NOTIFICATION", notification: {title: "Tekst usunięty", 'message': ""}});
+  };
+};

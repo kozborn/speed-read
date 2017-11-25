@@ -7,6 +7,10 @@ const response = (res) => {
     localStorage.clear();
     return {'title': "Nie znaleziono", message: "You are trying to fetch document that doesn't exists, remove documentId from URL and try again."};
   }
+  if (error === 'not_found' && reason === 'missing') {
+    localStorage.clear();
+    return { 'title': "Nie znaleziono", message: "You are trying to fetch document that doesn't exists, remove documentId from URL and try again." };
+  }
   return {};
 };
 
@@ -18,6 +22,7 @@ const notificationCreator = (type, data) => {
       notification = response(data);
       break;
     }
+
     default:
       notification = {title: 'Unknown error', 'message': 'Not sure what just happened'};
   }

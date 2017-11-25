@@ -27,7 +27,7 @@ export default class extends React.Component {
         <div onClick={this.onClick}>
           <h5>{title}</h5>
           <div className="snippet--text">
-            {sliceHTMLText(text)}
+            {sliceHTMLText(text, 100)}
           </div>
         </div>
       </div>
