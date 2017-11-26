@@ -3,6 +3,9 @@
 $navigationLinkColor: #eaeaea;
 
 .header {
+  position: fixed;
+  z-index: 999;
+  width: 100%;
   background-color: #222;
   text-align: center;
   padding: 10px;

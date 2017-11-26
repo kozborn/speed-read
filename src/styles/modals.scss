@@ -1,6 +1,6 @@
 .modal {
   position: absolute;
-  z-index: 100;
+  z-index: 1001;
   top: 0px;
   left: 0px;
   .modal--close {
@@ -22,6 +22,7 @@
 }
 
 .modal__overlay {
+  z-index: 1000;
   position: fixed;
   background: rgba(255, 255, 255, 0.3);
   width: 100%;

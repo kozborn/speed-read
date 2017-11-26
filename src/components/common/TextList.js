@@ -18,7 +18,7 @@ export default class extends React.Component {
 
   checkText(id) {
     this.props.checkText(this.props.textKey, id);
-    this.props.save()
+    this.props.save();
   }
 
   render() {

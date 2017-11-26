@@ -7,7 +7,7 @@ export default WrappedComponent =>
       let queryParams = "";
       const parsed = queryString.parse(window.location.search);
       const documentId = parsed.documentId;
-      if (documentId) {
+      if (documentId && documentId !== 'undefined') {
         queryParams = `?documentId=${documentId}`;
       }
       return <WrappedComponent {...this.props} documentId={documentId} queryParams={queryParams} />;

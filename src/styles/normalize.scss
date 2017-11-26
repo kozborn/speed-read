@@ -237,6 +237,7 @@ svg:not(:root) {
  * 2. Remove the margin in Firefox and Safari.
  */
 
+div[contenteditable=true],
 button,
 input,
 optgroup,

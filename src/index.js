@@ -17,6 +17,7 @@ import TableWithSliders from "./connectors/Table";
 import Fixations from "./connectors/Fixations";
 import UserTexts from "./connectors/UserTexts";
 import NewText from "./connectors/NewText";
+import EditText from "./connectors/EditText";
 import Settings from "./connectors/Settings";
 import registerServiceWorker from "./registerServiceWorker";
 import { getDefaultDoc } from "./actions/actions";
@@ -61,6 +62,7 @@ ReactDOM.render(
         <Route path="/bottom-half-text" component={BottomHalfText} />
         <Route path="/schultz-table" component={TableWithSliders} />
         <Route path="/new-text" component={NewText} />
+        <Route path="/edit-text" component={EditText} />
         <Route path="/user-texts" component={UserTexts} />
         <Route path="/settings" component={Settings} />
       </App>
