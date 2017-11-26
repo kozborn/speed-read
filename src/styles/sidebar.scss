@@ -1,0 +1,37 @@
+@import "breakpoints";
+
+.sidebar {
+  margin-top: 50px;
+  text-align: left;
+  width: 100%;
+  @include desktop {
+    width: 200px;
+  }
+  @include tablet {
+    width: 150px;
+  }
+  @include phone {
+    margin-top: 10px;
+  }
+
+  .text-list {
+    max-height: 500px;
+    overflow-y: auto;
+  }
+}
+
+.snippet {
+  margin-bottom: 20px;
+
+  h5 {
+    margin: 5px 0px;
+  }
+
+  .snippet--text {
+    cursor: pointer;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: $default-border;
+  }
+
+}

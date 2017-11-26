@@ -1,6 +1,6 @@
 import _ from 'underscore';
 import Immutable from 'immutable';
-import { fetchDoc, DbUrl, getOptions, saveDoc } from '../utils/db_helpers';
+import { fetchDoc, getOptions, saveDoc } from '../utils/db_helpers';
 
 export function setUserDocumentId(docId) {
   const userDocId = docId;
@@ -15,17 +15,6 @@ export function clearLocalStorage() {
 
 export const checkText = (key, textId) => {
   return {type: 'SWITCH_TEXT_FOR_KEY', key, textId};
-};
-
-export const savePreferences = (key, preferences) => {
-  return (dispatch) => {
-    dispatch({ type: "SAVE_USER_PREFERENCES", key, preferences });
-    dispatch(save());
-  };
-};
-
-export const addText = (text) => {
-  return {type: "ADD_NEW_TEXT", text};
 };
 
 export const getUserDoc = (docId) => {
@@ -62,5 +51,31 @@ export const save = () => {
     .catch((err) => {
       dispatch({type: "USER_DOC_SAVING_ERROR", err});
     });
+  };
+};
+
+export const savePreferences = (key, preferences) => {
+  return (dispatch) => {
+    dispatch({ type: "SAVE_USER_PREFERENCES", key, preferences });
+    dispatch(save());
+  };
+};
+
+export const addText = (text) => {
+  return (dispatch) => {
+    dispatch({type: "ADD_NEW_TEXT", text});
+    dispatch(save());
+  };
+};
+
+export const clearStatus = () => {
+  return {type: "CLEAR_STATUS"};
+};
+
+export const removeText = (textId) => {
+  return (dispatch) => {
+    dispatch({type: 'REMOVE_TEXT', textId});
+    dispatch(save());
+    dispatch({ type: "SHOW_NOTIFICATION", notification: {title: "Tekst usunięty", 'message': ""}});
   };
 };

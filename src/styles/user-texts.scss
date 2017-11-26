@@ -1,5 +1,39 @@
+@import './variables';
+
 .user-texts {
   max-width: 1000px;
   margin: 10px auto;
   text-align: left;
+
+  input {
+    width: 100%;
+    border: $default-border;
+    border-radius: 3px;
+    padding: 15px 10px;
+  }
+
+  .text-content {
+    margin-top: 10px;
+    width: 100%;
+    .content-editable {
+      border: $default-border;
+      border-radius: 3px;
+    }
+  }
+
+  .button-row {
+    margin-top: 10px;
+  }
+}
+
+.user_texts__text-header {
+  display: flex;
+  h2 {
+    margin: 0px;
+    line-height: 30px;
+    flex-grow: 1;
+  }
+  .new-text {
+    line-height: 30px;
+  }
 }

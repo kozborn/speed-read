@@ -1,5 +1,3 @@
-import {Map, List, fromJS} from "immutable";
-
 export function generateTable(count) {
   const table = [];
   for (let i = 0; i < count; i++) {
