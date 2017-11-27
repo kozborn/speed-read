@@ -4,16 +4,22 @@ import _ from 'underscore';
 import {connect} from "react-redux";
 import Immutable from "immutable";
 import UserTexts from "../components/UserTexts";
-import { clearStatus, removeText } from '../actions/user-actions';
+import withUserDoc from '../hoc/WithUserDoc';
+import { clearStatus, removeText, getUserDoc } from '../actions/user-actions';
 
 function mapStateToProps(state) {
   const texts = state.getIn(["user", "doc", 'texts'], Immutable.List());
   const status = state.getIn(['user', 'status']);
-  return { texts, status };
+  return {
+    texts,
+    status,
+    userDoc: state.get('user'),
+  };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
+    getUserDoc: userId => dispatch(getUserDoc(userId)),
     removeText: textId => dispatch(removeText(textId)),
     clearStatus: () => dispatch(clearStatus()),
   };
@@ -39,4 +45,4 @@ class UserTextsConnect extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserTextsConnect);
+export default connect(mapStateToProps, mapDispatchToProps)(withUserDoc(UserTextsConnect));

@@ -1,7 +1,8 @@
 import {connect} from "react-redux";
 import Immutable from "immutable";
 import TableWithSliders from "../components/TableWithSliders";
-import { savePreferences } from "../actions/user-actions";
+import withUserDoc from '../hoc/WithUserDoc';
+import { savePreferences, getUserDoc } from "../actions/user-actions";
 
 function mapStateToProps(state) {
   const defaultPreferences = state.getIn(['app', 'preferences'], Immutable.Map());
@@ -9,14 +10,16 @@ function mapStateToProps(state) {
   const preferences = userPreferences.merge(defaultPreferences);
   return {
     preferences,
+    userDoc: state.get('user'),
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
+    getUserDoc: userId => dispatch(getUserDoc(userId)),
     savePreferences: (key, preferences) =>
       dispatch(savePreferences(key, preferences)),
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TableWithSliders);
+export default connect(mapStateToProps, mapDispatchToProps)(withUserDoc(TableWithSliders));

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { string } from 'prop-types';
+import { withRouter } from 'react-router';
 import Hamburger from './common/Hamburger';
 import logo from "../assets/logo.svg";
 
@@ -46,6 +47,7 @@ class Header extends React.Component {
   }
 
   render() {
+    console.log(this.props)
     return (
       <header className="header">
         <img src={logo} className="logo" alt="logo" />
@@ -74,4 +76,4 @@ Header.propTypes = {
   queryParams: string.isRequired,
 };
 
-export default Header;
+export default withRouter(Header);

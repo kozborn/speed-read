@@ -3,16 +3,19 @@ import { connect } from 'react-redux';
 import { func, string, object } from 'prop-types';
 import { withRouter } from 'react-router';
 import NewText from '../components/NewText';
-import { addText } from '../actions/user-actions';
+import withUserDoc from '../hoc/WithUserDoc';
+import { addText, getUserDoc } from '../actions/user-actions';
 
 const mapStateToProps = (state) => {
   return {
+    userDoc: state.get('user'),
     status: state.getIn(['user', 'status']),
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    getUserDoc: userId => dispatch(getUserDoc(userId)),
     saveText: text => dispatch(addText(text)),
   };
 };
@@ -40,4 +43,4 @@ class NewTextConnect extends React.Component {
   }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NewTextConnect));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(withUserDoc(NewTextConnect)));
