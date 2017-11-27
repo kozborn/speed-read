@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import camelize from "underscore.string/camelize";
-import { withRouter } from "react-router";
+import { withRouter, Route } from "react-router";
 import Immutable from 'immutable';
 import { bool, string, object, node, instanceOf, func } from "prop-types";
 import Header from './Header';
@@ -59,12 +59,9 @@ class App extends Component {
 
     return (
       <div className="App">
-        <Header
-          queryParams={queryParams}
-        />
+        <Route component={Header} />
         <div className="App-body">
           <div className="page-content">
-
             {isFetching ? <Spinner /> : children}
           </div>
           {this.getSidebar(docId)}
