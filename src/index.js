@@ -56,15 +56,15 @@ ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
       <App>
-        <Route exact path="/" component={HomePage} />
-        <Route path="/fixations/:userId?" component={Fixations} />
-        <Route path="/top-half-text/:userId?" component={TopHalfText} />
-        <Route path="/bottom-half-text/:userId?" component={BottomHalfText} />
-        <Route path="/schultz-table/:userId?" component={TableWithSliders} />
-        <Route path="/new-text/:userId?" component={NewText} />
-        <Route path="/user-texts/:userId?" component={UserTexts} />
-        <Route path="/settings/:userId?" component={Settings} />
-        <Route path="/edit-text/:userId/:textId" component={EditText} />
+          <Route exact path="/" component={HomePage} />
+          <Route path="/fixations/:userId?" component={Fixations} />
+          <Route path="/top-half-text/:userId?" component={TopHalfText} />
+          <Route path="/bottom-half-text/:userId?" component={BottomHalfText} />
+          <Route path="/schultz-table/:userId?" component={TableWithSliders} />
+          <Route path="/new-text/:userId?" component={NewText} />
+          <Route path="/user-texts/:userId?" component={UserTexts} />
+          <Route path="/settings/:userId?" component={Settings} />
+          <Route path="/edit-text/:userId/:textId" component={EditText} />
       </App>
     </Router>
   </Provider>,

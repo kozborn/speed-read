@@ -1,6 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, matchPath } from 'react-router-dom';
 import { string } from 'prop-types';
+import cn from 'classnames';
 import Hamburger from './common/Hamburger';
 import logo from "../assets/logo.svg";
 
@@ -19,53 +20,47 @@ class Header extends React.Component {
     this.setState({hamburgerExpanded: !this.state.hamburgerExpanded});
   }
 
-  renderHamburgerMenu() {
-    return (<div className={'hamburger-menu'}>
-      <div className={'menuItem'}>
-        <Link to="/">Home page</Link>
-      </div>
-      <div className={'menuItem'}>
-        <Link to={`/bottom-half-text${this.props.queryParams}`}>Dolna połowa tekstu</Link>
-      </div>
-      <div className={'menuItem'}>
-        <Link to={`/top-half-text${this.props.queryParams}`}>Górna połowa tekstu</Link>
-      </div>
-      <div className={'menuItem'}>
-        <Link to={`/schultz-table${this.props.queryParams}`}>Tabela Schultz'a</Link>
-      </div>
-      <div className={'menuItem'}>
-        <Link to={`/fixations${this.props.queryParams}`}>Fiksacja</Link>
-      </div>
-      <div className={'menuItem'}>
-        <Link to={`/user-texts${this.props.queryParams}`}>Twoje teksty</Link>
-      </div>
-      <div className={'menuItem'}>
-        <Link className="settings" to={`/settings${this.props.queryParams}`}>Settings &#9881;</Link>
-      </div>
-    </div>);
+  renderMenu(hamburger = false) {
+    // https://stackoverflow.com/a/45492498/1783152
+    const match = matchPath(this.props.history.location.pathname, {
+      // You can share this string as a constant if you want
+      path: "/:module/:userId",
+    });
+
+    const userId = match && match.params && match.params.userId ? match.params.userId : "";
+
+    return (
+      <nav className={cn({'hamburger-menu': hamburger, 'navigation-top': !hamburger})}>
+        <li><Link to={`/${userId}`}>Home page</Link></li>
+        <li><Link to={`/bottom-half-text/${userId}`}>Dolna połowa tekstu</Link></li>
+        <li><Link to={`/top-half-text/${userId}`}>Górna połowa tekstu</Link></li>
+        <li><Link to={`/schultz-table/${userId}`}>Tabela Schultz'a</Link></li>
+        <li><Link to={`/fixations/${userId}`}>Fiksacja</Link></li>
+        <li><Link to={`/user-texts/${userId}`}>Twoje teksty</Link></li>
+        <li>
+          {hamburger ?
+            <Link className="settings" to={`/settings${userId}`}>
+              Settings &#9881;
+            </Link>
+          :
+            <Link className="settings" to={`/settings${userId}`}>
+              &#9881;
+            </Link>
+          }
+        </li>
+    </nav>);
   }
 
   render() {
-    console.log(this.props.match && this.props.match.params)
     return (
       <header className="header">
         <img src={logo} className="logo" alt="logo" />
-        <nav className="navigation-top">
-          <li><Link to="/">Home page</Link></li>
-          <li><Link to={`/bottom-half-text${this.props.queryParams}`}>Dolna połowa tekstu</Link></li>
-          <li><Link to={`/top-half-text${this.props.queryParams}`}>Górna połowa tekstu</Link></li>
-          <li><Link to={`/schultz-table${this.props.queryParams}`}>Tabela Schultz'a</Link></li>
-          <li><Link to={`/fixations${this.props.queryParams}`}>Fiksacja</Link></li>
-          <li><Link to={`/user-texts${this.props.queryParams}`}>Twoje teksty</Link></li>
-          <li>
-            <Link className="settings" to={`/settings${this.props.queryParams}`}>&#9881;</Link>
-          </li>
-        </nav>
+        {this.renderMenu()}
         <Hamburger
           className={'hamburger'}
           onClick={this.toggleHamburgerMenu}
         />
-        {this.state.hamburgerExpanded && this.renderHamburgerMenu()}
+        {this.state.hamburgerExpanded && this.renderMenu(true)}
       </header>
     );
   }
