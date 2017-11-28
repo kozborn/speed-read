@@ -48,7 +48,8 @@ class Header extends React.Component {
             </Link>
           }
         </li>
-    </nav>);
+      </nav>
+    );
   }
 
   render() {
