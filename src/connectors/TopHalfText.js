@@ -1,7 +1,6 @@
 import { connect } from "react-redux";
 import TopHalfText from "../components/TopHalfText";
 import { getText } from '../utils/state_helpers';
-import withUserDoc from '../hoc/WithUserDoc';
 import { getUserDoc } from '../actions/user-actions';
 
 function mapStateToProps(state) {
@@ -17,4 +16,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withUserDoc(TopHalfText));
+export default connect(mapStateToProps, mapDispatchToProps)(TopHalfText);

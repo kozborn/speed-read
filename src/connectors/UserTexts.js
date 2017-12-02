@@ -4,7 +4,6 @@ import _ from 'underscore';
 import {connect} from "react-redux";
 import Immutable from "immutable";
 import UserTexts from "../components/UserTexts";
-import withUserDoc from '../hoc/WithUserDoc';
 import { clearStatus, removeText, getUserDoc } from '../actions/user-actions';
 
 function mapStateToProps(state) {
@@ -45,4 +44,4 @@ class UserTextsConnect extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withUserDoc(UserTextsConnect));
+export default connect(mapStateToProps, mapDispatchToProps)(UserTextsConnect);

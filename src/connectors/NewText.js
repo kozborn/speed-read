@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { func, string, object } from 'prop-types';
 import { withRouter } from 'react-router';
 import NewText from '../components/NewText';
-import withUserDoc from '../hoc/WithUserDoc';
 import { addText, getUserDoc } from '../actions/user-actions';
 
 const mapStateToProps = (state) => {
@@ -43,4 +42,4 @@ class NewTextConnect extends React.Component {
   }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(withUserDoc(NewTextConnect)));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NewTextConnect));

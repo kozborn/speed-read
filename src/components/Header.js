@@ -21,14 +21,9 @@ class Header extends React.Component {
   }
 
   renderMenu(hamburger = false) {
-    // https://stackoverflow.com/a/45492498/1783152
-    const match = matchPath(this.props.history.location.pathname, {
-      // You can share this string as a constant if you want
-      path: "/:module/:userId",
-    });
 
-    const userId = match && match.params && match.params.userId ? match.params.userId : "";
-
+    // const userId = match && match.params && match.params.userId ? match.params.userId : "";
+    const userId = "";
     return (
       <nav className={cn({'hamburger-menu': hamburger, 'navigation-top': !hamburger})}>
         <li><Link to={`/${userId}`}>Home page</Link></li>
@@ -66,9 +61,5 @@ class Header extends React.Component {
     );
   }
 }
-
-Header.propTypes = {
-  queryParams: string.isRequired,
-};
 
 export default Header;

@@ -24,7 +24,10 @@ function app(state = Immutable.Map({
         s.set("isFetching", false);
       });
     case "FETCHING_ERROR":
-      return state.set('notification', notificationCreator('response-error', Immutable.fromJS(action.response)));
+      return state.withMutations((s) => {
+        s.set('notification', notificationCreator('response-error', Immutable.fromJS(action.response)));
+        s.set('isFetching', false);
+      });
     case "SHOW_NOTIFICATION":
       return state.set('notification', Immutable.fromJS(action.notification));
     case "CLOSE_NOTIFICATION":

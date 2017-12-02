@@ -3,7 +3,6 @@ import Immutable from 'immutable';
 import FixationsWithSliders from "../components/fixations/FixationsWithSliders";
 import { savePreferences, getUserDoc } from "../actions/user-actions";
 import { getText } from '../utils/state_helpers';
-import withUserDoc from '../hoc/WithUserDoc';
 
 function mapStateToProps(state) {
   return {
@@ -19,4 +18,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withUserDoc(FixationsWithSliders));
+export default connect(mapStateToProps, mapDispatchToProps)(FixationsWithSliders);

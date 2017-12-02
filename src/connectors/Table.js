@@ -1,7 +1,6 @@
 import {connect} from "react-redux";
 import Immutable from "immutable";
 import TableWithSliders from "../components/TableWithSliders";
-import withUserDoc from '../hoc/WithUserDoc';
 import { savePreferences, getUserDoc } from "../actions/user-actions";
 
 function mapStateToProps(state) {
@@ -22,4 +21,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withUserDoc(TableWithSliders));
+export default connect(mapStateToProps, mapDispatchToProps)(TableWithSliders);
