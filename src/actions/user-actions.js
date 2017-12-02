@@ -17,7 +17,7 @@ export const checkText = (key, textId) => {
   return {type: 'SWITCH_TEXT_FOR_KEY', key, textId};
 };
 
-export const getUserDoc = (docId) => {
+export const fetchUserDoc = (docId) => {
   return (dispatch) => {
     dispatch({type: "FETCHING_USER_DOC"});
     fetchDoc(docId)

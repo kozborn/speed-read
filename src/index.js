@@ -21,7 +21,7 @@ import EditText from "./connectors/EditText";
 import Settings from "./connectors/Settings";
 import registerServiceWorker from "./registerServiceWorker";
 import { getDefaultDoc } from "./actions/actions";
-import { getUserDoc } from './actions/user-actions';
+import { fetchUserDoc } from './actions/user-actions';
 
 const history = createBrowserHistory();
 
@@ -43,14 +43,14 @@ function logger({ getState }) {
 const store = createStore(reducer, applyMiddleware(thunkMiddleware, logger));
 store.dispatch(getDefaultDoc());
 
-const parsed = queryString.parse(window.location.search);
-const documentId = parsed.documentId;
+// const parsed = queryString.parse(window.location.search);
+// const documentId = parsed.documentId;
 
-if (documentId) {
-  store.dispatch(getUserDoc(documentId));
-} else if (localStorage.getItem("docId")) {
-  store.dispatch(getUserDoc(localStorage.getItem("docId")));
-}
+// if (documentId) {
+//   store.dispatch(getUserDoc(documentId));
+// } else if (localStorage.getItem("docId")) {
+//   store.dispatch(getUserDoc(localStorage.getItem("docId")));
+// }
 
 ReactDOM.render(
   <Provider store={store}>

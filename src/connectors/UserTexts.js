@@ -4,7 +4,7 @@ import _ from 'underscore';
 import {connect} from "react-redux";
 import Immutable from "immutable";
 import UserTexts from "../components/UserTexts";
-import { clearStatus, removeText, getUserDoc } from '../actions/user-actions';
+import { clearStatus, removeText } from '../actions/user-actions';
 
 function mapStateToProps(state) {
   const texts = state.getIn(["user", "doc", 'texts'], Immutable.List());
@@ -18,7 +18,6 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    getUserDoc: userId => dispatch(getUserDoc(userId)),
     removeText: textId => dispatch(removeText(textId)),
     clearStatus: () => dispatch(clearStatus()),
   };

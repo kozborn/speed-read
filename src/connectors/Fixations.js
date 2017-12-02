@@ -1,7 +1,7 @@
 import {connect} from "react-redux";
 import Immutable from 'immutable';
 import FixationsWithSliders from "../components/fixations/FixationsWithSliders";
-import { savePreferences, getUserDoc } from "../actions/user-actions";
+import { savePreferences } from "../actions/user-actions";
 import { getText } from '../utils/state_helpers';
 
 function mapStateToProps(state) {
@@ -13,7 +13,6 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
   return {
-    getUserDoc: userId => dispatch(getUserDoc(userId)),
     savePreferences: (key, preferences) => dispatch(savePreferences(key, preferences)),
   };
 }

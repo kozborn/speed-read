@@ -1,7 +1,6 @@
 import Immutable from 'immutable';
 import { connect } from 'react-redux';
 import Settings from '../components/settings/Settings.jsx';
-import { getUserDoc } from '../actions/user-actions';
 
 const mapStateToProps = (state) => {
   return {
@@ -11,7 +10,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getUserDoc: userId => dispatch(getUserDoc(userId)),
   };
 };
 

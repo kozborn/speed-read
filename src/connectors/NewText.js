@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { func, string, object } from 'prop-types';
 import { withRouter } from 'react-router';
 import NewText from '../components/NewText';
-import { addText, getUserDoc } from '../actions/user-actions';
+import { addText } from '../actions/user-actions';
 
 const mapStateToProps = (state) => {
   return {
@@ -14,7 +14,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getUserDoc: userId => dispatch(getUserDoc(userId)),
     saveText: text => dispatch(addText(text)),
   };
 };
