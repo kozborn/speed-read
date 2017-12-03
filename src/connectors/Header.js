@@ -3,7 +3,7 @@ import Header from '../components/Header';
 
 const mapStateToProps = (state) => {
   return {
-    docId: state.getIn(['user', 'id'], '123'),
+    docId: state.getIn(['user', 'doc', '_id'], ''),
   };
 };
 

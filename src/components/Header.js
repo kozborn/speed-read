@@ -25,7 +25,6 @@ class Header extends React.Component {
   }
 
   renderMenu(hamburger = false) {
-
     // const userId = match && match.params && match.params.userId ? match.params.userId : "";
     const { docId } = this.props;
     return (

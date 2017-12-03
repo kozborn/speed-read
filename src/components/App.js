@@ -75,7 +75,7 @@ class App extends Component {
 
     return (
       <div className="App">
-        <Route component={Header} />
+        <Header />
         <div className="App-body">
           <div className="page-content">
             {isFetching ? <Spinner /> : children}
