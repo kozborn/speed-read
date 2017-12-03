@@ -1,9 +1,9 @@
 import React from 'react';
-import { Link, matchPath } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { string } from 'prop-types';
 import cn from 'classnames';
 import Hamburger from './common/Hamburger';
-import logo from "../assets/logo.svg";
+import logo from "../assets/Logo100x100-revert.png";
 
 class Header extends React.Component {
 
