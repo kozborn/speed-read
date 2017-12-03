@@ -2,6 +2,7 @@
 @import "spinner";
 @import "variables";
 @import "breakpoints";
+@import "sidebar";
 @import "buttons";
 @import "header";
 @import "forms";
@@ -9,6 +10,7 @@
 @import "fixations";
 @import "table";
 @import "user-texts";
+@import "modals";
 
 $pageContentWidth: 800px;
 $sidebarWidth: 200px;
@@ -22,6 +24,11 @@ html, body {
   margin: 0;
   padding: 0;
   height: 100%;
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit
 }
 
 #root {
@@ -79,6 +86,7 @@ a, a:hover, a:visited, a:active {
 }
 
 .App-body {
+  padding-top: 50px;
   margin: 0px auto;
   height: 100%;
   padding-left: 20px;
@@ -96,27 +104,6 @@ a, a:hover, a:visited, a:active {
   padding: 10px;
   @include desktop {
     max-width: 800px;
-  }
-}
-
-.sidebar {
-  margin-top: 50px;
-  text-align: left;
-  width: 100%;
-  @include desktop {
-    width: 200px;
-  }
-  @include tablet {
-    width: 150px;
-  }
-  @include phone {
-    margin-top: 10px;
-  }
-  .text {
-    cursor: pointer;
-    margin-bottom: 20px;
-    padding-bottom: 20px;
-    border-bottom: $default-border;
   }
 }
 

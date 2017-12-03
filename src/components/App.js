@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import camelize from "underscore.string/camelize";
-import { withRouter } from "react-router";
-import { bool, string, object, node } from "prop-types";
-import Header from './Header';
+import { withRouter, Route } from "react-router";
+import { matchPath } from "react-router-dom";
+import Immutable from 'immutable';
+import { bool, string, object, node, instanceOf, func } from "prop-types";
+import Header from '../connectors/Header';
 import Spinner from './common/Spinner';
+import Modal from './common/Modal';
 import Footer from "../connectors/Footer";
 import TextListToChoose from "../connectors/TextListToChoose";
 
@@ -19,6 +22,9 @@ class App extends Component {
     isFetching: bool.isRequired,
     location: object.isRequired,
     children: node.isRequired,
+    notification: instanceOf(Immutable.Map).isRequired,
+    closeNotification: func.isRequired,
+    fetchUserDoc: func.isRequired,
   }
 
   constructor(props) {
@@ -26,7 +32,22 @@ class App extends Component {
     this.state = {
       sidebar: false,
     };
+    this.closeNotification = this.closeNotification.bind(this);
     this.getSidebar = this.getSidebar.bind(this);
+  }
+
+  componentDidMount() {
+    // https://stackoverflow.com/a/45492498/1783152
+    const match = matchPath(this.props.history.location.pathname, {
+      // You can share this string as a constant if you want
+      path: "/:module/:userId",
+    });
+
+    if (match && match.params.userId) {
+      this.props.fetchUserDoc(match.params.userId);
+    }
+
+    console.log(match);
   }
 
   getSidebar(docId) {
@@ -37,6 +58,10 @@ class App extends Component {
       </div>);
     }
     return null;
+  }
+
+  closeNotification() {
+    this.props.closeNotification();
   }
 
   render() {
@@ -50,17 +75,26 @@ class App extends Component {
 
     return (
       <div className="App">
-        <Header
-          queryParams={queryParams}
-        />
+        <Header />
         <div className="App-body">
           <div className="page-content">
-
             {isFetching ? <Spinner /> : children}
           </div>
           {this.getSidebar(docId)}
         </div>
         <Footer />
+        <Modal
+          isOpen={!this.props.notification.isEmpty()}
+          overlay
+          title={this.props.notification.get('title', "")}
+          position="center"
+          closeBtn
+          onClose={this.closeNotification}
+        >
+          <div className="notification">
+            {this.props.notification.get('message', '')}
+          </div>
+        </Modal>
       </div>
     );
   }

@@ -67,7 +67,8 @@ class Fixations extends React.Component {
 
   componentWillUnmount() {
     clearInterval(this.interval);
-    this.props.savePosition(this.currentElIndex);
+    // TODO fix this, it needs to know if user really wants to save this data
+    // this.props.savePosition(this.currentElIndex);
   }
 
   updateCurrentElIndex(e) {

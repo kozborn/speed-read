@@ -3,7 +3,7 @@ import Footer from "../components/Footer";
 
 function mapStateToProps(state) {
   const docId = state.getIn(["user", "docId"], '');
-  return {docId};
+  return { docId, queryParams: `/${docId}` };
 }
 
 function mapDispatchToProps(dispatch) {

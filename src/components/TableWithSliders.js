@@ -1,7 +1,7 @@
 import React from "react";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
-import {instanceOf, func, string} from "prop-types";
+import {instanceOf, func } from "prop-types";
 import {Map} from "immutable";
 import Table from "./Table";
 import handle from "./common/SliderHandle";

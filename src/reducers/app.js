@@ -1,4 +1,5 @@
-import {Map, fromJS} from "immutable";
+import Immutable from "immutable";
+import notificationCreator from './notification';
 
 const PREFERENCES = {
   fixationsSpeed: 1000,
@@ -8,19 +9,29 @@ const PREFERENCES = {
   },
 };
 
-function app(state = new Map({
+function app(state = Immutable.Map({
   isFetching: false,
-  defaultDoc: new Map(),
-  defaultPreferences: fromJS(PREFERENCES),
+  defaultDoc: Immutable.Map(),
+  defaultPreferences: Immutable.fromJS(PREFERENCES),
+  notification: Immutable.Map(),
 }), action) {
   switch (action.type) {
     case "FETCHING_DEFAULT_DOC":
       return state.set("isFetching", true);
     case "DEFAULT_DOC_FETCHED":
       return state.withMutations((s) => {
-        s.set("defaultDoc", fromJS(action.response));
+        s.set("defaultDoc", Immutable.fromJS(action.response));
         s.set("isFetching", false);
       });
+    case "FETCHING_ERROR":
+      return state.withMutations((s) => {
+        s.set('notification', notificationCreator('response-error', Immutable.fromJS(action.response)));
+        s.set('isFetching', false);
+      });
+    case "SHOW_NOTIFICATION":
+      return state.set('notification', Immutable.fromJS(action.notification));
+    case "CLOSE_NOTIFICATION":
+      return state.set('notification', Immutable.Map());
     default:
       return state;
   }

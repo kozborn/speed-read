@@ -45,6 +45,12 @@
     &.back {
       @include iconLeftButton("\3c")
     }
+    &.delete {
+      @include iconLeftButton("\2612")
+    }
+    &.edit {
+      @include iconLeftButton("\270E")
+    }
   }
 
   &.icon-right {
@@ -59,6 +65,12 @@
     }
     &.back {
       @include iconRightButton("\3c")
+    }
+    &.delete {
+      @include iconRightButton("\2612")
+    }
+    &.edit {
+      @include iconRightButton("\270E")
     }
   }
 

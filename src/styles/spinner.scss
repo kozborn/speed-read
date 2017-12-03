@@ -6,9 +6,12 @@
   .spinner {
     margin: 0px auto;
     animation: spinner-animation infinite 5s linear;
-    height: 20px;
-    width: 20px;
-    background: red;
+    height: 30px;
+    width: 30px;
+    img {
+      width: 100%;
+      height: 100%;
+    }
   }
 }
 

@@ -1,24 +1,15 @@
-import React from 'react';
+import Immutable from 'immutable';
 import { connect } from 'react-redux';
-import SettingsComponent from '../components/settings/Settings.jsx';
-
-class Settings extends React.Component {
-  render() {
-    return (
-      <SettingsComponent />
-    );
-  }
-}
+import Settings from '../components/settings/Settings.jsx';
 
 const mapStateToProps = (state) => {
   return {
-
+    userDoc: state.get('user'),
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-
   };
 };
 

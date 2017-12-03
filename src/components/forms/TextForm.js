@@ -59,7 +59,7 @@ export default class TextForm extends Component {
   render() {
     return (
       <div className="text-form">
-        <div className="form-row">
+        <div className="title">
           <input
             type="text"
             className="form-control"
@@ -67,14 +67,14 @@ export default class TextForm extends Component {
             onChange={this.changeTitle}
           />
         </div>
-        <div className="form-row">
+        <div className="text-content">
           <ContentEditable
-            className="form-control"
+            className="content-editable"
             html={this.state.text}
             onChange={this.changeText}
           />
         </div>
-        <div className="form-row">
+        <div className="button-row">
           <button className="btn btn-sm btn-default" onClick={this.saveText}>
             Zapisz
           </button>

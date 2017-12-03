@@ -1,23 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { func } from 'prop-types';
-import TextForm from '../components/forms/TextForm';
+import { func, string, object } from 'prop-types';
+import { withRouter } from 'react-router';
+import NewText from '../components/NewText';
 import { addText } from '../actions/user-actions';
 
-const NewText = ({ saveText }) => {
-  return (
-    <div>
-      <TextForm saveText={saveText} />
-    </div>
-  );
-};
-
-NewText.propTypes = {
-  saveText: func.isRequired,
-};
-
-const mapStateToProps = () => {
-  return {};
+const mapStateToProps = (state) => {
+  return {
+    userDoc: state.get('user'),
+    status: state.getIn(['user', 'status']),
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -26,4 +18,27 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewText);
+class NewTextConnect extends React.Component {
+
+  static propTypes = {
+    saveText: func.isRequired,
+    status: string,
+    history: object.isRequired,
+  }
+
+  static defaultProps = {
+    status: "",
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.status === 'saved') {
+      this.props.history.push('/user-texts');
+    }
+  }
+
+  render() {
+    return <NewText saveText={this.props.saveText} />;
+  }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NewTextConnect));
