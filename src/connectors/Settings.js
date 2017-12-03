@@ -4,13 +4,12 @@ import Settings from '../components/settings/Settings.jsx';
 
 const mapStateToProps = (state) => {
   return {
-    settings: state.get('user', Immutable.Map()),
+    userDoc: state.get('user'),
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-
   };
 };
 

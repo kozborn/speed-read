@@ -3,6 +3,7 @@ import { withRouter } from 'react-router';
 import Immutable from 'immutable';
 import App from '../components/App';
 import { closeNotification } from '../actions/actions';
+import { fetchUserDoc } from '../actions/user-actions';
 
 const mapStateToProps = (state) => {
   const isFetching = state.getIn(['user', 'isFetching']) || state.getIn(['app', 'isFetching']);
@@ -16,6 +17,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    fetchUserDoc: docId => dispatch(fetchUserDoc(docId)),
     closeNotification: () => dispatch(closeNotification()),
   };
 };

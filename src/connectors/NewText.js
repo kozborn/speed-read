@@ -7,6 +7,7 @@ import { addText } from '../actions/user-actions';
 
 const mapStateToProps = (state) => {
   return {
+    userDoc: state.get('user'),
     status: state.getIn(['user', 'status']),
   };
 };

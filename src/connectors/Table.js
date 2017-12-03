@@ -9,6 +9,7 @@ function mapStateToProps(state) {
   const preferences = userPreferences.merge(defaultPreferences);
   return {
     preferences,
+    userDoc: state.get('user'),
   };
 }
 

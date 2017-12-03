@@ -28,9 +28,8 @@ export const saveDoc = (data, options = {}) => {
         .then((e) => {
           return saveDoc(_.extend(data, { _rev: e._rev }), options);
         });
-    } 
-    else
-      return response.json()
+    }
+    return response.json();
   })
   .catch(ex => ex);
 }
