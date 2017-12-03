@@ -6,6 +6,7 @@ import { getText } from '../utils/state_helpers';
 
 function mapStateToProps(state) {
   return {
+    userDoc: state.get('user'),
     text: getText(state, "fixations"),
     preferences: state.getIn(['user', 'doc', 'preferences'], Immutable.Map()),
   };

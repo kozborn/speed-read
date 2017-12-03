@@ -9,7 +9,11 @@ import { clearStatus, removeText } from '../actions/user-actions';
 function mapStateToProps(state) {
   const texts = state.getIn(["user", "doc", 'texts'], Immutable.List());
   const status = state.getIn(['user', 'status']);
-  return { texts, status };
+  return {
+    texts,
+    status,
+    userDoc: state.get('user'),
+  };
 }
 
 function mapDispatchToProps(dispatch) {

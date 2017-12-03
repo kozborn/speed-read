@@ -8,7 +8,7 @@ $navigationLinkColor: #eaeaea;
   width: 100%;
   background-color: #222;
   text-align: center;
-  padding: 10px;
+  padding: 5px;
   color: white;
   border-bottom: 1px solid #eaeaea;
   display: flex;
@@ -37,8 +37,6 @@ nav {
   display: none;
   @include phone {
     display: inline-block;
-    margin-top: 5px;
-    margin-right: 10px;
   }
   float: right;
   &.hamburger-menu-btn {
@@ -46,7 +44,7 @@ nav {
     border: 1px solid #dddddd;
     border-radius: 4px;
     background-color: transparent;
-    padding: 9px 10px;
+    padding: 4px 5px;
     outline: none;
     &:hover {
       background-color: #dddddd;
@@ -55,7 +53,7 @@ nav {
 }
 
 .hamburger-menu {
-  top: 70px;
+  top: 61px;
   position: absolute;
   z-index: 2;
   left: 0;
@@ -73,12 +71,16 @@ nav {
     display: none;
   }
 
-  .menuItem {
+  li {
     width: 100%;
     text-align: center;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    border-bottom: 1px solid #eaeaea;
+    cursor: pointer;
     a {
+      padding-top: 15px;
+      padding-bottom: 15px;
+      display: block;
+      width: 100%;
       color: darken($navigationLinkColor, 70%);
       font-size: 16px;
       &:hover {
@@ -103,7 +105,7 @@ nav {
 
 .logo {
   animation: App-logo-spin infinite 20s linear;
-  height: 40px;
+  height: 50px;
   float: left;
 }
 

@@ -21,7 +21,7 @@ import EditText from "./connectors/EditText";
 import Settings from "./connectors/Settings";
 import registerServiceWorker from "./registerServiceWorker";
 import { getDefaultDoc } from "./actions/actions";
-import { getUserDoc } from './actions/user-actions';
+import { fetchUserDoc } from './actions/user-actions';
 
 const history = createBrowserHistory();
 
@@ -43,28 +43,29 @@ function logger({ getState }) {
 const store = createStore(reducer, applyMiddleware(thunkMiddleware, logger));
 store.dispatch(getDefaultDoc());
 
-const parsed = queryString.parse(window.location.search);
-const documentId = parsed.documentId;
+// const parsed = queryString.parse(window.location.search);
+// const documentId = parsed.documentId;
 
-if (documentId) {
-  store.dispatch(getUserDoc(documentId));
-} else if (localStorage.getItem("docId")) {
-  store.dispatch(getUserDoc(localStorage.getItem("docId")));
-}
+// if (documentId) {
+//   store.dispatch(getUserDoc(documentId));
+// } else if (localStorage.getItem("docId")) {
+//   store.dispatch(getUserDoc(localStorage.getItem("docId")));
+// }
 
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
       <App>
         <Route exact path="/" component={HomePage} />
-        <Route path="/fixations" component={Fixations} />
-        <Route path="/top-half-text" component={TopHalfText} />
-        <Route path="/bottom-half-text" component={BottomHalfText} />
-        <Route path="/schultz-table" component={TableWithSliders} />
-        <Route path="/new-text" component={NewText} />
-        <Route path="/edit-text" component={EditText} />
-        <Route path="/user-texts" component={UserTexts} />
-        <Route path="/settings" component={Settings} />
+        <Route path="/home/:userId?" component={HomePage} />
+        <Route path="/fixations/:userId?" component={Fixations} />
+        <Route path="/top-half-text/:userId?" component={TopHalfText} />
+        <Route path="/bottom-half-text/:userId?" component={BottomHalfText} />
+        <Route path="/schultz-table/:userId?" component={TableWithSliders} />
+        <Route path="/new-text/:userId?" component={NewText} />
+        <Route path="/user-texts/:userId?" component={UserTexts} />
+        <Route path="/settings/:userId?" component={Settings} />
+        <Route path="/edit-text/:userId/:textId" component={EditText} />
       </App>
     </Router>
   </Provider>,
