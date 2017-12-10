@@ -11,7 +11,7 @@ import Footer from "../connectors/Footer";
 import TextListToChoose from "../connectors/TextListToChoose";
 
 const pageWithSidebar = (location) => {
-  const key = camelize(location.replace("/", ""));
+  const key = camelize(location);
   return (["fixations", "bottomHalfText", "topHalfText"].indexOf(key) !== -1);
 };
 
@@ -46,18 +46,23 @@ class App extends Component {
     if (match && match.params.userId) {
       this.props.fetchUserDoc(match.params.userId);
     }
-
-    console.log(match);
   }
 
   getSidebar(docId) {
-    if (pageWithSidebar(this.props.location.pathname)) {
-      const key = camelize(this.props.location.pathname.replace("/", ""));
-      return (<div className="sidebar">
-        <TextListToChoose docId={docId} textKey={key} />
-      </div>);
+    const location = matchPath(this.props.history.location.pathname, {
+      // You can share this string as a constant if you want
+      path: "/:module/:userId",
+    });
+    if (location && location.params) {
+      if (pageWithSidebar(location.params.module)) {
+        const key = camelize(location.params.module);
+        return (<div className="sidebar">
+          <TextListToChoose docId={docId} textKey={key} />
+        </div>);
+      }
+    } else {
+      return null;
     }
-    return null;
   }
 
   closeNotification() {

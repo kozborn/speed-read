@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { string } from 'prop-types';
 import cn from 'classnames';
 import Hamburger from './common/Hamburger';
-import logo from "../assets/Logo100x100-revert.png";
+import logo from "../assets/Logo100x100.png";
 
 class Header extends React.Component {
 

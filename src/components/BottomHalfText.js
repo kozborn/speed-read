@@ -1,12 +1,12 @@
 import React from "react";
 import {Map} from "immutable";
 import { instanceOf } from "prop-types";
-import { stringDivider } from "../utils/helpers";
-
-const PREFIX = "<div class='wrapper'>";
-const POSTFIX = "<div class='show-bottom-letters'></div></div>";
+import { wrapEachWordWithSpanAndAddCover } from "../utils/helpers";
 
 const createMarkup = (markup) => { return { __html: markup}; };
+const prepareText = (text) => {
+  return wrapEachWordWithSpanAndAddCover(text, 'bottom-half-text');
+};
 
 class BottomHalfText extends React.Component {
 
@@ -22,12 +22,12 @@ class BottomHalfText extends React.Component {
   }
 
   componentDidMount() {
-    const textWrapped = stringDivider(this.props.text.get("text", ""), 100, PREFIX, POSTFIX);
+    const textWrapped = prepareText(this.props.text.get('text'));
     this.setState({textWrapped});
   }
 
   componentWillReceiveProps(nextProps) {
-    const textWrapped = stringDivider(nextProps.text.get("text", ""), 100, PREFIX, POSTFIX);
+    const textWrapped = prepareText(nextProps.text.get("text"));
     this.setState({textWrapped});
   }
 
@@ -35,8 +35,7 @@ class BottomHalfText extends React.Component {
     return (
       <div className="bottom-half-text">
         <div
-          className="text-container"
-          ref={(e) => { this.textContainer = e; }}
+          className="text-container text-with-helpers"
           dangerouslySetInnerHTML={createMarkup(this.state.textWrapped)}
         />
       </div>
