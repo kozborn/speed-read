@@ -12,7 +12,7 @@ function mapStateToProps(state) {
   return {
     texts,
     status,
-    docId: state.getIn(['user', 'id']),
+    docId: state.getIn(['user', 'id'], "") || "",
   };
 }
 

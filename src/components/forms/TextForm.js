@@ -1,21 +1,22 @@
 import React, {Component} from "react";
-import {func, string} from "prop-types";
-import ContentEditable from "react-contenteditable";
-import { sanitizeString, guid } from "../../utils/helpers";
+import Immutable from 'immutable';
+import { func, string, instanceOf} from "prop-types";
+import { guid } from "../../utils/helpers";
+import DraftEditor from "../common/Editor";
 
 export default class TextForm extends Component {
 
   static propTypes = {
     id: string,
     title: string,
-    text: string,
+    text: instanceOf(Immutable.Map),
     saveText: func.isRequired,
   }
 
   static defaultProps = {
     id: null,
     title: "Title",
-    text: "Dodaj swój text",
+    text: Immutable.Map(),
   }
 
   constructor(props) {
@@ -25,7 +26,6 @@ export default class TextForm extends Component {
       text: this.props.text,
     };
     this.changeTitle = this.changeTitle.bind(this);
-    this.changeText = this.changeText.bind(this);
     this.saveText = this.saveText.bind(this);
     this.textareaRef = this.textareaRef.bind(this);
   }
@@ -38,12 +38,9 @@ export default class TextForm extends Component {
     this.setState({title: e.target.value});
   }
 
-  changeText(evt) {
-    this.setState({text: sanitizeString(evt.target.value)});
-  }
-
   saveText() {
-    const {title, text} = this.state;
+    const { title } = this.state;
+    const text = this.editor.getContent();
     const data = {
       id: this.props.id || guid(),
       title,
@@ -68,10 +65,10 @@ export default class TextForm extends Component {
           />
         </div>
         <div className="text-content">
-          <ContentEditable
-            className="content-editable"
-            html={this.state.text}
-            onChange={this.changeText}
+          <DraftEditor
+            ref={(e) => { this.editor = e; }}
+            placeholder={"Dodaj swój tekst"}
+            initialText={this.state.text}
           />
         </div>
         <div className="button-row">

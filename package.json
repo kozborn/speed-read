@@ -2,9 +2,9 @@
   "name": "schultz-table",
   "version": "0.1.0",
   "private": true,
-
   "dependencies": {
     "classnames": "^2.2.5",
+    "draft-js": "^0.10.4",
     "immutable": "^3.8.1",
     "prop-types": "^15.5.10",
     "query-string": "^4.3.4",
