@@ -35,13 +35,28 @@ const user = (state = Immutable.fromJS({
       });
 
     case "ADD_NEW_TEXT": {
-      const texts = state.getIn(['doc', 'texts']);
+      const texts = state.getIn(['doc', 'texts'], Immutable.List());
       const newText = Immutable.fromJS(action.text);
       return state.setIn(['doc', 'texts'], texts.push(newText.set('timestamp', Date.now())));
     }
 
+    case "UPDATE_TEXT": {
+      const texts = state.getIn(['doc', 'texts']);
+      const indexOfCurrentText = texts.findIndex((text) => {
+        return text.get('id') === action.text.id;
+      });
+
+      const updatedTexts = texts.update(indexOfCurrentText, (text) => {
+        return text.set('title', action.text.title)
+        .set('text', action.text.text);
+      });
+
+      return state.setIn(['doc', 'texts'], updatedTexts);
+    }
+
     case "REMOVE_TEXT": {
-      const texts = state.getIn(["doc", "texts"]).filter(text => text.get('id') !== action.textId);
+      const texts = state.getIn(["doc", "texts"], Immutable.List())
+      .filter(text => text.get('id') !== action.textId);
       return state.setIn(["doc", 'texts'], texts);
     }
 

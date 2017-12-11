@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import camelize from "underscore.string/camelize";
-import { withRouter, Route } from "react-router";
+import { withRouter } from "react-router";
 import { matchPath } from "react-router-dom";
 import Immutable from 'immutable';
 import { bool, string, object, node, instanceOf, func } from "prop-types";
@@ -18,9 +18,8 @@ const pageWithSidebar = (location) => {
 class App extends Component {
 
   static propTypes = {
-    docId: string.isRequired,
     isFetching: bool.isRequired,
-    location: object.isRequired,
+    history: object.isRequired,
     children: node.isRequired,
     notification: instanceOf(Immutable.Map).isRequired,
     closeNotification: func.isRequired,
@@ -48,7 +47,7 @@ class App extends Component {
     }
   }
 
-  getSidebar(docId) {
+  getSidebar() {
     const location = matchPath(this.props.history.location.pathname, {
       // You can share this string as a constant if you want
       path: "/:module/:userId",
@@ -57,7 +56,7 @@ class App extends Component {
       if (pageWithSidebar(location.params.module)) {
         const key = camelize(location.params.module);
         return (<div className="sidebar">
-          <TextListToChoose docId={docId} textKey={key} />
+          <TextListToChoose textKey={key} />
         </div>);
       }
     } else {
@@ -70,13 +69,7 @@ class App extends Component {
   }
 
   render() {
-    let queryParams = "";
     const {isFetching, children} = this.props;
-
-    const docId = this.props.docId ? this.props.docId : localStorage.getItem("docId");
-    if (docId) {
-      queryParams = `?documentId=${docId}`;
-    }
 
     return (
       <div className="App">
@@ -85,7 +78,10 @@ class App extends Component {
           <div className="page-content">
             {isFetching ? <Spinner /> : children}
           </div>
-          {this.getSidebar(docId)}
+          {
+            // TODO MAKE THIS AS COMPONENT
+          }
+          {this.getSidebar()}
         </div>
         <Footer />
         <Modal

@@ -12,7 +12,7 @@ function mapStateToProps(state) {
   return {
     texts,
     status,
-    userDoc: state.get('user'),
+    docId: state.getIn(['user', 'id']),
   };
 }
 
@@ -30,6 +30,7 @@ class UserTextsConnect extends React.Component {
     clearStatus: func.isRequired,
     removeText: func.isRequired,
     status: string.isRequired,
+    docId: string.isRequired,
   }
 
   componentDidMount() {
@@ -39,7 +40,12 @@ class UserTextsConnect extends React.Component {
   }
 
   render() {
-    return <UserTexts removeText={this.props.removeText} texts={this.props.texts} />;
+    return (<UserTexts
+      docId={this.props.docId}
+      removeText={this.props.removeText}
+      texts={this.props.texts}
+    />
+    );
   }
 }
 

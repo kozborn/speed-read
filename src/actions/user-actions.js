@@ -68,6 +68,15 @@ export const addText = (text) => {
   };
 };
 
+export const updateText = (text) => {
+  return (dispatch) => {
+    dispatch({type: "UPDATE_TEXT", text});
+    dispatch(save());
+    // TODO create something different
+    // dispatch({type: "SHOW_NOTIFICATION", notification: { title: "Zapisano", 'message': ""}});
+  };
+};
+
 export const clearStatus = () => {
   return {type: "CLEAR_STATUS"};
 };
