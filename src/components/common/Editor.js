@@ -1,6 +1,6 @@
 import React from 'react';
 import Immutable from 'immutable';
-import { instanceOf, string, bool } from "prop-types";
+import { instanceOf, string, bool, oneOfType } from "prop-types";
 import { Editor,
   EditorState,
   ContentState,
@@ -13,7 +13,10 @@ class DraftEditor extends React.Component {
   static propTypes = {
     placeholder: string,
     readonly: bool,
-    initialText: instanceOf(Immutable.Map).isRequired,
+    initialText: oneOfType([
+      instanceOf(Immutable.Map),
+      string,
+    ]).isRequired,
   }
 
   static defaultProps = {
@@ -23,22 +26,33 @@ class DraftEditor extends React.Component {
 
   constructor(props) {
     super(props);
-    let initialContentState;
-    if (Immutable.Map.isMap(props.initialText) && !props.initialText.isEmpty()) {
-      const state = convertFromRaw(props.initialText.toJS());
-      initialContentState = EditorState.createWithContent(state);
-    } else if (typeof props.initialText === 'string') {
-      const state = ContentState.createFromText(props.initialText);
-      initialContentState = EditorState.createWithContent(state);
-    } else {
-      initialContentState = EditorState.createEmpty();
-    }
+    const initialContentState = this.setInitialText(props.initialText);
+    
 
     this.state = {
       editorState: initialContentState,
     };
     this.onChange = this.onChange.bind(this);
     this.getContent = this.getContent.bind(this);
+    this.setInitialText = this.setInitialText.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({editorState: this.setInitialText(nextProps.initialText)})
+  }
+
+  setInitialText(initialText) {
+    let initialContentState;
+    if (Immutable.Map.isMap(initialText) && !initialText.isEmpty()) {
+      const state = convertFromRaw(initialText.toJS());
+      initialContentState = EditorState.createWithContent(state);
+    } else if (typeof initialText === 'string') {
+      const state = ContentState.createFromText(initialText);
+      initialContentState = EditorState.createWithContent(state);
+    } else {
+      initialContentState = EditorState.createEmpty();
+    }
+    return initialContentState;
   }
 
   onChange(editorState) {

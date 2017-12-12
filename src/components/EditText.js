@@ -7,7 +7,6 @@ const EditText = ({
   textToEdit,
   saveText,
 }) => {
-  console.log(textToEdit.get('text'));
   return (
     <div className="user-texts">
       <TextForm
