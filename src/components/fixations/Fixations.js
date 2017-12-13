@@ -72,7 +72,7 @@ class Fixations extends React.Component {
   }
 
   updateCurrentElIndex(e) {
-    const index = parseInt(e.target.closest(".wrapper-content").getAttribute("data-element-index"));
+    const index = parseInt(e.target.closest(".wrapper-content").getAttribute("data-element-index"), 10);
     this.setCurrentElIndex(index);
     this.props.savePosition(index);
   }

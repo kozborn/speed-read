@@ -1,3 +1,5 @@
+import Immutable from 'immutable';
+
 export function generateTable(count) {
   const table = [];
   for (let i = 0; i < count; i++) {
@@ -108,8 +110,22 @@ export const flattenHTML = (html) => {
   return flattenEl.innerHTML;
 };
 
+export const addWordWrapper = (element, className = "x") => {
+  const el = document.createElement('div');
+  const words = element.textContent.split(" ");
+  for (let i = 0; i < words.length; i++) {
+    const word = document.createElement("span");
+    word.innerText = words[i] + " ";
+    const wrapper = document.createElement('span');
+    wrapper.classList.add(className);
+    word.appendChild(wrapper);
+    el.appendChild(word);
+  }
+  return el;
+};
+
+
 export const wrapEachWordWithSpanAndAddCover = (html, className) => {
-  console.log(html);
   const el = document.createElement("div");
   const flattenEl = document.createElement("div");
   el.innerHTML = html;
@@ -131,21 +147,3 @@ export const wrapEachWordWithSpanAndAddCover = (html, className) => {
   return flattenEl;
 };
 
-export const wrapEachWordWithSpanAndAddCoverDraft = (html, className) => {
-  console.log(html)
-  return html;
-}
-
-export const addWordWrapper = (element, className) => {
-  const el = document.createElement('div');
-  const words = element.textContent.split(" ");
-  for (let i = 0; i < words.length; i++) {
-    const word = document.createElement("span");
-    word.innerText = words[i] + " ";
-    const wrapper = document.createElement('span');
-    wrapper.classList.add(className);
-    word.appendChild(wrapper);
-    el.appendChild(word);
-  }
-  return el;
-};

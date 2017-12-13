@@ -4,8 +4,7 @@ import cn from 'classnames';
 import { Link } from 'react-router-dom';
 import Immutable from 'immutable';
 import Button from '../common/Button';
-import DraftEditor from '../common/Editor'
-import HTMLTextSnippet from '../common/HTMLTextSnippet';
+import DraftEditor from '../common/Editor';
 
 const Texts = ({ docId, texts, removeText }) =>
   (

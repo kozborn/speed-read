@@ -3,7 +3,7 @@ import camelize from "underscore.string/camelize";
 import { withRouter } from "react-router";
 import { matchPath } from "react-router-dom";
 import Immutable from 'immutable';
-import { bool, string, object, node, instanceOf, func } from "prop-types";
+import { bool, object, node, instanceOf, func } from "prop-types";
 import Header from '../connectors/Header';
 import Spinner from './common/Spinner';
 import Modal from './common/Modal';

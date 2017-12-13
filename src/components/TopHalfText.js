@@ -2,9 +2,13 @@ import React from "react";
 import { instanceOf } from "prop-types";
 import { Map } from "immutable";
 import DraftEditor from "./common/Editor";
-import { wrapEachWordWithSpanAndAddCoverDraft } from "../utils/helpers";
+import {
+  wrapEachWordWithSpanAndAddCoverDraft,
+  prepareContentStateForHalfText,
+} from "../utils/editor_helpers";
 
 const prepareText = (text) => {
+  // return prepareContentStateForHalfText(text);
   return wrapEachWordWithSpanAndAddCoverDraft(text, 'top-half-text');
 };
 const createMarkup = (markup) => { return { __html: markup }; };
@@ -36,7 +40,7 @@ class TopHalfText extends React.Component {
     return (
       <div className="top-half-text">
         <DraftEditor
-          readonly
+          readOnly
           ref={(e) => { this.editor = e; }}
           initialText={this.state.textWrapped}
         />

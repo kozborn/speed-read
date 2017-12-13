@@ -2,18 +2,20 @@ import React from 'react';
 import Immutable from 'immutable';
 import { instanceOf, string, bool, oneOfType } from "prop-types";
 import { Editor,
-  EditorState,
   ContentState,
-  convertFromRaw,
+  EditorState,
   convertToRaw,
 } from 'draft-js';
+import { getInitialState } from '../../utils/editor_helpers';
 
 class DraftEditor extends React.Component {
 
   static propTypes = {
     placeholder: string,
-    readonly: bool,
+    readOnly: bool,
     initialText: oneOfType([
+      instanceOf(ContentState),
+      instanceOf(EditorState),
       instanceOf(Immutable.Map),
       string,
     ]).isRequired,
@@ -21,42 +23,30 @@ class DraftEditor extends React.Component {
 
   static defaultProps = {
     placeholder: "",
-    readonly: false,
+    readOnly: false,
   }
 
   constructor(props) {
     super(props);
-    const initialContentState = this.setInitialText(props.initialText);
-    
+    const initialContentState = getInitialState(props.initialText);
 
     this.state = {
       editorState: initialContentState,
     };
     this.onChange = this.onChange.bind(this);
     this.getContent = this.getContent.bind(this);
-    this.setInitialText = this.setInitialText.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({editorState: this.setInitialText(nextProps.initialText)})
-  }
-
-  setInitialText(initialText) {
-    let initialContentState;
-    if (Immutable.Map.isMap(initialText) && !initialText.isEmpty()) {
-      const state = convertFromRaw(initialText.toJS());
-      initialContentState = EditorState.createWithContent(state);
-    } else if (typeof initialText === 'string') {
-      const state = ContentState.createFromText(initialText);
-      initialContentState = EditorState.createWithContent(state);
+    if (nextProps.initialText instanceof EditorState) {
+      this.setState({ editorState: nextProps.initialText});
     } else {
-      initialContentState = EditorState.createEmpty();
+      this.setState({ editorState: getInitialState(nextProps.initialText.getCurrentContent())});
     }
-    return initialContentState;
   }
 
   onChange(editorState) {
-    this.setState({editorState});
+    this.setState({ editorState });
   }
 
   getContent() {
@@ -66,6 +56,7 @@ class DraftEditor extends React.Component {
   render() {
     return (
       <Editor
+        readOnly={this.props.readOnly}
         placeholder={this.props.placeholder}
         ref={(e) => { this.editor = e; }}
         editorState={this.state.editorState}

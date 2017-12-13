@@ -1,5 +1,5 @@
 import React from "react";
-import {string, func} from "prop-types";
+import { oneOfType, object, string, func} from "prop-types";
 import { sliceHTMLText } from "../../utils/helpers";
 
 export default class extends React.Component {
@@ -7,7 +7,9 @@ export default class extends React.Component {
   static propTypes = {
     id: string.isRequired,
     title: string.isRequired,
-    text: string.isRequired,
+    text: oneOfType([
+      object, string,
+    ]).isRequired,
     onCheck: func.isRequired,
   }
 
