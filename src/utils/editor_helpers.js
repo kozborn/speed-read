@@ -38,9 +38,10 @@ const HandleSpan = (props) => {
   return <span className="dupa" >{props.children}</span>;
 };
 
-const HANDLE_REGEX = /\@[\w]+/g;
+const MATCH_WORD = /[\w]+/g;
+const MATCH_ANYTHING_BUT_WHITESPACE = /[\S]+/g;
 const handleStrategy = (contentBlock, callback, contentState) => {
-  findWithRegex(HANDLE_REGEX, contentBlock, callback);
+  findWithRegex(MATCH_ANYTHING_BUT_WHITESPACE, contentBlock, callback);
 };
 
 
