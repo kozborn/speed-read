@@ -41,7 +41,7 @@ class DraftEditor extends React.Component {
     if (nextProps.initialText instanceof EditorState) {
       this.setState({ editorState: nextProps.initialText});
     } else {
-      this.setState({ editorState: getInitialState(nextProps.initialText.getCurrentContent())});
+      this.setState({ editorState: getInitialState(nextProps.initialText)});
     }
   }
 

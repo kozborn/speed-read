@@ -1,4 +1,4 @@
-import React from 'react';
+import ReactDOMServer from 'react-dom/server';
 import Immutable from 'immutable';
 import {
   EditorState,
@@ -34,10 +34,6 @@ export const findWithRegex = (regex, contentBlock, callback) => {
   }
 };
 
-const HandleSpan = (props) => {
-  return <span className="dupa" >{props.children}</span>;
-};
-
 const MATCH_WORD = /[\w]+/g;
 const MATCH_ANYTHING_BUT_WHITESPACE = /[\S]+/g;
 const handleStrategy = (contentBlock, callback, contentState) => {
@@ -45,13 +41,15 @@ const handleStrategy = (contentBlock, callback, contentState) => {
 };
 
 
-export const wrapEachWordWithSpanAndAddCoverDraft = (text, className) => {
+export const wrapEachWordWithSpanAndAddCoverDraft = (text, component) => {
   const decorator = new CompositeDecorator([{
+    component,
     strategy: handleStrategy,
-    component: HandleSpan,
   }]);
-  const contentState = getInitialState(text, decorator);
-  return contentState;
+  return new Promise((resolve) => {
+    const contentState = getInitialState(text, decorator);
+    resolve(contentState);
+  });
 };
 
 export const prepareContentStateForHalfText = (contentState) => {

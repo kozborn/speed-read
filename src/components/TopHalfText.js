@@ -1,17 +1,22 @@
 import React from "react";
-import { instanceOf } from "prop-types";
+import { instanceOf, node } from "prop-types";
 import { Map } from "immutable";
 import DraftEditor from "./common/Editor";
 import {
   wrapEachWordWithSpanAndAddCoverDraft,
-  prepareContentStateForHalfText,
 } from "../utils/editor_helpers";
 
-const prepareText = (text) => {
-  // return prepareContentStateForHalfText(text);
-  return wrapEachWordWithSpanAndAddCoverDraft(text, 'top-half-text');
+const TopHalfWord = (props) => {
+  return <span>{props.children}<span className="top-half-text" /></span>;
 };
-const createMarkup = (markup) => { return { __html: markup }; };
+
+TopHalfWord.propTypes = {
+  children: node.isRequired,
+};
+
+const prepareText = (text) => {
+  return wrapEachWordWithSpanAndAddCoverDraft(text, TopHalfWord);
+};
 
 class TopHalfText extends React.Component {
 
@@ -27,28 +32,30 @@ class TopHalfText extends React.Component {
   }
 
   componentDidMount() {
-    const textWrapped = prepareText(this.props.text.get("text", ""));
-    this.setState({textWrapped});
+    prepareText(this.props.text.get('text')).then((textWrapped) => {
+      this.setState({ textWrapped });
+    });
   }
 
   componentWillReceiveProps(nextProps) {
-    const textWrapped = prepareText(nextProps.text.get("text", ""));
-    this.setState({textWrapped});
+    if (nextProps.text.get('title') !== this.props.text.get('title')) {
+      prepareText(nextProps.text.get('text')).then((textWrapped) => {
+        this.setState({ textWrapped });
+      });
+    }
   }
 
   render() {
     return (
       <div className="top-half-text">
-        <DraftEditor
-          readOnly
-          ref={(e) => { this.editor = e; }}
-          initialText={this.state.textWrapped}
-        />
-        <div
-          className="text-container text-with-helpers"
-          ref={(e) => { this.textContainer = e; }}
-          dangerouslySetInnerHTML={createMarkup(this.state.textWrapped)}
-        />
+        <h1>Top Half Text</h1>
+        <div className="text-with-helpers">
+          <DraftEditor
+            readOnly
+            ref={(e) => { this.editor = e; }}
+            initialText={this.state.textWrapped}
+          />
+        </div>
       </div>
     );
   }
