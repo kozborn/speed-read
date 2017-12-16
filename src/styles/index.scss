@@ -5,6 +5,7 @@
 @import "sidebar";
 @import "buttons";
 @import "header";
+@import "footer";
 @import "forms";
 @import "articles";
 @import "fixations";
@@ -13,6 +14,7 @@
 @import "modals";
 @import "textsHelpers";
 @import "editor";
+
 
 $pageContentWidth: 800px;
 $sidebarWidth: 200px;
@@ -107,26 +109,6 @@ a, a:hover, a:visited, a:active {
   padding: 10px;
   @include desktop {
     max-width: 800px;
-  }
-}
-
-.App-footer {
-  width: 100%;
-  position: absolute;
-  z-index: 2;
-  bottom: 0px;
-  border-top: 1px solid #eaeaea;
-  height: 100px;
-  footer {
-    position: relative;
-    height: 100%;
-    .copyrights {
-      font-size: 12px;
-      opacity: 0.4;
-      position: absolute;
-      bottom: 5px;
-      right: 5px;
-    }
   }
 }
 

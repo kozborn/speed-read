@@ -2,8 +2,10 @@ import { connect } from "react-redux";
 import Footer from "../components/Footer";
 
 function mapStateToProps(state) {
-  const docId = state.getIn(["user", "docId"], '');
-  return { docId, queryParams: `/${docId}` };
+  const userId = state.getIn(["user", "id"]) ? state.getIn(["user", "id"]) : localStorage.getItem('userId');
+  return {
+    userId: userId || '',
+  };
 }
 
 function mapDispatchToProps(dispatch) {
