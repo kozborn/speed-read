@@ -45,6 +45,7 @@ class App extends Component {
           <Sidebar history={history} />
         </div>
         <Footer />
+        
         <Modal
           isOpen={!notification.isEmpty()}
           overlay

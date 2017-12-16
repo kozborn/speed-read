@@ -29,7 +29,6 @@ export const findWithRegex = (regex, contentBlock, callback) => {
   const text = contentBlock.getText();
   let matchArr;
   let start;
-
   while ((matchArr = regex.exec(text)) !== null) {
     start = matchArr.index;
     callback(start, start + matchArr[0].length);
@@ -41,7 +40,6 @@ const MATCH_ANYTHING_BUT_WHITESPACE = /[\S]+/g;
 const handleStrategy = (contentBlock, callback, contentState) => {
   findWithRegex(MATCH_ANYTHING_BUT_WHITESPACE, contentBlock, callback);
 };
-
 
 export const wrapEachWordWithSpanAndAddCoverDraft = (text, component) => {
   const decorator = new CompositeDecorator([{
@@ -67,3 +65,39 @@ export const renderEditorToString = (state) => {
 
 export const getDraftTextSnippet = initialText =>
   initialText.update('blocks', blocks => blocks.take(2));
+
+const splitLineBy = (length, contentBlock, callback) => {
+  const text = contentBlock.getText();
+  const words = text.split(' ');
+  const sentences = [];
+  let sentence = '';
+  for (let i = 0; i < words.length; i++) {
+    sentence = sentence.concat(words[i], " ");
+    if (sentence.length > length) {
+      sentences.push(sentence);
+      sentence = '';
+    }
+  }
+  if (sentence !== '') {
+    sentences.push(sentence);
+  }
+  let start = 0;
+  let end = 0;
+  sentences.forEach((sentence) => {
+    end = start + sentence.length;
+    callback(start, end);
+    start += sentence.length;
+  });
+};
+
+export const fixationTextFromDraftJS = (component, text, splitLength = 50) => {
+  const splitLine = (contentBlock, callback, contentState) => {
+    splitLineBy(splitLength, contentBlock, callback);
+  };
+  const decorator = new CompositeDecorator([{
+    component,
+    strategy: splitLine,
+  }]);
+
+  return getInitialState(text, decorator);
+};

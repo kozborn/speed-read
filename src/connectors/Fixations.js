@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
 import Immutable from 'immutable';
-import FixationsWithSliders from "../components/fixations/FixationsWithSliders";
+import Fixations from "../components/Fixations";
 import { savePreferences } from "../actions/user-actions";
 import { getText } from '../utils/state_helpers';
 
@@ -17,4 +17,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(FixationsWithSliders);
+export default connect(mapStateToProps, mapDispatchToProps)(Fixations);

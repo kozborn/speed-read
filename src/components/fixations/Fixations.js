@@ -1,16 +1,14 @@
 import React from "react";
 import {number, instanceOf, func} from "prop-types";
-import {Map} from "immutable";
-import { stringDivider, flattenHTML } from "../../utils/helpers";
+import Immutable from "immutable";
+import { Editor } from 'draft-js';
+import { fixationTextFromDraftJS } from "../../utils/editor_helpers";
 import FixationsToolbar from "./FixationsToolbar";
-
-const PREFIX = "<div class='wrapper'>";
-const POSTFIX = " </div>||"; // "||" are used for splitting text
 
 class Fixations extends React.Component {
 
   static propTypes = {
-    text: instanceOf(Map).isRequired,
+    text: instanceOf(Immutable.Map).isRequired,
     fixationIndex: number,
     speed: number, // ms
     savePosition: func,
@@ -34,22 +32,19 @@ class Fixations extends React.Component {
       running: false,
     };
 
-    this.getText = this.getText.bind(this);
-    this.prepareText = this.prepareText.bind(this);
     this.startSwitching = this.startSwitching.bind(this);
     this.stopSwitching = this.stopSwitching.bind(this);
     this.pauseSwitching = this.pauseSwitching.bind(this);
     this.setCurrentElIndex = this.setCurrentElIndex.bind(this);
     this.updateCurrentElIndex = this.updateCurrentElIndex.bind(this);
+    this.getLineSplittedComponent = this.getLineSplittedComponent.bind(this);
   }
 
   componentDidMount() {
-    this.prepareText(this.props.text.get("text", ""));
     this.setCurrentElIndex(this.props.fixationIndex);
   }
 
   componentWillReceiveProps(nextProps) {
-    this.prepareText(nextProps.text.get("text", ""));
     if (nextProps.speed !== this.props.speed) {
       clearInterval(this.interval);
       this.interval = null;
@@ -71,8 +66,21 @@ class Fixations extends React.Component {
     // this.props.savePosition(this.currentElIndex);
   }
 
+  getLineSplittedComponent(props) {
+    return (
+      <span
+        data-element-index={props.offsetKey.split('-')[1]}
+        onClick={this.updateCurrentElIndex}
+        className="fixation-line"
+      >
+        {props.children}
+        <span className="breaker"> </span>
+      </span>
+    );
+  }
+
   updateCurrentElIndex(e) {
-    const index = parseInt(e.target.closest(".wrapper-content").getAttribute("data-element-index"), 10);
+    const index = parseInt(e.target.closest(".fixation-line").getAttribute("data-element-index"), 10);
     this.setCurrentElIndex(index);
     this.props.savePosition(index);
   }
@@ -80,60 +88,14 @@ class Fixations extends React.Component {
   setCurrentElIndex(index) {
     this.currentElIndex = index;
     const elements = this.getElements();
-    elements.forEach(element => element.classList.remove("highlight"));
+    Array.prototype.forEach.call(elements, element => element.classList.remove("highlight"));
     if (elements[this.currentElIndex]) {
       elements[this.currentElIndex].classList.add("highlight");
     }
   }
 
-  getText() {
-    const lines = [];
-    const {textWrapped} = this.state;
-
-    for (let i = 0; i < textWrapped.length; i += 2) {
-      const line = (<div className="line" key={`line_${i}`}>
-        <div
-          className="left wrapper-content"
-          dangerouslySetInnerHTML={this.createMarkup(textWrapped[i])}
-          data-element-index={i}
-          onClick={this.updateCurrentElIndex}
-        />
-        <div className="left-space">&nbsp;</div>
-        <div
-          className="right wrapper-content"
-          dangerouslySetInnerHTML={this.createMarkup(textWrapped[i + 1])}
-          data-element-index={i + 1}
-          onClick={this.updateCurrentElIndex}
-        />
-        <div className="clearfix" />
-      </div>);
-      lines.push(line);
-    }
-    return lines;
-  }
-
   getElements() {
-    const leftElements = this.textWithFixations.getElementsByClassName("left");
-    const rightElements = this.textWithFixations.getElementsByClassName("right");
-    const elements = [];
-    for (let i = 0; i < leftElements.length; i += 1) {
-      elements.push(leftElements[i]);
-      elements.push(rightElements[i]);
-    }
-    return elements;
-  }
-
-  prepareText(text) {
-    const flattenText = flattenHTML(text);
-    let wrapped = [];
-    // TODO this needs to be more bulletproof
-    for (let i = 0; i < flattenText.childElementCount; i++) {
-      const t = flattenText.children[i].textContent;
-      const sliced = stringDivider(t, 50, PREFIX, POSTFIX).split("||");
-      wrapped = wrapped.concat(sliced);
-    }
-
-    this.setState({textWrapped: wrapped});
+    return this.textWithFixations.getElementsByClassName("fixation-line");
   }
 
   startSwitching() {
@@ -162,14 +124,10 @@ class Fixations extends React.Component {
 
   stopSwitching() {
     const elements = this.getElements();
-    elements.forEach(element => element.classList.remove("highlight"));
+    Array.prototype.forEach.call(elements, element => element.classList.remove("highlight"));
     this.pauseSwitching();
     this.currentElIndex = 0;
     this.props.savePosition(0);
-  }
-
-  createMarkup(markup) {
-    return {__html: markup};
   }
 
   render() {
@@ -187,8 +145,11 @@ class Fixations extends React.Component {
             disabled: !this.state.running,
           }}
         />
+        <Editor
+          readOnly
+          editorState={fixationTextFromDraftJS(this.getLineSplittedComponent, this.props.text.get("text"))}
+        />
         <div className="text-title">{this.props.text.get("title")}</div>
-        {this.getText()}
       </div>
     );
   }

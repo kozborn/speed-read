@@ -1,7 +1,6 @@
 import React from 'react';
 import { instanceOf, string, func } from 'prop-types';
 import Immutable from 'immutable';
-import DraftEditor from "./common/Editor";
 import { wrapEachWordWithSpanAndAddCoverDraft, renderEditorToString } from "../utils/editor_helpers";
 
 class HalfText extends React.Component {
@@ -10,6 +9,11 @@ class HalfText extends React.Component {
     text: instanceOf(Immutable.Map).isRequired,
     pageTitle: string,
     className: string,
+  }
+
+  static defaultProps = {
+    pageTitle: "",
+    className: "",
   }
 
   constructor(props) {
