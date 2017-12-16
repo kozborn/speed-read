@@ -1,6 +1,6 @@
 import React from 'react';
 import Immutable from 'immutable';
-import { instanceOf, string, bool, oneOfType } from "prop-types";
+import { instanceOf, string, array, bool, oneOfType } from "prop-types";
 import { Editor,
   ContentState,
   EditorState,
@@ -13,6 +13,7 @@ class DraftEditor extends React.Component {
   static propTypes = {
     placeholder: string,
     readOnly: bool,
+    decorators: array,
     initialText: oneOfType([
       instanceOf(ContentState),
       instanceOf(EditorState),
@@ -24,11 +25,12 @@ class DraftEditor extends React.Component {
   static defaultProps = {
     placeholder: "",
     readOnly: false,
+    decorators: null,
   }
 
   constructor(props) {
     super(props);
-    const initialContentState = getInitialState(props.initialText);
+    const initialContentState = getInitialState(props.initialText, props.decorators);
 
     this.state = {
       editorState: initialContentState,
@@ -41,7 +43,7 @@ class DraftEditor extends React.Component {
     if (nextProps.initialText instanceof EditorState) {
       this.setState({ editorState: nextProps.initialText});
     } else {
-      this.setState({ editorState: getInitialState(nextProps.initialText)});
+      this.setState({ editorState: getInitialState(nextProps.initialText, nextProps.decorators)});
     }
   }
 

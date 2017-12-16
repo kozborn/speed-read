@@ -1,6 +1,8 @@
+import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import Immutable from 'immutable';
 import {
+  Editor,
   EditorState,
   ContentState,
   convertFromRaw,
@@ -52,6 +54,16 @@ export const wrapEachWordWithSpanAndAddCoverDraft = (text, component) => {
   });
 };
 
-export const prepareContentStateForHalfText = (contentState) => {
-  return contentState;
+export const renderEditorToString = (state) => {
+  return new Promise((resolve) => {
+    const stringEditor = ReactDOMServer.renderToStaticMarkup(
+      <Editor
+        readOnly
+        editorState={state}
+      />);
+    resolve(stringEditor);
+  });
 };
+
+export const getDraftTextSnippet = initialText =>
+  initialText.update('blocks', blocks => blocks.take(2));

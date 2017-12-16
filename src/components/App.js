@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import camelize from "underscore.string/camelize";
 import { withRouter } from "react-router";
 import { matchPath } from "react-router-dom";
 import Immutable from 'immutable';
@@ -8,12 +7,7 @@ import Header from '../connectors/Header';
 import Spinner from './common/Spinner';
 import Modal from './common/Modal';
 import Footer from "../connectors/Footer";
-import TextListToChoose from "../connectors/TextListToChoose";
-
-const pageWithSidebar = (location) => {
-  const key = camelize(location);
-  return (["fixations", "bottomHalfText", "topHalfText"].indexOf(key) !== -1);
-};
+import Sidebar from "./sidebar/Sidebar";
 
 class App extends Component {
 
@@ -24,15 +18,6 @@ class App extends Component {
     notification: instanceOf(Immutable.Map).isRequired,
     closeNotification: func.isRequired,
     fetchUserDoc: func.isRequired,
-  }
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      sidebar: false,
-    };
-    this.closeNotification = this.closeNotification.bind(this);
-    this.getSidebar = this.getSidebar.bind(this);
   }
 
   componentDidMount() {
@@ -47,29 +32,8 @@ class App extends Component {
     }
   }
 
-  getSidebar() {
-    const location = matchPath(this.props.history.location.pathname, {
-      // You can share this string as a constant if you want
-      path: "/:module/:userId",
-    });
-    if (location && location.params) {
-      if (pageWithSidebar(location.params.module)) {
-        const key = camelize(location.params.module);
-        return (<div className="sidebar">
-          <TextListToChoose textKey={key} />
-        </div>);
-      }
-    } else {
-      return null;
-    }
-  }
-
-  closeNotification() {
-    this.props.closeNotification();
-  }
-
   render() {
-    const {isFetching, children} = this.props;
+    const { history, isFetching, children, closeNotification} = this.props;
 
     return (
       <div className="App">
@@ -78,10 +42,7 @@ class App extends Component {
           <div className="page-content">
             {isFetching ? <Spinner /> : children}
           </div>
-          {
-            // TODO MAKE THIS AS COMPONENT
-          }
-          {this.getSidebar()}
+          <Sidebar history={history} />
         </div>
         <Footer />
         <Modal
@@ -90,7 +51,7 @@ class App extends Component {
           title={this.props.notification.get('title', "")}
           position="center"
           closeBtn
-          onClose={this.closeNotification}
+          onClose={closeNotification}
         >
           <div className="notification">
             {this.props.notification.get('message', '')}

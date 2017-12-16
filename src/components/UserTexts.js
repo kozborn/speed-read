@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { instanceOf, func, string } from 'prop-types';
 import Immutable from 'immutable';
-import Texts from './user-texts/Texts';
+import TextsList from './user-texts/TextsList';
 
 const UserTexts = ({docId, texts, removeText }) =>
   (
@@ -11,7 +11,7 @@ const UserTexts = ({docId, texts, removeText }) =>
         <h2>Twoje teksty</h2>
         <Link className="new-text" to="/new-text">Dodaj nowy tekst</Link>
       </div>
-      <Texts
+      <TextsList
         docId={docId}
         removeText={removeText}
         texts={texts}

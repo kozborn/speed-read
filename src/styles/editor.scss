@@ -1,10 +1,9 @@
 @import './variables';
 
-.DraftEditor-root {
+.public-DraftEditor-content {
   border: $default-border;
-  .dupa {
-    color: red;
-    font-weight: bold;
+  &[contenteditable=false] {
+    border: none;
   }
 }
 
