@@ -36,17 +36,20 @@
   float: left;
 }
 
-.line {
-  .highlight {
+.fixation-line {
+  white-space: nowrap;
+  .breaker {
+    white-space: normal;
+  }
+  &.highlight {
     background: lightgreen;
     .wrapper:hover {
       background: transparent;
     }
   }
-  .wrapper {
-    &:hover {
-      background: lightblue;
-      cursor: pointer;
-    }
+
+  &:hover {
+    background: lightblue;
+    cursor: pointer;
   }
 }

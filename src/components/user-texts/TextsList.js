@@ -4,7 +4,8 @@ import cn from 'classnames';
 import { Link } from 'react-router-dom';
 import Immutable from 'immutable';
 import Button from '../common/Button';
-import HTMLTextSnippet from '../common/HTMLTextSnippet';
+import DraftEditor from '../common/Editor';
+import { getDraftTextSnippet } from '../../utils/editor_helpers';
 
 const Texts = ({ docId, texts, removeText }) =>
   (
@@ -21,7 +22,7 @@ const Texts = ({ docId, texts, removeText }) =>
                 Usuń
               </Button>
             </div>
-            <HTMLTextSnippet text={text.get('text')} length={100} />
+            <DraftEditor readOnly initialText={getDraftTextSnippet(text.get('text'))} />
           </li>
         );
       })}

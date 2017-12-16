@@ -1,46 +1,26 @@
 import React from "react";
-import {Map} from "immutable";
-import { instanceOf } from "prop-types";
-import { wrapEachWordWithSpanAndAddCover } from "../utils/helpers";
+import Immutable from "immutable";
+import { instanceOf, node} from "prop-types";
+import HalfText from "./HalfText";
 
-const createMarkup = (markup) => { return { __html: markup}; };
-const prepareText = (text) => {
-  return wrapEachWordWithSpanAndAddCover(text, 'bottom-half-text');
+const BottomHalfWord = (props) => {
+  return <span>{props.children}<span className="bottom-half-text" /></span>;
 };
 
-class BottomHalfText extends React.Component {
+BottomHalfWord.propTypes = {
+  children: node.isRequired,
+};
 
-  static propTypes = {
-    text: instanceOf(Map).isRequired,
-  }
+const BottomHalfText = ({ text }) =>
+  (<HalfText
+    text={text}
+    handlerComponent={BottomHalfWord}
+    pageTitle="Bottom half Text"
+    className="bottom-half-text"
+  />);
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      textWrapped: "",
-    };
-  }
-
-  componentDidMount() {
-    const textWrapped = prepareText(this.props.text.get('text'));
-    this.setState({textWrapped});
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const textWrapped = prepareText(nextProps.text.get("text"));
-    this.setState({textWrapped});
-  }
-
-  render() {
-    return (
-      <div className="bottom-half-text">
-        <div
-          className="text-container text-with-helpers"
-          dangerouslySetInnerHTML={createMarkup(this.state.textWrapped)}
-        />
-      </div>
-    );
-  }
-}
+BottomHalfText.propTypes = {
+  text: instanceOf(Immutable.Map).isRequired,
+};
 
 export default BottomHalfText;

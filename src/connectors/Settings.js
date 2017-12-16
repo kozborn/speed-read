@@ -1,4 +1,3 @@
-import Immutable from 'immutable';
 import { connect } from 'react-redux';
 import Settings from '../components/settings/Settings.jsx';
 

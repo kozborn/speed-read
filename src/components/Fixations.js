@@ -1,9 +1,9 @@
 import React from "react";
 import Slider from "rc-slider";
-import {Map} from "immutable";
-import { func, instanceOf, oneOfType} from "prop-types";
-import Fixations from "./Fixations";
-import handle from "../common/SliderHandle";
+import Immutable from "immutable";
+import { func, instanceOf, oneOfType } from "prop-types";
+import FixationsBase from "./fixations/Fixations";
+import handle from "./common/SliderHandle";
 
 const marks = {
   0: "low",
@@ -21,18 +21,12 @@ const marks = {
   12: "high",
 };
 
-class FixationsWithSliders extends React.Component {
+class Fixations extends React.Component {
 
   static propTypes = {
-    preferences: instanceOf(Map).isRequired,
+    preferences: instanceOf(Immutable.Map).isRequired,
     savePreferences: func.isRequired,
-    text: oneOfType([
-      instanceOf(Map),
-    ]).isRequired,
-  }
-
-  static defaultProps = {
-    docId: null,
+    text: instanceOf(Immutable.Map).isRequired,
   }
 
   constructor(props) {
@@ -47,15 +41,15 @@ class FixationsWithSliders extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({speed: nextProps.preferences.get("fixationsSpeed", 0)});
+    this.setState({ speed: nextProps.preferences.get("fixationsSpeed", 0) });
   }
 
-  changeSpeed(e) {
-    this.setState({speed: e});
+  changeSpeed(speed) {
+    this.setState({ speed });
   }
 
-  saveSettings(e) {
-    this.props.savePreferences("fixationsSpeed", e);
+  saveSettings(speed) {
+    this.props.savePreferences("fixationsSpeed", speed);
   }
 
   savePosition(index) {
@@ -78,7 +72,7 @@ class FixationsWithSliders extends React.Component {
             marks={marks}
           />
         </div>
-        <Fixations
+        <FixationsBase
           text={this.props.text}
           fixationIndex={this.props.preferences.get("fixationIndex", 0)}
           speed={this.state.speed}
@@ -89,4 +83,4 @@ class FixationsWithSliders extends React.Component {
   }
 }
 
-export default FixationsWithSliders;
+export default Fixations;

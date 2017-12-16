@@ -48,7 +48,7 @@ const user = (state = Immutable.fromJS({
 
       const updatedTexts = texts.update(indexOfCurrentText, (text) => {
         return text.set('title', action.text.title)
-        .set('text', action.text.text);
+        .set('text', Immutable.fromJS(action.text.text));
       });
 
       return state.setIn(['doc', 'texts'], updatedTexts);
