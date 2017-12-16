@@ -8,7 +8,11 @@ import logo from "../assets/Logo100x100.png";
 class Header extends React.Component {
 
   static propTypes = {
-    docId: string.isRequired,
+    userId: string,
+  }
+
+  static propTypes = {
+    userId: "",
   }
 
   constructor(props) {
@@ -26,22 +30,22 @@ class Header extends React.Component {
 
   renderMenu(hamburger = false) {
     // const userId = match && match.params && match.params.userId ? match.params.userId : "";
-    const { docId } = this.props;
+    const { userId } = this.props;
     return (
       <nav className={cn({'hamburger-menu': hamburger, 'navigation-top': !hamburger})}>
-        <li><Link to={`/home/${docId}`}>Home page</Link></li>
-        <li><Link to={`/bottom-half-text/${docId}`}>Dolna połowa tekstu</Link></li>
-        <li><Link to={`/top-half-text/${docId}`}>Górna połowa tekstu</Link></li>
-        <li><Link to={`/schultz-table/${docId}`}>Tabela Schultz'a</Link></li>
-        <li><Link to={`/fixations/${docId}`}>Fiksacja</Link></li>
-        <li><Link to={`/user-texts/${docId}`}>Twoje teksty</Link></li>
+        <li><Link to={`/home/${userId}`}>Home page</Link></li>
+        <li><Link to={`/bottom-half-text/${userId}`}>Dolna połowa tekstu</Link></li>
+        <li><Link to={`/top-half-text/${userId}`}>Górna połowa tekstu</Link></li>
+        <li><Link to={`/schultz-table/${userId}`}>Tabela Schultz'a</Link></li>
+        <li><Link to={`/fixations/${userId}`}>Fiksacja</Link></li>
+        <li><Link to={`/user-texts/${userId}`}>Twoje teksty</Link></li>
         <li>
           {hamburger ?
-            <Link className="settings" to={`/settings/${docId}`}>
+            <Link className="settings" to={`/settings/${userId}`}>
               Settings &#9881;
             </Link>
           :
-            <Link className="settings" to={`/settings/${docId}`}>
+            <Link className="settings" to={`/settings/${userId}`}>
               &#9881;
             </Link>
           }
