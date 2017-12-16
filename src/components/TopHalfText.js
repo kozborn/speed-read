@@ -1,47 +1,26 @@
 import React from "react";
-import { instanceOf } from "prop-types";
+import { instanceOf, node } from "prop-types";
 import { Map } from "immutable";
-import { wrapEachWordWithSpanAndAddCover } from "../utils/helpers";
+import HalfText from "./HalfText";
 
-const prepareText = (text) => {
-  return wrapEachWordWithSpanAndAddCover(text, 'top-half-text');
+const TopHalfWord = (props) => {
+  return <span>{props.children}<span className="top-half-text" /></span>;
 };
-const createMarkup = (markup) => { return { __html: markup }; };
 
-class TopHalfText extends React.Component {
+TopHalfWord.propTypes = {
+  children: node.isRequired,
+};
 
-  static propTypes = {
-    text: instanceOf(Map).isRequired,
-  }
+const TopHalfText = ({ text }) =>
+  (<HalfText
+    text={text}
+    handlerComponent={TopHalfWord}
+    pageTitle="Top half Text"
+    className="top-half-text"
+  />);
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      textWrapped: "",
-    };
-  }
-
-  componentDidMount() {
-    const textWrapped = prepareText(this.props.text.get("text", ""));
-    this.setState({textWrapped});
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const textWrapped = prepareText(nextProps.text.get("text", ""));
-    this.setState({textWrapped});
-  }
-
-  render() {
-    return (
-      <div className="top-half-text">
-        <div
-          className="text-container text-with-helpers"
-          ref={(e) => { this.textContainer = e; }}
-          dangerouslySetInnerHTML={createMarkup(this.state.textWrapped)}
-        />
-      </div>
-    );
-  }
-}
+TopHalfText.propTypes = {
+  text: instanceOf(Map).isRequired,
+};
 
 export default TopHalfText;

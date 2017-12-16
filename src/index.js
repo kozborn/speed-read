@@ -5,10 +5,11 @@ import { createStore, applyMiddleware } from "redux";
 import createBrowserHistory from "history/createBrowserHistory";
 import { Provider } from "react-redux";
 import thunkMiddleware from "redux-thunk";
-import queryString from "query-string";
+
+import "../node_modules/draft-js/dist/Draft.css";
+import "./styles/index.css";
 
 import reducer from "./reducer";
-import "./styles/index.css";
 import App from "./connectors/App";
 import HomePage from "./connectors/HomePage";
 import BottomHalfText from "./connectors/BottomHalfText";
@@ -21,7 +22,6 @@ import EditText from "./connectors/EditText";
 import Settings from "./connectors/Settings";
 import registerServiceWorker from "./registerServiceWorker";
 import { getDefaultDoc } from "./actions/actions";
-import { fetchUserDoc } from './actions/user-actions';
 
 const history = createBrowserHistory();
 
@@ -42,15 +42,6 @@ function logger({ getState }) {
 
 const store = createStore(reducer, applyMiddleware(thunkMiddleware, logger));
 store.dispatch(getDefaultDoc());
-
-// const parsed = queryString.parse(window.location.search);
-// const documentId = parsed.documentId;
-
-// if (documentId) {
-//   store.dispatch(getUserDoc(documentId));
-// } else if (localStorage.getItem("docId")) {
-//   store.dispatch(getUserDoc(localStorage.getItem("docId")));
-// }
 
 ReactDOM.render(
   <Provider store={store}>

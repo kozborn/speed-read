@@ -1,3 +1,5 @@
+import Immutable from 'immutable';
+
 export function generateTable(count) {
   const table = [];
   for (let i = 0; i < count; i++) {
@@ -106,41 +108,4 @@ export const flattenHTML = (html) => {
     }
   }
   return flattenEl.innerHTML;
-};
-
-export const wrapEachWordWithSpanAndAddCover = (html, className) => {
-  // TODO this needs to be more bulletproof and usefull for fixations switcher
-  const el = document.createElement("div");
-  const flattenEl = document.createElement("div");
-  el.innerHTML = html;
-  const elements = el.getElementsByTagName("*");
-  // most likely this means el is simple text
-  if (elements.length === 0) {
-    const wrapper = document.createElement("div");
-    wrapper.appendChild(addWordWrapper(el, className));
-    return flattenEl.appendChild(wrapper).innerHTML;
-  }
-
-  for (let i = 0; i < elements.length; i++) {
-    if (elements[i].firstChild && elements[i].firstChild.nodeType === Node.TEXT_NODE) {
-      const wrapper = document.createElement("div");
-      wrapper.appendChild(addWordWrapper(elements[i], className));
-      flattenEl.appendChild(wrapper);
-    }
-  }
-  return flattenEl;
-};
-
-export const addWordWrapper = (element, className) => {
-  const el = document.createElement('div');
-  const words = element.textContent.split(" ");
-  for (let i = 0; i < words.length; i++) {
-    const word = document.createElement("span");
-    word.innerText = words[i] + " ";
-    const wrapper = document.createElement('span');
-    wrapper.classList.add(className);
-    word.appendChild(wrapper);
-    el.appendChild(word);
-  }
-  return el;
 };

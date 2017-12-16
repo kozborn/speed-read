@@ -2,10 +2,9 @@ import Immutable from 'immutable';
 import _ from 'underscore';
 
 export const getText = (state, textKey) => {
-
   const defaultText = state.getIn(['app', 'defaultDoc', textKey], Immutable.Map());
   if (defaultText.isEmpty()) {
-    throw {error: `There is no default text for this key: "${textKey}"`};
+    throw new Error(`There is no default text for this key: "${textKey}"`);
   }
   const userDoc = state.getIn(['user', 'doc']);
   if (userDoc.isEmpty()) return defaultText;
@@ -21,7 +20,7 @@ export const getText = (state, textKey) => {
 
   // if is not empty then return
   if (!userText.isEmpty()) return userText;
-  
+
   // if userText is empty then try to find it in defaultDoc
   const defaultTextForKey = state.getIn(['app', 'defaultDoc', userTextKey], Immutable.Map());
   if (!defaultTextForKey.isEmpty()) return defaultTextForKey;

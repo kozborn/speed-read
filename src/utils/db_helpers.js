@@ -32,4 +32,4 @@ export const saveDoc = (data, options = {}) => {
     return response.json();
   })
   .catch(ex => ex);
-}
+};
