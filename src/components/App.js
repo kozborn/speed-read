@@ -33,7 +33,7 @@ class App extends Component {
   }
 
   render() {
-    const { history, isFetching, children, closeNotification} = this.props;
+    const { history, isFetching, children, notification, closeNotification} = this.props;
 
     return (
       <div className="App">
@@ -46,15 +46,15 @@ class App extends Component {
         </div>
         <Footer />
         <Modal
-          isOpen={!this.props.notification.isEmpty()}
+          isOpen={!notification.isEmpty()}
           overlay
-          title={this.props.notification.get('title', "")}
+          title={notification.get('title', "")}
           position="center"
           closeBtn
           onClose={closeNotification}
         >
           <div className="notification">
-            {this.props.notification.get('message', '')}
+            {notification.get('message', '')}
           </div>
         </Modal>
       </div>
