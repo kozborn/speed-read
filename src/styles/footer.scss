@@ -1,0 +1,25 @@
+.footer {
+  width: 100%;
+  position: absolute;
+  z-index: 2;
+  bottom: 0px;
+  border-top: 1px solid #eaeaea;
+  height: 100px;
+
+  footer {
+    .navigation-footer {
+      display: flex;
+      justify-content: center;
+      margin: 25px;
+      li {
+        text-align: center;
+      }
+    }
+    .copyrights {
+      display: flex;
+      justify-content: flex-end;
+      margin-right: 25px;
+      color: #ababab;
+    }
+  }
+}

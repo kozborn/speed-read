@@ -10,7 +10,7 @@ const mapStateToProps = (state) => {
   const userId = state.getIn(["user", "id"]) ? state.getIn(["user", "id"]) : localStorage.getItem('userId');
   return {
     isFetching,
-    userId,
+    userId: userId || '',
     notification: state.getIn(["app", 'notification'], Immutable.Map()),
   };
 };
