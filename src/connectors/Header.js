@@ -2,8 +2,10 @@ import { connect } from 'react-redux';
 import Header from '../components/Header';
 
 const mapStateToProps = (state) => {
+
+  const userId = state.getIn(["user", "id"]) ? state.getIn(["user", "id"]) : localStorage.getItem('userId');
   return {
-    docId: state.getIn(['user', 'doc', '_id'], ''),
+    userId: userId || '',
   };
 };
 
