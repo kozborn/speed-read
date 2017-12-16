@@ -7,17 +7,17 @@ import { fetchUserDoc } from '../actions/user-actions';
 
 const mapStateToProps = (state) => {
   const isFetching = state.getIn(['user', 'isFetching']) || state.getIn(['app', 'isFetching']);
-
+  const userId = state.getIn(["user", "id"]) ? state.getIn(["user", "id"]) : localStorage.getItem('userId');
   return {
     isFetching,
-    docId: state.getIn(["user", "docId"], ''),
+    userId,
     notification: state.getIn(["app", 'notification'], Immutable.Map()),
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchUserDoc: docId => dispatch(fetchUserDoc(docId)),
+    fetchUserDoc: userId => dispatch(fetchUserDoc(userId)),
     closeNotification: () => dispatch(closeNotification()),
   };
 };
