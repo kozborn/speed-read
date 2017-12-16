@@ -4,12 +4,12 @@ import { fetchDoc, getOptions, saveDoc } from '../utils/db_helpers';
 
 export function setUserDocumentId(docId) {
   const userDocId = docId;
-  localStorage.setItem("docId", userDocId);
+  localStorage.setItem("userId", userDocId);
   return { type: "SET_USER_DOCID", userDocId };
 }
 
 export function clearLocalStorage() {
-  localStorage.removeItem("docId");
+  localStorage.removeItem("userId");
   return { type: "SET_USER_DOCID", userDocId: null };
 }
 

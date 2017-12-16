@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { withRouter } from "react-router";
 import { matchPath } from "react-router-dom";
 import Immutable from 'immutable';
-import { bool, object, node, instanceOf, func } from "prop-types";
+import { bool, object, node, instanceOf, func, string } from "prop-types";
 import Header from '../connectors/Header';
 import Spinner from './common/Spinner';
 import Modal from './common/Modal';
@@ -12,6 +12,7 @@ import Sidebar from "./sidebar/Sidebar";
 class App extends Component {
 
   static propTypes = {
+    userId: string,
     isFetching: bool.isRequired,
     history: object.isRequired,
     children: node.isRequired,
@@ -20,15 +21,19 @@ class App extends Component {
     fetchUserDoc: func.isRequired,
   }
 
+  static defaultProps = {
+    userId: '',
+  }
+
   componentDidMount() {
     // https://stackoverflow.com/a/45492498/1783152
     const match = matchPath(this.props.history.location.pathname, {
       // You can share this string as a constant if you want
       path: "/:module/:userId",
     });
-
-    if (match && match.params.userId) {
-      this.props.fetchUserDoc(match.params.userId);
+    const userId = match && match.params.userId ? match.params.userId : this.props.userId;
+    if (userId) {
+      this.props.fetchUserDoc(userId);
     }
   }
 
@@ -45,7 +50,7 @@ class App extends Component {
           <Sidebar history={history} />
         </div>
         <Footer />
-        
+
         <Modal
           isOpen={!notification.isEmpty()}
           overlay
