@@ -11,7 +11,7 @@ class Header extends React.Component {
     userId: string,
   }
 
-  static propTypes = {
+  static defaultProps = {
     userId: "",
   }
 

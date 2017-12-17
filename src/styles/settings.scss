@@ -1,0 +1,28 @@
+.settings__label {
+  font-weight: 600;
+  margin: 20px 0px 10px;
+}
+
+.document-settings {
+  display: flex;
+  .document-settings__title {
+    font-weight: 600;
+    margin-right: 10px;
+  }
+}
+
+.preference {
+  display: flex;
+  .preference__key {
+    font-weight: 600;
+    margin-right: 10px;
+  }
+}
+
+.texts {
+  display: flex;
+  .texts__title {
+    font-weight: 600;
+    margin-right: 10px;
+  }
+}

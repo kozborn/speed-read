@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
-import Settings from '../components/settings/Settings.jsx';
+import Settings from '../components/Settings';
+import { createNewUserDoc } from '../actions/user-actions';
 
 const mapStateToProps = (state) => {
   return {
@@ -9,8 +10,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    createNewUserDoc: () => dispatch(createNewUserDoc()),
   };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Settings);
-
