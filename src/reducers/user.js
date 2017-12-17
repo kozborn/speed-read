@@ -4,7 +4,10 @@ const user = (state = Immutable.fromJS({
   id: null,
   status: '',
   isFetching: false,
-  doc: Immutable.Map(),
+  doc: {
+    preferences: {},
+    texts: [],
+  },
 }), action) => {
   switch (action.type) {
 

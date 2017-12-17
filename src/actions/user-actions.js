@@ -54,6 +54,13 @@ export const save = () => {
   };
 };
 
+export const createNewUserDoc = () => {
+  return (dispatch) => {
+    dispatch({type: "CREATING_NEW_USER_DOCUMENT"});
+    dispatch(save());
+  };
+};
+
 export const savePreferences = (key, preferences) => {
   return (dispatch) => {
     dispatch({ type: "SAVE_USER_PREFERENCES", key, preferences });
