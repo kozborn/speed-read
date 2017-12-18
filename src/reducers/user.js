@@ -5,7 +5,10 @@ const user = (state = Immutable.fromJS({
   status: '',
   isFetching: false,
   doc: {
-    preferences: {},
+    preferences: {
+      schultzTable: {},
+      fixations: {},
+    },
     texts: [],
   },
 }), action) => {

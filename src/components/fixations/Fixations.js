@@ -27,17 +27,17 @@ class Fixations extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      textWrapped: [],
-      running: false,
-    };
-
+    
     this.startSwitching = this.startSwitching.bind(this);
     this.stopSwitching = this.stopSwitching.bind(this);
     this.pauseSwitching = this.pauseSwitching.bind(this);
     this.setCurrentElIndex = this.setCurrentElIndex.bind(this);
     this.updateCurrentElIndex = this.updateCurrentElIndex.bind(this);
     this.getLineSplittedComponent = this.getLineSplittedComponent.bind(this);
+    this.state = {
+      text: fixationTextFromDraftJS(this.getLineSplittedComponent, props.text.get("text")),
+      running: false,
+    };
   }
 
   componentDidMount() {
@@ -45,6 +45,12 @@ class Fixations extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+
+    if (nextProps.text.get('title') !== this.props.text.get('title')) {
+      this.setState({'text':
+        fixationTextFromDraftJS(this.getLineSplittedComponent, nextProps.text.get("text"))});
+    }
+
     if (nextProps.speed !== this.props.speed) {
       clearInterval(this.interval);
       this.interval = null;
@@ -74,7 +80,7 @@ class Fixations extends React.Component {
         className="fixation-line"
       >
         {props.children}
-        <span className="breaker"> </span>
+        <span className="breaker"> </span> {/* empty span is required for breaking line */}
       </span>
     );
   }
@@ -147,7 +153,7 @@ class Fixations extends React.Component {
         />
         <Editor
           readOnly
-          editorState={fixationTextFromDraftJS(this.getLineSplittedComponent, this.props.text.get("text"))}
+          editorState={this.state.text}
         />
         <div className="text-title">{this.props.text.get("title")}</div>
       </div>

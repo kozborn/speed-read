@@ -1,7 +1,7 @@
 import React from "react";
 import Slider from "rc-slider";
 import Immutable from "immutable";
-import { func, instanceOf, oneOfType } from "prop-types";
+import { func, instanceOf } from "prop-types";
 import FixationsBase from "./fixations/Fixations";
 import handle from "./common/SliderHandle";
 
@@ -32,7 +32,7 @@ class Fixations extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      speed: props.preferences.get("fixationsSpeed", 0),
+      speed: props.preferences.getIn(['fixationsSettings', "fixationsSpeed"], 0),
     };
 
     this.changeSpeed = this.changeSpeed.bind(this);
@@ -41,7 +41,7 @@ class Fixations extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({ speed: nextProps.preferences.get("fixationsSpeed", 0) });
+    this.setState({ speed: nextProps.preferences.getIn(['fixationsSettings', "fixationsSpeed"], 0) });
   }
 
   changeSpeed(speed) {
@@ -49,14 +49,16 @@ class Fixations extends React.Component {
   }
 
   saveSettings(speed) {
-    this.props.savePreferences("fixationsSpeed", speed);
+    this.props.savePreferences('fixationsSettings', {"fixationsSpeed": speed});
   }
 
   savePosition(index) {
-    this.props.savePreferences("fixationIndex", index);
+    this.props.savePreferences('fixationsSettings', {"fixationsIndex": index});
   }
 
   render() {
+    const fixationsIndex = this.props.preferences.getIn(['fixationsSettings', 'fixationsIndex'], 0);
+
     return (
       <div className="fixations-with-slider">
         <div className="sliders">
@@ -74,7 +76,7 @@ class Fixations extends React.Component {
         </div>
         <FixationsBase
           text={this.props.text}
-          fixationIndex={this.props.preferences.get("fixationIndex", 0)}
+          fixationIndex={fixationsIndex}
           speed={this.state.speed}
           savePosition={this.savePosition}
         />
