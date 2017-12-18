@@ -11,12 +11,14 @@ class Fixations extends React.Component {
     text: instanceOf(Immutable.Map).isRequired,
     fixationIndex: number,
     speed: number, // ms
+    blockSize: number,
     savePosition: func,
   }
 
   static defaultProps = {
     documentId: "sample_text",
     speed: 0, // ms
+    blockSize: 50, // letters
     fixationIndex: 0,
     eventType: "",
     savePosition: () => "",
@@ -27,7 +29,7 @@ class Fixations extends React.Component {
 
   constructor(props) {
     super(props);
-    
+
     this.startSwitching = this.startSwitching.bind(this);
     this.stopSwitching = this.stopSwitching.bind(this);
     this.pauseSwitching = this.pauseSwitching.bind(this);
@@ -35,7 +37,7 @@ class Fixations extends React.Component {
     this.updateCurrentElIndex = this.updateCurrentElIndex.bind(this);
     this.getLineSplittedComponent = this.getLineSplittedComponent.bind(this);
     this.state = {
-      text: fixationTextFromDraftJS(this.getLineSplittedComponent, props.text.get("text")),
+      text: fixationTextFromDraftJS(this.getLineSplittedComponent, props.text.get("text"), props.blockSize),
       running: false,
     };
   }
@@ -45,10 +47,12 @@ class Fixations extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-
-    if (nextProps.text.get('title') !== this.props.text.get('title')) {
+    if (
+        nextProps.text.get('title') !== this.props.text.get('title') ||
+        nextProps.blockSize !== this.props.blockSize
+      ) {
       this.setState({'text':
-        fixationTextFromDraftJS(this.getLineSplittedComponent, nextProps.text.get("text"))});
+        fixationTextFromDraftJS(this.getLineSplittedComponent, nextProps.text.get("text"), nextProps.blockSize)});
     }
 
     if (nextProps.speed !== this.props.speed) {
