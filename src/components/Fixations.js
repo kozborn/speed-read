@@ -36,7 +36,7 @@ const sizeMarks = {
 class Fixations extends React.Component {
 
   static propTypes = {
-    preferences: instanceOf(Immutable.Map).isRequired,
+    fixationsSettings: instanceOf(Immutable.Map).isRequired,
     savePreferences: func.isRequired,
     text: instanceOf(Immutable.Map).isRequired,
   }
@@ -44,9 +44,9 @@ class Fixations extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      speed: props.preferences.getIn(['fixationsSettings', "speed"], 0),
-      blockSize: props.preferences.getIn(['fixationsSettings', 'blockSize'], 8),
-      position: props.preferences.getIn(['fixationsSettings', 'position'], 0),
+      speed: props.fixationsSettings.get("speed", 0),
+      blockSize: props.fixationsSettings.get('blockSize', 8),
+      position: props.fixationsSettings.get('position', 0),
     };
     this.changeBlockSize = this.changeBlockSize.bind(this);
     this.changeSpeed = this.changeSpeed.bind(this);
@@ -55,7 +55,7 @@ class Fixations extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({ speed: nextProps.preferences.getIn(['fixationsSettings', "speed"], 0) });
+    this.setState({ speed: nextProps.fixationsSettings.get("speed", 0) });
   }
 
   changeSpeed(speed) {
@@ -79,7 +79,7 @@ class Fixations extends React.Component {
   }
 
   render() {
-    const fixationsIndex = this.props.preferences.getIn(['fixationsSettings', 'position'], 0);
+    const fixationsIndex = this.props.fixationsSettings.get('position', 0);
     const blockSize = (this.state.blockSize * 5) + 10;
     return (
       <div className="fixations-with-slider">

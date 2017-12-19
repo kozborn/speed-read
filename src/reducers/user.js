@@ -67,7 +67,6 @@ const user = (state = Immutable.fromJS({
     }
 
     case "SAVE_USER_PREFERENCES": {
-      console.log(action.preferences)
       return state.setIn(['doc', 'preferences', action.key], Immutable.fromJS(action.preferences));
     }
     default:

@@ -8,7 +8,7 @@ function mapStateToProps(state) {
   return {
     userDoc: state.get('user'),
     text: getText(state, "fixations"),
-    preferences: state.getIn(['user', 'doc', 'preferences'], Immutable.Map()),
+    fixationsSettings: state.getIn(['user', 'doc', 'preferences', 'fixationsSettings'], Immutable.Map()),
   };
 }
 function mapDispatchToProps(dispatch) {
