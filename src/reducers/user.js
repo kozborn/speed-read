@@ -80,6 +80,17 @@ const user = (state = Immutable.fromJS({
     case 'SAVE_USER_PREFERENCES': {
       return state.setIn(['doc', 'preferences', action.key], Immutable.fromJS(action.preferences));
     }
+
+    case 'SCHULTZ_TABLE_NEW_TIME': {
+      const schultzTableTime = Immutable.fromJS({
+        rows: action.data.rows,
+        cols: action.data.cols,
+        time: action.data.time,
+      })
+      const schultzTables = state.getIn(['doc', 'statistics', 'schultzTables']).concat(schultzTableTime);
+      return state.setIn(['doc', 'statistics', 'schultzTables'], schultzTables);
+    }
+
     default:
       return state;
   }
