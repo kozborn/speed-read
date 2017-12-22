@@ -12,6 +12,9 @@ describe('user reducer', () => {
           schultzTable: {},
           fixations: {},
         },
+        statistics: {
+          schultzTables: [],
+        },
         texts: [],
       },
     }))
