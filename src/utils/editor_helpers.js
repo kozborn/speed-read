@@ -89,12 +89,10 @@ const splitLineBy = (length, contentBlock, callback) => {
   let start = 0;
   let end = 0;
 
-  console.log(sentences);
-
-  sentences.forEach((sentence) => {
-    end = start + sentence.length;
+  sentences.forEach((s) => {
+    end = start + s.length;
     callback(start, end);
-    start += sentence.length;
+    start += s.length;
   });
 };
 
