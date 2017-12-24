@@ -4,6 +4,7 @@ import Immutable from "immutable";
 import { Editor } from 'draft-js';
 import { fixationTextFromDraftJS } from "../../utils/editor_helpers";
 import FixationsToolbar from "./FixationsToolbar";
+import DraftEditor from '../common/Editor';
 
 class Fixations extends React.Component {
 
@@ -155,9 +156,9 @@ class Fixations extends React.Component {
             disabled: !this.state.running,
           }}
         />
-        <Editor
+        <DraftEditor
           readOnly
-          editorState={this.state.text}
+          initialText={this.state.text}
         />
         <div className="text-title">{this.props.text.get("title")}</div>
       </div>
