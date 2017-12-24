@@ -7,7 +7,7 @@ import TextsList from './user-texts/TextsList';
 const UserTexts = ({docId, texts, removeText }) =>
   (
     <div>
-      <div className="user_texts__text-header">
+      <div className="user-texts__header no-bg">
         <h2>Twoje teksty</h2>
         <Link className="new-text" to="/new-text">Dodaj nowy tekst</Link>
       </div>

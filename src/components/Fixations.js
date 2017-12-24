@@ -1,11 +1,11 @@
 import React from "react";
 import Slider from "rc-slider";
 import Immutable from "immutable";
-import { func, instanceOf, oneOfType } from "prop-types";
+import { func, instanceOf } from "prop-types";
 import FixationsBase from "./fixations/Fixations";
 import handle from "./common/SliderHandle";
 
-const marks = {
+const speedMarks = {
   0: "low",
   1: "1",
   2: "2",
@@ -21,10 +21,22 @@ const marks = {
   12: "high",
 };
 
+const sizeMarks = {
+  0: 10,
+  1: 15,
+  2: 20,
+  3: 25,
+  4: 30,
+  5: 35,
+  6: 40,
+  7: 45,
+  8: 50,
+};
+
 class Fixations extends React.Component {
 
   static propTypes = {
-    preferences: instanceOf(Immutable.Map).isRequired,
+    fixationsSettings: instanceOf(Immutable.Map).isRequired,
     savePreferences: func.isRequired,
     text: instanceOf(Immutable.Map).isRequired,
   }
@@ -32,31 +44,43 @@ class Fixations extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      speed: props.preferences.get("fixationsSpeed", 0),
+      speed: props.fixationsSettings.get("speed", 0),
+      blockSize: props.fixationsSettings.get('blockSize', 8),
+      position: props.fixationsSettings.get('position', 0),
     };
-
+    this.changeBlockSize = this.changeBlockSize.bind(this);
     this.changeSpeed = this.changeSpeed.bind(this);
     this.saveSettings = this.saveSettings.bind(this);
     this.savePosition = this.savePosition.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({ speed: nextProps.preferences.get("fixationsSpeed", 0) });
+    this.setState({ speed: nextProps.fixationsSettings.get("speed", 0) });
   }
 
   changeSpeed(speed) {
     this.setState({ speed });
   }
 
-  saveSettings(speed) {
-    this.props.savePreferences("fixationsSpeed", speed);
+  changeBlockSize(blockSize) {
+    this.setState({ blockSize });
   }
 
-  savePosition(index) {
-    this.props.savePreferences("fixationIndex", index);
+  saveSettings() {
+    this.props.savePreferences('fixationsSettings', {
+      "speed": this.state.speed,
+      "blockSize": this.state.blockSize,
+      "position": this.state.position,
+    });
+  }
+
+  savePosition(position) {
+    this.setState({ position }, this.saveSettings);
   }
 
   render() {
+    const fixationsIndex = this.props.fixationsSettings.get('position', 0);
+    const blockSize = (this.state.blockSize * 5) + 10;
     return (
       <div className="fixations-with-slider">
         <div className="sliders">
@@ -69,13 +93,27 @@ class Fixations extends React.Component {
             value={this.state.speed}
             onChange={this.changeSpeed}
             onAfterChange={this.saveSettings}
-            marks={marks}
+            marks={speedMarks}
+          />
+        </div>
+        <div className="sliders">
+          <div className="slider-title">Maksymalny rozmiar bloku</div>
+          <Slider
+            min={0}
+            max={8}
+            step={1}
+            handle={handle}
+            value={this.state.blockSize}
+            onChange={this.changeBlockSize}
+            onAfterChange={this.saveSettings}
+            marks={sizeMarks}
           />
         </div>
         <FixationsBase
           text={this.props.text}
-          fixationIndex={this.props.preferences.get("fixationIndex", 0)}
+          fixationIndex={fixationsIndex}
           speed={this.state.speed}
+          blockSize={blockSize}
           savePosition={this.savePosition}
         />
       </div>

@@ -2,7 +2,11 @@ import Immutable from "immutable";
 import notificationCreator from './notification';
 
 const PREFERENCES = {
-  fixationsSpeed: 1000,
+  fixationsSettings: {
+    speed: 1000,
+    blockSize: 8,
+    index: 0,
+  },
   schultzTable: {
     rows: 3,
     cols: 3,

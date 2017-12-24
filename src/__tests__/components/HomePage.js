@@ -8,7 +8,7 @@ let wrapper;
 
 describe("App", () => {
   it("should render App without crashing", () => {
-    wrapper = shallow(<HomePage 
+    wrapper = shallow(<HomePage
       memorizing={defaultDoc.get('memorizing')}
       reading={defaultDoc.get('reading')}
       understanding={defaultDoc.get('understanding')}
@@ -19,8 +19,7 @@ describe("App", () => {
   });
 
   it("should render 5 article sections", () => {
-    const articles = wrapper.find('HomeArticle')
-    
+    const articles = wrapper.find(HomeArticle)
     expect(articles.length).toBe(5)
   })
 });

@@ -4,6 +4,7 @@ import Immutable from "immutable";
 import { Editor } from 'draft-js';
 import { fixationTextFromDraftJS } from "../../utils/editor_helpers";
 import FixationsToolbar from "./FixationsToolbar";
+import DraftEditor from '../common/Editor';
 
 class Fixations extends React.Component {
 
@@ -11,12 +12,14 @@ class Fixations extends React.Component {
     text: instanceOf(Immutable.Map).isRequired,
     fixationIndex: number,
     speed: number, // ms
+    blockSize: number,
     savePosition: func,
   }
 
   static defaultProps = {
     documentId: "sample_text",
     speed: 0, // ms
+    blockSize: 50, // letters
     fixationIndex: 0,
     eventType: "",
     savePosition: () => "",
@@ -27,10 +30,6 @@ class Fixations extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      textWrapped: [],
-      running: false,
-    };
 
     this.startSwitching = this.startSwitching.bind(this);
     this.stopSwitching = this.stopSwitching.bind(this);
@@ -38,6 +37,10 @@ class Fixations extends React.Component {
     this.setCurrentElIndex = this.setCurrentElIndex.bind(this);
     this.updateCurrentElIndex = this.updateCurrentElIndex.bind(this);
     this.getLineSplittedComponent = this.getLineSplittedComponent.bind(this);
+    this.state = {
+      text: fixationTextFromDraftJS(this.getLineSplittedComponent, props.text.get("text"), props.blockSize),
+      running: false,
+    };
   }
 
   componentDidMount() {
@@ -45,6 +48,14 @@ class Fixations extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    if (
+        nextProps.text.get('title') !== this.props.text.get('title') ||
+        nextProps.blockSize !== this.props.blockSize
+      ) {
+      this.setState({'text':
+        fixationTextFromDraftJS(this.getLineSplittedComponent, nextProps.text.get("text"), nextProps.blockSize)});
+    }
+
     if (nextProps.speed !== this.props.speed) {
       clearInterval(this.interval);
       this.interval = null;
@@ -74,7 +85,7 @@ class Fixations extends React.Component {
         className="fixation-line"
       >
         {props.children}
-        <span className="breaker"> </span>
+        <span className="breaker"> </span> {/* empty span is required for breaking line */}
       </span>
     );
   }
@@ -145,9 +156,9 @@ class Fixations extends React.Component {
             disabled: !this.state.running,
           }}
         />
-        <Editor
+        <DraftEditor
           readOnly
-          editorState={fixationTextFromDraftJS(this.getLineSplittedComponent, this.props.text.get("text"))}
+          initialText={this.state.text}
         />
         <div className="text-title">{this.props.text.get("title")}</div>
       </div>

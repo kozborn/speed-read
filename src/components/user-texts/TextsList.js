@@ -9,13 +9,13 @@ import { getDraftTextSnippet } from '../../utils/editor_helpers';
 
 const Texts = ({ docId, texts, removeText }) =>
   (
-    <ul>
+    <ul className="user-texts">
       {texts.map((text, key) => {
         return (
           <li key={key}>
-            <div className="text-header">
+            <div className="user-texts__header">
               <h2>{text.get('title')}</h2>
-              <Link className={cn('edit', 'icon-right')} to={`/edit-text/${docId}/${text.get('id')}`}>
+              <Link className={cn('btn', 'edit', 'icon-right')} to={`/edit-text/${docId}/${text.get('id')}`}>
                 Edycja
               </Link>
               <Button icon="right" type="delete" onClick={() => removeText(text.get('id'))}>

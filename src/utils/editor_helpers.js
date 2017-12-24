@@ -1,4 +1,6 @@
 import React from 'react';
+import _ from 'underscore'
+import trim from 'underscore.string/trim';
 import ReactDOMServer from 'react-dom/server';
 import Immutable from 'immutable';
 import {
@@ -37,14 +39,14 @@ export const findWithRegex = (regex, contentBlock, callback) => {
 
 const MATCH_WORD = /[\w]+/g;
 const MATCH_ANYTHING_BUT_WHITESPACE = /[\S]+/g;
-const handleStrategy = (contentBlock, callback, contentState) => {
+const coverWords = (contentBlock, callback, contentState) => {
   findWithRegex(MATCH_ANYTHING_BUT_WHITESPACE, contentBlock, callback);
 };
 
 export const wrapEachWordWithSpanAndAddCoverDraft = (text, component) => {
   const decorator = new CompositeDecorator([{
     component,
-    strategy: handleStrategy,
+    strategy: coverWords,
   }]);
   return new Promise((resolve) => {
     const contentState = getInitialState(text, decorator);
@@ -64,7 +66,10 @@ export const renderEditorToString = (state) => {
 };
 
 export const getDraftTextSnippet = initialText =>
-  initialText.update('blocks', blocks => blocks.take(2));
+  initialText.update('blocks', (blocks) => {
+    return blocks.filter(block => !_.isEmpty(block.get('text')))
+    .take(2)
+  });
 
 const splitLineBy = (length, contentBlock, callback) => {
   const text = contentBlock.getText();
@@ -78,15 +83,16 @@ const splitLineBy = (length, contentBlock, callback) => {
       sentence = '';
     }
   }
-  if (sentence !== '') {
+  if (!_.isEmpty(trim(sentence))) {
     sentences.push(sentence);
   }
   let start = 0;
   let end = 0;
-  sentences.forEach((sentence) => {
-    end = start + sentence.length;
+
+  sentences.forEach((s) => {
+    end = start + s.length;
     callback(start, end);
-    start += sentence.length;
+    start += s.length;
   });
 };
 
@@ -99,5 +105,6 @@ export const fixationTextFromDraftJS = (component, text, splitLength = 50) => {
     strategy: splitLine,
   }]);
 
-  return getInitialState(text, decorator);
+  const state = getInitialState(text, decorator);
+  return state;
 };
