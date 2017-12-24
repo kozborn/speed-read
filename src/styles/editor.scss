@@ -1,8 +1,41 @@
 @import './variables';
-.public-DraftEditor-content {
-  border: $default-border;
-  &[contenteditable=false] {
-    border: none;
+
+.editor {
+
+  .DraftEditor-root {
+    border: $default-border;
+    &[contenteditable=false] {
+      border: none;
+    }
   }
+
+  &.readonly {
+    .DraftEditor-root {
+      border: none;
+    }
+  }
+
+  .editor__toolbar {
+    padding: 1px;
+    border-top: $default-border;
+    border-left: $default-border;
+    border-right: $default-border;
+    background: #eaeaea;
+  }
+
+  .editor__controls {
+    padding: 2px 1px;
+  }
+
+  .editor__styleButton {
+    padding: 2px;
+    margin-right: 1px;
+    cursor: default;
+    &.editor__activeButton,
+    &:hover {
+      background: darken(#eaeaea, 10%);
+    }
+  }
+
 }
 

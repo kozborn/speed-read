@@ -1,5 +1,6 @@
 import React from 'react';
 import Immutable from 'immutable';
+import cn from 'classnames';
 import { instanceOf, string, array, bool, oneOfType } from "prop-types";
 import { Editor,
   ContentState,
@@ -21,7 +22,7 @@ const styleMap = {
 
 function getBlockStyle(block) {
   switch (block.getType()) {
-    case 'blockquote': return 'RichEditor-blockquote';
+    case 'blockquote': return 'editor__blockquote';
     default: return null;
   }
 }
@@ -35,9 +36,9 @@ class StyleButton extends React.Component {
     };
   }
   render() {
-    let className = 'RichEditor-styleButton';
+    let className = 'editor__styleButton';
     if (this.props.active) {
-      className += ' RichEditor-activeButton';
+      className += ' editor__activeButton';
     }
     return (
       <span className={className} onMouseDown={this.onToggle}>
@@ -67,7 +68,7 @@ const BlockStyleControls = (props) => {
     .getBlockForKey(selection.getStartKey())
     .getType();
   return (
-    <div className="RichEditor-controls">
+    <div className="editor__controls">
       {BLOCK_TYPES.map((type) =>
         <StyleButton
           key={type.label}
@@ -90,7 +91,7 @@ const INLINE_STYLES = [
 const InlineStyleControls = (props) => {
   var currentStyle = props.editorState.getCurrentInlineStyle();
   return (
-    <div className="RichEditor-controls">
+    <div className="editor__controls">
       {INLINE_STYLES.map(type =>
         <StyleButton
           key={type.label}
@@ -189,7 +190,7 @@ class DraftEditor extends React.Component {
 
   render() {
     return (
-      <div className="editor">
+      <div className={cn("editor", {'readonly': this.props.readOnly})}>
         {!this.props.readOnly && <div className="editor__toolbar">
           <BlockStyleControls
             editorState={this.state.editorState}
