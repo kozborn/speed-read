@@ -51,6 +51,10 @@
     &.edit {
       @include iconLeftButton("\270E")
     }
+
+    &.submit {
+      @include iconLeftButton("\2714")
+    }
   }
 
   &.icon-right {
@@ -71,6 +75,10 @@
     }
     &.edit {
       @include iconRightButton("\270E")
+    }
+
+    &.submit {
+      @include iconRightButton("\2714")
     }
   }
 

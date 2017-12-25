@@ -20,6 +20,7 @@ import UserTexts from "./connectors/UserTexts";
 import NewText from "./connectors/NewText";
 import EditText from "./connectors/EditText";
 import Settings from "./connectors/Settings";
+import StaticTexts from './connectors/StaticTexts';
 import registerServiceWorker from "./registerServiceWorker";
 import { getDefaultDoc } from "./actions/actions";
 
@@ -57,6 +58,7 @@ ReactDOM.render(
         <Route path="/user-texts/:userId?" component={UserTexts} />
         <Route path="/settings/:userId?" component={Settings} />
         <Route path="/edit-text/:userId/:textId" component={EditText} />
+        <Route path="/static-texts/" component={StaticTexts} />
       </App>
     </Router>
   </Provider>,

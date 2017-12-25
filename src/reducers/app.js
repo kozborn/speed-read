@@ -15,7 +15,7 @@ const PREFERENCES = {
 
 function app(state = Immutable.Map({
   isFetching: false,
-  defaultDoc: Immutable.Map(),
+  defaultDoc: Immutable.Map({}),
   defaultPreferences: Immutable.fromJS(PREFERENCES),
   notification: Immutable.Map(),
 }), action) {
@@ -32,6 +32,10 @@ function app(state = Immutable.Map({
         s.set('notification', notificationCreator('response-error', Immutable.fromJS(action.response)));
         s.set('isFetching', false);
       });
+    case "UPDATE_TEXT": {
+      const { path, text } = action;
+      return state.setIn(path, Immutable.fromJS(text));
+    }
     case "SHOW_NOTIFICATION":
       return state.set('notification', Immutable.fromJS(action.notification));
     case "CLOSE_NOTIFICATION":

@@ -1,4 +1,5 @@
-import { fetchDoc } from "../utils/db_helpers";
+import Immutable from 'immutable';
+import { fetchDoc, getOptions, saveDoc } from "../utils/db_helpers";
 
 export const getDefaultDoc = () => {
   return (dispatch) => {
@@ -9,6 +10,21 @@ export const getDefaultDoc = () => {
     });
   };
 };
+
+export const save = (key, text) => {
+  const path = ['defaultDoc', key, 'text'];
+
+  return (dispatch, getState) => {
+    dispatch({ type: "UPDATE_TEXT", path, text})
+    const options = getOptions("PUT"); // this document has to exists
+    const docToSave = getState().getIn(['app', 'defaultDoc'], Immutable.Map()).toJS()
+    docToSave.id = 'default_doc';
+    saveDoc(docToSave, options)
+    .then((response) => {
+      console.log(response);
+    })
+  }
+}
 
 export const closeNotification = () => {
   return {type: "CLOSE_NOTIFICATION"};

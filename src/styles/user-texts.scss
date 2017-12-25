@@ -1,5 +1,5 @@
 @import './variables';
-
+.default-texts,
 .user-texts {
   max-width: 1000px;
   margin: 10px auto;
@@ -16,6 +16,7 @@
   }
 }
 
+.default-texts__header,
 .user-texts__header {
   padding: 2px 5px;
   background: #eaeaea;
