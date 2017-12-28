@@ -33,10 +33,10 @@ class Header extends React.Component {
     const { userId } = this.props;
     return (
       <nav className={cn({'hamburger-menu': hamburger, 'navigation-top': !hamburger})}>
-        <li><Link to={`/home/${userId}`}>Home page</Link></li>
+        <li><Link to={`/home/${userId}`}>Strona główna</Link></li>
         <li><Link to={`/bottom-half-text/${userId}`}>Dolna połowa tekstu</Link></li>
         <li><Link to={`/top-half-text/${userId}`}>Górna połowa tekstu</Link></li>
-        <li><Link to={`/schultz-table/${userId}`}>Tabela Schultz'a</Link></li>
+        <li><Link to={`/schultz-table/${userId}`}>Tabela Schulz'a</Link></li>
         <li><Link to={`/fixations/${userId}`}>Fiksacja</Link></li>
         <li><Link to={`/user-texts/${userId}`}>Twoje teksty</Link></li>
         <li>
