@@ -1,14 +1,15 @@
 import React from 'react';
-import { instanceOf, func } from 'prop-types';
+import { instanceOf, func, bool } from 'prop-types';
 import Immutable from 'immutable';
 import ChangelogEntry from './changelog/ChangelogEntry'
 
-const Changelog = ({ changelog, update }) => {
+const Changelog = ({ changelog, update, isLogged }) => {
   return (
     <div className="changelog">
       {changelog.map((entry) => {
         return (
           <ChangelogEntry
+            isLogged={isLogged}
             key={entry.get('id')}
             entry={entry}
             update={update}
@@ -20,6 +21,7 @@ const Changelog = ({ changelog, update }) => {
 }
 
 Changelog.propTypes = {
+  isLogged: bool.isRequired,
   update: func.isRequired,
   changelog: instanceOf(Immutable.List).isRequired,
 }

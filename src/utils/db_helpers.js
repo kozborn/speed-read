@@ -1,9 +1,15 @@
 import _ from 'underscore'
+import PouchDB from 'pouchdb';
+import PouchDBAuth from 'pouchdb-authentication'
+
+PouchDB.plugin(PouchDBAuth);
 
 export const DEFAULT_DOC_ID = "default_doc";
 export const DbUrl = "http://piotrkozubek.pl:5984/speed-read";
 export const ServerUrl = "http://localhost:3000";
 const SessionUrl = "http://piotrkozubek.pl:5984/_session"
+
+const db = new PouchDB('http://piotrkozubek.pl:5984/speed-read2', { skip_setup: true })
 
 export const getOptions = (method) => {
   const headers = new Headers();
@@ -23,9 +29,7 @@ export const fetchDoc = docId =>
     .catch(ex => ex);
 
 export const fetchSession = () =>
-  fetch(SessionUrl)
-    .then(response => response.json())
-    .catch(ex => ex);
+  db.getSession()
 
 export const saveDoc = (data, options = {}) => {
   const url = _(data.id).isEmpty() ? DbUrl : `${DbUrl}/${data.id}`;

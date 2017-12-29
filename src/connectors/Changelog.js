@@ -15,6 +15,7 @@ const newChangelogEntry = Immutable.fromJS({
 
 const mapStateToProps = (state) => {
   return {
+    isLogged: state.getIn(['app', 'isLogged']),
     isFetching: state.getIn(['changelog', 'isFetching']),
     changelog: state.getIn(['changelog', 'doc', 'changelog'], Immutable.List()),
   }
@@ -30,6 +31,7 @@ const mapDispatchToProps = (dispatch) => {
 
 class ChangelogConnector extends React.Component {
   static propTypes = {
+    isLogged: bool.isRequired,
     isFetching: bool.isRequired,
     add: func.isRequired,
     update: func.isRequired,
@@ -65,11 +67,11 @@ class ChangelogConnector extends React.Component {
 
         {this.props.isFetching && <Spinner />}
 
-        {!this.state.newEntryForm &&
+        {!this.state.newEntryForm && this.props.isLogged &&
           <Button type="add" icon="left" onClick={this.showNewChangelogEntryForm} >Nowy wpis</Button>
         }
 
-        {this.state.newEntryForm &&
+        {this.state.newEntryForm && this.props.isLogged &&
           <div>
             <ChangelogForm
               ref={(e) => { this.newChangelogEntryForm = e }}
@@ -82,6 +84,7 @@ class ChangelogConnector extends React.Component {
 
         {!this.props.isFetching &&
           <Changelog
+            isLogged={this.props.isLogged}
             update={this.props.update}
             changelog={this.props.changelog}
           />

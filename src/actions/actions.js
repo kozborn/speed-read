@@ -15,8 +15,7 @@ export const checkIfUserLogged = () => {
   return (dispatch) => {
     fetchSession()
     .then((response) => {
-      console.log(response)
-      if (response.userCtx.name !== null && response.userCtx.name == 'admin') {
+      if (response.userCtx.name !== null && response.userCtx.name === 'admin') {
         dispatch({ type: "USER_LOGGED" })
       } else {
         dispatch({ type: "USER_NOT_LOGGED"})

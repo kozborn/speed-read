@@ -15,6 +15,7 @@ const PREFERENCES = {
 
 function app(state = Immutable.Map({
   isFetching: false,
+  isLogged: false,
   defaultDoc: Immutable.Map({}),
   defaultPreferences: Immutable.fromJS(PREFERENCES),
   notification: Immutable.Map(),
@@ -40,6 +41,10 @@ function app(state = Immutable.Map({
       return state.set('notification', Immutable.fromJS(action.notification));
     case "CLOSE_NOTIFICATION":
       return state.set('notification', Immutable.Map());
+    case "USER_LOGGED":
+      return state.set('isLogged', true);
+    case "USER_NOT_LOGGED":
+      return state.set('isLogged', false);
     default:
       return state;
   }
