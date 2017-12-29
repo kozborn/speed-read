@@ -36,6 +36,9 @@
     &.apply {
       @include iconLeftButton("\2714")
     }
+    &.add {
+      @include iconLeftButton("\2795")
+    }
     &.forward {
       @include iconLeftButton("\3e")
     }
@@ -60,6 +63,9 @@
   &.icon-right {
     &.apply {
       @include iconRightButton("\2714")
+    }
+    &.add {
+      @include iconRightButton("\2795")
     }
     &.cancel {
       @include iconRightButton("\D7")

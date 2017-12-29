@@ -1,16 +1,26 @@
 import React from 'react';
-import { instanceOf } from 'prop-types';
+import { instanceOf, func } from 'prop-types';
 import Immutable from 'immutable';
+import ChangelogEntry from './changelog/ChangelogEntry'
 
-const Changelog = ({ changelog }) => {
+const Changelog = ({ changelog, update }) => {
   return (
     <div className="changelog">
-      <h2>Changelog:</h2>
+      {changelog.map((entry) => {
+        return (
+          <ChangelogEntry
+            key={entry.get('id')}
+            entry={entry}
+            update={update}
+          />
+        )
+      })}
     </div>
   )
 }
 
 Changelog.propTypes = {
+  update: func.isRequired,
   changelog: instanceOf(Immutable.List).isRequired,
 }
 

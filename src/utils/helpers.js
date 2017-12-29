@@ -49,6 +49,11 @@ export function guid() {
     s4() + "-" + s4() + s4() + s4();
 }
 
+export function generateQuickGuid() {
+  return Math.random().toString(36).substring(2, 15) +
+    Math.random().toString(36).substring(2, 15);
+}
+
 const ALLOWED_TAGS = ["H3", "H2", "H1", "DIV", "P"];
 
 function usurp(p) {
