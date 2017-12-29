@@ -11,9 +11,10 @@ import "./styles/index.css";
 
 import reducer from "./reducer";
 import App from "./connectors/App";
+import BottomHalfText from "./connectors/BottomHalfText";
 import Changelog from "./connectors/Changelog";
 import HomePage from "./connectors/HomePage";
-import BottomHalfText from "./connectors/BottomHalfText";
+import HelpPage from "./connectors/HelpPage";
 import TopHalfText from "./connectors/TopHalfText";
 import TableWithSliders from "./connectors/Table";
 import Fixations from "./connectors/Fixations";
@@ -59,6 +60,7 @@ ReactDOM.render(
         <Route path="/user-texts/:userId?" component={UserTexts} />
         <Route path="/settings/:userId?" component={Settings} />
         <Route path="/edit-text/:userId/:textId" component={EditText} />
+        <Route path="/help" component={HelpPage} />
         <Route path="/static-texts/" component={StaticTexts} />
         <Route path="/changelog" component={Changelog} />
       </App>

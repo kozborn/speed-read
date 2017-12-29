@@ -2,6 +2,7 @@ import React from "react";
 import Immutable from "immutable";
 import { instanceOf, node} from "prop-types";
 import HalfText from "./HalfText";
+import HelpPortal from "./common/HelpPortal"
 
 const BottomHalfWord = (props) => {
   return <span>{props.children}<span className="bottom-half-text" /></span>;
@@ -12,12 +13,16 @@ BottomHalfWord.propTypes = {
 };
 
 const BottomHalfText = ({ text }) =>
-  (<HalfText
-    text={text}
-    handlerComponent={BottomHalfWord}
-    pageTitle="Bottom half Text"
-    className="bottom-half-text"
-  />);
+  (
+    <div>
+      <h1>Bottom half Text <HelpPortal /></h1>
+      <HalfText
+        text={text}
+        handlerComponent={BottomHalfWord}
+        className="bottom-half-text"
+      />
+    </div>
+  );
 
 BottomHalfText.propTypes = {
   text: instanceOf(Immutable.Map).isRequired,

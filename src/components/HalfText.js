@@ -7,12 +7,10 @@ class HalfText extends React.Component {
   static propTypes = {
     handlerComponent: func.isRequired,
     text: instanceOf(Immutable.Map).isRequired,
-    pageTitle: string,
     className: string,
   }
 
   static defaultProps = {
-    pageTitle: "",
     className: "",
   }
 
@@ -53,7 +51,6 @@ class HalfText extends React.Component {
   render() {
     return (
       <div className={this.props.className}>
-        <h1>{this.props.pageTitle}</h1>
         <div className="text-with-helpers">
           <div dangerouslySetInnerHTML={{__html: this.state.textWrapped}} />
         </div>
