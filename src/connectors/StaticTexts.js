@@ -5,6 +5,7 @@ import { save } from '../actions/actions';
 
 const mapStateToProps = (state) => {
   return {
+    isLogged: state.getIn(['app', 'isLogged']),
     defaultDoc: state.getIn(['app', 'defaultDoc'], Immutable.Map()),
   }
 };

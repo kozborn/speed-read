@@ -1,14 +1,20 @@
 import React from 'react'
 import Immutable from 'immutable'
+import { func, bool, instanceOf } from 'prop-types';
 import StaticText from './static-texts/StaticText'
 
 class StaticTexts extends React.Component {
 
-  constructor(props) {
-    super(props)
+  static propTypes = {
+    isLogged: bool.isRequired,
+    saveDoc: func.isRequired,
+    defaultDoc: instanceOf(Immutable.Map).isRequired,
   }
 
   render() {
+    if (!this.props.isLogged) {
+      return "Not found";
+    }
     return (
       <div>
         <h2>Static texts</h2>
