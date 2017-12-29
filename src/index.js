@@ -23,7 +23,7 @@ import EditText from "./connectors/EditText";
 import Settings from "./connectors/Settings";
 import StaticTexts from './connectors/StaticTexts';
 import registerServiceWorker from "./registerServiceWorker";
-import { getDefaultDoc } from "./actions/actions";
+import { getDefaultDoc, checkIfUserLogged } from "./actions/actions";
 
 const history = createBrowserHistory();
 
@@ -44,7 +44,7 @@ function logger({ getState }) {
 
 const store = createStore(reducer, applyMiddleware(thunkMiddleware, logger));
 store.dispatch(getDefaultDoc());
-
+store.dispatch(checkIfUserLogged())
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>

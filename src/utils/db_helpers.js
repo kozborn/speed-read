@@ -1,7 +1,9 @@
 import _ from 'underscore'
+
 export const DEFAULT_DOC_ID = "default_doc";
 export const DbUrl = "http://piotrkozubek.pl:5984/speed-read";
 export const ServerUrl = "http://localhost:3000";
+const SessionUrl = "http://piotrkozubek.pl:5984/_session"
 
 export const getOptions = (method) => {
   const headers = new Headers();
@@ -9,6 +11,7 @@ export const getOptions = (method) => {
   return {
     method,
     headers,
+    credentials: true,
     mode: "cors",
     cache: "default",
   };
@@ -16,6 +19,11 @@ export const getOptions = (method) => {
 
 export const fetchDoc = docId =>
   fetch(`${DbUrl}/${docId}`)
+    .then(response => response.json())
+    .catch(ex => ex);
+
+export const fetchSession = () =>
+  fetch(SessionUrl)
     .then(response => response.json())
     .catch(ex => ex);
 
