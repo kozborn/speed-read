@@ -1,7 +1,13 @@
 import React from 'react'
+import { string } from 'prop-types';
 import Modal from './Modal'
+import Help from '../../connectors/Help'
 
 class HelpPortal extends React.Component {
+
+  static propTypes = {
+    helpKey: string.isRequired,
+  }
 
   constructor(props) {
     super(props)
@@ -33,7 +39,7 @@ class HelpPortal extends React.Component {
           closeBtn
           onClose={this.closeHelp}
         >
-          <h2>Dupa zbita</h2>
+          <Help helpKey={this.props.helpKey} />
         </Modal>
       </div>
     )

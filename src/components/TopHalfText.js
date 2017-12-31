@@ -1,6 +1,6 @@
 import React from "react";
 import { instanceOf, node } from "prop-types";
-import { Map } from "immutable";
+import Immutable from "immutable";
 import HalfText from "./HalfText";
 import HelpPortal from "./common/HelpPortal"
 
@@ -15,7 +15,7 @@ TopHalfWord.propTypes = {
 const TopHalfText = ({ text }) =>
   (
     <div>
-      <h1>Top half Text <HelpPortal /></h1>
+      <h1>Górna połowa tekstu <HelpPortal helpKey="top-half-text" /></h1>
       <HalfText
         text={text}
         handlerComponent={TopHalfWord}
@@ -25,7 +25,7 @@ const TopHalfText = ({ text }) =>
   );
 
 TopHalfText.propTypes = {
-  text: instanceOf(Map).isRequired,
+  text: instanceOf(Immutable.Map).isRequired,
 };
 
 export default TopHalfText;

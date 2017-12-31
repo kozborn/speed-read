@@ -5,7 +5,7 @@ const changelog = (state = Immutable.Map({
   doc: Immutable.Map(),
 }), action) => {
   switch (action.type) {
-    case "FETCH_CHANGELOG":
+    case "FETCHING_CHANGELOG":
       return state.set('isFetching', true);
     case "CHANGELOG_FETCHED":
       return state.withMutations((s) => {

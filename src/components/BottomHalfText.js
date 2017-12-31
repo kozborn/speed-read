@@ -15,7 +15,7 @@ BottomHalfWord.propTypes = {
 const BottomHalfText = ({ text }) =>
   (
     <div>
-      <h1>Bottom half Text <HelpPortal /></h1>
+      <h1>Dolna połowa tekstu <HelpPortal helpKey="bottom-half-text" /></h1>
       <HalfText
         text={text}
         handlerComponent={BottomHalfWord}
