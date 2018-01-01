@@ -5,7 +5,7 @@ import ChangelogEntry from './changelog/ChangelogEntry'
 
 const Changelog = ({ changelog, update, isLogged }) => {
   return (
-    <div className="changelog">
+    <div className="changelog-texts">
       {changelog.map((entry) => {
         return (
           <ChangelogEntry

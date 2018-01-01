@@ -16,9 +16,27 @@ const help = (state = Immutable.Map({
       action.entry.createdTimestamp = Date.now();
       return state.setIn(['doc', action.key], Immutable.fromJS(action.entry));
     }
-    case "UPDATE_CHANGELOG_ENTRY": {
-      action.entry.updatedTimestamp = Date.now();
-      return state.setIn(['doc', action.key], Immutable.fromJS(action.entry));
+    case "UPDATE_HELP_ENTRY": {
+      let docToUpdate = state.get('doc');
+      if (action.entry.id !== action.entry.oldId) {
+        docToUpdate = docToUpdate.mapKeys((k) => {
+          if (k === action.entry.oldId) {
+            return action.entry.id;
+          }
+          return k;
+        })
+      }
+
+      const updatedDoc = docToUpdate.update(action.entry.id, (entry) => {
+        return entry.withMutations((e) => {
+          e.set('id', action.entry.id)
+          e.set('updatedTimestamp', Date.now())
+          e.set('title', action.entry.title)
+          e.set('text', Immutable.fromJS(action.entry.text))
+        })
+      })
+
+      return state.set('doc', updatedDoc);
     }
     default:
       return state;

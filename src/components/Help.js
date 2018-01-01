@@ -18,4 +18,8 @@ Help.propTypes = {
   helpContent: instanceOf(Immutable.Map).isRequired,
 }
 
+Help.defaultProps = {
+  isLogged: false,
+}
+
 export default Help;

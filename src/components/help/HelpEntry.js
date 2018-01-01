@@ -2,10 +2,10 @@ import React from 'react'
 import { instanceOf, func, bool } from 'prop-types';
 import Immutable from 'immutable';
 import DraftEditor from '../common/Editor'
-import ChangelogForm from './ChangelogForm'
+import HelpForm from './HelpForm'
 import Button from '../common/Button';
 
-class ChangelogEntry extends React.Component {
+class HelpEntry extends React.Component {
 
   static propTypes = {
     isLogged: bool.isRequired,
@@ -33,19 +33,18 @@ class ChangelogEntry extends React.Component {
   }
 
   update() {
-    this.props.update(this.changelogForm.getEntry());
+    this.props.update(this.helpForm.getEntry());
     this.setState({ editing: false })
   }
 
   render() {
-    const {entry} = this.props
-
+    const { entry } = this.props
     return (
       this.state.editing && this.props.isLogged ?
         <div>
-          <ChangelogForm
-            ref={(e) => { this.changelogForm = e }}
-            changelogEntry={entry}
+          <HelpForm
+            ref={(e) => { this.helpForm = e }}
+            helpEntry={entry}
           />
           <Button icon="right" type="cancel" onClick={this.cancel}>
             Anuluj
@@ -54,11 +53,11 @@ class ChangelogEntry extends React.Component {
             Zapisz
           </Button>
         </div>
-      :
+        :
         <div>
-          <div className="changelog-texts__header">
+          <div className="help-texts__header">
             <h2>
-              {entry.get('version')}
+              {entry.get('id')}: {entry.get('title')}
             </h2>
             {this.props.isLogged &&
               <Button icon="right" type="edit" onClick={this.edit}>
@@ -72,4 +71,4 @@ class ChangelogEntry extends React.Component {
   }
 }
 
-export default ChangelogEntry
+export default HelpEntry

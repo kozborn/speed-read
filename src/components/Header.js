@@ -42,11 +42,22 @@ class Header extends React.Component {
         <li>
           {hamburger ?
             <Link className="settings" to={`/settings/${userId}`}>
-              Settings &#9881;
+              Ustawienia &#9881;
             </Link>
           :
             <Link className="settings" to={`/settings/${userId}`}>
               &#9881;
+            </Link>
+          }
+        </li>
+        <li>
+          {hamburger ?
+            <Link className="help" to="/help">
+              Pomoc &#x3f;
+            </Link>
+          :
+            <Link className="Help" to="/help">
+              &#x3f;
             </Link>
           }
         </li>

@@ -36,3 +36,25 @@
     }
   }
 }
+
+.changelog-texts__header,
+.help-texts__header,
+.default-texts__header,
+.user-texts__header {
+  padding: 2px 5px;
+  background: #eaeaea;
+  margin-top: 25px;
+  display: flex;
+  h2 {
+    margin: 0px;
+    line-height: 30px;
+    flex-grow: 1;
+  }
+  a,
+  button {
+    line-height: 30px;
+  }
+  .new-text {
+    line-height: 30px;
+  }
+}

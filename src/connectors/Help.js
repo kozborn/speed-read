@@ -25,7 +25,9 @@ class HelpConnector extends React.Component {
     return this.props.isFetching ?
       <Spinner />
     :
-      <Help helpContent={this.props.helpContent} />
+      <Help
+        helpContent={this.props.helpContent}
+      />
   }
 }
 
