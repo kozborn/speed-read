@@ -15,7 +15,7 @@ TopHalfWord.propTypes = {
 const TopHalfText = ({ text }) =>
   (
     <div>
-      <h1>Górna połowa tekstu <HelpPortal helpKey="top-half-text" /></h1>
+      <h1 className="with-help">Górna połowa tekstu <HelpPortal helpKey="top-half-text" /></h1>
       <HalfText
         text={text}
         handlerComponent={TopHalfWord}

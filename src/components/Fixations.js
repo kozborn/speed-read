@@ -3,6 +3,7 @@ import Slider from "rc-slider";
 import Immutable from "immutable";
 import { func, instanceOf } from "prop-types";
 import FixationsBase from "./fixations/Fixations";
+import HelpPortal from './common/HelpPortal';
 import handle from "./common/SliderHandle";
 
 const speedMarks = {
@@ -83,6 +84,7 @@ class Fixations extends React.Component {
     const blockSize = (this.state.blockSize * 5) + 10;
     return (
       <div className="fixations-with-slider">
+        <h1 className="with-help">Fiksacje <HelpPortal helpKey="fixations" /></h1>
         <div className="sliders">
           <div className="slider-title">Prędkość przełączania</div>
           <Slider

@@ -83,6 +83,14 @@ a, a:hover, a:visited, a:active {
   }
 }
 
+h1.with-help {
+  display: flex;
+  .help-portal {
+
+  }
+}
+
+
 .App {
   text-align: left;
   min-height: 100%;

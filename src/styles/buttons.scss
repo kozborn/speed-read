@@ -36,6 +36,9 @@
     &.apply {
       @include iconLeftButton("\2714")
     }
+    &.help {
+      @include iconLeftButton("\003f")
+    }
     &.add {
       @include iconLeftButton("\2795")
     }
@@ -54,7 +57,6 @@
     &.edit {
       @include iconLeftButton("\270E")
     }
-
     &.submit {
       @include iconLeftButton("\2714")
     }

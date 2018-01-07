@@ -1,7 +1,6 @@
 import React from "react";
 import {number, instanceOf, func} from "prop-types";
 import Immutable from "immutable";
-import { Editor } from 'draft-js';
 import { fixationTextFromDraftJS } from "../../utils/editor_helpers";
 import FixationsToolbar from "./FixationsToolbar";
 import DraftEditor from '../common/Editor';
@@ -37,13 +36,21 @@ class Fixations extends React.Component {
     this.setCurrentElIndex = this.setCurrentElIndex.bind(this);
     this.updateCurrentElIndex = this.updateCurrentElIndex.bind(this);
     this.getLineSplittedComponent = this.getLineSplittedComponent.bind(this);
+    this.prepareText = this.prepareText.bind(this);
     this.state = {
-      text: fixationTextFromDraftJS(this.getLineSplittedComponent, props.text.get("text"), props.blockSize),
+      text: Immutable.Map(),
       running: false,
     };
   }
 
   componentDidMount() {
+    this.prepareText();
+  }
+
+  prepareText() {
+    this.setState({
+      'text': fixationTextFromDraftJS(this.getLineSplittedComponent, this.props.text.get("text"), this.props.blockSize),
+    });
     this.setCurrentElIndex(this.props.fixationIndex);
   }
 
@@ -52,8 +59,9 @@ class Fixations extends React.Component {
         nextProps.text.get('title') !== this.props.text.get('title') ||
         nextProps.blockSize !== this.props.blockSize
       ) {
-      this.setState({'text':
-        fixationTextFromDraftJS(this.getLineSplittedComponent, nextProps.text.get("text"), nextProps.blockSize)});
+      this.setState({
+        'text': fixationTextFromDraftJS(this.getLineSplittedComponent, nextProps.text.get("text"), nextProps.blockSize),
+      });
     }
 
     if (nextProps.speed !== this.props.speed) {

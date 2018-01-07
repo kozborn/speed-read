@@ -3,6 +3,7 @@ import { instanceOf, func, bool } from 'prop-types';
 import Immutable from 'immutable';
 import DraftEditor from '../common/Editor'
 import HelpForm from './HelpForm'
+import HelpPortal from '../common/HelpPortal'
 import Button from '../common/Button';
 
 class HelpEntry extends React.Component {
@@ -17,11 +18,14 @@ class HelpEntry extends React.Component {
     super(props);
     this.state = {
       editing: false,
+      helpPortal: false,
     }
 
     this.edit = this.edit.bind(this);
     this.update = this.update.bind(this);
     this.cancel = this.cancel.bind(this);
+    this.toggleHelpPortal = this.toggleHelpPortal.bind(this);
+
   }
 
   edit() {
@@ -35,6 +39,10 @@ class HelpEntry extends React.Component {
   update() {
     this.props.update(this.helpForm.getEntry());
     this.setState({ editing: false })
+  }
+
+  toggleHelpPortal() {
+    this.setState({ helpModalOpen: !this.state.helpModalOpen })
   }
 
   render() {
@@ -56,8 +64,14 @@ class HelpEntry extends React.Component {
         :
         <div>
           <div className="help-texts__header">
-            <h2>
+            <h2 onClick={this.toggleHelpPortal}>
               {entry.get('id')}: {entry.get('title')}
+              <HelpPortal
+                customTrigger
+                helpKey={entry.get('id')}
+                modalOpen={this.state.helpModalOpen}
+                onClose={this.toggleHelpPortals}
+              />
             </h2>
             {this.props.isLogged &&
               <Button icon="right" type="edit" onClick={this.edit}>

@@ -2,8 +2,9 @@ import React from "react";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 import {instanceOf, func } from "prop-types";
-import {Map} from "immutable";
+import Immutable from "immutable";
 import Table from "./Table";
+import HelpPortal from './common/HelpPortal';
 import handle from "./common/SliderHandle";
 
 const marks = {
@@ -21,7 +22,7 @@ const marks = {
 class TableWithSliders extends React.Component {
 
   static propTypes = {
-    preferences: instanceOf(Map).isRequired,
+    preferences: instanceOf(Immutable.Map).isRequired,
     savePreferences: func.isRequired,
   }
 
@@ -61,7 +62,7 @@ class TableWithSliders extends React.Component {
   render() {
     return (
       <div className="table-with-sliders">
-        <h2>Schulz Tables</h2>
+        <h1 className="with-help">Tabela Schultz'a <HelpPortal helpKey="schultz-table" /></h1>
         <div className="sliders">
           <div className="slider">
             <div className="slider-title">Liczba kolumn</div>
