@@ -1,4 +1,5 @@
 import Immutable from 'immutable';
+import _ from 'underscore'
 import { fetchDoc, getOptions, saveDoc } from "../utils/db_helpers";
 
 export function getHelp() {
@@ -17,7 +18,7 @@ export function save() {
     const options = getOptions("PUT"); // this document has to exists
     const docToSave = getState().getIn(['help', 'doc'], Immutable.Map()).toJS()
     docToSave.id = 'help';
-    saveDoc(docToSave, options)
+    return saveDoc(docToSave, options)
     .then((response) => {
       console.log(response);
     })

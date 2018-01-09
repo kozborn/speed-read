@@ -13,7 +13,6 @@ const help = (state = Immutable.Map({
         s.set('doc', Immutable.fromJS(action.response))
       })
     case "ADD_HELP_ENTRY": {
-      action.entry.createdTimestamp = Date.now();
       return state.setIn(['doc', action.key], Immutable.fromJS(action.entry));
     }
     case "UPDATE_HELP_ENTRY": {

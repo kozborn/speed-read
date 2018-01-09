@@ -1,5 +1,6 @@
 import _ from 'underscore';
 import Immutable from 'immutable';
+import { showNotification } from './notification-actions'
 import { fetchDoc, getOptions, saveDoc } from '../utils/db_helpers';
 
 export function setUserDocumentId(docId) {
@@ -23,7 +24,8 @@ export const fetchUserDoc = (docId) => {
     fetchDoc(docId)
     .then((response) => {
       if (response.error) {
-        dispatch({ type: "FETCHING_ERROR", response});
+        dispatch({ type: "FETCHING_ERROR", response });
+        dispatch(showNotification('response-error', response));
       } else {
         dispatch({type: "USER_DOC_FETCHED", response});
         dispatch(setUserDocumentId(docId));

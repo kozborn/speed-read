@@ -5,6 +5,7 @@ describe('app reducer', () => {
   it('should return the initial state', () => {
     expect(reducer(undefined, {})).toEqual(Immutable.fromJS({
       isFetching: false,
+      isLogged: false,
       defaultDoc: {},
       defaultPreferences: {
         fixationsSettings: {
@@ -17,7 +18,6 @@ describe('app reducer', () => {
           cols: 3,
         },
       },
-      notification: {},
     }))
   })
 })

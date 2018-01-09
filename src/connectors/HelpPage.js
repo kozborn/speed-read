@@ -2,6 +2,7 @@ import React from 'react'
 import Immutable from 'immutable'
 import { instanceOf, bool, func } from 'prop-types'
 import { connect } from 'react-redux'
+import _ from 'underscore'
 import Button from '../components/common/Button'
 import HelpPage from '../components/HelpPage'
 import HelpForm from '../components/help/HelpForm'
@@ -93,7 +94,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getHelpDoc: () => dispatch(getHelp()),
     update: entry => dispatch(update(entry)),
-    add: entry => dispatch(add(entry)),
+    add: entry => dispatch(add(_.extend(entry, {timestamp: Date.now()}))),
   }
 }
 

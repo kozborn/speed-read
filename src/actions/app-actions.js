@@ -38,8 +38,3 @@ export const save = (key, text) => {
     })
   }
 }
-
-export const closeNotification = () => {
-  return {type: "CLOSE_NOTIFICATION"};
-};
-
