@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import Immutable from 'immutable';
 import App from '../components/App';
-import { closeNotification } from '../actions/actions';
+import { closeNotification } from '../actions/app-actions';
 import { fetchUserDoc } from '../actions/user-actions';
 
 const mapStateToProps = (state) => {

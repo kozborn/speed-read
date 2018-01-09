@@ -24,7 +24,7 @@ import EditText from "./connectors/EditText";
 import Settings from "./connectors/Settings";
 import StaticTexts from './connectors/StaticTexts';
 import registerServiceWorker from "./registerServiceWorker";
-import { getDefaultDoc, checkIfUserLogged } from "./actions/actions";
+import { getDefaultDoc, checkIfUserLogged } from "./actions/app-actions";
 
 const history = createBrowserHistory();
 

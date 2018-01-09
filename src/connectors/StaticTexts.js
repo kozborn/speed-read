@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import Immutable from 'immutable'
 import StaticTexts from '../components/StaticTexts'
-import { save } from '../actions/actions';
+import { save } from '../actions/app-actions';
 
 const mapStateToProps = (state) => {
   return {

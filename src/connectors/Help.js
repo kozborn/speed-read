@@ -4,7 +4,7 @@ import { instanceOf, bool, func } from 'prop-types'
 import { connect } from 'react-redux'
 import Help from '../components/Help'
 import Spinner from '../components/common/Spinner'
-import { getHelp } from '../actions/help'
+import { getHelp } from '../actions/help-actions'
 
 class HelpConnector extends React.Component {
 

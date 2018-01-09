@@ -6,7 +6,7 @@ import Button from '../components/common/Button'
 import HelpPage from '../components/HelpPage'
 import HelpForm from '../components/help/HelpForm'
 import Spinner from '../components/common/Spinner'
-import { getHelp, update, add } from '../actions/help'
+import { getHelp, update, add } from '../actions/help-actions'
 
 const newHelpEntry = Immutable.fromJS({
   title: "",

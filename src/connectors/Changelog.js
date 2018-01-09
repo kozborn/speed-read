@@ -6,7 +6,7 @@ import Changelog from '../components/Changelog';
 import ChangelogForm from '../components/changelog/ChangelogForm';
 import Spinner from '../components/common/Spinner'
 import Button from '../components/common/Button';
-import { getChangelog, update, add } from '../actions/changelog'
+import { getChangelog, update, add } from '../actions/changelog-actions'
 
 const newChangelogEntry = Immutable.fromJS({
   version: "",
