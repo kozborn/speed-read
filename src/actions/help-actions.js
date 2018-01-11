@@ -20,7 +20,7 @@ export function save() {
     docToSave.id = 'help';
     return saveDoc(docToSave, options)
     .then((response) => {
-      console.log(response);
+      // console.log(response);
     })
   }
 }

@@ -13,7 +13,6 @@ class HelpPortal extends React.Component {
   }
 
   static defaultProps = {
-    trigger: <button className="btn help icon-left" onClick={this.showHelp} />,
     modalOpen: false,
     customTrigger: false,
     onClose: () => null,
