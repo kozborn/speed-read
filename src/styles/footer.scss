@@ -1,15 +1,15 @@
+@import "variables";
+
 .footer {
   width: 100%;
   position: absolute;
   z-index: 2;
   bottom: 0px;
   border-top: 1px solid #eaeaea;
-  height: 100px;
 
   footer {
+    height: $footer-height;
     .navigation-footer {
-      display: flex;
-      justify-content: center;
       margin: 25px;
       li {
         text-align: center;

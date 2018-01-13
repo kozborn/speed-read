@@ -16,7 +16,7 @@ describe('Help actions', () => {
     fetch.mockResponse(JSON.stringify({}))
 
     const expectedActions = [
-      { "entry": { "entry": { "timestamp": 1515533667268 } }, "type": "ADD_HELP_ENTRY" },
+      { "entry": { "timestamp": 1515533667268 }, "type": "ADD_HELP_ENTRY" },
       { "type": "SAVING_HELP" },
     ];
 
@@ -25,7 +25,7 @@ describe('Help actions', () => {
       doc: Immutable.Map(),
     }))
 
-    store.dispatch(actions.add({ entry: { "timestamp": 1515533667268 } }))
+    store.dispatch(actions.add({ "timestamp": 1515533667268 }))
     expect(store.getActions()).toEqual(expectedActions)
   })
 })

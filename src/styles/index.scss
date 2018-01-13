@@ -90,7 +90,6 @@ h1.with-help {
   }
 }
 
-
 .App {
   text-align: left;
   min-height: 100%;
@@ -104,7 +103,7 @@ h1.with-help {
   height: 100%;
   padding-left: 20px;
   padding-right: 20px;
-  padding-bottom: 100px; // height of the footer
+  padding-bottom: $footer-height;
   display: flex;
   justify-content: space-around;
   @include phone {

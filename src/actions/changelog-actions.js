@@ -29,7 +29,7 @@ export function add(entry) {
   return (dispatch) => {
     dispatch({
       type: "ADD_CHANGELOG_ENTRY",
-      entry: _.extend(entry, { timestamp: Date.now()}),
+      entry: entry.timestamp ? entry : _.extend(entry, { timestamp: Date.now() }),
     });
     dispatch(save());
   }

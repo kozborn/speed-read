@@ -27,7 +27,10 @@ export function save() {
 
 export function add(entry) {
   return (dispatch) => {
-    dispatch({ type: "ADD_HELP_ENTRY", entry });
+    dispatch({
+      type: "ADD_HELP_ENTRY",
+      entry: entry.timestamp ? entry : _.extend(entry, {timestamp: Date.now()}),
+    });
     dispatch(save());
   }
 }
