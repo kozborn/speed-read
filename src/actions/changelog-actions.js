@@ -1,4 +1,5 @@
 import Immutable from 'immutable';
+import _ from 'underscore'
 import { fetchDoc, getOptions, saveDoc } from "../utils/db_helpers";
 
 export function getChangelog() {
@@ -26,7 +27,10 @@ export function save() {
 
 export function add(entry) {
   return (dispatch) => {
-    dispatch({ type: "ADD_CHANGELOG_ENTRY", entry });
+    dispatch({
+      type: "ADD_CHANGELOG_ENTRY",
+      entry: _.extend(entry, { timestamp: Date.now()}),
+    });
     dispatch(save());
   }
 }

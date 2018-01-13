@@ -14,7 +14,6 @@ const changelog = (state = Immutable.Map({
       })
     case "ADD_CHANGELOG_ENTRY": {
       const c = state.getIn(['doc', 'changelog'], Immutable.List());
-      action.entry.timestamp = Date.now();
       return state.setIn(['doc', 'changelog'], c.push(Immutable.fromJS(action.entry)));
     }
     case "UPDATE_CHANGELOG_ENTRY": {
