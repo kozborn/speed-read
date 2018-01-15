@@ -25,6 +25,61 @@
   line-height: 26px;
   max-width: 1000px;
   margin: 10px 0px;
+  position: relative;
+}
+
+.fixations-controls {
+  width: 100%;
+  padding-left: 100px;
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  z-index: 3;
+  background: #fff;
+  border-top: 1px solid #ccc;
+
+  .sliders {
+    flex-basis: 300px;
+    margin-left: 10px;
+    background: #fff;
+  }
+
+  .sliders__slider-title {
+    font-size: 13px;
+    text-align: left;
+    white-space: nowrap;
+  }
+
+  .sliders__slider {
+    margin-bottom: 10px;
+    .rc-slider {
+      flex-basis: 400px;
+      .rc-slider-mark {
+        top: 5px;
+      }
+      .rc-slider-mark-text {
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+.fixations-controls__butons {
+  display: inline-block;
+  background: #fff;
+  padding: 10px 20px;
+  border: 1px solid #fff;
+  margin-right: 20px;
+  border-radius: 10px;
+  box-shadow: 1px 1px 5px #ccc;
+  button {
+    margin: 0px 10px;
+  }
 }
 
 .line .left,

@@ -105,6 +105,5 @@ export const fixationTextFromDraftJS = (component, text, splitLength = 50) => {
     strategy: splitLine,
   }]);
 
-  const state = getInitialState(text, decorator);
-  return state;
+  return getInitialState(text, decorator);
 };

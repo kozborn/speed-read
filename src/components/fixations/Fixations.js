@@ -2,8 +2,10 @@ import React from "react";
 import {number, instanceOf, func} from "prop-types";
 import Immutable from "immutable";
 import { fixationTextFromDraftJS } from "../../utils/editor_helpers";
-import FixationsToolbar from "./FixationsToolbar";
+import FixationsControls from "./FixationsControls";
 import DraftEditor from '../common/Editor';
+
+const getBlockSize = blockSize => (blockSize * 5) + 10
 
 class Fixations extends React.Component {
 
@@ -26,6 +28,7 @@ class Fixations extends React.Component {
 
   interval = null;
   currentElIndex = 0;
+  keyList = [];
 
   constructor(props) {
     super(props);
@@ -49,7 +52,7 @@ class Fixations extends React.Component {
 
   prepareText() {
     this.setState({
-      'text': fixationTextFromDraftJS(this.getLineSplittedComponent, this.props.text.get("text"), this.props.blockSize),
+      'text': fixationTextFromDraftJS(this.getLineSplittedComponent, this.props.text.get("text"), getBlockSize(this.props.blockSize)),
     });
     this.setCurrentElIndex(this.props.fixationIndex);
   }
@@ -60,7 +63,7 @@ class Fixations extends React.Component {
         nextProps.blockSize !== this.props.blockSize
       ) {
       this.setState({
-        'text': fixationTextFromDraftJS(this.getLineSplittedComponent, nextProps.text.get("text"), nextProps.blockSize),
+        'text': fixationTextFromDraftJS(this.getLineSplittedComponent, nextProps.text.get("text"), getBlockSize(nextProps.blockSize)),
       });
     }
 
@@ -86,9 +89,10 @@ class Fixations extends React.Component {
   }
 
   getLineSplittedComponent(props) {
+    this.keyList.push(props.offsetKey);
     return (
       <span
-        data-element-index={props.offsetKey.split('-')[1]}
+        data-element-offsetkey={props.offsetKey}
         onClick={this.updateCurrentElIndex}
         className="fixation-line"
       >
@@ -99,7 +103,8 @@ class Fixations extends React.Component {
   }
 
   updateCurrentElIndex(e) {
-    const index = parseInt(e.target.closest(".fixation-line").getAttribute("data-element-index"), 10);
+    const key = e.target.closest(".fixation-line").getAttribute("data-element-offsetkey");
+    const index = this.keyList.indexOf(key) !== -1 ? this.keyList.indexOf(key) : 0;
     this.setCurrentElIndex(index);
     this.props.savePosition(index);
   }
@@ -152,7 +157,7 @@ class Fixations extends React.Component {
   render() {
     return (
       <div className="text-with-fixations" ref={(e) => { this.textWithFixations = e; }} >
-        <FixationsToolbar
+        <FixationsControls
           startBtn={{
             cb: this.state.running ? this.pauseSwitching : this.startSwitching,
             label: this.state.running ? "Pause" : "Start",
@@ -163,6 +168,12 @@ class Fixations extends React.Component {
             label: "Stop",
             disabled: !this.state.running,
           }}
+          speed={this.props.speed}
+          blockSize={this.props.blockSize}
+          changeSpeed={this.props.changeSpeed}
+          afterChangeSpeed={this.props.afterChangeSpeed}
+          changeBlockSize={this.props.changeBlockSize}
+          afterChangeBlockSize={this.props.afterChangeBlockSize}
         />
         <DraftEditor
           readOnly
