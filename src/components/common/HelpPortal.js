@@ -52,7 +52,6 @@ class HelpPortal extends React.Component {
         <Modal
           isOpen={this.state.modalOpen}
           overlay
-          title={"Help modal"}
           position="center"
           closeBtn
           onClose={this.closeHelp}
