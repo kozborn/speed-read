@@ -7,7 +7,7 @@ import Header from '../connectors/Header';
 import Spinner from './common/Spinner';
 import Modal from './common/Modal';
 import Footer from "../connectors/Footer";
-import Sidebar from "./sidebar/Sidebar";
+import Sidebar from "../connectors/Sidebar";
 
 class App extends Component {
 
@@ -44,12 +44,12 @@ class App extends Component {
       <div className="App">
         <Header />
         <div className="App-body">
+          <Sidebar history={history} />
           <div className="page-content">
             {isFetching ? <Spinner /> : children}
+            <Footer />
           </div>
-          <Sidebar history={history} />
         </div>
-        <Footer />
 
         <Modal
           isOpen={!notification.isEmpty()}

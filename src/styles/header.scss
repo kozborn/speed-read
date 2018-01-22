@@ -1,4 +1,5 @@
 @import './breakpoints';
+@import 'variables';
 
 $navigationLinkColor: #eaeaea;
 
@@ -6,11 +7,11 @@ $navigationLinkColor: #eaeaea;
   position: fixed;
   z-index: 999;
   width: 100%;
-  background-color: #222;
+  background-color: $sidebar-bg;
   text-align: center;
   padding: 5px;
   color: white;
-  border-bottom: 1px solid #eaeaea;
+  box-shadow: 1px 1px 1px #333;
   display: flex;
   justify-content: space-between
 }
