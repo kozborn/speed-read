@@ -15,6 +15,7 @@ const PREFERENCES = {
 function app(state = Immutable.Map({
   isFetching: false,
   isLogged: false,
+  sidebarExpanded: true,
   defaultDoc: Immutable.Map({}),
   defaultPreferences: Immutable.fromJS(PREFERENCES),
 }), action) {
@@ -36,6 +37,8 @@ function app(state = Immutable.Map({
       return state.set('isLogged', true);
     case "USER_NOT_LOGGED":
       return state.set('isLogged', false);
+    case "TOGGLE_SIDEBAR":
+      return state.set('sidebarExpanded', !state.get('sidebarExpanded', true));
     default:
       return state;
   }

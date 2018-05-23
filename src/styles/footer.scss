@@ -1,16 +1,16 @@
 @import "variables";
 
 .footer {
-  width: 100%;
   position: absolute;
+  bottom: 0;
   z-index: 2;
-  bottom: 0px;
+  left: $sidebar-width + 20;
   border-top: 1px solid #eaeaea;
 
   footer {
     height: $footer-height;
     .navigation-footer {
-      margin: 25px;
+      padding: 25px;
       li {
         text-align: center;
       }

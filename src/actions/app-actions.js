@@ -38,3 +38,9 @@ export const save = (key, text) => {
     })
   }
 }
+
+export const toggleSidebar = () => {
+  return {
+    "type": "TOGGLE_SIDEBAR",
+  }
+}
