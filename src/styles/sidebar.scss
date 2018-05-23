@@ -3,6 +3,7 @@
 
 .sidebar {
   position: fixed;
+  z-index: 2; //otherwise it would be overlapped by page-content
   top: 50px;
   height: calc(100vh - 50px);
   display: flex;
@@ -13,7 +14,22 @@
   padding: 10px;
   background: $sidebar-bg;
   color: #fff;
+
+  &.absolute-expand,
+  &.expanded {
+    width: $sidebar-width !important;
+    transition: width 0.5s;
+  }
+
+  &.absolute-collapsed,
+  &.collapsed {
+    width: 50px;
+    transition: width 0.5s;
+  }
+
 }
+
+
 
 .sidebar__navigation {
   display: flex;

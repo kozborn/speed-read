@@ -1,4 +1,5 @@
 import React from 'react';
+import cn from 'classnames';
 import { string, func, bool } from 'prop-types';
 
 class Sidebar extends React.Component {
@@ -10,8 +11,12 @@ class Sidebar extends React.Component {
   }
 
   render() {
+    const sidebarClasses = cn('sidebar', {
+      'expanded': this.props.expanded,
+      'collapsed': !this.props.expanded,
+    });
     return (
-      <div className="sidebar">
+      <div className={sidebarClasses}>
         <nav className="sidebar__navigation">
           <li>Dupa jasia</li>
           <li>Dupa jasia</li>
@@ -32,7 +37,7 @@ class Sidebar extends React.Component {
             </nav>
           </li>
         </nav>
-        <button>expand</button>
+        <button onClick={this.props.onToggle}>expand</button>
       </div>
     )
   }

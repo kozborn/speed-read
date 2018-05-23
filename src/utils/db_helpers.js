@@ -5,11 +5,11 @@ import PouchDBAuth from 'pouchdb-authentication'
 PouchDB.plugin(PouchDBAuth);
 
 export const DEFAULT_DOC_ID = "default_doc";
-export const DbUrl = "http://piotrkozubek.pl:5984/speed-read";
+export const DbUrl = window.location.hostname === 'localhost' ? 'http://localhost:5984'
+  : "http://piotrkozubek.pl:5984";
 export const ServerUrl = "http://localhost:3000";
-const SessionUrl = "http://piotrkozubek.pl:5984/_session"
 
-const db = new PouchDB('http://piotrkozubek.pl:5984/speed-read2', { skip_setup: true })
+const db = new PouchDB(`${DbUrl}/speed-read`, { skip_setup: true })
 
 export const getOptions = (method) => {
   const headers = new Headers();
@@ -24,7 +24,7 @@ export const getOptions = (method) => {
 };
 
 export const fetchDoc = docId =>
-  fetch(`${DbUrl}/${docId}`)
+  fetch(`${DbUrl}/speed-read/${docId}`)
     .then(response => response.json())
     .catch(ex => ex);
 

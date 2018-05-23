@@ -110,12 +110,13 @@ h1.with-help {
 
 .page-content {
   position: relative;
+  width: 100%;
   min-height: 100%;
   padding-left: $sidebar-width + 20px;
   padding-bottom: $footer-height;
   margin: 0px auto;
   @include desktop {
-    max-width: 800px;
+    max-width: 1000px;
   }
 }
 
