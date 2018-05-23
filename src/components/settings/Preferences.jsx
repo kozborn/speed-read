@@ -23,7 +23,6 @@ class Preferences extends React.Component {
 
   render() {
     const {userDoc} = this.props;
-    console.log(userDoc.getIn(['doc', 'preferences']).toJS());
     return (
       <div>
         <div className="settings__label">

@@ -5,6 +5,7 @@ import { savePreferences } from "../actions/user-actions";
 import { getText } from '../utils/state_helpers';
 
 function mapStateToProps(state) {
+  console.log(getText(state, "fixations").toJS())
   return {
     userDoc: state.get('user'),
     text: getText(state, "fixations"),

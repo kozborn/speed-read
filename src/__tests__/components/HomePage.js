@@ -1,8 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 import { defaultDoc } from '../../__mocks__/defaultDocMock';
-import HomePage from '../../components/HomePage';
-import { HomeArticle } from '../../components/HomePage';
+import HomePage, { HomeArticle } from '../../components/HomePage';
 
 let wrapper;
 

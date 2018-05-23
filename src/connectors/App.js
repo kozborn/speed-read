@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import Immutable from 'immutable';
 import App from '../components/App';
-import { closeNotification } from '../actions/actions';
+import { closeNotification } from '../actions/notification-actions';
 import { fetchUserDoc } from '../actions/user-actions';
 
 const mapStateToProps = (state) => {
@@ -11,7 +11,7 @@ const mapStateToProps = (state) => {
   return {
     isFetching,
     userId: userId || '',
-    notification: state.getIn(["app", 'notification'], Immutable.Map()),
+    notification: state.getIn(['notification', 'notification'], Immutable.Map()),
   };
 };
 

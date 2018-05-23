@@ -1,5 +1,4 @@
 import Immutable from "immutable";
-import notificationCreator from './notification';
 
 const PREFERENCES = {
   fixationsSettings: {
@@ -15,9 +14,10 @@ const PREFERENCES = {
 
 function app(state = Immutable.Map({
   isFetching: false,
-  defaultDoc: Immutable.Map(),
+  isLogged: false,
+  sidebarExpanded: true,
+  defaultDoc: Immutable.Map({}),
   defaultPreferences: Immutable.fromJS(PREFERENCES),
-  notification: Immutable.Map(),
 }), action) {
   switch (action.type) {
     case "FETCHING_DEFAULT_DOC":
@@ -28,14 +28,17 @@ function app(state = Immutable.Map({
         s.set("isFetching", false);
       });
     case "FETCHING_ERROR":
-      return state.withMutations((s) => {
-        s.set('notification', notificationCreator('response-error', Immutable.fromJS(action.response)));
-        s.set('isFetching', false);
-      });
-    case "SHOW_NOTIFICATION":
-      return state.set('notification', Immutable.fromJS(action.notification));
-    case "CLOSE_NOTIFICATION":
-      return state.set('notification', Immutable.Map());
+      return state.set("isFetching", true);
+    case "UPDATE_TEXT": {
+      const { path, text } = action;
+      return state.setIn(path, Immutable.fromJS(text));
+    }
+    case "USER_LOGGED":
+      return state.set('isLogged', true);
+    case "USER_NOT_LOGGED":
+      return state.set('isLogged', false);
+    case "TOGGLE_SIDEBAR":
+      return state.set('sidebarExpanded', !state.get('sidebarExpanded', true));
     default:
       return state;
   }

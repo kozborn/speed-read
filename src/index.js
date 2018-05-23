@@ -11,8 +11,10 @@ import "./styles/index.css";
 
 import reducer from "./reducer";
 import App from "./connectors/App";
-import HomePage from "./connectors/HomePage";
 import BottomHalfText from "./connectors/BottomHalfText";
+import Changelog from "./connectors/Changelog";
+import HomePage from "./connectors/HomePage";
+import HelpPage from "./connectors/HelpPage";
 import TopHalfText from "./connectors/TopHalfText";
 import TableWithSliders from "./connectors/Table";
 import Fixations from "./connectors/Fixations";
@@ -20,8 +22,9 @@ import UserTexts from "./connectors/UserTexts";
 import NewText from "./connectors/NewText";
 import EditText from "./connectors/EditText";
 import Settings from "./connectors/Settings";
+import StaticTexts from './connectors/StaticTexts';
 import registerServiceWorker from "./registerServiceWorker";
-import { getDefaultDoc } from "./actions/actions";
+import { getDefaultDoc, checkIfUserLogged } from "./actions/app-actions";
 
 const history = createBrowserHistory();
 
@@ -42,7 +45,7 @@ function logger({ getState }) {
 
 const store = createStore(reducer, applyMiddleware(thunkMiddleware, logger));
 store.dispatch(getDefaultDoc());
-
+store.dispatch(checkIfUserLogged())
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
@@ -57,6 +60,9 @@ ReactDOM.render(
         <Route path="/user-texts/:userId?" component={UserTexts} />
         <Route path="/settings/:userId?" component={Settings} />
         <Route path="/edit-text/:userId/:textId" component={EditText} />
+        <Route path="/help" component={HelpPage} />
+        <Route path="/static-texts/" component={StaticTexts} />
+        <Route path="/changelog" component={Changelog} />
       </App>
     </Router>
   </Provider>,

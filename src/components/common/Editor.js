@@ -140,6 +140,7 @@ class DraftEditor extends React.Component {
     this.toggleInlineStyle = this.toggleInlineStyle.bind(this);
   }
 
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.initialText instanceof EditorState) {
       this.setState({ editorState: nextProps.initialText});

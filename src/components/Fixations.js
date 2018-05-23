@@ -1,37 +1,11 @@
 import React from "react";
-import Slider from "rc-slider";
 import Immutable from "immutable";
 import { func, instanceOf } from "prop-types";
 import FixationsBase from "./fixations/Fixations";
-import handle from "./common/SliderHandle";
+import HelpPortal from './common/HelpPortal';
 
-const speedMarks = {
-  0: "low",
-  1: "1",
-  2: "2",
-  3: "3",
-  4: "4",
-  5: "5",
-  6: "6",
-  7: "7",
-  8: "8",
-  9: "9",
-  10: "10",
-  11: "11",
-  12: "high",
-};
-
-const sizeMarks = {
-  0: 10,
-  1: 15,
-  2: 20,
-  3: 25,
-  4: 30,
-  5: 35,
-  6: 40,
-  7: 45,
-  8: 50,
-};
+import SpeedSlider from "./fixations/SpeedSlider"
+import BlockSizeSlider from "./fixations/BlockSizeSlider"
 
 class Fixations extends React.Component {
 
@@ -80,41 +54,19 @@ class Fixations extends React.Component {
 
   render() {
     const fixationsIndex = this.props.fixationsSettings.get('position', 0);
-    const blockSize = (this.state.blockSize * 5) + 10;
     return (
       <div className="fixations-with-slider">
-        <div className="sliders">
-          <div className="slider-title">Prędkość przełączania</div>
-          <Slider
-            min={0}
-            max={12}
-            step={1}
-            handle={handle}
-            value={this.state.speed}
-            onChange={this.changeSpeed}
-            onAfterChange={this.saveSettings}
-            marks={speedMarks}
-          />
-        </div>
-        <div className="sliders">
-          <div className="slider-title">Maksymalny rozmiar bloku</div>
-          <Slider
-            min={0}
-            max={8}
-            step={1}
-            handle={handle}
-            value={this.state.blockSize}
-            onChange={this.changeBlockSize}
-            onAfterChange={this.saveSettings}
-            marks={sizeMarks}
-          />
-        </div>
+        <h1 className="with-help">Fiksacje <HelpPortal helpKey="fixations" /></h1>
         <FixationsBase
           text={this.props.text}
           fixationIndex={fixationsIndex}
           speed={this.state.speed}
-          blockSize={blockSize}
+          blockSize={this.state.blockSize}
           savePosition={this.savePosition}
+          changeSpeed={this.changeSpeed}
+          afterChangeSpeed={this.saveSettings}
+          changeBlockSize={this.changeBlockSize}
+          afterChangeBlockSize={this.saveSettings}
         />
       </div>
     );

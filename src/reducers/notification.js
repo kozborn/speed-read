@@ -14,19 +14,30 @@ const response = (res) => {
   return {};
 };
 
-
-const notificationCreator = (type, data) => {
+const notificationCreator = (kind, data) => {
   let notification;
-  switch (type) {
+  switch (kind) {
     case 'response-error': {
       notification = response(data);
       break;
     }
-
     default:
-      notification = {title: 'Unknown error', 'message': 'Not sure what just happened'};
+      notification = { title: 'Unknown error', 'message': 'Not sure what just happened' };
   }
   return Immutable.fromJS(notification);
 };
 
-export default notificationCreator;
+const notification = (state = Immutable.Map({
+  notification: Immutable.Map(),
+}), action) => {
+  switch (action.type) {
+    case "SHOW_NOTIFICATION":
+      return state.set('notification', notificationCreator(action.kind, Immutable.fromJS(action.response)));
+    case "CLOSE_NOTIFICATION":
+      return state.set('notification', Immutable.Map());
+    default:
+      return state;
+  }
+}
+
+export default notification;

@@ -84,32 +84,40 @@ a, a:hover, a:visited, a:active {
   }
 }
 
+h1.with-help {
+  display: flex;
+  .help-portal {
+
+  }
+}
+
 .App {
   text-align: left;
-  min-height: 100%;
   position: relative;
   min-width: 480px;
+  height: 100%;
 }
 
 .App-body {
   padding-top: 50px;
   margin: 0px auto;
-  height: 100%;
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-bottom: 100px; // height of the footer
+  min-height: calc(100vh);
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   @include phone {
     flex-direction: column;
   }
 }
 
 .page-content {
-  flex-grow: 1;
-  padding: 10px;
+  position: relative;
+  width: 100%;
+  min-height: 100%;
+  padding-left: $sidebar-width + 20px;
+  padding-bottom: $footer-height;
+  margin: 0px auto;
   @include desktop {
-    max-width: 800px;
+    max-width: 1000px;
   }
 }
 

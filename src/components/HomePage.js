@@ -1,11 +1,14 @@
 import React from "react";
 import Immutable from "immutable";
 import { instanceOf } from "prop-types";
+import DraftEditor from './common/Editor';
 
 export const HomeArticle = ({ article }) =>
   (<article>
     <h2>{article.get("title")}</h2>
-    <div>{article.get("text")}</div>
+    <div>
+      <DraftEditor readOnly initialText={article.get("text")} />
+    </div>
   </article>);
 
 HomeArticle.propTypes = {

@@ -36,6 +36,12 @@
     &.apply {
       @include iconLeftButton("\2714")
     }
+    &.help {
+      @include iconLeftButton("\003f")
+    }
+    &.add {
+      @include iconLeftButton("\2795")
+    }
     &.forward {
       @include iconLeftButton("\3e")
     }
@@ -51,11 +57,17 @@
     &.edit {
       @include iconLeftButton("\270E")
     }
+    &.submit {
+      @include iconLeftButton("\2714")
+    }
   }
 
   &.icon-right {
     &.apply {
       @include iconRightButton("\2714")
+    }
+    &.add {
+      @include iconRightButton("\2795")
     }
     &.cancel {
       @include iconRightButton("\D7")
@@ -71,6 +83,10 @@
     }
     &.edit {
       @include iconRightButton("\270E")
+    }
+
+    &.submit {
+      @include iconRightButton("\2714")
     }
   }
 

@@ -1,5 +1,5 @@
 @import './variables';
-
+.default-texts,
 .user-texts {
   max-width: 1000px;
   margin: 10px auto;
@@ -13,24 +13,5 @@
   }
   .editor {
     padding: 5px;
-  }
-}
-
-.user-texts__header {
-  padding: 2px 5px;
-  background: #eaeaea;
-  margin-top: 25px;
-  display: flex;
-  h2 {
-    margin: 0px;
-    line-height: 30px;
-    flex-grow: 1;
-  }
-  a,
-  button {
-    line-height: 30px;
-  }
-  .new-text {
-    line-height: 30px;
   }
 }
