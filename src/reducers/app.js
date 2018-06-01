@@ -20,7 +20,6 @@ function app(state = Immutable.Map({
   defaultDoc: Immutable.Map({}),
   defaultPreferences: Immutable.fromJS(PREFERENCES),
 }), action) {
-  console.log(action);
   switch (action.type) {
     case "FETCHING_DEFAULT_DOC":
       return state.set("isFetching", true);
