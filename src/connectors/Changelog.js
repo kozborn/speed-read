@@ -79,7 +79,6 @@ class ChangelogConnector extends React.Component {
             />
             <Button type="add" icon="left" onClick={this.addNewEntry} >Dodaj</Button>
           </div>
-
         }
 
         {!this.props.isFetching &&

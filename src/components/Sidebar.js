@@ -1,11 +1,10 @@
 import React from 'react';
 import cn from 'classnames';
-import { string, func, bool } from 'prop-types';
+import { func, bool } from 'prop-types';
 
 class Sidebar extends React.Component {
 
   static propTypes = {
-    renderMode: string.isRequired,
     onToggle: func.isRequired,
     expanded: bool.isRequired,
   }

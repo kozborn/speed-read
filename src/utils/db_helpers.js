@@ -1,15 +1,15 @@
 import _ from 'underscore'
-import PouchDB from 'pouchdb';
-import PouchDBAuth from 'pouchdb-authentication'
-
-PouchDB.plugin(PouchDBAuth);
-
+import PouchDb from 'pouchdb'
+import PouchAuthentication from 'pouchdb-authentication'
+import { checkIfUserLogged } from '../actions/app-actions';
 export const DEFAULT_DOC_ID = "default_doc";
-export const DbUrl = window.location.hostname === 'localhost' ? 'http://localhost:5984'
-  : "http://piotrkozubek.pl:5984";
+export const DbUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' ? 'http://localhost:5984'
+: "http://piotrkozubek.pl:5984";
 export const ServerUrl = "http://localhost:3000";
 
-const db = new PouchDB(`${DbUrl}/speed-read`, { skip_setup: true })
+PouchDb.plugin(PouchAuthentication);
+const db = new PouchDb('http://localhost:5984/speed-read', { skip_setup: true });
+const dbName = `${DbUrl}/speed-read`
 
 export const getOptions = (method) => {
   const headers = new Headers();
@@ -24,12 +24,24 @@ export const getOptions = (method) => {
 };
 
 export const fetchDoc = docId =>
-  fetch(`${DbUrl}/speed-read/${docId}`)
+  fetch(`${dbName}/${docId}`)
     .then(response => response.json())
     .catch(ex => ex);
 
-export const fetchSession = () =>
-  db.getSession()
+export const fetchSession = () => {
+  return db.getSession()
+  .catch(ex => ex);
+}
+
+export const logUser = (user, pass) => {
+  return db.logIn(user, pass)
+  .catch(ex => ex);
+}
+
+export const getUserFromDb = (username) => {
+  return db.getUser(username)
+  .catch(ex => ex)
+}
 
 export const saveDoc = (data, options = {}) => {
   const url = _(data.id).isEmpty() ? DbUrl : `${DbUrl}/${data.id}`;

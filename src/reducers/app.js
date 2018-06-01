@@ -15,10 +15,12 @@ const PREFERENCES = {
 function app(state = Immutable.Map({
   isFetching: false,
   isLogged: false,
+  currentlyLogged: Immutable.Map(),
   sidebarExpanded: true,
   defaultDoc: Immutable.Map({}),
   defaultPreferences: Immutable.fromJS(PREFERENCES),
 }), action) {
+  console.log(action);
   switch (action.type) {
     case "FETCHING_DEFAULT_DOC":
       return state.set("isFetching", true);
@@ -34,9 +36,15 @@ function app(state = Immutable.Map({
       return state.setIn(path, Immutable.fromJS(text));
     }
     case "USER_LOGGED":
-      return state.set('isLogged', true);
+      return state.withMutations((s) => {
+        s.set('isLogged', true)
+        s.set('currentlyLogged', Immutable.fromJS(action.userData))
+      })
     case "USER_NOT_LOGGED":
-      return state.set('isLogged', false);
+      return state.withMutations((s) => {
+        s.set('isLogged', false)
+        s.set('currentlyLogged', Immutable.Map())
+      })
     case "TOGGLE_SIDEBAR":
       return state.set('sidebarExpanded', !state.get('sidebarExpanded', true));
     default:

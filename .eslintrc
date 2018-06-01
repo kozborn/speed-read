@@ -26,6 +26,6 @@
     "quote-props": "off",
     "no-plusplus": "off",
     "jsx-a11y/no-static-element-interactions": "off",
-    "radix": [0] // this is very stupid rule IMHO
+    "radix": "off",
   }
 }

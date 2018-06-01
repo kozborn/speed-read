@@ -1,5 +1,5 @@
 import Immutable from 'immutable';
-import { fetchDoc, getOptions, saveDoc, fetchSession } from "../utils/db_helpers";
+import { fetchDoc, getOptions, saveDoc, fetchSession, logUser, getUserFromDb } from "../utils/db_helpers";
 
 export const getDefaultDoc = () => {
   return (dispatch) => {
@@ -11,12 +11,30 @@ export const getDefaultDoc = () => {
   };
 };
 
+export const logIn = (username, password) => {
+  return (dispatch) => {
+    logUser(username, password)
+    .then((response) => {
+      if (response.ok && response.name) {
+        // dispatch({ type: 'USER_LOGGED', userData: { name: response.name, roles: response.roles }});
+
+      }
+    })
+  }
+}
+
+export const getUser = (username) => {
+  return getUserFromDb(username);
+}
+
 export const checkIfUserLogged = () => {
   return (dispatch) => {
     fetchSession()
     .then((response) => {
       if (response.userCtx.name !== null && response.userCtx.name === 'admin') {
-        dispatch({ type: "USER_LOGGED" })
+        dispatch({ type: "ADMIN_LOGGED"})
+      } else if (response.userCtx.name !== null) {
+        dispatch({ type: "USER_LOGGED", userData: response.userCtx })
       } else {
         dispatch({ type: "USER_NOT_LOGGED"})
       }
