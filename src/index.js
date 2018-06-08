@@ -6,8 +6,10 @@ import createBrowserHistory from "history/createBrowserHistory";
 import { Provider } from "react-redux";
 import thunkMiddleware from "redux-thunk";
 
+import 'font-awesome/css/font-awesome.css'
 import "../node_modules/draft-js/dist/Draft.css";
 import "./styles/index.css";
+
 
 import reducer from "./reducer";
 import App from "./connectors/App";

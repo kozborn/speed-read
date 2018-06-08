@@ -26,10 +26,33 @@
     width: 50px;
     transition: width 0.5s;
   }
-
 }
 
+.sidebar__button.btn {
+  margin: 0px;
+  padding: 0px;
+}
 
+.sidebar__button.btn i {
+  position: absolute; 
+}
+
+.sidebar__button:before {
+  font-size: 24px;
+}
+
+.sidebar__button-transition {
+  transition-property: transform;
+  transition-duration: 1s;
+}
+
+.sidebar__button--expanded {
+  transform: rotate(180deg);
+}
+
+.sidebar__button--collapsed {
+  transform: rotate(0deg);
+}
 
 .sidebar__navigation {
   display: flex;
